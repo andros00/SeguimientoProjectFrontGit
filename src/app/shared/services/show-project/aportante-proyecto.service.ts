@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-//import { ActualizarAportante } from '../modelo/actualizar-aportante';
 import { AportanteProyecto } from '../../components/molecules/show-project/aportante-proyecto';
 import { DireccionesUrl } from '../../components/molecules/show-project/direcciones-url';
 import { RubroConvocatoria } from '../../components/molecules/show-project/rubro-convocatoria';
@@ -32,7 +31,7 @@ export class AportanteProyectoService {
     return this.http.delete<void>(url);
   }
 
-  editarAportante(datos: ActualizarAportante): Observable<void> {
+  editarAportante(datos: AportanteProyecto): Observable<void> {
     const url = `${environment.URL_BASE}${DireccionesUrl.DIRECCIONES_PROYECTO.ACTUALIZAR_APORTANTE_PROYECTO}`;
     return this.http.put<void>(url, datos);
   }

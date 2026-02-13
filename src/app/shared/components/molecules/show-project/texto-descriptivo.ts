@@ -1,4 +1,4 @@
-import { TextoSolicitado } from '../../convocatoria/modelo/texto-solicitado';
+import { TextoSolicitado } from './texto-solicitado';
 export class TextoDescriptivo {
     identificador: number;
     proyecto: string;

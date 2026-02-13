@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { DireccionesUrl } from 'src/app/direcciones-url';
+import { DireccionesUrl } from '../direcciones-url';
 import { DocumentoSoporte } from '../documento-soporte';
 import { environment } from 'src/environments/environment';
 import { DocumentoProyecto } from '../documento-proyecto';

@@ -23,8 +23,7 @@ export class InformacionComplementariaLocalService {
         [ProyectoConstantes.INFORMACION_COMPLEMENTARIA_SECCION_ECONOMI]: ProyectoConstantes.INFORMACION_COMPLEMENTARIA_TITULO_ECONOMI,
     };
 
-    constructor(private complementariaService: InformacionComplementariaLocalService,
-        private proyectoServicioLocal: ProyectoLocalService) {
+    constructor(private proyectoServicioLocal: ProyectoLocalService) {
     }
 
     validarInformacionComplementaria(): string {
@@ -32,27 +31,28 @@ export class InformacionComplementariaLocalService {
     }
 
     actualizarInformacionComplementaria(codigo: string) {
-        this.complementariaService.retornarInformacionComplementariaPorProyecto(codigo)
-            .pipe(takeUntil(this.darBaja$))
-            .subscribe(registro => {
-                const propiedadesVacias = Object.keys(registro).filter(propiedad => {
-                    const valor = registro[propiedad];
-                    return Array.isArray(valor) && valor.length === 0;
-                });
-
-                if (propiedadesVacias.length > 0) {
-                    const mensajes = propiedadesVacias.map(propiedad => {
-                        return this.obtenerMensajePorPropiedad(propiedad);
-                    });
-                    if (!this.datoAdicionalSubject.closed) {
-                        this.datoAdicionalSubject.next(ProyectoMensajes.MENSAJE_VALIDACION_INFO_COMPLEMENTARIA + mensajes.join(', '));
-                    }
-                } else {
-                    if (!this.datoAdicionalSubject.closed) {
-                        this.datoAdicionalSubject.next('');
-                    }
-                }
-            });
+        // Functionality disabled - commented out
+        // this.complementariaService.retornarInformacionComplementariaPorProyecto(codigo)
+        //     .pipe(takeUntil(this.darBaja$))
+        //     .subscribe(registro => {
+        //         const propiedadesVacias = Object.keys(registro).filter(propiedad => {
+        //             const valor = registro[propiedad];
+        //             return Array.isArray(valor) && valor.length === 0;
+        //         });
+        //
+        //         if (propiedadesVacias.length > 0) {
+        //             const mensajes = propiedadesVacias.map(propiedad => {
+        //                 return this.obtenerMensajePorPropiedad(propiedad);
+        //             });
+        //             if (!this.datoAdicionalSubject.closed) {
+        //                 this.datoAdicionalSubject.next(ProyectoMensajes.MENSAJE_VALIDACION_INFO_COMPLEMENTARIA + mensajes.join(', '));
+        //             }
+        //         } else {
+        //             if (!this.datoAdicionalSubject.closed) {
+        //                 this.datoAdicionalSubject.next('');
+        //             }
+        //         }
+        //     });
     }
 
     ngOnDestroy() {

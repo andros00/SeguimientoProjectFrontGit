@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -22,6 +22,7 @@ import { InformacionComplementariaLocalService } from 'src/app/shared/services/s
   templateUrl: './paso-publicar-proyecto.component.html',
   styleUrls: ['./paso-publicar-proyecto.component.css'],
   standalone: true,
+  imports: [CommonModule],
   providers: [DatePipe]
 })
 export class PasoPublicarProyectoComponent {

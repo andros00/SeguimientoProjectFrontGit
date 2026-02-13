@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Evaluador } from '../evaluador-proyecto';
 
 @Component({
   selector: 'app-resultado-evaluador',
   templateUrl: './resultado-evaluador.component.html',
   styleUrls: ['./resultado-evaluador.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [CommonModule]
 })
 export class ResultadoEvaluadorComponent implements OnInit, OnChanges {
 

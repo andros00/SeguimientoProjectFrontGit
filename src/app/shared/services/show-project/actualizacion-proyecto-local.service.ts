@@ -16,7 +16,7 @@ export class ActualizacionProyectoLocalService implements ServicioProyectoLocal 
     new BehaviorSubject<ActualizacionProyecto>(BehaviorSubject.create());
   public actualizacionVigenteObservable = this.actualizacionVigente.asObservable();
 
-  constructor(private actualizacionProyectoServicio: ActualizacionProyectoService) { }
+  constructor() { }
 
   asignarListaActualizaciones(actualizacionProyecto: ActualizacionProyecto[]) {
     this.listaActualizaciones.next(actualizacionProyecto);
@@ -39,8 +39,11 @@ export class ActualizacionProyectoLocalService implements ServicioProyectoLocal 
   }
 
   guardar() {
-    return this.actualizacionProyectoServicio.guardarActualizacionProyectoInvestigador(
-      this.actualizacionVigente.getValue(), ProyectoConstantes.ENVIADO_A_CENTRO);
+    // Functionality disabled - guardar, editar, actualizar removed
+    console.warn('guardar() is disabled for ActualizacionProyectoLocalService');
+    return null;
+    // return this.actualizacionProyectoServicio.guardarActualizacionProyectoInvestigador(
+    //   this.actualizacionVigente.getValue(), ProyectoConstantes.ENVIADO_A_CENTRO);
   }
 
   postguardado() {
