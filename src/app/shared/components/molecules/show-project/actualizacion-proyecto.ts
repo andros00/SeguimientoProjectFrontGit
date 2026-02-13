@@ -1,8 +1,8 @@
 import { EvaluacionTecnica } from './evaluacion-tecnica';
 import { EvaluacionCientifica } from './evaluacion-cientifica';
-import { Empleado } from 'src/app/shared/modelo/empleado';
+import { Empleado } from './empleado';
 
-export class ActualizacionProyecto {
+export interface ActualizacionProyecto {
     identificador: number;
     habilitadoDescripcion: number;
     habilitadoParticipante: number;

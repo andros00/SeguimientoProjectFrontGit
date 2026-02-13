@@ -1,12 +1,12 @@
-import { GrupoInvestigacion } from 'src/app/shared/modelo/grupo-investigacion';
+import { GrupoInvestigacion } from './grupo-investigacion';
 import { RolParticipanteProyecto } from './rol-participante-proyecto';
-import { PersonaNatural } from 'src/app/shared/modelo/persona-natural';
+import { PersonaNatural } from './persona-natural';
 import { Vinculo } from './vinculo';
-import { PersonaJuridica } from 'src/app/shared/modelo/persona-juridica';
+import { PersonaJuridica } from './persona-juridica';
 import { Programa } from './programa';
-import { Dependencia } from 'src/app/shared/modelo/dependencia';
+import { Dependencia } from './dependencia';
 
-export class ParticipanteProyecto {
+export interface ParticipanteProyecto {
     identificador: number;
     vinculacionClase: string;
     vinculacionTipo: string;
@@ -42,5 +42,5 @@ export class ParticipanteProyecto {
     programa: Programa;
     grupoInvestigacion: GrupoInvestigacion;
     dependenciaSeleccionada: Dependencia;
-    habilitarRegistro = false;
+    habilitarRegistro: boolean;
 }

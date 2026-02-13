@@ -1,5 +1,5 @@
 
-export class ModalidadConvocatoria {
+export interface ModalidadConvocatoria {
     identificador: number;
     convocatoria: number;
     orden: number;

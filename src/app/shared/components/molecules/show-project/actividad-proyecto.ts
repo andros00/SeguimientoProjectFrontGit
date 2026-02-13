@@ -1,4 +1,4 @@
-export class ActividadProyecto {
+export interface ActividadProyecto {
     identificador: number;
     proyecto: string;
     orden: number;

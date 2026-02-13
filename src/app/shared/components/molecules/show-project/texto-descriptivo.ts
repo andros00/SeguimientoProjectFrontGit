@@ -1,5 +1,5 @@
-import { TextoSolicitado } from '../../convocatoria/modelo/texto-solicitado';
-export class TextoDescriptivo {
+import { TextoSolicitado } from './texto-solicitado';
+export interface TextoDescriptivo {
     identificador: number;
     proyecto: string;
     textoSolicitado: TextoSolicitado;

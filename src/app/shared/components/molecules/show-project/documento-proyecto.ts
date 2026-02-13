@@ -1,6 +1,6 @@
-import { DocumentoSoporte } from 'src/app/shared/modelo/documento-soporte';
+import { DocumentoSoporte } from './documento-soporte';
 
-export class DocumentoProyecto {
+export interface DocumentoProyecto {
     identificador: number;
     proyecto: string;
     documentoSoporte: DocumentoSoporte;

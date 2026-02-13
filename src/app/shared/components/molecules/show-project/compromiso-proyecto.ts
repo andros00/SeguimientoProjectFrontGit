@@ -1,6 +1,6 @@
-import { Compromiso } from 'src/app/convocatoria/modelo/compromiso';
+import { Compromiso } from './compromiso';
 
-export class CompromisoProyecto {
+export interface CompromisoProyecto {
 
     identificador: number;
     actaFecha: string;

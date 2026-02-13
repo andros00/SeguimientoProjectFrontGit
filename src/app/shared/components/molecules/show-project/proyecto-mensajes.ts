@@ -22,11 +22,11 @@ export const ProyectoMensajes = {
     TITULO_EDITAR_APORTANTE: 'Editar aportante',
     MENSAJE_ELIMINAR_APORTANTE: '¿Está seguro que desea eliminar este aportante?',
     MENSAJE_EDITAR_APORTANTE: '¿Está seguro que desea editar este aportante?',
-    MENSAJE_EVALUACION_REGLA(porcentaje, rubro, personaJuridica) {
+    MENSAJE_EVALUACION_REGLA(porcentaje: number, rubro: string, personaJuridica: any) {
         return `Se ha excedido el ${porcentaje}% para el rubro `
             + `${rubro} definido por el financiador ${personaJuridica}.`;
     },
-    MENSAJE_EVALUACION_MODALIDAD(nombreFinanciador, montoMaximoModalidad) {
+    MENSAJE_EVALUACION_MODALIDAD(nombreFinanciador: string, montoMaximoModalidad: number) {
         return `El financiador ${nombreFinanciador} supera el monto máximo`
             + ` definido en la modalidad seleccionada (${montoMaximoModalidad})`;
     },

@@ -1,10 +1,10 @@
-import { Disponibilidad } from './../../shared/modelo/disponibilidad';
-import { NivelProyecto } from 'src/app/shared/modelo/nivel-proyecto';
-import { ClaseSubproyecto } from 'src/app/shared/modelo/clase-subproyecto';
-import { TipoProyecto } from 'src/app/shared/modelo/tipo-proyecto';
+import { Disponibilidad } from './disponibilidad';
+import { NivelProyecto } from './nivel-proyecto';
+import { ClaseSubproyecto } from './clase-subproyecto';
+import { TipoProyecto } from './tipo-proyecto';
 
 
-export class InformacionGeneral {
+export interface InformacionGeneral {
     identificador: number;
     estado: string;
     accion: string;

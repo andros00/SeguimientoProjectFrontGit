@@ -1,5 +1,5 @@
-import { EstadoProyecto } from './../../busqueda-proyecto/modelo/estado-proyecto';
-export class EnviarACentro {
+import { EstadoProyecto } from './estado-proyecto';
+export interface EnviarACentro {
     codigoProyecto: string;
     estadoProyecto: EstadoProyecto;
     centroDeGestion: number;

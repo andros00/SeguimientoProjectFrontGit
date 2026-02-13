@@ -1,4 +1,4 @@
-export class DatosSubproyecto {
+export interface DatosSubproyecto {
     identificador: number;
     codigo: string;
     codigoProyecto: string;

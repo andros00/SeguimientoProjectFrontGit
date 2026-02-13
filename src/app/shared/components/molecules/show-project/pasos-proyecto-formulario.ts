@@ -1,6 +1,6 @@
 import { Paso } from './paso';
 
-export class PasosProyectoFormulario {
+export interface PasosProyectoFormulario {
     informacionGeneral: Paso;
     actualizaciones: Paso;
     complementaria: Paso;

@@ -1,6 +1,6 @@
-import { TipoDocumento } from '../../proyecto/modelo/tipo-documento';
+import { TipoDocumento } from './tipo-documento';
 
-export class DocumentoSoporte {
+export interface DocumentoSoporte {
     identificador: number;
     nombreDocumento: string;
     fechaEmision: string;

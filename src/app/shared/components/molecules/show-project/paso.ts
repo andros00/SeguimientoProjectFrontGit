@@ -1,6 +1,6 @@
-import { ServicioProyectoLocal } from '../servicio-local/servicio-proyecto-local';
+import { ServicioProyectoLocal } from "src/app/shared/services/show-project/servicio-proyecto-local";
 
-export class Paso {
+export interface Paso {
     numero: number;
     titulo: string;
     visible: boolean;

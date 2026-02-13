@@ -1,4 +1,4 @@
-export class TipoDisponibilidad {
+export interface TipoDisponibilidad {
     tipo: number;
     descripcion: string;
     estado: string;

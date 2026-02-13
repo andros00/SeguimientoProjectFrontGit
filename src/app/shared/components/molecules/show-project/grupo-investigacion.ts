@@ -1,4 +1,4 @@
-export class GrupoInvestigacion {
+export interface GrupoInvestigacion {
     identificador: number;
     nombreCompleto: string;
     nombreCorto: string;

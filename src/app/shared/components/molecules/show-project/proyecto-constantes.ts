@@ -1,4 +1,4 @@
-import { EstadosProyectoConstantes } from '../busqueda-proyecto/constantes/estados-proyecto-constantes';
+import { EstadosProyectoConstantes } from './estados-proyecto-constantes';
 
 export const ProyectoConstantes = {
     VALOR_MAXIMO_CUARENTA: 40,
@@ -41,7 +41,7 @@ export const ProyectoConstantes = {
     TEXTO_SELECCIONAR_SECTOR_APORTANTE: 'Seleccionar sector del aportante',
     MENSAJE_AYUDA_SECTOR_APORTANTE: 'Seleccione el sector al cuál pertenece la entidad aportante. Solo permite seleccionar un registro.',
     MENSAJE_AYUDA_TIPO_FINANCIADOR: 'Seleccione el tipo de financiación de la entidad aportante. Solo permite seleccionar un registro.',
-    COLUMNAS_TABLA_COFINANCIADORES: { 
+    COLUMNAS_TABLA_COFINANCIADORES: {
       NOMBRE_DEL_FINANCIADOR: 'Nombre del financiador',
       GRUPO_DEPENDENCIA: 'Grupo o Dependencia',
       TIPO_APORTANTE: 'Tipo aportante',

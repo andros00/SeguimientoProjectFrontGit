@@ -1,6 +1,6 @@
 import { FinanciadorConvocatoria } from './financiador-convocatoria';
 
-export class RubroConvocatoria {
+export interface RubroConvocatoria {
     identificador: number;
     convocatoria: number;
     orden: number;
@@ -10,5 +10,5 @@ export class RubroConvocatoria {
     explicacion: string;
     esAdministracion: number;
     listaFinanciadorConvocatoria: FinanciadorConvocatoria[];
-    listaRubrosHijos?: RubroConvocatoria[] = [];
+    listaRubrosHijos?: RubroConvocatoria[];
 }

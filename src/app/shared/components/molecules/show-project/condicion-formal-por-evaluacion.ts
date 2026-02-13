@@ -1,6 +1,6 @@
-import { ObservacionCondicionFormalPorEvaluacion } from 'src/app/acciones-proyecto/modelo/observacion-condicion-evaluacion';
+import { ObservacionCondicionFormalPorEvaluacion } from './observacion-condicion-evaluacion';
 
-export class CondicionFormalPorEvaluacion {
+export interface CondicionFormalPorEvaluacion {
     identificador: number;
     codigoPredefinido: string;
     comentario: string;

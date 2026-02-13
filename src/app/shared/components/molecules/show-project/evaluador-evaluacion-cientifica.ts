@@ -1,8 +1,8 @@
-import { EvaluadorRecomendado } from 'src/app/proyecto/modelo/evaluador-recomendado';
-import { EvaluacionCientifica } from 'src/app/proyecto/modelo/evaluacion-cientifica';
-import { ResultadoProyecto } from 'src/app/busqueda-proyecto/modelo/resultado-proyecto';
+import { EvaluadorRecomendado } from './evaluador-recomendado';
+import { EvaluacionCientifica } from './evaluacion-cientifica';
+import { ResultadoProyecto } from './resultado-proyecto';
 
-export class EvaluadorEvaluacionCientifica extends ResultadoProyecto {
+export interface EvaluadorEvaluacionCientifica extends ResultadoProyecto {
     evaluadorRecomendado: EvaluadorRecomendado;
     evaluacionCientifica: EvaluacionCientifica;
     fechaEtapaVigente: boolean;

@@ -1,7 +1,7 @@
-import { PersonaNatural } from 'src/app/shared/modelo/persona-natural';
+import { PersonaNatural } from './persona-natural';
 import { ComponenteProyecto } from './componente-proyecto';
 
-export class ComponenteMacroproyecto {
+export interface ComponenteMacroproyecto {
     identificador: number;
     cantidadproyectos: number;
     descripcion: string;

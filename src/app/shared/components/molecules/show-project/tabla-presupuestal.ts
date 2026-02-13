@@ -1,6 +1,6 @@
 import { RubroProyecto } from './rubro-proyecto';
 
-export class TablaPresupuestal {
+export interface TablaPresupuestal {
 
     rubros: RubroProyecto[];
     subtotales: RubroProyecto;

@@ -1,4 +1,4 @@
-export class Vinculo {
+export interface Vinculo {
     secuenciaVinculacion: number;
     codigoTipoVinculacion: string;
     nombreTipoVinculacion: string;

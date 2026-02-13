@@ -208,7 +208,7 @@ export const DireccionesUrl = {
         OBTENER_EVALUACION_CIENTIFICA: '/aval/evaluacion-cientifica',
     },
     DIRECCIONES_EVALUADOR: {
-        CONSULTA_MIS_EVALUACIONES_POR_FILTRO(evaluador, codigo, nombreProyecto) {
+        CONSULTA_MIS_EVALUACIONES_POR_FILTRO(evaluador: any, codigo: any, nombreProyecto: any) {
             return `/mis-evaluaciones/evaluaciones/evaluador/${evaluador}/codigo/${codigo}/nombreProyecto/${nombreProyecto}`;
         },
         ES_FUNCIONARIO: '/compartido/es-funcionario',

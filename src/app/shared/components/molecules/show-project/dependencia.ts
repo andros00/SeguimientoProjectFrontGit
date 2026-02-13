@@ -1,4 +1,4 @@
-export class Dependencia {
+export interface Dependencia {
     codigoFacultad: number;
     nombreFacultad: string;
 }

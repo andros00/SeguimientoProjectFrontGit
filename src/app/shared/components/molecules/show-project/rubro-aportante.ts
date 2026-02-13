@@ -1,6 +1,6 @@
 import { AportanteProyecto } from './aportante-proyecto';
 
-export class RubroAportante {
+export interface RubroAportante {
 
     identificador: number;
     aportante: AportanteProyecto;

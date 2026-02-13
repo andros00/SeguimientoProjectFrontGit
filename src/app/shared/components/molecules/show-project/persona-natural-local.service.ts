@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PersonaNatural } from '../modelo/persona-natural';
+import { PersonaNatural } from './persona-natural';
 
 @Injectable({
   providedIn: 'root'

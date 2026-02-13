@@ -1,4 +1,4 @@
-export class FiltroEvaluador {
+export interface FiltroEvaluador {
     identificacion: string;
     nombres: string;
     apellidos: string;

@@ -1,4 +1,4 @@
-export class Programa {
+export interface Programa {
     codigoPrograma: number;
     nombrePrograma: string;
     codigoTipoPrograma: string;

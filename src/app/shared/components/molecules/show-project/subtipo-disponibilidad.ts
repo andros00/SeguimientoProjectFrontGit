@@ -1,6 +1,6 @@
 import { TipoDisponibilidad } from "./tipo-disponibilidad";
 
-export class SubtipoDisponibilidad {
+export interface SubtipoDisponibilidad {
     subtipo: number;
     nombre: string;
     descripcion: string;

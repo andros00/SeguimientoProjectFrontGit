@@ -13,7 +13,7 @@ import { EvaluadorRecomendado } from './evaluador-recomendado';
 import { DocumentoProyecto } from './documento-proyecto';
 import { TablaPresupuestal } from './tabla-presupuestal';
 
-export class EstructuraProyecto {
+export interface EstructuraProyecto {
     informacionGeneralProyecto: InformacionGeneralProyecto;
     textosDescriptivos: TextoDescriptivo[];
     aportantesProyecto: AportanteProyecto[];

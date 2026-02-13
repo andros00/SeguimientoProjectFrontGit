@@ -1,6 +1,6 @@
 import { RubroAportante } from './rubro-aportante';
 
-export class CeldaRubroPorAportante {
+export interface CeldaRubroPorAportante {
 
     frescos: RubroAportante[];
     aportanteEnEspecie: RubroAportante;

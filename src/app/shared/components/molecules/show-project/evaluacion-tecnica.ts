@@ -1,6 +1,6 @@
-import { InstanciaAdministrativa } from 'src/app/shared/modelo/instancia-administrativa';
+import { InstanciaAdministrativa } from './instancia-administrativa';
 
-export class EvaluacionTecnica {
+export interface EvaluacionTecnica {
 
     identificador: number;
     etapaProceso: number;

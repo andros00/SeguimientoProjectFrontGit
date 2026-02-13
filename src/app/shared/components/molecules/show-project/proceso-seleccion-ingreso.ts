@@ -3,7 +3,7 @@ import { InformacionGeneral } from './informacion-general';
 import { CondicionFormal } from './condicion-formal';
 
 
-export class ProcesoSeleccionIngreso {
+export interface ProcesoSeleccionIngreso {
     informacionGeneral: InformacionGeneral;
     listaEtapasSeleccion: EtapaSeleccion[];
     listaCondicionesFormales:  CondicionFormal[];

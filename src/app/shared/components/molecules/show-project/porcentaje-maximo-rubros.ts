@@ -2,7 +2,7 @@ import { FinanciadorConvocatoria } from './financiador-convocatoria';
 import { RubroConvocatoria } from './rubro-convocatoria';
 import { TipoPorcentajeMaximo } from './tipo-porcentaje-maximo';
 
-export class PorcentajeMaximoRubros {
+export interface PorcentajeMaximoRubros {
     identificador: number;
     convocatoria: number;
     financiador: FinanciadorConvocatoria;

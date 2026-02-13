@@ -1,5 +1,5 @@
 import { DependenciaFinanciadora } from './dependencia-financiadora';
-import { PersonaJuridica } from '../../shared/modelo/persona-juridica';
+import { PersonaJuridica } from './persona-juridica';
 import { ProgramaFinanciador } from './programa-financiador';
 
 export class FinanciadorConvocatoria {

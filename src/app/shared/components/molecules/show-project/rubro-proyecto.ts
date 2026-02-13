@@ -1,8 +1,8 @@
 import { CeldaRubroPorAportante } from './celda-rubro-por-aportante';
-import { RubroConvocatoria } from 'src/app/convocatoria/modelo/rubro-convocatoria';
+import { RubroConvocatoria } from './rubro-convocatoria';
 import { RubroAportante } from './rubro-aportante';
 
-export class RubroProyecto {
+export interface RubroProyecto {
     identificador: number;
     proyecto: string;
     rFinanciable: RubroConvocatoria;

@@ -1,8 +1,8 @@
 import { DatosAdicionalesAportantes } from "./datos-adicional-aportantes";
 
-export class DatoAdicionalAportante {
+export interface DatoAdicionalAportante {
 
     tipoFinanciacion: DatosAdicionalesAportantes;
     sectorAportante: DatosAdicionalesAportantes;
-    
+
 }

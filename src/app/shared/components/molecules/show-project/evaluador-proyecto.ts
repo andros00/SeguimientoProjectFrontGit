@@ -1,5 +1,5 @@
-import { PersonaJuridica } from 'src/app/shared/modelo/persona-juridica';
-export class Evaluador {
+import { PersonaJuridica } from './persona-juridica';
+export interface Evaluador {
     identificador: number;
     identificacion: string;
     tipoIdentificacion: string;
