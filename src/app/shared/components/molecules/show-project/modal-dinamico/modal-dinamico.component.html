@@ -1,0 +1,52 @@
+<!-- Generico -->
+<h1 class="alert-title" mat-dialog-title>{{datosModal.titulo}}</h1>
+
+<div mat-dialog-content>
+  <div class="container-alert">
+    <div class="row">
+      <div class="col col-10">
+        <div [className]="datosModal.clase">
+          <mat-icon>info</mat-icon>
+          <div [innerHTML]="datosModal.mensaje"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="habilitarEditarFinanciador()">
+  <div class="editar-aportante">
+    <div class="col-5">
+      <div class="b-bottom">
+        <div class="d-inline-b">
+          <mat-icon class="upper">account_box</mat-icon>NOMBRE
+          <h3>{{datosModal.editarAportante.personaJuridica.nombreCorto}}</h3>
+        </div>
+      </div>
+      <div class="dates">
+        <div class="d-inline-b m-right">
+          <span>
+            <mat-icon class="upper">account_box</mat-icon>NIT
+          </span>
+          <p>{{datosModal.editarAportante.personaJuridica.nit}}</p>
+        </div>
+      </div>
+    </div>
+    <app-cofinanciador-matricula-proyecto (emitirActualizarSeleccion)="recibirAportante($event)"
+      [editarCofinanciadorMatriculaProyecto]="datosModal.editarAportante">
+    </app-cofinanciador-matricula-proyecto>
+  </div>
+</ng-container>
+
+<div mat-dialog-actions class="align-end">
+  <div class="buttons">
+    <button mat-raised-button class="button-secondary" id="btn-modal-primario"
+      (click)="clickModalPrimerBoton()">{{datosModal.textoPrimerBoton}}
+      <mat-icon class="light-gray">cancel</mat-icon>
+    </button>
+    <button id="btn-modal-secundario" [className]="estiloBotonConfirmar" mat-raised-button
+      (click)="validarEnvioDatosModal()">{{datosModal.textoSegundoBoton}}
+      <mat-icon class="bg-white">done</mat-icon>
+    </button>
+  </div>
+</div>

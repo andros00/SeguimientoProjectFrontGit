@@ -1,0 +1,331 @@
+<div class="container" [formGroup]="form">
+  <div class="header">
+    <h2 class="title">Actualizar participante del proyecto</h2>
+  </div>
+
+
+  <!-- Información del Proyecto -->
+  <p><span style="color: red;">*</span> Información del Proyecto.</p>
+
+
+  <mat-card class="card">
+
+    <div class="row card-responsable">
+      <div class="b-bottom">
+        <div class="d-inline-b">
+          <img src="assets/img/ic-responsable-2.png" alt="icono-persona-responsable">
+        </div>
+        <div class="d-inline-b">
+          <span>Nombre del proyecto</span>
+          <h3>{{ form.get('nombreProyecto')?.value }}</h3>
+        </div>
+      </div>
+
+      <div class="dates">
+        <div class="d-inline-b m-right">
+          <span>
+            Código
+          </span>
+          <p>{{ form.get('proyecto')?.value}}</p>
+        </div>
+
+        <div class="d-inline-b m-right">
+          <span>
+            Fecha inicio proyecto
+          </span>
+          <p>{{ form.get('fechaInicio')?.value}}</p>
+        </div>
+
+        <div class="d-inline-b m-right">
+          <span>
+            Fecha fin proyecto
+          </span>
+          <p>{{ form.get('fechaFin')?.value}}</p>
+        </div>
+
+        <div class="d-inline-b">
+          <span>
+            Duración proyecto (meses)
+          </span>
+          <p>{{ form.get('dedicacionMeses')?.value}}</p>
+        </div>
+
+
+      </div>
+    </div>
+  </mat-card>
+
+
+  <p><span style="color: red;">*</span> Información del Participante.</p>
+
+  <mat-card class="card">
+    <div class="row card-responsable">
+      <div class="b-bottom">
+        <div class="d-inline-b">
+          <img src="assets/img/ic-participants.png" alt="icono-persona-responsable">
+        </div>
+        <div class="d-inline-b">
+          <span>Nombre</span>
+          <h3>{{ form.get('nombrePersona')?.value }}</h3>
+        </div>
+      </div>
+
+      <div class="dates">
+
+        <div class="d-inline-b m-right">
+          <span>
+            Identificación
+          </span>
+          <p>{{ form.get('personaNatural')?.value}}</p>
+        </div>
+
+        <div class="d-inline-b m-right">
+          <span>
+            Institución
+          </span>
+          <p>{{ form.get('institucion')?.value}}</p>
+        </div>
+        <div class="d-inline-b m-right">
+          <span>
+            Grupo
+          </span>
+          <p>{{ form.get('nombreGrupo')?.value}}</p>
+        </div>
+
+
+        <div class="d-inline-b m-right">
+          <span>
+            Rol
+          </span>
+          <p>{{ form.get('rolParticipante')?.value}}</p>
+        </div>
+
+
+        <div class="d-inline-b m-right">
+          <span>
+            Vínculo contractual UdeA
+          </span>
+          <p>{{ form.get('vinculacionUdea')?.value}}</p>
+        </div>
+
+      </div>
+    </div>
+  </mat-card>
+
+
+
+  <p><span style="color: red;">*</span> Información para actualizar.</p>
+
+
+
+  <mat-card class="card">
+
+    <div class="form-group-container">
+      <div class="row no-wrap margin-bottom">
+
+        <div class="col col-2">
+          <div class="align-center">
+            <button mat-button class="button-select-pj" (click)="abrirModalSeleccionarPersonaNatural()">
+              SELECCIONAR PARTICIPANTE</button>
+          </div>
+        </div>
+        <div class="col col-8 content">
+          <p>
+            <span class="btn-info" [matMenuTriggerFor]="mensajeAyudaParticipante">
+              <mat-icon class="light-gray more">info</mat-icon>
+            </span>
+            <mat-menu class="info-help" #mensajeAyudaParticipante="matMenu">
+              <h3 class="color-info">
+                <mat-icon class="more">info</mat-icon>¡Recuerde!
+              </h3>
+              <span>Dando clic en "Seleccionar participante", defina la persona participante del proyecto.
+              </span>
+            </mat-menu>
+          </p>
+        </div>
+
+
+
+
+
+        <div class="col col-2">
+          <div class="align-center">
+            <button mat-button class="button-select-pj" (click)="abrirModalSeleccionarInstitucion()">
+              SELECCIONAR INSTITUCIÓN</button>
+          </div>
+        </div>
+        <div class="col col-8 content">
+          <p>
+            <span class="btn-info" [matMenuTriggerFor]="mensajeAyudaParticipante">
+              <mat-icon class="light-gray more">info</mat-icon>
+            </span>
+            <mat-menu class="info-help" #mensajeAyudaParticipante="matMenu">
+              <h3 class="color-info">
+                <mat-icon class="more">info</mat-icon>¡Recuerde!
+              </h3>
+              <span>Dando clic en "Seleccionar instituciòn", defina la instituciòn al participante del proyecto.
+              </span>
+            </mat-menu>
+          </p>
+        </div>
+      </div>
+
+
+
+      <div class="row card-responsable">
+        <div class="b-bottom">
+          <div class="d-inline-b">
+            <img src="assets/img/ic-contextual-edit.png" alt="icono-persona-responsable">
+          </div>
+        </div>
+
+        <div class="dates">
+
+          <div class="form-group-container">
+
+
+          </div>
+
+          <div class="d-inline-b m-right">
+            <span>
+              Vínculo contractual
+            </span>
+            <select class="form-control" formControlName="vinculacionTipo" (change)="onVinculoChange($event)">
+              <option value="">Seleccione vínculo</option>
+              <option *ngFor="let vinculo of vinculos" [value]="vinculo.secuenciaVinculacion">
+                {{ vinculo.nombreTipoVinculacion }}
+              </option>
+            </select>
+          </div>
+
+          <div class="d-inline-b m-right">
+            <span>
+              Grupo
+            </span>
+            <select class="form-control" formControlName="grupo">
+              <option value="">Seleccione grupo</option>
+              <option *ngFor="let grupo of grupos" [value]="grupo.identificador">{{ grupo.nombreCorto }}</option>
+            </select>
+          </div>
+
+          <div class="d-inline-b m-right">
+            <span>
+              Rol
+            </span>
+            <select class="form-control" formControlName="rolParticipanteProyecto">
+              <option value="">Seleccione rol</option>
+              <option *ngFor="let rol of roles" [value]="rol.identificador">{{ rol.nombre }}</option>
+            </select>
+          </div>
+
+          <div class="d-inline-b m-right">
+            <app-datepicker [label]="'FFecha de ingreso al proyecto'" class="input" formControlName="fechaInicio" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+
+
+
+  <mat-card class="card">
+    <div class="row card-responsable">
+      <!-- Dedicación Horaria -->
+      <div class="dedication-section">
+        <div class="dedication-column">
+          <div class="dedication-title">Dedicación horaria por fuera del plan de trabajo</div>
+          <div class="dedication-content">
+            <div class="dedication-row">
+              <div class="dedication-field">
+                <label>Horas ingresadas</label>
+                <input type="number" class="form-control input-readonly" formControlName="dedicacionHoras" readonly />
+              </div>
+              <div class="dedication-field">
+                <label>Horas actualizadas</label>
+                <input type="number" class="form-control" formControlName="dedicacionHoras" />
+              </div>
+            </div>
+
+            <div class="dedication-row">
+              <div class="dedication-field">
+                <label>Meses ingresados</label>
+                <input type="number" class="form-control input-readonly" formControlName="dedicacionMeses" readonly />
+              </div>
+              <div class="dedication-field">
+                <label>Meses actualizados</label>
+                <input type="number" class="form-control" formControlName="dedicacionMeses" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dedication-column">
+          <div class="dedication-title">Dedicación horaria por dentro del plan de trabajo</div>
+          <div class="dedication-content">
+            <div class="dedication-row">
+              <div class="dedication-field">
+                <label>Horas ingresadas</label>
+                <input type="number" class="form-control input-readonly" formControlName="dedicacionHorasPlan"
+                  readonly />
+              </div>
+              <div class="dedication-field">
+                <label>Horas actualizadas</label>
+                <input type="number" class="form-control" formControlName="dedicacionHorasPlan" />
+              </div>
+            </div>
+            <div class="dedication-row">
+              <div class="dedication-field">
+                <label>Meses ingresados</label>
+                <input type="number" class="form-control input-readonly" formControlName="dedicacionMesesPlan"
+                  readonly />
+              </div>
+              <div class="dedication-field">
+                <label>Meses actualizados</label>
+                <input type="number" class="form-control" formControlName="dedicacionMesesPlan" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </mat-card>
+
+  <!-- Participación y Beneficios -->
+  <mat-card class="card">
+    <div class="section-title">* % Participación y Beneficios P&B</div>
+    <div class="row card-responsable">
+      <div class="pb-section">
+        <div class="form-group">
+          <label>% Participación y Beneficios ( %P&B)</label>
+          <input type="number" formControlName="porcentajeBeneficios" class="form-control" />
+        </div>
+        <div class="form-group">
+          <label>Nota aclaratoria P&B</label>
+          <textarea class="form-control" rows="4" formControlName="notaAclaratoria"></textarea>
+        </div>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Funciones -->
+  <mat-card class="card">
+    <div class="section-title">Funciones</div>
+    <div class="functions-section">
+      <textarea formControlName="funcion" class="form-control" rows="5"></textarea>
+    </div>
+  </mat-card>
+
+  <!-- Botones -->
+  <div class="button-group">
+    <button type="button" class="btn btn-guardar" (click)="actualizar()" [disabled]="form.invalid">
+      <mat-icon>save</mat-icon> Actualizar
+    </button>
+    <button mat-raised-button class="button-secondary" (click)="cancelar()">CANCELAR
+      <mat-icon class="light-gray">cancel</mat-icon>
+    </button>
+
+  </div>
+
+</div>

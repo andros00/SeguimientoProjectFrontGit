@@ -1,0 +1,54 @@
+<div *ngIf="resultados?.length === 0" class="no-results">
+  <p>No se encontraron instituciones.</p>
+</div>
+
+<!-- Si hay exactamente 1 resultado lo mostramos (puede ser auto-seleccionado por el contenedor) -->
+<div *ngIf="resultados?.length === 1">
+  <mat-card class="margin-top">
+    <mat-card-header>
+      <mat-card-title>{{ resultados[0].razonSocial }}</mat-card-title>
+      <mat-card-subtitle>NIT: {{ resultados[0].nit }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p><strong>Dirección:</strong> {{ resultados[0].direccion }}</p>
+      <p><strong>Correo:</strong> {{ resultados[0].correoElectronico }}</p>
+      <p><strong>Teléfono:</strong> {{ resultados[0].telefono }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary" (click)="seleccionar(resultados[0])">Seleccionar</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<!-- Si hay más de 1, mostramos tabla/listado para elegir -->
+<div *ngIf="(resultados?.length ?? 0) > 1" class="list-results margin-top">
+  <mat-table [dataSource]="resultados" class="mat-elevation-z2">
+    <!-- Razon social -->
+    <ng-container matColumnDef="razonSocial">
+      <mat-header-cell *matHeaderCellDef> Institución </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.razonSocial}} </mat-cell>
+    </ng-container>
+
+    <!-- NIT -->
+    <ng-container matColumnDef="nit">
+      <mat-header-cell *matHeaderCellDef> NIT </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nit}} </mat-cell>
+    </ng-container>
+
+    <!-- Acción -->
+    <ng-container matColumnDef="accion">
+      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+
+              <button type="button" class="btn btn-guardar" (click)="seleccionar(element)">
+        <mat-icon>save</mat-icon> Seleccionar
+      </button>
+
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['razonSocial', 'nit', 'accion']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['razonSocial', 'nit', 'accion'];"></mat-row>
+  </mat-table>
+</div>

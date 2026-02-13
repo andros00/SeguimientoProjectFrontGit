@@ -1,0 +1,43 @@
+<mat-card class="card">
+  <div class="container">
+    <div class="fade-b-t">
+      <div>
+        <button mat-button class="button-back" (click)="regresarAProyecto()">
+          <mat-icon>arrow_back</mat-icon> Regresar
+        </button>
+
+        <div *ngIf="!modoRegistroPersonaNatural">
+          <div class="row">
+            <h1>Selección de persona natural</h1>
+          </div>
+
+          <div class="row">
+            <app-filtro-persona-natural (emitirBusquedaRealizada)="busquedaRealizada($event)"
+              (emitirFormularioModificado)="formularioModificado()">
+            </app-filtro-persona-natural>
+
+            <div class="row margin-top" *ngIf="mostrarOpcionCreacion()">
+              <div class="col-12 contextual-info">
+                <p>No se ha encontrado la persona natural buscada. Puede registrarla:</p>
+                <button mat-button color="primary" (click)="cambiarModoRegistrarPersonaNatural()">
+                  Registrar Persona Natural
+                </button>
+              </div>
+            </div>
+
+            <div class="col-12 margin-top" *ngIf="mostrarPersonaNoEncontrada()">
+              <div class="row alert-error">
+                <mat-icon>cancel</mat-icon>
+                <p>No se ha encontrado la persona natural buscada.</p>
+              </div>
+            </div>
+
+            <app-resultado-persona-natural (emitirPersonaNauralSeleccionada)="personaNaturalSeleccionada($event)"
+              [listaPersonaNatural]="listadoPersonasNaturales">
+            </app-resultado-persona-natural>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>

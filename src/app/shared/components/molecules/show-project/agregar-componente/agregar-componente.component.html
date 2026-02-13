@@ -1,0 +1,150 @@
+<h2 class="secondary-color text-center title-modal" mat-dialog-title>Está agregando un componente</h2>
+<form class="example-form" [formGroup]="formularioComponente" autocomplete="off">
+  <div class="fade-b-t">
+    <div mat-dialog-content>
+      <div class="container-modal">
+        <div class="row no-wrap">
+          <div class="col col-5">
+            <mat-form-field appearance="fill" class="element margin-bottom">
+              <mat-label><span class="required">* </span>Título</mat-label>
+              <input matInput type="text" formControlName="titulo">
+              <mat-error *ngIf="f.titulo.errors?.required">
+                Este campo es obligatorio.
+              </mat-error>
+              <mat-error *ngIf="f.titulo.errors?.maxlength">
+                Solo se permiten {{f.titulo.errors.maxlength.requiredLength}} caracteres.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col col-4">
+            <mat-form-field appearance="fill" class="element margin-bottom">
+              <mat-label>Número de proyectos</mat-label>
+              <input matInput type="number" formControlName="numeroProyectos">
+              <mat-error *ngIf="f.numeroProyectos.errors?.min">
+                El valor debe ser mayor o igual a {{f.numeroProyectos.errors.min.min}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col col-1 content">
+            <span class="btn-info" [matMenuTriggerFor]="numeroProyectos">
+              <mat-icon class="light-gray more">info</mat-icon>
+            </span>
+            <mat-menu class="info-help" #numeroProyectos="matMenu">
+              <h3 class="color-info">
+                <mat-icon class="more">info</mat-icon>¡Recuerde!
+              </h3>
+              <span>Ingrese en números la cantidad de proyectos que harán parte del componente.</span>
+            </mat-menu>
+          </div>
+        </div>
+        <h3 class="medium-gray col col-10 sub-space"><span class="required">* </span>Responsable
+          <span class="btn-info" [matMenuTriggerFor]="responsableperson">
+            <mat-icon class="light-gray more">info</mat-icon>
+          </span>
+          <mat-menu class="info-help" #responsableperson="matMenu">
+            <h3 class="color-info">
+              <mat-icon class="more">info</mat-icon>¡Recuerde!
+            </h3>
+            <span>El responsable es un empleado vinculado a la UdeA que responde administrativamente por los proyectos
+              asociados a su componente.</span>
+          </mat-menu>
+        </h3>
+        <div class="row margin-bottom">
+          <div class="col col-2">
+            <div class="align-center">
+              <button mat-button class="button-select margin-right"
+                (click)="abrirModalSeleccionarResponsable()">BUSCAR</button>
+              <p>
+                <mat-checkbox (change)="cambioResponsableIndeterminado()" [ngModelOptions]="{standalone: true}"
+                  [(ngModel)]="responsableIndeterminado">Indeterminado</mat-checkbox>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="!responsableIndeterminado && !!responsable">
+          <div class="col col-5">
+            <div class="row card-responsable">
+              <div class="col-5">
+                <div class="b-bottom">
+                  <div class="d-inline-b">
+                    <img src="assets/img/ic-responsable-2.png" alt="icono-persona-responsable">
+                  </div>
+                  <div class="d-inline-b">
+                    <span>Nombre</span>
+                    <p>{{responsable.nombrePila}} {{responsable.apellido1}} {{responsable.apellido2}}</p>
+                  </div>
+                </div>
+                <div class="dates">
+                  <div class="d-inline-b m-right">
+                    <span>
+                      <mat-icon class="upper">account_box</mat-icon>Identificación
+                    </span>
+                    <p>{{responsable.identificacion}}</p>
+                  </div>
+                  <div class="d-inline-b m-right">
+                    <span>
+                      <mat-icon class="upper">mail</mat-icon>Correo electrónico
+                    </span>
+                    <p>{{responsable.correoElectronico}}</p>
+                  </div>
+                  <div class="d-inline-b">
+                    <span>
+                      <mat-icon class="upper">phone</mat-icon>Teléfono
+                    </span>
+                    <p>{{responsable.telefono}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="responsableIndeterminado">
+          <div class="col col-5">
+            <div class="row card-responsable">
+              <div class="col-5">
+                <div class="b-bottom">
+                  <div class="d-inline-b">
+                    <img src="assets/img/ic-responsable-2.png" alt="icono-persona-responsable">
+                  </div>
+                  <div class="d-inline-b">
+                    <span>Nombre</span>
+                    <p>No definido <span class="text-suggest medium-gray">(No es necesario definir un
+                        responsable)</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row margin-top">
+          <div class="col col-10">
+            <mat-form-field appearance="fill">
+              <mat-label><span class="required">* </span>Descripción</mat-label>
+              <textarea matInput formControlName="descripcion"></textarea>
+              <mat-hint align="end">{{f.descripcion.value?.length ||
+                  0}}/500</mat-hint>
+              <mat-error *ngIf="f.descripcion.errors?.required">
+                Este campo es obligatorio.
+              </mat-error>
+              <mat-error *ngIf="f.descripcion.errors?.maxlength">
+                Solo se permiten {{f.descripcion.errors.maxlength.requiredLength}} caracteres.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions class="align-end">
+    <div class="row">
+      <div class="col col-5 margin-bottom">
+        <button type="button" mat-raised-button class="button-secondary" (click)="cerrarModal()">CANCELAR
+          <mat-icon>cancel</mat-icon>
+        </button>
+        <button mat-raised-button class="save-fill" (click)="agregarComponente()">AGREGAR COMPONENTE
+          <mat-icon>done</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

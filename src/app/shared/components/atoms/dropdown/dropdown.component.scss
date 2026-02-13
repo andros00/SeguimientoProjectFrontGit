@@ -1,0 +1,11 @@
+:host {
+  display: block; /* Ensures the component spans full width */
+  width: 100%; /* Forces full width */
+  box-sizing: border-box; /* Includes padding and borders in width */
+}
+
+mat-form-field {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}

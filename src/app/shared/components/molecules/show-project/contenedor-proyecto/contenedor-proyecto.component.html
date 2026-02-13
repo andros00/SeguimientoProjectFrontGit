@@ -1,0 +1,166 @@
+<div class="container">
+  <div class="container-wizard"></div>
+  <br />
+  <button mat-button class="button-back" *ngIf="soloLectura" (click)=cerrar()>
+    <mat-icon>clear</mat-icon> Cerrar
+  </button>
+  <h1 align="center" class="margin-b secondary-color font-normal title-w">Inscripción de proyecto</h1>
+  <div class="status">
+    <div *ngIf="esProyectoGuardado()">
+      <div>
+        <p class="content">Código de proyecto</p>
+      </div>
+      <div class="bg-status">
+        <span>{{informacionGeneralProyecto?.codigo}}{{getEstadoProyecto()}}</span>
+      </div>
+    </div>
+  </div>
+
+  <aw-wizard [disableNavigationBar]='inhabilitarNavegacion' class="wizard-udea" #wizardProyecto>
+
+    <aw-wizard-step class="error">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="current-step">{{pasos.informacionGeneral?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.informacionGeneral),
+        'text-error': pasos.informacionGeneral.valido}">
+          {{pasos.informacionGeneral?.titulo}}</p>
+      </ng-template>
+      <br />
+      <!-- <app-paso-informacion-general-proyecto #paso1 (pasoSiguiente)="irAdelante()">
+      </app-paso-informacion-general-proyecto> -->
+    </aw-wizard-step>
+
+    <!-- <aw-wizard-step *ngIf="mostrarPaso(pasos.actualizaciones)">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="step-number">{{pasos.actualizaciones?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.actualizaciones),
+        'text-error': pasos.actualizaciones.valido }">
+          {{pasos.actualizaciones?.titulo}}</p>
+      </ng-template>
+      <br />
+      <app-paso-actualizaciones-proyecto #paso2 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
+      </app-paso-actualizaciones-proyecto>
+    </aw-wizard-step>
+
+    <aw-wizard-step *ngIf="mostrarPaso(pasos.complementaria)">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="step-number">{{pasos.complementaria?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.complementaria),
+        'text-error': pasos.complementaria.valido }">
+          {{pasos.complementaria?.titulo}}</p>
+      </ng-template>
+      <br />
+      <app-paso-informacion-complementaria #paso3 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
+      </app-paso-informacion-complementaria>
+    </aw-wizard-step>
+
+    <aw-wizard-step *ngIf="mostrarPaso(pasos.cronograma)">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="step-number">{{pasos.cronograma?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.cronograma),
+        'text-error': pasos.cronograma.valido }">
+          {{pasos.cronograma?.titulo}}</p>
+      </ng-template>
+      <br />
+      <app-paso-descripcion-cronograma-proyecto #paso4 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
+      </app-paso-descripcion-cronograma-proyecto>
+    </aw-wizard-step>
+
+    <aw-wizard-step *ngIf="mostrarPaso(pasos.presupuestal)">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="step-number">{{pasos.presupuestal?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.presupuestal),
+        'text-error': pasos.presupuestal.valido }">
+          {{pasos.presupuestal?.titulo}}</p>
+      </ng-template>
+      <br />
+      <app-paso-presupuestal-proyecto #paso5 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
+      </app-paso-presupuestal-proyecto>
+    </aw-wizard-step>
+
+    <aw-wizard-step *ngIf="mostrarPaso(pasos.componentes)">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="step-number">{{pasos.componentes?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.componentes),
+        'text-error': pasos.componentes.valido }">
+          {{pasos.componentes?.titulo}}</p>
+      </ng-template>
+      <br />
+      <app-paso-componente-proyecto #paso6 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
+      </app-paso-componente-proyecto>
+    </aw-wizard-step>
+
+    <aw-wizard-step *ngIf="mostrarPaso(pasos.planTrabajo)">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="step-number">{{pasos.planTrabajo?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.planTrabajo),
+        'text-error': pasos.planTrabajo.valido }">
+          {{pasos.planTrabajo?.titulo}}</p>
+      </ng-template>
+      <br />
+      <app-paso-plan-trabajo-proyecto #paso7 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
+      </app-paso-plan-trabajo-proyecto>
+    </aw-wizard-step>
+
+    <aw-wizard-step *ngIf="mostrarPaso(pasos.participantes)">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="step-number">{{pasos.participantes?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.participantes),
+        'text-error': pasos.participantes.valido }">
+          {{pasos.participantes?.titulo}}</p>
+      </ng-template>
+      <br />
+      <app-paso-participantes-proyecto (inhabilitarSiguiente)="inhabilitarSiguiente()"
+        (habilitarSiguiente)="habilitarSiguiente()" #paso8 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
+      </app-paso-participantes-proyecto>
+    </aw-wizard-step>
+
+    <aw-wizard-step *ngIf="mostrarPaso(pasos.evaluadores)">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="step-number">{{pasos.evaluadores?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.evaluadores),
+        'text-error': pasos.evaluadores.valido }">
+          {{pasos.evaluadores?.titulo}}</p>
+      </ng-template>
+      <br />
+      <app-paso-evaluadores-recomendados-proyecto #paso9 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
+      </app-paso-evaluadores-recomendados-proyecto>
+    </aw-wizard-step>
+
+    <aw-wizard-step *ngIf="mostrarPaso(pasos.compromisos)">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="step-number">{{pasos.compromisos?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.compromisos),
+        'text-error': pasos.compromisos.valido }">
+          {{pasos.compromisos?.titulo}}</p>
+      </ng-template>
+      <br>
+      <app-paso-compromisos-condiciones-proyecto #paso10 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
+      </app-paso-compromisos-condiciones-proyecto>
+    </aw-wizard-step>
+
+    <aw-wizard-step *ngIf="mostrarPaso(pasos.documento)">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="step-number">{{pasos.documento?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.documento),
+        'text-error': pasos.documento.valido }">{{pasos.documento?.titulo}}
+        </p>
+      </ng-template>
+      <br>
+      <app-paso-documentos-soporte-proyecto #paso11 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
+      </app-paso-documentos-soporte-proyecto>
+    </aw-wizard-step>
+
+    <aw-wizard-step *ngIf="mostrarPaso(pasos.publicar)">
+      <ng-template class="p" awWizardStepTitle>
+        <span class="step-number">{{pasos.publicar?.numero}}</span>
+        <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.publicar),
+        'text-error': pasos.publicar.valido }">{{pasos.publicar?.titulo}}
+        </p>
+      </ng-template>
+      <app-paso-publicar-proyecto #paso12 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
+      </app-paso-publicar-proyecto>
+    </aw-wizard-step> -->
+
+  </aw-wizard>
+</div>

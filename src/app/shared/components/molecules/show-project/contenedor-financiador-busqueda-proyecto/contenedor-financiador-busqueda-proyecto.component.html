@@ -1,0 +1,48 @@
+<div class="fade-b-t">
+  <div class="">
+    <button mat-button class="button-back" (click)=regresarAProyecto()>
+      <mat-icon>arrow_back</mat-icon> Regresar
+    </button>
+    <div class="row margin-bottom">
+      <div class="contextual-help">
+        <div class="card-contextual">
+          <img src="assets/img/ic-contextual-help.png" alt="Ayuda contextual">
+          <p class="contextual-yellow">{{ProyectoConstantes.MENSAJE_AYUDA_SELECCIONAR_FINANCIADORES}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="align-between">
+        <h1 class="secondary-color font-normal">{{ProyectoConstantes.TEXTO_SELECCIONAR_FINANCIADORES}}<span class="required">* </span></h1>
+      </div>
+    </div>
+    <app-filtros-financiador-busqueda #filtrosFinanciador (emitirFiltro)="recibirFiltro($event)"
+      (emitirCambioEnFormulario)="cambioFormulario()"></app-filtros-financiador-busqueda>
+
+    <app-cofinanciador-matricula-proyecto *ngIf="activarAgregarInfoAdicionalCofinanciador()" (emitirActualizarSeleccion)="recibirFiltroCofinanciadorMatriculaProyecto($event)" 
+    (emitirCambioFormulario)="cambioFormularioCofinanciadorMatriculaProyecto()"></app-cofinanciador-matricula-proyecto>
+
+    <div class="row" *ngIf="mostrarRegistroFinanciador">
+        <div class="contextual-info">
+          <p [innerHTML]="mensajeSugerencia"></p>
+          <ol>
+            <li *ngFor="let paso of mensajePasos">{{ paso }}</li>
+          </ol>
+        </div>
+    </div>
+    <div class="row" *ngIf="mostrarMensajeFinanciadorNoEncontrado">
+      <div class="col col-12">
+        <div class="contextual-info">
+          <img src="assets/img/ic-contextual-info.png" alt="">
+          <p>No se han encontrado financiadores asociados a la palabra clave.</p>
+        </div>
+      </div>
+    </div>
+
+    <app-resultado-financiador-proyecto (emitirLimpiarFormulario)="filtrosFinanciador.limpiarFormulario()"
+      (emitirCierreModal)="regresarAProyecto()" 
+      [resultadosFinanciador] = "enviarDatosAResultadosFinanciador()"
+      [institucionPara]="institucionPara"></app-resultado-financiador-proyecto>
+  </div>
+</div>

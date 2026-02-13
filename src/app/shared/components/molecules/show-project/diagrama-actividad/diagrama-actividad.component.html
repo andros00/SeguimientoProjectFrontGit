@@ -1,0 +1,42 @@
+<h2 class="secondary-color text-center title-modal" mat-dialog-title>Diagrama de actividades</h2>
+<div mat-dialog-content>
+  <div class="container-modal">
+    <div class="row no-wrap">
+
+      <div class="col col-8">
+        <div class="sidenav-container row no-wrap">
+          <!-- progress -->
+          <div class="sidenav progress-bars col-5">
+            <div class="sidenav-header">Actividad</div>
+            <mat-tree class="tree" [dataSource]="dataSource" [treeControl]="treeControl">
+              <mat-tree-node *matTreeNodeDef="let node" class="progress-row">
+                <p>{{node.nombre}}</p>
+              </mat-tree-node>
+            </mat-tree>
+          </div>
+          <!-- calendar -->
+          <div class="sidenav-content calendar col-5">
+            <div class="row no-wrap">
+              <div *ngFor="let mes of meses" class="calendar-cell">{{mes}}</div>
+            </div>
+            <mat-tree class="tree" [dataSource]="dataSource" [treeControl]="treeControl">
+              <mat-tree-node *matTreeNodeDef="let node" class="calendar-row">
+                <div *ngFor="let mes of meses; let i=index;" class="calendar-cell" [attr.date-filled]="node.rangoMeses.indexOf(mes)>-1"
+                  [attr.date-inside]="mes>=node.inicio&&mes<=node.fin">
+                </div>
+              </mat-tree-node>
+            </mat-tree>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions class="align-end">
+  <div class="buttons">
+    <button type="button" mat-button class="button-secondary" (click)="cerrarModal()">CERRAR
+      <mat-icon>cancel</mat-icon>
+    </button>
+  </div>
+</div>

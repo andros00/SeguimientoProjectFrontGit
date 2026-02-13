@@ -1,0 +1,25 @@
+<div class="row space-wizard" *ngIf="editable">
+  <div class="col-5 align-center">
+    <button mat-raised-button class="add-fill" (click)="agregarEvaluador()">AGREGAR EVALUADOR</button>
+    <div class="margin-left">
+      <button mat-raised-button class="save-fill" (click)="guardarEvaluadoresRecomendados()">GUARDAR<mat-icon>
+          save</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-mensaje-exito-error></app-mensaje-exito-error>
+
+<app-lista-evaluadores-recomendados-proyecto [editable]="editable" ></app-lista-evaluadores-recomendados-proyecto>
+
+<div class="align-between border-top margin-top">
+  <button mat-button class="button-back" (click)="emitirPasoAnterior()">
+    <mat-icon>arrow_back</mat-icon>
+    ANTERIOR
+  </button>
+  <button mat-raised-button class="button-secondary" (click)="emitirPasoSiguiente()">
+    SIGUIENTE
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+</div>

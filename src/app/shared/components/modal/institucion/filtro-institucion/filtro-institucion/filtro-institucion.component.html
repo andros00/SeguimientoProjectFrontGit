@@ -1,0 +1,15 @@
+<form [formGroup]="formulario" (ngSubmit)="buscar()" class="filtro-institucion">
+  <div class="row">
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>NIT</mat-label>
+      <input matInput formControlName="nit" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" />
+    </mat-form-field>
+  </div>
+  <app-button-primary *ngIf="!cargando" [label]="'Buscar'" type="submit" [icon]="'search'" />
+
+</form>

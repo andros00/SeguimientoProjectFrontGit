@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+h2.mat-dialog-title{
+    display: inline-block;
+}
+
+h1.center-title, h2.center-title, h3.center-title, p.center-title, span.center-title {
+  text-align: center;
+}
+
+h2{
+    font-size: 20px;
+}
+
+h2.title-modal{
+    font-weight: 400;
+    font-size: 20px;
+    padding: 0 15px;
+}
+
+.input-readonly {
+  border: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  pointer-events: none; /* evita el foco */
+  color: inherit !important; /* mantiene el color de texto */
+  padding-left: 0; /* opcional, si quieres que se alinee con texto normal */
+}
+
+.form-group-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  margin-right: 5em;
+}
+
+.container {
+  background-color: white;
+}
+
+.divider {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+mat-icon {
+  color: #b0b0b0;
+  cursor: pointer;
+}
+

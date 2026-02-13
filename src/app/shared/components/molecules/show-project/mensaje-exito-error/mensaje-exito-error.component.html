@@ -1,0 +1,18 @@
+<div *ngIf="!!alertaMensaje && esMensajeError(alertaMensaje)">
+  <div class="row margin-top" *ngIf="mostrarMensajeError">
+    <div class="col col-10">
+      <div class="alert-error">
+        <mat-icon>cancel</mat-icon>
+        <p>{{mensajeMostrar}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row margin-top" *ngIf="mostrarMensajeExito">
+    <div class="col col-10">
+      <div class="alert-done">
+        <mat-icon>done</mat-icon>
+        <p>{{mensajeMostrar}}</p>
+      </div>
+    </div>
+  </div>
+</div>

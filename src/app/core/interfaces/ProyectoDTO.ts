@@ -1,0 +1,29 @@
+export interface ProyectoDTO {
+  centroGestion: number;
+  codigo: string;
+  codigoInterno: string;
+  convocatoria: number;
+  duracion: number;
+  estado: string;
+  etapaActual: number;
+  fechaAprobacionRechazo: string;
+  fechaEnvioCentro: string;
+  fechaRegistro: string;
+  instanciaAdmtivaActual: number;
+  lugarEjecucion: string;
+  modalidadConvocatoria: number;
+  moneda: string;
+  nombreCompleto: string;
+  nombreCorto: string;
+  nombreResponsable: string;
+  palabrasClaves: string;
+  pendienteAjustePpto: number;
+  periodoCronograma: string;
+  procesoSeleccion: number;
+  responsable: string;
+  seccional: string;
+  selectorResponsable: string;
+  selectorSeccional: string;
+  subtipoProyecto: number;
+  nombreCentroGestion: string;
+}

@@ -1,0 +1,201 @@
+<div class="table-responsive fade-b-t">
+
+  <div class="row margin-top" *ngIf="!!guardadoExitosamente">
+    <div class="col col-10">
+      <div class="alert-done">
+        <mat-icon>done</mat-icon>
+        <p>Guardado exitosamente.</p>
+      </div>
+    </div>
+  </div>
+
+  <table id="result-table" class="table presupuesto">
+    <thead>
+      <tr class="header-table">
+        <th class="title-table" rowspan="2">Rubro</th>
+        <ng-container *ngFor="let encabezado of encabezados$ | async">
+          <th [attr.colspan]="numeroDeColumnas(encabezado)">{{extraerTitulo(encabezado)}}</th>
+        </ng-container>
+        <th [attr.colspan]="numeroDeColumnasSeccionSubtotales()">Subtotal</th>
+      </tr>
+      <tr>
+        <ng-container *ngFor="let encabezado of encabezados$ | async">
+          <ng-container *ngIf="encabezado.esUdea">
+            <ng-container *ngFor="let aportanteUdea of encabezado.frescos">
+              <th class="small-font">{{extraerTituloDependencia(aportanteUdea)}}</th>
+              <th class="small-font" *ngIf="porcentajeVisible">%</th>
+            </ng-container>
+            <th class="small-font">Especie</th>
+          </ng-container>
+
+          <ng-container *ngIf="!encabezado.esUdea">
+            <th class="small-font border-left">Fresco</th>
+            <th class="small-font" *ngIf="porcentajeVisible">%</th>
+            <th class="small-font">Especie</th>
+          </ng-container>
+        </ng-container>
+
+        <th class="small-font border-left">Fresco</th>
+        <th class="small-font" *ngIf="porcentajeVisible">%</th>
+        <th class="small-font">Especie</th>
+        <th class="small-font">Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-template #recursiveTable let-list let-nivel="nivel + 1">
+        <ng-container *ngFor="let rubroProyecto of list">
+          <tr class="first-tr">
+            <td class="inline-order">
+              <a (click)="mostrarOcultarHijos(rubroProyecto)"
+                *ngIf="datosSoloLectura && rubroProyecto.rubrosHijos?.length > 0">
+                <mat-icon class="icon-table" *ngIf="!rubroProyecto.hijosVisibles">add</mat-icon>
+                <mat-icon class="icon-table" *ngIf="rubroProyecto.hijosVisibles">remove</mat-icon>
+              </a>
+
+              <div class="line-tab" [ngClass]="{'line-tab-last': esUltimoHijo(rubroProyecto)}"
+                [ngStyle]="{ 'width.px': 50 * (nivel-1) }"></div>
+
+              <mat-menu #rubroMenu="matMenu">
+                <button mat-menu-item (click)="abrirModalEdicion(rubroProyecto)">
+                  <mat-icon>edit</mat-icon>Editar
+                </button>
+
+                <button mat-menu-item (click)="abrirModalAgregarRubro(rubroProyecto)">
+                  <mat-icon>add</mat-icon>Agregar subrubro
+                </button>
+
+                <button mat-menu-item [disabled]="rubroProyecto.rubrosHijos.length > 0"
+                  (click)="eliminarRubro(rubroProyecto)">
+                  <mat-icon>delete</mat-icon>Eliminar
+                </button>
+              </mat-menu>
+
+              <button mat-icon-button [matMenuTriggerFor]="rubroMenu" *ngIf="porcentajeVisible || !datosSoloLectura">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              {{rubroProyecto.nombre}}
+            </td>
+
+            <ng-container *ngFor="let rubroPorAportante of rubroProyecto.listaRubrosPorAportantes">
+
+              <!-- Filas Udea -->
+              <ng-container *ngIf="rubroPorAportante.esUdea">
+                <!-- Fresco UdeA -->
+                <ng-container *ngFor="let aportanteUdea of rubroPorAportante.frescos">
+                  <td class="border-left">
+                    <mat-form-field appearance="fill" *ngIf="!datosSoloLectura && !porcentajeVisible">
+                      <input matInput type="text" currencyMask [pattern]="number"
+                        [options]="{ thousands: '.', decimal: ',',  precision: '2'}"
+                        [disabled]="deshabilitarRubroAportante(rubroProyecto, aportanteUdea)"
+                        [(ngModel)]="aportanteUdea.frescoSolicitado"
+                        [ngClass]="{'aportanteRubroInvalido': !aportanteUdea.porcentajeValido}"
+                        (blur)="recalcularFresco(rubroProyecto, aportanteUdea)">
+                    </mat-form-field>
+                    <span
+                      *ngIf="datosSoloLectura || porcentajeVisible">{{aportanteUdea.frescoSolicitado | currency:'COP':'symbol-narrow':'1.2-2'}}</span>
+                  </td>
+                  <td *ngIf="porcentajeVisible">{{aportanteUdea.porcentaje | number:'1.2-2'}}%</td>
+                </ng-container>
+
+                <td>
+                  <!-- Especie UdeA-->
+                  <mat-form-field appearance="fill" *ngIf="!datosSoloLectura && !porcentajeVisible">
+                    <input matInput type="text" currencyMask [pattern]="number"
+                      [options]="{ thousands: '.', decimal: ',',  precision: '2'}"
+                      [disabled]="deshabilitarRubroAportante(rubroProyecto, rubroPorAportante.aportanteEnEspecie)"
+                      [(ngModel)]="rubroPorAportante.aportanteEnEspecie.especieSolicitado"
+                      (blur)="recalcularEspecie(rubroProyecto, rubroPorAportante.aportanteEnEspecie)">
+                  </mat-form-field>
+                  <span
+                    *ngIf="datosSoloLectura || porcentajeVisible">{{rubroPorAportante.aportanteEnEspecie.especieSolicitado | currency:'COP':'symbol-narrow':'1.2-2'}}</span>
+                </td>
+              </ng-container>
+
+              <!-- Filas Cofinanciadores -->
+              <ng-container *ngIf="!rubroPorAportante.esUdea">
+                <td class="border-left">
+                  <!-- Fresco -->
+                  <mat-form-field appearance="fill" *ngIf="!datosSoloLectura && !porcentajeVisible">
+                    <input matInput type="text" currencyMask [pattern]="number"
+                      [options]="{ thousands: '.', decimal: ',',  precision: '2'}"
+                      [disabled]="deshabilitarRubroAportante(rubroProyecto, rubroPorAportante.frescos[0])"
+                      [(ngModel)]="rubroPorAportante.frescos[0].frescoSolicitado"
+                      [ngClass]="{'aportanteRubroInvalido': !rubroPorAportante.frescos[0].porcentajeValido}"
+                      (blur)="recalcularFresco(rubroProyecto, rubroPorAportante.frescos[0])">
+                  </mat-form-field>
+                  <span
+                    *ngIf="datosSoloLectura || porcentajeVisible">{{rubroPorAportante.frescos[0].frescoSolicitado | currency:'COP':'symbol-narrow':'1.2-2'}}</span>
+                </td>
+                <td *ngIf="porcentajeVisible">{{rubroPorAportante.frescos[0].porcentaje | number:'1.2-2'}}%</td>
+
+                <td>
+                  <!-- Especie -->
+                  <mat-form-field appearance="fill" *ngIf="!datosSoloLectura && !porcentajeVisible">
+                    <input matInput type="text" currencyMask [pattern]="number"
+                      [options]="{ thousands: '.', decimal: ',',  precision: '2'}"
+                      [disabled]="deshabilitarRubroAportante(rubroProyecto, rubroPorAportante.frescos[0])"
+                      [(ngModel)]="rubroPorAportante.frescos[0].especieSolicitado"
+                      (blur)="recalcularEspecie(rubroProyecto, rubroPorAportante.frescos[0])">
+                  </mat-form-field>
+
+                  <span
+                    *ngIf="datosSoloLectura || porcentajeVisible">{{rubroPorAportante.frescos[0].especieSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</span>
+                </td>
+              </ng-container>
+
+            </ng-container>
+
+            <td class="border-left align-right">
+              {{rubroProyecto.totalFrescoSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</td>
+            <td class="align-right" *ngIf="porcentajeVisible">
+              {{rubroProyecto.porcentajeSubtotalFresco | number:'1.2-2'}}%</td>
+            <td class="align-right">{{rubroProyecto.totalEspecieSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}
+            </td>
+            <td class="align-right">
+              {{(rubroProyecto.totalFrescoSolicitado + rubroProyecto.totalEspecieSolicitado) | currency:'COP':'symbol-narrow':'1.2-2' }}
+            </td>
+          </tr>
+
+          <ng-container
+            *ngIf="rubroProyecto.rubrosHijos?.length > 0 && (!datosSoloLectura || rubroProyecto.hijosVisibles)">
+            <ng-container
+              *ngTemplateOutlet="recursiveTable; context:{ $implicit: rubroProyecto.rubrosHijos, nivel: nivel }">
+            </ng-container>
+          </ng-container>
+
+        </ng-container>
+      </ng-template>
+
+      <ng-container *ngTemplateOutlet="recursiveTable; context:{ $implicit: listaRubrosProyecto, nivel: 0 }">
+      </ng-container>
+
+      <!-- Fila de subtotatles -->
+      <tr class="subtotal">
+        <td>Subtotales</td>
+        <ng-container *ngFor="let aportante of subtotales?.listaRubrosPorAportantes">
+          <ng-container *ngIf="aportante.esUdea">
+            <ng-container *ngFor="let aportanteUdea of aportante.frescos">
+              <td>{{aportanteUdea.frescoSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</td>
+              <td *ngIf="porcentajeVisible">{{aportanteUdea.porcentaje | number:'1.2-2'}}%</td>
+            </ng-container>
+            <td>{{aportante.aportanteEnEspecie.especieSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</td>
+          </ng-container>
+
+          <ng-container *ngIf="!aportante.esUdea">
+            <td>{{aportante.frescos[0].frescoSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</td>
+            <td *ngIf="porcentajeVisible">{{aportante.frescos[0].porcentaje | number:'1.2-2'}}%</td>
+            <td>{{aportante.frescos[0].especieSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</td>
+          </ng-container>
+        </ng-container>
+
+        <td class="border-left">{{subtotales?.totalFrescoSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</td>
+        <td *ngIf="porcentajeVisible">{{subtotales.porcentajeSubtotalFresco | number:'1.2-2'}}%</td>
+        <td>{{subtotales?.totalEspecieSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</td>
+        <td>
+          {{(subtotales?.totalFrescoSolicitado + subtotales?.totalEspecieSolicitado) | currency:'COP':'symbol-narrow':'1.2-2' }}
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>

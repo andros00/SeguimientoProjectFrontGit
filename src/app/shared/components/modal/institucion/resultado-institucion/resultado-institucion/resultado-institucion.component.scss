@@ -1,0 +1,18 @@
+
+.btn {
+  border: none;
+  padding: 10px 25px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-guardar {
+  background-color: #8bc34a;
+  color: white;
+}

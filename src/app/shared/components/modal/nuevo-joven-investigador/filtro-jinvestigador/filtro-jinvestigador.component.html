@@ -1,0 +1,16 @@
+<form [formGroup]="formulario" (ngSubmit)="buscar()" class="filtro-institucion">
+  <div class="row">
+    <mat-form-field appearance="outline" class="col-6">
+      <mat-label>CÉDULA</mat-label>
+      <input matInput formControlName="identificacion" />
+    </mat-form-field>
+  </div>
+
+  <div class="row align-end margin-top">
+    <button mat-flat-button color="primary" type="submit" [disabled]="cargando">
+      <mat-icon *ngIf="!cargando">search</mat-icon>
+      <mat-progress-spinner *ngIf="cargando" diameter="20" mode="indeterminate"></mat-progress-spinner>
+      <span *ngIf="!cargando">Buscar</span>
+    </button>
+  </div>
+</form>

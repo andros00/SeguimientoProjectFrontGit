@@ -1,0 +1,28 @@
+.button-primary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  height: 48px; /* Adjust height to your needs */
+  background-color: #dff1c4; /* Light green */
+  color: #6cb743;
+  border-radius: 4px; /* Optional for rounded corners */
+  overflow: hidden;
+}
+
+.button-primary .label {
+  flex: 1;
+  text-align: center;
+  color: #6cb743;
+  padding: 0 1em;
+}
+
+.button-primary .icon {
+  background-color: #6cb743; /* Darker green */
+  color: white;
+  padding: 12px; /* Adjust for icon alignment */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}

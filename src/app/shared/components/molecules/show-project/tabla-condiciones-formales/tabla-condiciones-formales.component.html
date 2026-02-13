@@ -1,0 +1,32 @@
+<table class="table margin-top">
+  <thead>
+    <tr class="header-table">
+      <th>Condición formal</th>
+      <th>Cumplimiento</th>
+      <th>Observación</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let condicion of listaCondiciones$ | async">
+    <tr class="table-hover">
+      <td>
+        {{condicion.explicacionCondicionFormal}}
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <mat-select placeholder="Cumplimiento" [disabled]="!editable" [(ngModel)]="condicion.resultadoManual"
+            (selectionChange)="cambioCondicion(condicion)">
+            <mat-option value="s">Cumple</mat-option>
+            <mat-option value="n">No cumple</mat-option>
+            <mat-option value="a">No aplica</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field appearance="fill">
+          <mat-label>Observación</mat-label>
+          <input matInput [disabled]="!editable" [(ngModel)]="condicion.comentario" (blur)="cambioCondicion(condicion)">
+        </mat-form-field>
+      </td>
+    </tr>
+  </tbody>
+</table>

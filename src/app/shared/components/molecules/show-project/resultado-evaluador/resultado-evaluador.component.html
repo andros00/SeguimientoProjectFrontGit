@@ -1,0 +1,81 @@
+<div class="container">
+  <h2 class="medium-gray font-20" *ngIf="totalRegistros > 0">Resultados({{totalRegistros}})</h2>
+  <div class="row card-financer">
+    <mat-card class="col-2 card-financiador flip-card" *ngFor="let evaluador of listaEvaluadoresPaginada">
+      <div class="flip-card-inner">
+        <mat-card-header class="header-card">
+          <mat-card-title>
+            <p class="title-card dark-gray font-16 font-w">{{evaluador.nombres}} {{evaluador.primerApellido}}
+              {{evaluador.segundoApellido}}</p>
+            <p class="normal-gray">Identificación: {{evaluador.identificacion}}</p>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <div class="d-flex">
+            <mat-icon class="light-gray">work</mat-icon>
+            <div class="card-body">
+              <p class="normal-gray">Área de especialidad</p>
+              <p class="medium-gray font-16">{{evaluador.areaEspecialidad}}
+              </p>
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <mat-icon class="light-gray">account_balance</mat-icon>
+            <div class="card-body">
+              <p class="normal-gray">Institución</p>
+              <p class="medium-gray font-16">{{evaluador.personaJuridica.nit}} -
+                {{evaluador.personaJuridica.razonSocial}}
+              </p>
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <mat-icon class="light-gray">place</mat-icon>
+            <div class="card-body">
+              <p class="normal-gray">Dirección</p>
+              <p class="medium-gray font-16">{{evaluador.direccion}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <mat-icon class="light-gray">email</mat-icon>
+            <div class="card-body">
+              <p class="normal-gray">Correo</p>
+              <p class="medium-gray font-16">{{evaluador.correoElectronico}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <mat-icon class="light-gray">phone</mat-icon>
+            <div class="card-body">
+              <p class="normal-gray">Teléfono</p>
+              <p class="medium-gray font-16">{{evaluador.telefono}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex" *ngIf="!!evaluador.celular">
+            <mat-icon class="light-gray">stay_current_portrait</mat-icon>
+            <div class="card-body">
+              <p class="normal-gray">Celular</p>
+              <p class="medium-gray font-16">{{evaluador.celular}}</p>
+            </div>
+          </div>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="position-bottom">
+            <button class="button-select" mat-button (click)="seleccionarEvaluador(evaluador)">SELECCIONAR</button>
+          </div>
+        </mat-card-actions>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+<div *ngIf="totalRegistros && (totalRegistros > registrosPorPagina)">
+  <mat-paginator class="paginador" [hidePageSize]="true" [length]="totalRegistros" [pageSize]="registrosPorPagina"
+    (page)="cargarPagina($event.pageIndex)">
+  </mat-paginator>
+</div>

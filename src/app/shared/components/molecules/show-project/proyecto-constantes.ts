@@ -1,0 +1,77 @@
+import { EstadosProyectoConstantes } from '../busqueda-proyecto/constantes/estados-proyecto-constantes';
+
+export const ProyectoConstantes = {
+    VALOR_MAXIMO_CUARENTA: 40,
+    TAMANO_MAXIMO_NOMBRE_CORTO: 200,
+    TAMANO_MAXIMO_NOMBRE_COMPLETO: 600,
+    TAMANO_MAXIMO_PALABRA_CLAVE: 200,
+    TAMANO_MAXIMO_LUGAR_EJECUCION: 100,
+    MINIMO_DURACION: 1,
+    IDENTIFICADOR_TIPO_PROPUESTA_GRADO_POSGRADOS: -1,
+    IDENTIFICADOR_TIPO_TRABAJO_GRADO_POSGRADOS: -2,
+    IDENTIFICADOR_TIPO_MACROPROYECTO: 1,
+    IDENTIFICADOR_TIPO_PROYECTO: 2,
+    IDENTIFICADOR_TIPO_SUBPROYECTO: 3,
+    IDENTIFICADOR_CLASE_SUBPROYECTO_J_I_UDEA: 1,
+    ID_CENTRO_ADMINISTRATIVO_VICERRECTORIA_INVESTIGACION: 57,
+    TIPO_CONVOCATORIA: 1,
+    TIPO_PROCESO_SELECCION: 2,
+    TITULO_ALERTA_GUARDANDO_APORTANTE: 'Error guardando registros de aportantes',
+    MENSAJE_ALERTA_GUARDANDO_APORTANTE: 'No se presenta registro de entidad participante con rol de financiador.',
+    TITULO_ALERTA_ELIMINAR_PARTICIPANTE: 'Eliminar participante',
+    ELIMINAR_PARTICIPANTE: '¿Realmente desea eliminar este participante?',
+    CALCULAR_SOBRE_SUBTOTAL: 1,
+    CALCULAR_SOBRE_TOTAL: 2,
+    ROL_ENTIDAD_FINANCIADOR: "financiador",
+    ROL_ENTIDAD_COFINANCIADOR: "cofinanciador",
+    ESTADO_PERMITIDO_PARA_ELIMINACION: 'escritura',
+    ESTADO_PENDIENTE_ACTUALIZACION: 'pendactual',
+    INFORMACION_COMPLEMENTARIA_SECCION_FOCOS: 'focosMisionSabios',
+    INFORMACION_COMPLEMENTARIA_SECCION_ODS: 'objetivosDesarrolloMilenio',
+    INFORMACION_COMPLEMENTARIA_SECCION_G8: 'agendaG8',
+    INFORMACION_COMPLEMENTARIA_SECCION_ECONOMI: 'objetivosSocioeconomicos',
+    INFORMACION_COMPLEMENTARIA_TITULO_FOCOS: 'Agregar focos de misión de sabios',
+    INFORMACION_COMPLEMENTARIA_TITULO_ODS: 'Agregar objetivos desarrollo sostenible - ODS',
+    INFORMACION_COMPLEMENTARIA_TITULO_G8: 'Agregar agenda G8',
+    TEXTO_SELECCIONAR_FINANCIADORES: 'Seleccionar financiadores',
+    MENSAJE_AYUDA_SELECCIONAR_FINANCIADORES: 'Agregue las entidades aportantes al proyecto, defina el tipo de financiación y el sector al que pertenece',
+    MENSAJE_ERROR_SELECCIONAR_FINANCIADORES: 'Debe completar toda la información de financiadores, solo así lo podrá agregar.',
+    MENSAJE_ERROR_CANTIDAD_CARACTERES: 'Usted pasó el número de caracteres permitidos.',
+    TEXTO_SELECCIONAR_TIPO_FINANCIADOR: 'Seleccionar tipo de financiador',
+    TEXTO_SELECCIONAR_SECTOR_APORTANTE: 'Seleccionar sector del aportante',
+    MENSAJE_AYUDA_SECTOR_APORTANTE: 'Seleccione el sector al cuál pertenece la entidad aportante. Solo permite seleccionar un registro.',
+    MENSAJE_AYUDA_TIPO_FINANCIADOR: 'Seleccione el tipo de financiación de la entidad aportante. Solo permite seleccionar un registro.',
+    COLUMNAS_TABLA_COFINANCIADORES: { 
+      NOMBRE_DEL_FINANCIADOR: 'Nombre del financiador',
+      GRUPO_DEPENDENCIA: 'Grupo o Dependencia',
+      TIPO_APORTANTE: 'Tipo aportante',
+      TIPO_DE_FINANCIACION: 'Tipo de financiación',
+      SECTOR_DEL_APORTANTE: 'Sector del aportante',
+      ACCIONES: 'Acciones'
+    },
+    MENSAJES_TIPO_MONEDA: {
+      MENSAJE_ADVERTENCIA: 'Recuerde que el presupuesto debe estar en Pesos colombianos, debe realizar la conversión de acuerdo a la TRM del día que realiza el registro del proyecto.',
+      NOMBRE_MONEDA: 'COP - PESO COLOMBIANO',
+      MENSAJE_INFORMACION: 'Recuerde que el presupuesto debe estar en Pesos colombianos, debe realizar la conversión de acuerdo a la TRM del día que realiza el registro del proyecto.'
+    },
+    INFORMACION_COMPLEMENTARIA_TITULO_ECONOMI: 'Agregar objetivo socioeconómico',
+    ENVIADO_A_CENTRO: 'true',
+    PROYECTO_PROCES0_DE_SELECCION: {
+        'Proceso Selección Proyectos Inscritos': 'Esta opción corresponde a los  Proyectos por medio de contratos que no pasaron por la VRI en su gestión. - Proyectos de Convocatorias en Convenios con la UdeA (Ej: las convocatorias del G8, FAPESP, DFG, entre otras)',
+        'Proceso Solicitud Avales Institucionales': 'Esta opción corresponde a los proyectos - Financiados por Convocatorias Minciencias. - Proyectos de los cuales las propuestas o el contrato pasaron por el proceso de avales de la vicerrectoría de investigación.',
+      },
+    ESTADO_PERMITIDO_PARA_DEVOLVER_PROYECTO: [
+        EstadosProyectoConstantes.AVALADO,
+        EstadosProyectoConstantes.MATRICULADO
+    ],
+    ESTADO_PERMITIDO_PARA_CAMBIO_CENTRO: [
+        EstadosProyectoConstantes.MATRICULADO,
+        EstadosProyectoConstantes.APROBADO,
+        EstadosProyectoConstantes.AVALADO
+      ],
+    SIN_CONVOCATORIA: 'SIN_CONVOCATORIA',
+    PROCESO_SELECCION_INSCRITO: 351,
+    PROCESO_SELECCION_AVALES: 1670,
+    TIPO_DATO_UBICACION: 'listado',
+    TITULO_LUGAR_EJECUCION: 'Lugar de ejecución'
+};
