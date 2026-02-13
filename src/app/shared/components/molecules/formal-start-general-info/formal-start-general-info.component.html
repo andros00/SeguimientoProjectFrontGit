@@ -1,0 +1,23 @@
+<ng-container class="container" [formGroup]="form">
+  <p><span style="color: red;">*</span> Complete la información para el inicio formal.</p>
+  <div class="form-group-container">
+    <app-input-text [label]="'Código interno'" [readonly]="true" formControlName="codigoInterno" class="input" />
+    <app-input-text [label]="'Duracion del proyecto (meses)'" class="input" formControlName="duracion" />
+  </div>
+  <div class="form-group-container">
+    <app-datepicker [label]="'* Fecha de inicio'" class="input" formControlName="fechaInicio" />
+    <app-datepicker [label]="'Fecha de finalización'" [disabled]="true" class="input"
+      formControlName="fechaFinalizacion" />
+  </div>
+  <div class="form-group-container">
+    <app-datepicker [label]="'Fecha de aprobación'" class="input" formControlName="fechaAprobacionRechazo" />
+  </div>
+  <mat-divider class="divider" />
+  <div class="buttons">
+
+    <app-button-primary [label]="'GUARDAR'" [icon]="'save'" (click)="guardar()" />
+
+
+  </div>
+  <mat-divider class="divider" />
+</ng-container>

@@ -1,0 +1,114 @@
+<div class="row margin-top" *ngIf="mostrarMensajeErrorEliminar">
+  <div class="col col-10">
+    <div class="alert-error">
+      <mat-icon>cancel</mat-icon>
+      <p>Ocurrió un error eliminando el participante del proyecto.</p>
+    </div>
+  </div>
+</div>
+<div class="row margin-top margin-bottom" *ngIf="mostrarMensajeExitoEliminar">
+  <div class="col col-10">
+    <div class="alert-done">
+      <mat-icon>done</mat-icon>
+      <p>Participante del proyecto eliminado exitosamente.</p>
+    </div>
+  </div>
+</div>
+<table *ngIf="listaParticipantes.length > 0" id="result-table" class="table table-striped table-bordered margin-top"
+  style="width:100%">
+  <thead>
+    <tr class="header-table">
+      <th></th>
+      <th>Nombre</th>
+      <th>Grupo de investigación</th>
+      <th>Rol en proyecto/Vínculo</th>
+      <th>Dedicación</th>
+      <th>Programa académico apoyado/Porcentaje</th>
+      <th *ngIf="editable">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let participante of listaParticipantes">
+      <tr class="table-hover">
+        <td>
+          <a (click)="habilitarRegistro(participante)">
+            <mat-icon class="icon-table" *ngIf="!participante.habilitarRegistro">add</mat-icon>
+            <mat-icon class="icon-table" *ngIf="participante.habilitarRegistro">remove</mat-icon>
+          </a>
+        </td>
+        <td>
+          {{participante.participante? construirNombreCompleto(participante.participante.nombrePila, participante.participante.apellido1, participante.participante.apellido2) : 'Indeterminado'}}
+        </td>
+        <td>{{participante.grupoInvestigacion? participante.grupoInvestigacion.nombreCorto: ''}}</td>
+        <td>
+          {{ concatenarCadena(participante.rol?.nombre, participante.vinculo?.nombreTipoVinculacion) }}
+          {{participante.vinculo?.nombreClaseEmpleado}}
+        </td>
+        <td>{{participante.dedicacionHoras}}h - {{participante.dedicacionMeses}}m
+          <span *ngIf="participante.dedicacionHorasPlan">/ P.T.:{{participante.dedicacionHorasPlan}}h - {{participante.dedicacionMesesPlan}}m</span></td>
+        <td>
+          {{ mostrarProgramaAcademico(!!participante.programa?.nombrePrograma ? participante.programa.nombrePrograma : '', !!participante.programa?.porcentajeCompletado ? participante.programa.porcentajeCompletado : '' ) }}
+        </td>
+        <td *ngIf="editable">
+          <button class="button-more" [matMenuTriggerFor]="menu">
+            <mat-icon>more_horiz</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button (click)="editarParticipante(participante)" mat-menu-item>
+              <mat-icon class="icon-table">create</mat-icon>Editar
+            </button>
+            <button (click)="abrirEliminarParticipante(participante)" mat-menu-item>
+              <mat-icon class="icon-table">delete</mat-icon>Eliminar
+            </button>
+          </mat-menu>
+        </td>
+      </tr>
+      <tr *ngIf="participante.habilitarRegistro">
+        <td colspan="8">
+          <div class="content-table">
+            <div class="title-info">
+              <h3 class="primary-color margin-bottom">Información requerida</h3>
+            </div>
+            <div class="row">
+              <div class="col-10">
+                <div class="card-accordion">
+                  <div class="row margin-right margin-bottom">
+                    <span *ngIf="participante.participante"> <b>
+                        <mat-icon>account_box</mat-icon> Identificación
+                      </b>:
+                      {{participante.participante.identificacion}}</span>
+                  </div>
+                  <div class="row margin-right margin-bottom">
+                    <span *ngIf="participante.participante"> <b>
+                        <mat-icon>phone</mat-icon> Teléfono
+                      </b>:
+                      {{participante.participante.telefono}}</span>
+                  </div>
+                  <div class="row margin-right margin-bottom">
+                    <span *ngIf="participante.participante"> <b>
+                        <mat-icon>email</mat-icon>Correo
+                      </b>:
+                      {{participante.participante.correoElectronico}}</span>
+                  </div>
+                  <div class="row margin-right margin-bottom">
+                    <span *ngIf="participante.funcion"> <b>
+                        <mat-icon>pan_tool</mat-icon> Función
+                      </b>: {{participante.funcion}}</span>
+                  </div>
+                  <div class="row margin-right margin-bottom">
+                    <span *ngIf="participante.institucionP"> <b>
+                        <mat-icon>account_balance</mat-icon> Institución que representa
+                      </b>:
+                      {{participante.institucionP.nombreCorto}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+  <tfoot>
+  </tfoot>
+</table>

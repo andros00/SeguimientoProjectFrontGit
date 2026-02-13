@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e8f0ff;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+mat-checkbox {
+  .mat-checkbox-frame {
+    border-color: #6cb743 !important;
+  }
+
+  &.mat-mdc-checkbox-checked {
+    .mdc-checkbox__background {
+      background-color: #6cb743 !important;
+    }
+    .mat-checkbox-frame {
+      border-color: #6cb743 !important;
+    }
+  }
+}

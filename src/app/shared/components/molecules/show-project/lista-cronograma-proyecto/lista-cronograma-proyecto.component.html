@@ -1,0 +1,105 @@
+<div class="row" *ngIf="listaCronogramaProyecto$.length === 0">
+  <div class="col-10">
+    <div class="onboarding">
+      <p>Crea los ítems que componen este paso</p>
+    </div>
+    <div class="onboarding">
+      <p>Recuerda completar cada uno de los campos</p>
+    </div>
+    <div class="onboarding">
+      <p>Revisa la información antes de continuar</p>
+    </div>
+  </div>
+</div>
+<div class="accordion-udea margin-top" *ngIf="listaCronogramaProyecto$">
+  <mat-accordion *ngFor="let actividad of listaCronogramaProyecto$; let i = index">
+    <mat-expansion-panel class="expansion-space">
+      <mat-expansion-panel-header class="header-accordions">
+        <mat-panel-title>
+          <button mat-icon-button *ngIf="editable">
+            <span class="title-accordion">
+              <mat-icon class="more" [matMenuTriggerFor]="menu">more_vert</mat-icon>
+            </span>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="abrirEditar(actividad)">
+              <mat-icon>edit</mat-icon>Editar
+            </button>
+            <button mat-menu-item (click)="abrirEliminarActividad(actividad)">
+              <mat-icon>delete</mat-icon>Eliminar
+            </button>
+          </mat-menu>
+          <h3 class="title-accordion">Actividad {{i + 1}}</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row no-wrap cronograma">
+        <div class="col col-5">
+
+          <div class="col col-10 padding-int margin-top-mini">
+            <h3 class="subtitle-accordion">
+              Actividad
+            </h3>
+            <div class="parrafo-accordion">
+              <p class="parrafo-accordion">
+                {{actividad.nombre}}
+              </p>
+            </div>
+          </div>
+          <div *ngIf="!!actividad.detalle" class="col col-10 border-top padding-int">
+            <h3 class="subtitle-accordion">
+              Detalle
+            </h3>
+            <div class="parrafo-accordion">
+              <p class="parrafo-accordion">
+                {{actividad.detalle}}
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col col-5 margin-top-mini">
+          
+          <div class="col col-10 padding-int">
+            <h3 class="subtitle-accordion">
+              Período
+            </h3>
+            <div class="parrafo-accordion">
+              <p class="parrafo-accordion">
+                {{actividad.periodo}}
+              </p>
+            </div>
+          </div>
+
+          <div class="row no-wrap border-top">
+            <div class="col col-2 card-accordion">
+              <div class="cont-center-acordion">
+                <mat-icon class="light-gray">date_range</mat-icon>
+                <div class="cont-date">
+                  <p>Inicio del evento</p>
+                  <h3>
+                    {{actividad.inicio}}
+                  </h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="col col-2 card-accordion">
+              <div class="cont-center-acordion">
+                <mat-icon class="light-gray">date_range</mat-icon>
+                <div class="cont-date">
+                  <p>Fin del evento</p>
+                  <h3>
+                    {{actividad.fin}}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

@@ -1,0 +1,36 @@
+<div class="fade-b-t">
+  <div class="row space-wizard" *ngIf="editable">
+    <div class="col-5 align-center">
+      <div>
+        <button mat-button class="add-fill" (click)="abrirAgregarComponente()">AGREGAR COMPONENTE</button>
+      </div>
+      <div class="margin-left">
+        <button mat-raised-button class="save-fill" (click)="guardarComponentes()">GUARDAR
+          <mat-icon>save</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="contextual-help">
+        <div class="card-contextual">
+          <img src="assets/img/ic-contextual-help.png" alt="">
+          <p class="contextual-yellow">Para agregar un componente debe hacer clic en el botón agregar componente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-mensaje-exito-error></app-mensaje-exito-error>
+
+  <app-lista-componente-proyecto [editable]="editable"></app-lista-componente-proyecto>
+  <div class="buttons align-between margin-top">
+    <button mat-button class="button-back" awPreviousStep>
+      <mat-icon>arrow_back</mat-icon>
+      ANTERIOR
+    </button>
+    <button mat-raised-button class="button-secondary" (click)="validarComponente()" awNextStep>
+      SIGUIENTE
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
+</div>

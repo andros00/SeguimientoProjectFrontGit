@@ -1,0 +1,64 @@
+<div class="accordion-udea">
+  <mat-accordion class="margin-top" *ngFor="let documento of listaDocumentosProyecto$ | async; let i = index">
+    <mat-expansion-panel class="expansion-space">
+      <mat-expansion-panel-header class="header-accordions">
+        <mat-panel-title>
+          <button mat-icon-button *ngIf="editable">
+            <mat-icon class="more" [matMenuTriggerFor]="menu">more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="abrirModalEdicionDocumentoSoporte(documento)">
+              <mat-icon>edit</mat-icon>Editar
+            </button>
+            <button mat-menu-item (click)="abrirEliminar(documento)">
+              <mat-icon>delete</mat-icon>Eliminar
+            </button>
+          </mat-menu>
+          <h3>{{documento.documentoSoporte.nombreDocumento}}<span *ngIf="documento.documentoSoporte.numeroDocumento"> -
+              {{documento.documentoSoporte.numeroDocumento}}</span></h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="margin-top">
+        <div class="row no-wrap">
+          <div class="col col-5">
+            <div class="card-accordion">
+              <div>
+                <h3>Tipo documento</h3>
+                <p>{{documento.documentoSoporte.tipo.nombreTipo}}</p>
+              </div>
+              <div class="align-between">
+                <div class="download-card">
+                  <p class="parrafo-accordion"><img src="assets/img/docs-add.png" alt="documento-agregado">{{documento.documentoSoporte.nombreAdjunto}}</p>
+                </div>
+                <div  class="download-btn"  >
+                  <a [hidden]="!documento.documentoSoporte.identificador" href="{{urlBase}}{{direccion}}{{documento.documentoSoporte.identificador}}">Descargar<mat-icon
+                      class="download">cloud_download</mat-icon></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col col-5">
+            <div class="card-accordion">
+              <div class="content-card align-between">
+                <div class="text-card">
+                  <h3>Emisor</h3>
+                  <p class="parrafo-accordion">{{documento.documentoSoporte.emisor}}</p>
+                </div>
+                <div class="text-card">
+                  <h3>Fecha de emisión</h3>
+                  <p class="parrafo-accordion">{{documento.documentoSoporte.fechaEmision | date: 'dd-MM-yyyy'}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col col-10 formal-explain">
+            <h2 class="titles-accordion">Descripción</h2>
+            <p class="parrafo-accordion"> {{documento.documentoSoporte.descripcion}}</p>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

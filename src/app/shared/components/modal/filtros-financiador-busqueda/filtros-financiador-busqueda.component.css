@@ -1,0 +1,51 @@
+.radio-financer, .d-flex{
+    display: flex;
+    align-items: center;
+}
+
+.radios{
+    margin: 0 20px 0 0;
+}
+
+::ng-deep mat-card.flip-card[_ngcontent-c7], ::ng-deep mat-card.flip-card .mat-card-content {
+    background: #fff;
+}
+
+.onboarding-table{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+    text-align: center;
+  }
+  
+  .img-onboarding img{
+    width: 100px;
+  }
+
+  .text-onboarding span{
+    font-size: 24px;
+    color: #5a5a5a;
+  }
+  
+  .text-onboarding p{
+    color: gray;
+    margin: 5px 0 0 0;
+  }
+
+
+@media (max-width: 992px) {
+    .radio-financer, .d-flex{
+        align-items: initial;
+    }
+
+    .button-primary{
+        margin-left: 0px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+}
+.margin-radio {
+    margin: 20px;
+} 

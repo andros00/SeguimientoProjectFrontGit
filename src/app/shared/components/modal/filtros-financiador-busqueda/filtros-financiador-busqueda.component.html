@@ -1,0 +1,65 @@
+<form class="example-form" [formGroup]="formularioFiltrobusquedaFinanciador" autocomplete="off">
+  <div class="row radio-financer border-bottom">
+    <mat-radio-group class="radio-financer radios" id="limiteGeografico" formControlName="limiteGeografico" (change)="validarCambioLimiteGeografico()">
+
+      <mat-radio-button value="nacional">Nacional</mat-radio-button>
+      <mat-radio-button value="internacional">Internacional</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Escribe la palabra clave</mat-label>
+      <input matInput placeholder="Palabra Clave" formControlName="palabraClave" (input)="validarFormularioBusqueda()">
+      <mat-error>
+        <span *ngIf="f.palabraClave.errors?.minlength">
+          Debe contener mínimo 3 caracteres.
+        </span>
+      </mat-error>
+    </mat-form-field>
+    <div class="content">
+        <span class="btn-info" [matMenuTriggerFor]="nombredefinanciador">
+          <mat-icon class="light-gray more">info</mat-icon>
+        </span>
+        <mat-menu class="info-help" #nombredefinanciador="matMenu">
+          <h3 class="color-info">
+            <mat-icon class="more">info</mat-icon>¡Recuerde!
+          </h3>
+          <span>
+            Palabra clave que contenga el nombre del financiador a buscar.
+          </span>
+        </mat-menu>
+      </div>
+    <mat-form-field class="element" appearance="fill">
+      <mat-label>Escribe el NIT</mat-label>
+      <input matInput type="text" placeholder="NIT" formControlName="nit" (input)="validarFormularioBusqueda()">
+      <mat-error>
+        <span *ngIf="f.nit.errors?.maxlength">
+          Debe contener máximo 9 dígitos.
+        </span>
+        <span *ngIf="f.nit.errors?.minlength">
+          Debe contener mínimo 5 dígitos.
+        </span>
+        <span *ngIf="!f.nit.errors?.maxlength && f.nit.errors?.pattern && validarLimiteGeografico()">
+          Solo debe ingresar números.
+        </span>
+        <span *ngIf="!f.nit.errors?.maxlength && f.nit.errors?.pattern && f.limiteGeografico && !validarLimiteGeografico()">
+          Debe ingresar números y/o letras.
+        </span>
+      </mat-error>
+    </mat-form-field>
+    <div class="content">
+        <span class="btn-info" [matMenuTriggerFor]="nitdefinanciador">
+          <mat-icon class="light-gray more">info</mat-icon>
+        </span>
+        <mat-menu class="info-help" #nitdefinanciador="matMenu">
+          <h3 class="color-info">
+            <mat-icon class="more">info</mat-icon>¡Recuerde!
+          </h3>
+          <span>
+            Número de identificación correspondiente al financiador a buscar.
+          </span>
+        </mat-menu>
+      </div>
+    <div class="button-financer-search">
+      <button mat-raised-button class="save-fill mat-raised-button" (click)="buscar()" [disabled]="formularioInvalido">BUSCAR<mat-icon>search</mat-icon></button>
+    </div>
+  </div>
+</form>

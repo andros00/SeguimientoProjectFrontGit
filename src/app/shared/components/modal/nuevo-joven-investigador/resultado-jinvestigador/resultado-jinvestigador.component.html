@@ -1,0 +1,43 @@
+<div class="container" *ngIf="resultados">
+  <h2 class="medium-gray font-20">Resultado</h2>
+
+  <mat-card class="card-financiador">
+    <mat-card-header>
+      <mat-card-title>
+        <p class="font-16">{{ resultados.nombre }} {{ resultados.apellidos }}</p>
+        <p class="normal-gray">Identificación: {{ resultados.tipoDocumento }} {{ resultados.celular }}</p>
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+
+      <div class="d-flex" *ngIf="resultados.direccion">
+        <mat-icon>place</mat-icon>
+        <span>{{ resultados.direccion }}</span>
+      </div>
+
+      <div class="d-flex" *ngIf="resultados.email">
+        <mat-icon>email</mat-icon>
+        <span>{{ resultados.email }}</span>
+      </div>
+
+      <div class="d-flex" *ngIf="resultados.telefono">
+        <mat-icon>phone</mat-icon>
+        <span>{{ resultados.telefono }}</span>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-stroked-button color="primary"
+              (click)="seleccionar(resultados)">
+        Seleccionar
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+</div>
+
+<div *ngIf="!resultados">
+  <p class="normal-gray">No se encontraron resultados.</p>
+</div>

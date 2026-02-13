@@ -1,0 +1,15 @@
+ export interface InstitucionDTO{
+    codigoSap: string,
+    continente: number,
+    correoElectronico: string,
+    departamento: number,
+    direccion: string,
+    fax: string,
+    municipio: number,
+    nit: string,
+    nombreCorto: string,
+    pais: number,
+    razonSocial: string,
+    telefono: string,
+    temporal: number,
+ }

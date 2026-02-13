@@ -1,0 +1,103 @@
+<div class="row no-wrap space-wizard info-bulb" *ngIf="editable">
+  <div class="col col-10">
+    <button id="btnModalAgregarRubro" class="add-fill" mat-raised-button *ngIf="porcentajeVisible || !datosSoloLectura"
+      (click)="abrirModalAgregarRubro()">AGREGAR RUBRO
+    </button>
+
+    <button id="btnGuardarRubro" mat-raised-button [disabled]="rubrosVacios()" class="save-fill margin-left"
+      (click)="guardarTablaPresupuesta()">GUARDAR<mat-icon>save</mat-icon>
+    </button>
+
+    <span class="info-box" [matMenuTriggerFor]="ayudapresupuesto">
+      <img src="assets/img/ic-contextual-help.png" alt="">¿Necesita ayuda?
+    </span>
+    <mat-menu id="info-yellow" class="info-help" #ayudapresupuesto="matMenu">
+      <h3 class="contextual-yellow">
+        Tenga en cuenta
+      </h3>
+      <span>
+        <li class="font-small">Los recursos frescos en dinero aportados por la Universidad de Antioquia deben ser
+          ingresados en la columna de la dependencia que los aporta.
+        </li>
+        <li class="font-small">
+          Mientras que los recursos en especie de la Universidad de Antioquia deben ser ingresados en la columna
+          Especie sin importar la dependencia que aporte el recurso.
+        </li>
+        <li class="font-small">
+          Si su presupuesto es en moneda extranjera, seleccione la moneda en la que está el presupuesto. Tenga en
+          cuenta que COP es pesos colombianos, USD es dólares estadounidenses y EUR es euros.
+        </li>
+        <li class="font-small">
+          Agregue los rubros que considere pertinentes para su proyecto.
+        </li>
+      </span>
+    </mat-menu>
+  </div>
+</div>
+
+<div class="row no-wrap">
+  <div class="col col-10">
+    <div class="contextual-info margin-bottom">
+      <img src="assets/img/ic-contextual-info.png" alt="ic-contextual-info">
+      <p>{{mensajesTipoMoneda.MENSAJES_TIPO_MONEDA.MENSAJE_ADVERTENCIA}}</p>
+    </div>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col col-10 d-flex actions-table margin-top">
+
+    <div class="align-center">
+      <div class="money-info">
+        <p>Moneda</p>
+        <p>{{ mensajesTipoMoneda.MENSAJES_TIPO_MONEDA.NOMBRE_MONEDA }}</p>
+      </div>
+      <div class="money-info-popup">
+        <span class="btn-info" [matMenuTriggerFor]="infogeneralproyecto">
+          <mat-icon class="light-gray more">info</mat-icon>
+        </span>
+        <mat-menu class="info-help" #infogeneralproyecto="matMenu">
+          <h3 class="color-info">
+            <mat-icon class="more">info</mat-icon>¡Recuerde!
+          </h3>
+          <span>{{mensajesTipoMoneda.MENSAJES_TIPO_MONEDA.MENSAJE_INFORMACION}}</span>
+        </mat-menu>
+      </div>
+    </div>
+
+    <div class="align-center" *ngIf="editable">
+      <button class="button-check" [ngClass]="{'active': datosSoloLectura}">
+        <input id="checkVerResumen" type="checkbox" [checked]="datosSoloLectura" (change)="emitirEventoVerResumen()" />
+        <label for="checkVerResumen">VER RESUMEN<mat-icon>remove_red_eye</mat-icon></label>
+      </button>
+    </div>
+    <div class="align-center" *ngIf="editable">
+      <button class="button-check" [ngClass]="{'active': porcentajeVisible}">
+        <input id="checkVerPorcentaje" type="checkbox" [checked]="porcentajeVisible"
+          (change)="emitirEventoVerPorcentaje()" />
+        <label for="checkVerPorcentaje">VER PORCENTAJE<mat-icon>timeline</mat-icon></label>
+      </button>
+    </div>
+    <div class="align-center fade-b-t" *ngIf="editable">
+      <mat-slide-toggle (change)=onAmpliarSubrubros($event) *ngIf="datosSoloLectura">
+        <span *ngIf="!ampliado">Ampliar</span>
+        <span *ngIf="ampliado">Reducir</span>
+      </mat-slide-toggle>
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="inconsistencias.length > 0">
+  <div class="col col-10 d-flex">
+    <div class="alert-error" *ngFor="let alert of inconsistencias">
+      <mat-icon>cancel</mat-icon>
+      <p>{{alert}}</p>
+    </div>
+  </div>
+</div>
+
+<app-tabla-presupuesto-proyecto [editable]="editable" (emitirErroresValidacion)="onErroresValidacion($event)">
+</app-tabla-presupuesto-proyecto>
+
+<app-visor-componentes-proyecto url="/ver-presupuesto/" *ngIf="mostrarComponentes"></app-visor-componentes-proyecto>

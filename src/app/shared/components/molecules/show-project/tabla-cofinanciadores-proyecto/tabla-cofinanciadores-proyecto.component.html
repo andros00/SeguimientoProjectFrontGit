@@ -1,0 +1,61 @@
+<div class="margin-top">
+  <table id="result-table" class="table table-striped table-bordered" style="width:100%" aria-label="Tabla de cofinanciadores de proyecto">
+    <thead>
+      <tr class="header-table">
+        <th>{{columnas.NOMBRE_DEL_FINANCIADOR}}</th>
+        <th>{{columnas.GRUPO_DEPENDENCIA}}</th>
+        <th>{{columnas.TIPO_APORTANTE}}</th>
+        <th>{{columnas.TIPO_DE_FINANCIACION}}</th>
+        <th>{{columnas.SECTOR_DEL_APORTANTE}}</th>
+        <th *ngIf="editable">{{columnas.ACCIONES}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let aportanteProyecto of listaAportante$ | async">
+        <tr class="table-hover">
+          <td>
+            <span>{{aportanteProyecto.personaJuridica.nit}} - {{aportanteProyecto.personaJuridica.nombreCorto}}</span>
+          </td>
+          <td>
+            <span *ngIf="aportanteProyecto.dependencia != null">
+              {{aportanteProyecto.dependencia?.nombre}}
+            </span>
+            <span *ngIf="aportanteProyecto.grupo != null">
+              {{aportanteProyecto.grupo?.nombreCorto}}
+            </span>
+            <span *ngIf="esFinanciadorUdeA(aportanteProyecto.personaJuridica.nit) &&esAporteRecursoEnEspecie(aportanteProyecto)">
+              {{grupoDependenciaPorDefectoUdeA}}
+            </span>
+          </td>
+          <td>
+            <span *ngIf="!editable || esProyectoConvocatoria">{{validarEsCofinanciadorOFinanciador(aportanteProyecto.tipo)}}</span>
+            <mat-form-field *ngIf="editable && esProyectoProcesoSeleccion" appearance="fill" class="margin-right">
+              <mat-label>Tipo</mat-label>
+              <mat-select id="tipoAportanteProyecto" [(value)]="aportanteProyecto.tipo" (selectionChange)="cambioEnAportante(aportanteProyecto);">
+                <mat-option value="cofinanciador">Cofinanciador</mat-option>
+                <mat-option value="financiador">Financiador</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <span>{{aportanteProyecto.tipoFinanciacion?.nombre || ''}}</span>
+          </td>
+          <td>
+            <span>{{aportanteProyecto.sectorAportante?.nombre || ''}}</span>
+          </td>
+          <td *ngIf="editable">
+            <div *ngIf="habilitarEliminarRegistro(aportanteProyecto)" class="delete-table">
+              <div class="icon-container">
+                <mat-icon class="light-gray" (click)="validarEliminarAportante(aportanteProyecto)">delete</mat-icon>
+                <mat-icon class="light-gray" (click)="validarEditarAportante(aportanteProyecto)">edit</mat-icon>
+              </div>
+            </div>
+            
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>

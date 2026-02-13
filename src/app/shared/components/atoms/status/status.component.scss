@@ -1,0 +1,30 @@
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 20px; // Space between statuses
+  background-color: white; // Background remains white
+  padding: 10px; // Optional padding for spacing
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 8px; // Space between icon and text
+}
+
+.status-icon {
+  font-size: 24px;
+
+  &.danger {
+    color: red; // Red icon for "No aplica"
+  }
+
+  &.success {
+    color: green; // Green icon for "Aplica"
+  }
+}
+
+.status-label {
+  font-size: 14px;
+  color: black; // Text color
+}

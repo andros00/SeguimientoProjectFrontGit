@@ -1,0 +1,4 @@
+::ng-deep .mat-dialog-container{
+    height: inherit;
+    margin: 30px;
+}

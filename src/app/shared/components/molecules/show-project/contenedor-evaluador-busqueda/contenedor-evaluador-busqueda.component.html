@@ -1,0 +1,48 @@
+<div class="fade-b-t">
+  <div class="container-modal">
+    <button mat-button class="button-back margin-top" (click)=cerrarModal()>
+      <mat-icon>arrow_back</mat-icon> Regresar
+    </button>
+
+    <div *ngIf="!modoRegistro">
+      <div class="row">
+        <div class="align-between">
+          <h1 class="secondary-color font-normal">Selección de evaluador</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <app-filtro-evaluador (emitirBusquedaRealizada)="busquedaRealizada($event)"
+          (emitirFormularioModificado)="formularioModificado()">
+        </app-filtro-evaluador>
+
+        <div class="row" *ngIf="evaluadorNoEncontrado">
+          <div class="col col-12">
+            <div class="contextual-info">
+              <p>No se ha encontrado el evaluador buscado</p><p *ngIf="mostrarAgregarEvaluador">, si desea puede registrarlo </p>
+              <button *ngIf="mostrarAgregarEvaluador" mat-button class="add-fill margin-left" (click)="cambiarModoRegistrar()">
+                REGISTRAR EVALUADOR</button>
+            </div>
+          </div>
+        </div>
+
+        <app-resultado-evaluador (emitirEvaluadorSeleccionado)="evaluadorSeleccionado($event)"
+          [listadoEvaluadores]="listadoEvaluadores"></app-resultado-evaluador>
+      </div>
+    </div>
+
+    <div *ngIf="modoRegistro">
+      <div class="row">
+        <div class="align-between">
+          <h1 class="secondary-color font-normal">Registro de evaluador</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- <app-creacion-evaluador [identificacionEvaluador]="identificacionConsultada">
+        </app-creacion-evaluador> -->
+      </div>
+    </div>
+
+  </div>
+</div>

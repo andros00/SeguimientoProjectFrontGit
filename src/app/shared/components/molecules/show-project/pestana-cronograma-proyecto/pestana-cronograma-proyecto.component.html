@@ -1,0 +1,50 @@
+<div class="row space-wizard" *ngIf="editable">
+  <div class="col-5 align-center">
+    <button id="btn-agregar-actividad" mat-raised-button class="add-fill" (click)="abrirAgregarActividad()">AGREGAR
+      ACTIVIDAD</button>
+    <div class="margin-left">
+      <button id="btn-guardar-actividad" mat-raised-button class="save-fill" (click)="guardarActividad()">GUARDAR
+        <mat-icon>save</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="col-5">
+    <div class="contextual-help">
+      <div class="card-contextual">
+        <img src="assets/img/ic-contextual-help.png" alt="">
+        <p class="contextual-yellow">Dando clic en agregar, defina las actividades, su duración y los detalles de la
+          misma para definir el cronograma. Luego puede ver el diagrama.</p>
+        <a href="#contactTypes"></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <form [formGroup]="formularioPeriodo" autocomplete="off">
+    <div class="row">
+      <div class="col-10">
+        <div *ngIf="listaCronogramaProyecto$.length > 0">
+          <mat-form-field appearance="fill">
+            <mat-label>Período</mat-label>
+            <mat-select formControlName="periodo" (selectionChange)="validarPeriodoSeleccionado()">
+              <mat-option *ngFor="let periodo of listaPeriodo" [value]="periodo.nombreDB">
+                {{periodo?.nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="col-6 align-end">
+    <div>
+      <button class="button-diagrama" *ngIf="listaCronogramaProyecto$.length > 0" (click)="abrirDiagramaActividad()">
+        <mat-icon>view_module</mat-icon> Ver diagrama
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-mensaje-exito-error></app-mensaje-exito-error>
+
+<app-lista-cronograma-proyecto [editable]="editable"></app-lista-cronograma-proyecto>

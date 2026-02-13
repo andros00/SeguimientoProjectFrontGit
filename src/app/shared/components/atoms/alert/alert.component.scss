@@ -1,0 +1,26 @@
+mat-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 1em;
+  border: 1px solid #e6dba4;
+  border-radius: 4px;
+  background-color: #fcf8e3;
+  color: #6b4e00;
+  font-size: 14px;
+  box-shadow: none;
+}
+
+.alert-icon {
+  color: #ffca28;
+  margin-right: 8px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+}
+
+.alert-label {
+  flex: 1;
+  font-size: 14px;
+  white-space: nowrap;
+}
