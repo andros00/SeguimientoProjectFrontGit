@@ -42,51 +42,15 @@ export class TablaParticipantesProyectoComponent implements OnInit {
   }
 
   editarParticipante(participante: ParticipanteProyecto) {
-    this.emitirParticipanteEditar.emit(participante);
+    console.warn('editarParticipante deshabilitado en modo solo lectura (tabla-participantes).', participante);
   }
 
   abrirEliminarParticipante(participante: ParticipanteProyecto) {
-    const datosModal: DatosModal = {
-      titulo: ProyectoConstantes.TITULO_ALERTA_ELIMINAR_PARTICIPANTE,
-      mensaje: ProyectoConstantes.ELIMINAR_PARTICIPANTE,
-      textoPrimerBoton: ClaseAlerta.CANCELAR,
-      textoSegundoBoton: ClaseAlerta.ELIMINAR,
-      clase: ClaseAlerta.ALERTA_INFORMATIVA,
-    };
-    const modalEliminaParticipanteRef = this.modal.open(ModalDinamicoComponent, {
-      data: datosModal
-    });
-
-    modalEliminaParticipanteRef.afterClosed().subscribe(result => {
-      if (ClaseAlerta.ELIMINAR === result) {
-        this.eliminarParticipante(participante);
-      }
-    });
+    console.warn('abrirEliminarParticipante deshabilitado en modo solo lectura (tabla-participantes).', participante);
   }
 
   eliminarParticipante(participante: ParticipanteProyecto) {
-    if (participante.identificador !== 0) {
-      this.participanteServicio.eliminarParticipanteProyecto(participante.identificador).subscribe(
-        _ => { },
-        _ => {
-          this.mostrarMensajeErrorEliminar = true;
-          this.mostrarMensajeExitoEliminar = false;
-          setTimeout(() => {
-            this.mostrarMensajeErrorEliminar = false;
-          }, this.tiempoVisibleMensaje);
-        }
-      );
-    }
-    const listaParticipantes = this.participanteLocalServicio.obtenerListaParticipanteProyecto();
-    const index = listaParticipantes.indexOf(participante);
-    listaParticipantes.splice(index, 1);
-    this.participanteLocalServicio.agregarParticipanteProyecto(listaParticipantes);
-    if (!this.mostrarMensajeErrorEliminar) {
-      this.mostrarMensajeExitoEliminar = true;
-      setTimeout(() => {
-        this.mostrarMensajeExitoEliminar = false;
-      }, this.tiempoVisibleMensaje);
-    }
+    console.warn('eliminarParticipante deshabilitado en modo solo lectura (tabla-participantes).', participante);
   }
 
   construirNombreCompleto(nombre: string, pApellido: string, sApellido) {

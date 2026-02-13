@@ -48,24 +48,14 @@ export class PasoDocumentosSoporteProyectoComponent implements OnInit {
   }
 
   abrirModalAgregarDocumentoSoporte() {
-    this.dialogo.open(AgregarDocumentoSoporteProyectoComponent);
+    console.warn('abrirModalAgregarDocumentoSoporte deshabilitado en modo solo lectura (paso-documentos-soporte).');
   }
 
   guardarDocumentos() {
-    const mensaje = new AlertaMensaje();
-    let listaDocumentos: DocumentoProyecto[];
-    listaDocumentos = this.documentoSoporteServicioLocal.obtenerListaDocumentosProyecto();
-    this.documentoProyectoServicio.guardarDocumentoSoporte(listaDocumentos).subscribe(respuestaGuardado => {
-      this.documentoSoporteServicioLocal.agregarListaDocumentosProyecto(respuestaGuardado);
-      mensaje.tipoMensaje = ConstantesExitoError.EXITO;
-      mensaje.mensaje = MENSAJE_EXITO;
-      this.alertaServicioLocal.agregarMensaje(mensaje);
-    },
-      _ => {
-        mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-        mensaje.mensaje = MENSAJE_ERROR;
-        this.alertaServicioLocal.agregarMensaje(mensaje);
-      });
+    // Guardado deshabilitado en modo solo lectura.
+    // const mensaje = new AlertaMensaje();
+    // Implementación original comentada para evitar acciones de escritura.
+    console.warn('guardarDocumentos deshabilitado (solo lectura)');
 
   }
 

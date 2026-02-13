@@ -147,9 +147,8 @@ export class ListaInformacionComplementariaComponent implements OnInit {
   }
 
   guardarSeleccionados(): void {
-    const seleccionados = this.obtenerSeleccionados();
-    seleccionados.proyecto = this.codigoProyecto;
-    this.guardarDatosAdicionales(seleccionados);
+    // Guardado deshabilitado en modo solo lectura.
+    console.warn('guardarSeleccionados deshabilitado (solo lectura)');
   }
 
   obtenerSeleccionados(): DatosAdicionales {
@@ -182,10 +181,8 @@ export class ListaInformacionComplementariaComponent implements OnInit {
   }
 
   guardarDatosAdicionales(datosAdicionales: DatosAdicionales): void {
-    const mensaje = new AlertaMensaje();
-    this.informacionComplementariaService.guardarInformacionComplementaria(datosAdicionales).subscribe(_ => {
-      this.actualizarInformacionComplementaria(mensaje);
-    });
+    // Acción deshabilitada en modo solo lectura.
+    console.warn('guardarDatosAdicionales deshabilitado (solo lectura)');
   }
 
   actualizarInformacionComplementaria(mensaje: AlertaMensaje): void {

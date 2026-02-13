@@ -7,7 +7,7 @@
         <th>{{columnas.TIPO_APORTANTE}}</th>
         <th>{{columnas.TIPO_DE_FINANCIACION}}</th>
         <th>{{columnas.SECTOR_DEL_APORTANTE}}</th>
-        <th *ngIf="editable">{{columnas.ACCIONES}}</th>
+        <!-- Columnas de acciones eliminadas en modo solo lectura -->
       </tr>
     </thead>
     <tbody>
@@ -43,15 +43,7 @@
           <td>
             <span>{{aportanteProyecto.sectorAportante?.nombre || ''}}</span>
           </td>
-          <td *ngIf="editable">
-            <div *ngIf="habilitarEliminarRegistro(aportanteProyecto)" class="delete-table">
-              <div class="icon-container">
-                <mat-icon class="light-gray" (click)="validarEliminarAportante(aportanteProyecto)">delete</mat-icon>
-                <mat-icon class="light-gray" (click)="validarEditarAportante(aportanteProyecto)">edit</mat-icon>
-              </div>
-            </div>
-            
-          </td>
+          <!-- Acciones de editar/eliminar ocultas para solo lectura -->
         </tr>
       </ng-container>
     </tbody>

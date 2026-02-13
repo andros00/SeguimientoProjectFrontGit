@@ -17,16 +17,7 @@
       <mat-expansion-panel class="expansion-space">
         <mat-expansion-panel-header class="header-accordions">
           <mat-panel-title>
-            <button mat-icon-button *ngIf="editable">
-              <span class="title-accordion">
-                <mat-icon class="more" [matMenuTriggerFor]="menu">more_vert</mat-icon>
-              </span>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="editarActualizacion()">
-                <mat-icon>edit</mat-icon>Editar
-              </button>
-            </mat-menu>
+            <!-- Controles de edición eliminados (solo lectura) -->
             <h3 class="title-accordion">Comentarios</h3>
           </mat-panel-title>
         </mat-expansion-panel-header>

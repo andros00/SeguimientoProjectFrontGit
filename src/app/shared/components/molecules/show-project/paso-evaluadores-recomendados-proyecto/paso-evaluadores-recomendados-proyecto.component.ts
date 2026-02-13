@@ -52,20 +52,7 @@ export class PasoEvaluadoresRecomendadosProyectoComponent implements OnInit {
   }
 
   guardarEvaluadoresRecomendados() {
-    const mensaje = new AlertaMensaje();
-    if (this.listaEvaluadoresRecomendados$.length > 0) {
-      this.evaluadorProyectoServicio.guardarEvaluadorRecomendado(this.listaEvaluadoresRecomendados$).subscribe(
-        respuestaGuardado => {
-          this.evaluadorProyectoLocal.agregarListaEvaluadoresRecomendados(respuestaGuardado);
-          mensaje.tipoMensaje = ConstantesExitoError.EXITO;
-          mensaje.mensaje = MENSAJE_EXITO;
-          this.alertaServicioLocal.agregarMensaje(mensaje);
-        },
-        _ => {
-          mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-          mensaje.mensaje = MENSAJE_ERROR;
-          this.alertaServicioLocal.agregarMensaje(mensaje);
-        });
-    }
+    // Guardado deshabilitado en modo solo lectura.
+    console.warn('guardarEvaluadoresRecomendados deshabilitado (solo lectura)');
   }
 }

@@ -3,17 +3,7 @@
     <mat-expansion-panel class="expansion-space">
       <mat-expansion-panel-header class="header-accordions">
         <mat-panel-title>
-          <button mat-icon-button *ngIf="editable">
-            <mat-icon class="more" [matMenuTriggerFor]="menu">more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="abrirModalEdicionDocumentoSoporte(documento)">
-              <mat-icon>edit</mat-icon>Editar
-            </button>
-            <button mat-menu-item (click)="abrirEliminar(documento)">
-              <mat-icon>delete</mat-icon>Eliminar
-            </button>
-          </mat-menu>
+          <!-- Menú de edición eliminado para modo solo lectura -->
           <h3>{{documento.documentoSoporte.nombreDocumento}}<span *ngIf="documento.documentoSoporte.numeroDocumento"> -
               {{documento.documentoSoporte.numeroDocumento}}</span></h3>
         </mat-panel-title>

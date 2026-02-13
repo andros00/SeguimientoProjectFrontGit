@@ -1,24 +1,4 @@
-<div class="row space-wizard" *ngIf="editable">
-  <div class="col-5 align-center">
-    <button id="btn-agregar-actividad" mat-raised-button class="add-fill" (click)="abrirAgregarActividad()">AGREGAR
-      ACTIVIDAD</button>
-    <div class="margin-left">
-      <button id="btn-guardar-actividad" mat-raised-button class="save-fill" (click)="guardarActividad()">GUARDAR
-        <mat-icon>save</mat-icon>
-      </button>
-    </div>
-  </div>
-  <div class="col-5">
-    <div class="contextual-help">
-      <div class="card-contextual">
-        <img src="assets/img/ic-contextual-help.png" alt="">
-        <p class="contextual-yellow">Dando clic en agregar, defina las actividades, su duración y los detalles de la
-          misma para definir el cronograma. Luego puede ver el diagrama.</p>
-        <a href="#contactTypes"></a>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Edición deshabilitada: eliminar botones agregar/guardar -->
 <div class="row">
   <form [formGroup]="formularioPeriodo" autocomplete="off">
     <div class="row">
@@ -38,7 +18,7 @@
   </form>
   <div class="col-6 align-end">
     <div>
-      <button class="button-diagrama" *ngIf="listaCronogramaProyecto$.length > 0" (click)="abrirDiagramaActividad()">
+      <button class="button-diagrama" *ngIf="listaCronogramaProyecto$.length > 0">
         <mat-icon>view_module</mat-icon> Ver diagrama
       </button>
     </div>

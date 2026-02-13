@@ -86,23 +86,7 @@ export class PasoParticipantesProyectoComponent implements OnInit {
   }
 
   guardarParticipanteProyecto() {
-    const mensaje = new AlertaMensaje();
-    let listaParticipantes: ParticipanteProyecto[];
-    listaParticipantes = this.participanteProyectoLocalServicio.obtenerListaParticipanteProyecto();
-    if (listaParticipantes.length > 0) {
-      this.participanteProyectoServicio.guardarParticipanteProyecto(listaParticipantes).subscribe(
-        respuestaGuardado => {
-          this.participanteProyectoLocalServicio.agregarParticipanteProyecto(respuestaGuardado);
-          mensaje.tipoMensaje = ConstantesExitoError.EXITO;
-          mensaje.mensaje = MENSAJE_EXITO;
-          this.alertaServicioLocal.agregarMensaje(mensaje);
-        },
-        _ => {
-          mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-          mensaje.mensaje = MENSAJE_ERROR;
-          this.alertaServicioLocal.agregarMensaje(mensaje);
-        });
-
-    }
+    // Guardado deshabilitado en modo solo lectura.
+    console.warn('guardarParticipanteProyecto deshabilitado (solo lectura)');
   }
 }

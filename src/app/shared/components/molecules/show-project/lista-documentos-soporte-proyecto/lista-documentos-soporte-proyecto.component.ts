@@ -47,39 +47,11 @@ export class ListaDocumentosSoporteProyectoComponent implements OnInit {
   }
 
   abrirEliminar(documento: DocumentoProyecto): void {
-    // const datosModal: DatosModal = {
-    //   titulo: DocumentosSoporteConstantes.TITULO_ALERTA_ELIMINAR_DOCUMENTO,
-    //   mensaje: DocumentosSoporteConstantes.ELIMINAR_DOCUMENTO,
-    //   textoPrimerBoton: ClaseAlerta.CANCELAR,
-    //   textoSegundoBoton: ClaseAlerta.ELIMINAR,
-    //   clase: ClaseAlerta.ALERTA_INFORMATIVA,
-    // };
-    // const modalEliminarDocumentoRef = this.modal.open(ModalDinamicoComponent, {
-    //   data: datosModal
-    // });
-
-    // modalEliminarDocumentoRef.afterClosed().subscribe(result => {
-    //   if (ClaseAlerta.ELIMINAR === result) {
-    //     this.eliminarDocumento(documento);
-    //   }
-    // });
+    console.warn('Eliminación deshabilitada en modo solo lectura (lista-documentos-soporte).', documento);
   }
 
   eliminarDocumento(documento: DocumentoProyecto) {
-    const mensaje = new AlertaMensaje();
-    if (!!documento.identificador && documento.identificador !== 0) {
-      this.documentoProyectoServicio.eliminarDocumentoSoporte(documento).subscribe(
-        _ => {
-          this.eliminarDocumentoLocal(documento, mensaje);
-        },
-        _ => {
-          mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-          mensaje.mensaje = MENSAJE_ERROR_ELIMINANDO;
-          this.alertaServicioLocal.agregarMensaje(mensaje);
-        });
-    } else {
-      this.eliminarDocumentoLocal(documento, mensaje);
-    }
+    console.warn('eliminarDocumento deshabilitado en modo solo lectura (lista-documentos-soporte).', documento);
   }
 
   private eliminarDocumentoLocal(documento: DocumentoProyecto, mensaje: AlertaMensaje) {

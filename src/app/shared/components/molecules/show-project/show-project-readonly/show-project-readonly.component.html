@@ -1,0 +1,16 @@
+<mat-card *ngIf="proyecto" class="show-project-card">
+  <mat-card-header>
+    <mat-card-title>{{ proyecto.tituloProyecto || proyecto.nombre || 'Proyecto' }}</mat-card-title>
+    <mat-card-subtitle *ngIf="proyecto.convocatoria">Convocatoria: {{ proyecto.convocatoria.nombre }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p *ngIf="proyecto.justificacion">{{ proyecto.justificacion }}</p>
+    <div class="row">
+      <div class="col-4"><strong>Duración:</strong> {{ proyecto.duracion || '-' }}</div>
+      <div class="col-4"><strong>Modalidad:</strong> {{ proyecto.modalidadConvocatoria?.nombre || '-' }}</div>
+      <div class="col-4"><strong>Moneda:</strong> {{ proyecto.moneda || '-' }}</div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<div *ngIf="!proyecto" class="no-data">No hay información del proyecto para mostrar.</div>

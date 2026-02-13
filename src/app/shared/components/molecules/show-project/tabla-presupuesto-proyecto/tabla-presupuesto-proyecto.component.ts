@@ -86,32 +86,7 @@ export class TablaPresupuestoProyectoComponent implements OnInit, OnDestroy {
   }
 
   guardarTablaPresupuestal() {
-    const inconsistenciasReglas = this.presupuestalProyectoLocalService.validarPorcentajes();
-    const inconsistenciasModalidad = this.presupuestalProyectoLocalService.validarFinanciadorConModalidad();
-
-    const inconsistencias = inconsistenciasReglas.concat(inconsistenciasModalidad);
-    this.emitirErroresValidacion.emit(inconsistencias);
-
-    const proyecto = this.proyectoLocalServicio.obtenerInformacionGeneralProyecto();
-
-    if (inconsistencias.length === 0) {
-      const tabla = new TablaPresupuestal();
-
-      this.generarListaAportantesModelo(this.listaRubrosProyecto);
-      this.generarModeloAportantesEnRubro(this.subtotales);
-
-      tabla.rubros = this.listaRubrosProyecto;
-      tabla.subtotales = this.subtotales;
-      tabla.moneda = AjustePresupuestoConstantes.MONEDA_NACIONAL;
-
-      this.presupuestalProyectoService.guardarTablaPresupuestal(tabla)
-        .subscribe(r => {
-          this.presupuestalProyectoLocalService.actualizarIdentificadores(r);
-          this.presupuestalProyectoLocalService.actualizarTotalAportantes();
-          this.guardadoExitosamente = true;
-          this.programarEsconderMensaje();
-        });
-    }
+    console.warn('guardarTablaPresupuestal deshabilitado en modo solo lectura (tabla-presupuesto).');
   }
 
   private programarEsconderMensaje() {
@@ -147,23 +122,11 @@ export class TablaPresupuestoProyectoComponent implements OnInit, OnDestroy {
   }
 
   abrirModalEdicion(rubro: RubroProyecto) {
-    const esSubrubro = this.presupuestalProyectoLocalService.esSubrubro(rubro);
-    let padre: RubroProyecto;
-
-    if (!esSubrubro) {
-      padre = this.presupuestalProyectoLocalService.encontrarRubroPadre(rubro);
-    }
-
-    const options = {
-      rubro: rubro,
-      esSubrubro: !esSubrubro,
-      padre: padre,
-    };
-    this.dialogo.open(EditarRubroComponent, { data: options });
+    console.warn('abrirModalEdicion deshabilitado en modo solo lectura (tabla-presupuesto).', rubro);
   }
 
   eliminarRubro(rubro: RubroProyecto) {
-    this.presupuestalProyectoLocalService.eliminarRubro(rubro);
+    console.warn('eliminarRubro deshabilitado en modo solo lectura (tabla-presupuesto).', rubro);
   }
 
   agregarRubroPadre(rubro: RubroProyecto) {

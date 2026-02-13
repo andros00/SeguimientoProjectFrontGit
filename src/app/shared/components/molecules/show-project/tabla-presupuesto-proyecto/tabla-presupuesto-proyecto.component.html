@@ -55,24 +55,7 @@
               <div class="line-tab" [ngClass]="{'line-tab-last': esUltimoHijo(rubroProyecto)}"
                 [ngStyle]="{ 'width.px': 50 * (nivel-1) }"></div>
 
-              <mat-menu #rubroMenu="matMenu">
-                <button mat-menu-item (click)="abrirModalEdicion(rubroProyecto)">
-                  <mat-icon>edit</mat-icon>Editar
-                </button>
-
-                <button mat-menu-item (click)="abrirModalAgregarRubro(rubroProyecto)">
-                  <mat-icon>add</mat-icon>Agregar subrubro
-                </button>
-
-                <button mat-menu-item [disabled]="rubroProyecto.rubrosHijos.length > 0"
-                  (click)="eliminarRubro(rubroProyecto)">
-                  <mat-icon>delete</mat-icon>Eliminar
-                </button>
-              </mat-menu>
-
-              <button mat-icon-button [matMenuTriggerFor]="rubroMenu" *ngIf="porcentajeVisible || !datosSoloLectura">
-                <mat-icon>more_vert</mat-icon>
-              </button>
+              <!-- Menú de edición eliminado para solo lectura -->
               {{rubroProyecto.nombre}}
             </td>
 

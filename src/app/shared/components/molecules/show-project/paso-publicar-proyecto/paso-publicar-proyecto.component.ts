@@ -188,24 +188,14 @@ export class PasoPublicarProyectoComponent {
     if (pasosVisibles.length > 0) {
       const paso = pasosVisibles[0];
       if (paso.servicio) {
-        paso.servicio.guardar().subscribe(
-          exito => {
-            paso.servicio.postguardado(exito);
-            const nuevosPasosVisibles = pasosVisibles.slice(1);
-            this.ejecutarRecursivo(nuevosPasosVisibles, resolve);
-          },
-          error => {
-            if (error.status === 400) {
-              const mensajeDeError = error.error[0].mensaje;
-              this.listaErrores.push(`En <strong>${paso.titulo}</strong> ${mensajeDeError}.`);
-              const nuevosPasosVisibles = pasosVisibles.slice(1);
-              paso.valido = true;
-              this.marcarPasosConErrores();
-              this.ejecutarRecursivo(nuevosPasosVisibles, resolve);
-            } else {
-              this.listaErrores.push(`En <strong>${paso.titulo}</strong> hay datos errados, por favor verificar para poder envíar el proyecto.`);
-            }
-          });
+        console.warn('guardar de paso deshabilitado en modo solo lectura (paso-publicar):', paso.titulo);
+        try {
+          if (paso.servicio.postguardado) {
+            paso.servicio.postguardado(null);
+          }
+        } catch (e) { }
+        const nuevosPasosVisibles = pasosVisibles.slice(1);
+        this.ejecutarRecursivo(nuevosPasosVisibles, resolve);
       } else {
         const nuevosPasosVisibles = pasosVisibles.slice(1);
         this.ejecutarRecursivo(nuevosPasosVisibles, resolve);

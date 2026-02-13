@@ -38,33 +38,8 @@ export class PestanaCompromisosProyectoComponent implements OnInit {
   }
 
   guardarCompromisos() {
-    const mensaje = new AlertaMensaje();
-    let listaCompromisos: CompromisoProyecto[];
-    listaCompromisos = this.compromisosServicioLocal.obtenerListaCompromisosObligatorios();
-    listaCompromisos = listaCompromisos.concat(this.compromisosServicioLocal.obtenerListaCompromisosOpcionales());
-    const listaCompromisosObligatorios = [];
-    const listaCompromisosOpcionales = [];
-    this.compromisosServicio.guardarCompromisos(listaCompromisos).subscribe(
-      compromisosGuardados => {
-        compromisosGuardados.forEach(compromiso => {
-          if (!!compromiso.compromiso && (compromiso.compromiso.tipoCompromiso === this.tipoCompromisoObligatorio ||
-            compromiso.compromiso.tipoCompromiso === this.tipoCompromisoObligatorioDB)) {
-            listaCompromisosObligatorios.push(compromiso);
-          } else {
-            listaCompromisosOpcionales.push(compromiso);
-          }
-        });
-        this.compromisosServicioLocal.agregarListaCompromisosObligatorios(listaCompromisosObligatorios);
-        this.compromisosServicioLocal.agregarListaCompromisosOpcionales(listaCompromisosOpcionales);
-        mensaje.tipoMensaje = ConstantesExitoError.EXITO;
-        mensaje.mensaje = MENSAJE_EXITO;
-        this.alertaServicioLocal.agregarMensaje(mensaje);
-      },
-      _ => {
-        mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-        mensaje.mensaje = MENSAJE_ERROR;
-        this.alertaServicioLocal.agregarMensaje(mensaje);
-      });
+    // Guardado deshabilitado en modo solo lectura.
+    console.warn('guardarCompromisos deshabilitado (solo lectura)');
   }
 
   irAIdeas(url: string) {

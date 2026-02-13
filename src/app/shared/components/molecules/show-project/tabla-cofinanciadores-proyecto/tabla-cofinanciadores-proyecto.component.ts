@@ -114,44 +114,11 @@ export class TablaCofinanciadoresProyectoComponent implements OnInit {
   }
 
   validarEliminarAportante(aportanteProyecto: AportanteProyecto) {
-    const datosModal: DatosModal = {
-      titulo: ProyectoMensajes.TITULO_ELIMINAR_APORTANTE,
-      mensaje: ProyectoMensajes.MENSAJE_ELIMINAR_APORTANTE,
-      textoPrimerBoton: ClaseAlerta.CANCELAR,
-      textoSegundoBoton: ClaseAlerta.ACEPTAR,
-      clase: ClaseAlerta.ALERTA_INFORMATIVA
-
-    };
-    const modalContinuarSinGuardar = this.modal.open(ModalDinamicoComponent, {
-      data: datosModal
-    });
-
-    modalContinuarSinGuardar.afterClosed().subscribe(resultado => {
-      if (ClaseAlerta.ACEPTAR === resultado) {
-        this.eliminarAportante(aportanteProyecto);
-      }
-    });
+    console.warn('validarEliminarAportante deshabilitado en modo solo lectura (tabla-cofinanciadores).', aportanteProyecto);
   }
 
   validarEditarAportante(aportanteProyecto: AportanteProyecto) {
-    const datosModal: DatosModal = {
-      titulo: ProyectoMensajes.TITULO_EDITAR_APORTANTE,
-      mensaje: ProyectoMensajes.MENSAJE_EDITAR_APORTANTE,
-      textoPrimerBoton: ClaseAlerta.CANCELAR,
-      textoSegundoBoton: ClaseAlerta.ACEPTAR,
-      clase: ClaseAlerta.ALERTA_INFORMATIVA,
-      editarAportante: aportanteProyecto,
-
-    };
-    const modalContinuarSinGuardar = this.modal.open(ModalDinamicoComponent, {
-      data: datosModal
-    });
-
-    modalContinuarSinGuardar.afterClosed().subscribe(resultado => {
-      if (ClaseAlerta.ACEPTAR === resultado.textoSegundoBoton) {
-        this.actualizarAportante(resultado.editarAportante);
-      }
-    });
+    console.warn('validarEditarAportante deshabilitado en modo solo lectura (tabla-cofinanciadores).', aportanteProyecto);
   }
 
   actualizarAportante(aportanteProyecto: AportanteProyecto): void {
@@ -172,14 +139,7 @@ export class TablaCofinanciadoresProyectoComponent implements OnInit {
   }
 
   eliminarAportante(aportanteProyecto: AportanteProyecto) {
-    if (aportanteProyecto.identificador) {
-      this.aportanteProyectoServicio.eliminarAportante(aportanteProyecto.identificador).subscribe(_ => {
-        this.eliminarAportanteEnTabla(aportanteProyecto);
-        this.aportanteProyectoServicioLocal.eliminarAportanteProyecto(aportanteProyecto);
-      });
-    } else {
-      this.eliminarAportanteEnTabla(aportanteProyecto);
-    }
+    console.warn('eliminarAportante deshabilitado en modo solo lectura (tabla-cofinanciadores).', aportanteProyecto);
   }
 
   private eliminarAportanteEnTabla(aportanteProyecto: AportanteProyecto) {

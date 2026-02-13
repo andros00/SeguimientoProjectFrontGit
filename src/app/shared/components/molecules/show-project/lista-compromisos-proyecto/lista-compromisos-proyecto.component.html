@@ -59,9 +59,7 @@
         </div>
       </div>
     </div>
-    <div class="margin-bottom" *ngIf="editable">
-      <button mat-button class="add-fill" (click)="abrirAgregarCompromiso()">AGREGAR COMPROMISO</button>
-    </div>
+    <!-- Botón agregar eliminado (solo lectura) -->
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header class="header-accordions">
@@ -99,21 +97,7 @@
                   <mat-hint align="end">{{compromiso.comentario?.length}} / 1200</mat-hint>
                 </mat-form-field>
               </td>
-              <td *ngIf="editable">
-                <ng-container *ngIf="!compromiso.compromiso">
-                  <button class="button-more" [matMenuTriggerFor]="menu">
-                    <mat-icon>more_horiz</mat-icon>
-                  </button>
-                  <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="editarCompromiso(compromiso)">
-                      <mat-icon class="icon-table">create</mat-icon>Editar
-                    </button>
-                    <button mat-menu-item (click)="abrirModalEliminarCompromiso(compromiso)">
-                      <mat-icon class="icon-table">delete</mat-icon>Eliminar
-                    </button>
-                  </mat-menu>
-                </ng-container>
-              </td>
+              <!-- Acciones de edición/eliminación eliminadas (solo lectura) -->
             </tr>
           </tbody>
         </table>
@@ -123,10 +107,8 @@
 </ng-container>
 
 <!-- Proceso selección -->
-<div class="margin-top" *ngIf="mostrarTablaProcesoSeleccion">
-  <div class="margin-bottom"  *ngIf="editable">
-    <button mat-button class="add-fill" (click)="abrirAgregarCompromiso()">AGREGAR COMPROMISO</button>
-  </div>
+  <div class="margin-top" *ngIf="mostrarTablaProcesoSeleccion">
+  <!-- Botón agregar eliminado (solo lectura) -->
   <mat-accordion>
     <mat-expansion-panel>
       <mat-expansion-panel-header class="header-accordions">
@@ -161,19 +143,7 @@
                 <mat-hint align="end">{{compromiso.comentario?.length}} / 1200</mat-hint>
               </mat-form-field>
             </td>
-            <td *ngIf="editable">
-              <button class="button-more" [matMenuTriggerFor]="menu">
-                <mat-icon>more_horiz</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="editarCompromiso(compromiso)">
-                  <mat-icon class="icon-table">create</mat-icon>Editar
-                </button>
-                <button mat-menu-item (click)="abrirModalEliminarCompromiso(compromiso)">
-                  <mat-icon class="icon-table">delete</mat-icon>Eliminar
-                </button>
-              </mat-menu>
-            </td>
+            <!-- Acciones de edición/eliminación eliminadas (solo lectura) -->
           </tr>
         </tbody>
       </table>

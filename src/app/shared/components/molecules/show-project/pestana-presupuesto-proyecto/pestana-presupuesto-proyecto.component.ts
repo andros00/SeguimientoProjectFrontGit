@@ -61,15 +61,12 @@ export class PestanaPresupuestoProyectoComponent implements OnInit, OnDestroy {
   }
 
   abrirModalAgregarRubro() {
-    // const options = {
-    //   rubrosAgregados: this.rubros,
-    //   proyecto: this.proyecto
-    // };
-    // this.dialogo.open(AgregarRubroComponent, { data: options });
+    console.warn('abrirModalAgregarRubro deshabilitado en modo solo lectura (pestana-presupuesto).');
   }
 
   guardarTablaPresupuesta() {
-    this.accionesFormularioService.guardarPresupuesto();
+    // Guardado deshabilitado en modo solo lectura.
+    console.warn('guardarTablaPresupuesta deshabilitado (solo lectura)');
   }
 
   emitirEventoVerResumen() {

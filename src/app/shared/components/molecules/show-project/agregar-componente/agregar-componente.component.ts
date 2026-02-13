@@ -50,17 +50,7 @@ export class AgregarComponenteComponent implements OnInit {
   get f() { return this.formularioComponente.controls; }
 
   abrirModalSeleccionarResponsable() {
-    const modalContenedorPersonaNatural = this.dialogo.open(ContenedorPersonaNaturalComponent);
-    modalContenedorPersonaNatural.afterClosed().subscribe(resultado => {
-      this.personaNaturalLocalService.obtenerPersonaNatural().subscribe(responsable => {
-        if (!!responsable.nombrePila) {
-          this.f.responsable.setValue(responsable);
-          this.responsable = responsable;
-          this.responsableIndeterminado = false;
-          this.personaNaturalLocalService.eliminarPersonaNatural();
-        }
-      });
-    });
+    console.warn('abrirModalSeleccionarResponsable deshabilitado en modo solo lectura (agregar-componente).');
   }
 
   cambioResponsableIndeterminado() {
@@ -80,21 +70,7 @@ export class AgregarComponenteComponent implements OnInit {
   }
 
   private guardarComponenteLocal() {
-
-    const componenteMacroproyecto = new ComponenteMacroproyecto();
-    componenteMacroproyecto.identificador = 0;
-    componenteMacroproyecto.cantidadproyectos = this.f.numeroProyectos.value;
-    componenteMacroproyecto.descripcion = this.f.descripcion.value;
-    componenteMacroproyecto.macroproyecto = this.proyectoServicioLocal.obtenerInformacionGeneralProyecto().codigo;
-    if (!this.responsableIndeterminado) {
-      componenteMacroproyecto.personaNatural = this.responsable;
-    }
-    componenteMacroproyecto.titulo = this.f.titulo.value;
-
-    const listaComponentes = this.componenteProyectoServicioLocal.obtenerListaComponenteProyecto();
-    listaComponentes.push(componenteMacroproyecto);
-    this.componenteProyectoServicioLocal.agregarComponenteProyecto(listaComponentes);
-    this.cerrarModal();
+    console.warn('guardarComponenteLocal deshabilitado en modo solo lectura (agregar-componente).');
   }
   cerrarModal() {
     this.modalAgregarComponente.close();

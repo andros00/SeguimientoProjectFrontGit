@@ -1,21 +1,5 @@
 <div class="fade-b-t">
-  <div class="row space-wizard" *ngIf="editable">
-    <div class="col-5 align-center">
-      <div>
-        <button mat-raised-button class="save-fill" (click)="guardarCondiciones()">GUARDAR
-          <mat-icon>save</mat-icon>
-        </button>
-      </div>
-    </div>
-    <div class="col-5">
-      <div class="contextual-help">
-        <div class="card-contextual">
-          <img src="assets/img/ic-contextual-help.png" alt="">
-          <p class="contextual-yellow">Verifique el cumplimiento de las condiciones formales de su proyecto.</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Edición deshabilitada: eliminar botón guardar -->
 </div>
 <app-mensaje-exito-error></app-mensaje-exito-error>
 <app-tabla-condiciones-formales [editable]="editable"></app-tabla-condiciones-formales>

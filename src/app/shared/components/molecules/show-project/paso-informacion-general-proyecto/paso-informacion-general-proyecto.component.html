@@ -698,14 +698,9 @@
           </div>
           <div class="row">
             <div class="col col-2" align="end">
-              <div class="buttons padding-top">
-                <button id="btn-guardar" class="save-fill" *ngIf="!soloLectura" [disabled]="informacionGuardada"
-                  mat-raised-button (click)="guardar()">
-                  GUARDAR
-                  <mat-icon>save</mat-icon>
-                </button>
-                <button id="btn-siguiente" class="button-secondary" [disabled]="!informacionGuardada" mat-raised-button
-                  (click)="emitirSiguientePaso()">
+                <div class="buttons padding-top">
+                <!-- Botón guardar eliminado (solo lectura) -->
+                <button id="btn-siguiente" class="button-secondary" mat-raised-button (click)="emitirSiguientePaso()">
                   SIGUIENTE
                   <mat-icon>arrow_forward</mat-icon>
                 </button>

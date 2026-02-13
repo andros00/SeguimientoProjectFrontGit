@@ -1,10 +1,5 @@
 <div class="accordion-udea margin-top">
-  <div class="col-5 align-center boton">
-    <div>
-      <button mat-raised-button id="btn-guardar-condicion" name="btnguardar" class="save-fill"
-        (click)="guardarSeleccionados()">GUARDAR<mat-icon class="margin-left">save</mat-icon></button>
-    </div>
-  </div>
+  <!-- Botón guardar eliminado (solo lectura) -->
   <app-mensaje-exito-error></app-mensaje-exito-error>
   <mat-accordion *ngFor="let valor of listado; let i = index">
     <mat-expansion-panel class="expansion-space">

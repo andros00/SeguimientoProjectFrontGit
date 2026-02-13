@@ -73,21 +73,8 @@ export class PestanaCronogramaProyectoComponent implements OnInit {
   }
 
   guardarActividad() {
-    const mensaje = new AlertaMensaje();
-    let listaActividades: ActividadProyecto[];
-    listaActividades = this.cronogramaServicioLocal.obtenerListaActividadProyecto();
-    this.agregarPeriodo(listaActividades);
-    this.cronogramaServicio.guardarActividades(listaActividades).subscribe(respuestaGuardado => {
-      this.cronogramaServicioLocal.agregarActividadProyecto(respuestaGuardado);
-      mensaje.tipoMensaje = ConstantesExitoError.EXITO;
-      mensaje.mensaje = MENSAJE_EXITO;
-      this.alertaServicioLocal.agregarMensaje(mensaje);
-    },
-      _ => {
-        mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-        mensaje.mensaje = MENSAJE_ERROR;
-        this.alertaServicioLocal.agregarMensaje(mensaje);
-      });
+    // Guardado deshabilitado en modo solo lectura.
+    console.warn('guardarActividad deshabilitado (solo lectura)');
   }
 
   agregarPeriodo(listaActividades: ActividadProyecto[]) {

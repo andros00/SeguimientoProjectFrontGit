@@ -69,13 +69,7 @@ export class ListaCompromisosProyectoComponent implements OnInit {
   }
 
   eliminarCompromiso(compromiso: CompromisoProyecto) {
-    if (compromiso.identificador !== 0) {
-      this.compromisoServicio.eliminarCompromisoProyecto(compromiso.identificador).subscribe();
-    }
-    const listaCompromisos = this.compromisoServicioLocal.obtenerListaCompromisosOpcionales();
-    const index = listaCompromisos.indexOf(compromiso);
-    listaCompromisos.splice(index, 1);
-    this.compromisoServicioLocal.agregarListaCompromisosOpcionales(listaCompromisos);
+    console.warn('eliminarCompromiso deshabilitado en modo solo lectura (lista-compromisos).', compromiso);
   }
 
 }

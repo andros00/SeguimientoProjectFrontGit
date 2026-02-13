@@ -52,48 +52,18 @@ export class ListaCronogramaProyectoComponent implements OnInit {
   }
 
   abrirEliminarActividad(actividad: ActividadProyecto) {
-    const datosModal: DatosModal = {
-      titulo: CronogramaProyectoConstantes.TITULO_ALERTA_ELIMINAR_ACTIVIDAD,
-      mensaje: CronogramaProyectoConstantes.ELIMINAR_ACTIVIDAD,
-      textoPrimerBoton: ClaseAlerta.CANCELAR,
-      textoSegundoBoton: ClaseAlerta.ELIMINAR,
-      clase: ClaseAlerta.ALERTA_INFORMATIVA,
-    };
-    const modalEliminarCondicionRef = this.modal.open(ModalDinamicoComponent, {
-      data: datosModal
-    });
-
-    modalEliminarCondicionRef.afterClosed().subscribe(result => {
-      if (ClaseAlerta.ELIMINAR === result) {
-        this.eliminarActividad(actividad);
-      }
-    });
+    // Eliminación deshabilitada en modo solo lectura.
+    console.warn('abrirEliminarActividad deshabilitado (solo lectura)');
   }
 
   eliminarActividad(actividad: ActividadProyecto) {
-    const mensaje = new AlertaMensaje();
-    if (!!actividad.identificador && actividad.identificador !== 0) {
-      this.cronogramaServicio.eliminarActividadProyecto(actividad.identificador).subscribe(_ => {
-        this.eliminarActividadLocal(actividad, mensaje);
-      },
-        _ => {
-          mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-          mensaje.mensaje = MENSAJE_ERROR_ELIMINANDO;
-          this.alertaServicioLocal.agregarMensaje(mensaje);
-        });
-    } else {
-      this.eliminarActividadLocal(actividad, mensaje);
-    }
+    // Eliminación deshabilitada en modo solo lectura.
+    console.warn('eliminarActividad deshabilitado (solo lectura)');
   }
 
 
   private eliminarActividadLocal(actividad: ActividadProyecto, mensaje: AlertaMensaje) {
-    const listaActividades = this.cronogramaServicioLocal.obtenerListaActividadProyecto();
-    const index = listaActividades.indexOf(actividad);
-    listaActividades.splice(index, 1);
-    this.cronogramaServicioLocal.agregarActividadProyecto(listaActividades);
-    mensaje.tipoMensaje = ConstantesExitoError.EXITO;
-    mensaje.mensaje = MENSAJE_EXITO_ELIMINANDO;
-    this.alertaServicioLocal.agregarMensaje(mensaje);
+    // Operación local de eliminación deshabilitada en modo solo lectura.
+    console.warn('eliminarActividadLocal deshabilitado (solo lectura)');
   }
 }

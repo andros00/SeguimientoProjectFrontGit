@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';;
@@ -148,6 +148,7 @@ import { ContenedorProyectoComponent } from './components/molecules/show-project
     MatDialogModule, MatTab, MatTabGroup], providers: [
       [provideHttpClient(withInterceptorsFromDi())],
       { provide: MatPaginatorIntl, useValue: CustomPaginator() }
-    ]
+    ],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SharedModule { }

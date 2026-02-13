@@ -69,18 +69,11 @@ export class FiltroEvaluadorComponent implements OnInit {
   }
 
   abrirSeleccionarInstitucion() {
-    const institucionPara = 'Evaluador';
-    const modalInstitucionRef = this.dialogo.open(ContenedorFinanciadorBusquedaProyectoComponent, {
-      data: institucionPara
-    });
-    modalInstitucionRef.afterClosed().subscribe(resultado => {
-      this.institucion = resultado;
-      this.cambioNombres();
-    });
+    console.warn('abrirSeleccionarInstitucion deshabilitado en modo solo lectura (filtro-evaluador).');
   }
 
   eliminarFinanciador() {
-    this.institucion = {};
+    this.institucion = null;
     this.cambioNombres();
   }
 
@@ -118,16 +111,7 @@ export class FiltroEvaluadorComponent implements OnInit {
   }
 
   buscarEvaluador() {
-    if (this.formularioFiltroEvaluador.invalid && this.institucion === null) {
-      return;
-    }
-    const filtroEvaluadores: FiltroEvaluador = this.formularioFiltroEvaluador.value;
-    if (!!this.institucion) {
-      filtroEvaluadores.institucion = this.institucion.nit;
-    }
-    this.evaluadorServicio.obtenerEvaluadores(filtroEvaluadores).subscribe(respuestaEvaluadores => {
-      this.notificarResultados(respuestaEvaluadores, filtroEvaluadores.identificacion);
-    });
+    console.warn('buscarEvaluador deshabilitado en modo solo lectura (filtro-evaluador).');
   }
 
   private notificarResultados(resultados: Evaluador[], identificacionBucar: string) {

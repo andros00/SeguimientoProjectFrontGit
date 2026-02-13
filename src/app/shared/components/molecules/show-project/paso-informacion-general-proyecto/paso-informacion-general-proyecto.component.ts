@@ -161,9 +161,10 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.modoEdicion = this.activeRoute.snapshot.queryParams.estado === 'Editar';
-    this.soloLectura = this.activeRoute.snapshot.queryParams.soloLectura === 'true';
-    this.paraActualizacion = this.activeRoute.snapshot.queryParams.paraActualizacion === 'true';
+    const qp: any = this.activeRoute.snapshot.queryParams as any;
+    this.modoEdicion = qp['estado'] === 'Editar';
+    this.soloLectura = qp['soloLectura'] === 'true';
+    this.paraActualizacion = qp['paraActualizacion'] === 'true';
 
     this.paraConsulta = this.modoEdicion || this.soloLectura || this.paraActualizacion;
 
@@ -265,7 +266,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
       valor => this.evaluarRequeridosComiteBioetica(valor));
   }
 
-  get f() { return this.formularioInformacionGeneralProyecto.controls; }
+  get f(): any { return (this.formularioInformacionGeneralProyecto.controls as any); }
 
   identificarCambiosEnFormulario() {
     this.informacionGuardada = true;
@@ -572,8 +573,8 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
       this.opcionesFiltradasConvocatoria = this.f.convocatoria.valueChanges
         .pipe(
           startWith<string | InformacionGeneralConvocatoria>(''),
-          map(value => typeof value === 'string' ? value : value.nombre),
-          map(nombre => nombre ? this._filtroConvocatoria(nombre) : this.listaConvocatorias.slice())
+          map(value => typeof value === 'string' ? value : (value as any).nombre),
+          map(nombre => nombre ? this._filtroConvocatoria(nombre as string) : this.listaConvocatorias.slice())
         );
     }
   }
@@ -647,8 +648,8 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
       this.opcionesFiltradasProyecto = this.f.proyectoVinculaJi.valueChanges.pipe(
         startWith<string | InformacionGeneralProyecto>(''),
         filter(value => !!value),
-        map(value => typeof value === 'string' ? value : value.nombreCorto),
-        map(nombre => nombre ? this._filtroProyectoAsociado(nombre) : this.listaProyectoAsociado.slice())
+        map(value => typeof value === 'string' ? value : (value as any).nombreCorto),
+        map(nombre => nombre ? this._filtroProyectoAsociado(nombre as string) : this.listaProyectoAsociado.slice())
       );
     }
   }
@@ -694,40 +695,8 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   }
 
   guardar() {
-    if (this.formularioInformacionGeneralProyecto.invalid) {
-      return;
-    }
-
-    const informacionGeneral = this.validarInformacionGeneral();
-    const subproyecto: DatosSubproyecto = this.validarEsSubproyecto();
-    const componente: ComponenteProyecto = this.validarEsMacroProyecto();
-    const proyecto = new Proyecto();
-    proyecto.informacionGeneralProyecto = informacionGeneral;
-    proyecto.datosSubproyecto = subproyecto;
-    proyecto.componenteProyecto = componente;
-    const esProyectoEditar = !!this.proyectoAEditar;
-    if (esProyectoEditar) {
-      proyecto.informacionGeneralProyecto.estado = this.proyectoAEditar.estado;
-      proyecto.informacionGeneralProyecto.etapaActual = this.proyectoAEditar.etapaActual;
-      proyecto.informacionGeneralProyecto.instanciaAdmtivaActual = this.proyectoAEditar.instanciaAdmtivaActual;
-      proyecto.informacionGeneralProyecto.fechaEnvioCentro = this.proyectoAEditar.fechaEnvioCentro;
-      proyecto.informacionGeneralProyecto.fechaRegistro = this.proyectoAEditar.fechaRegistro;
-    }
-
-    this.informacionGeneralProyectoServicio.guardarInformacionGeneralProyecto(proyecto)
-      .subscribe(respuestaInformacionGeneral => {
-        proyecto.informacionGeneralProyecto.codigo = respuestaInformacionGeneral.informacionGeneralProyecto.codigo;
-        proyecto.informacionGeneralProyecto.estado = respuestaInformacionGeneral.informacionGeneralProyecto.estado;
-        this.proyectoLocalServicio.agregarInformacionGeneralProyecto(proyecto.informacionGeneralProyecto);
-        if (!!this.f.modalidad.value) {
-          this.proyectoLocalServicio.guardarModalidadSeleccionada(this.f.modalidad.value);
-        }
-        this.proyectoLocalServicio.notificarProyectoGuardado();
-        this.informacionGuardada = true;
-        if (!esProyectoEditar) {
-          this.validacionDePasos(proyecto, respuestaInformacionGeneral);
-        }
-      });
+    // Guardado deshabilitado en modo solo lectura.
+    console.warn('guardar deshabilitado (solo lectura)');
   }
 
   private validacionDePasos(proyecto: Proyecto, respuestaInformacionGeneral: EstructuraProyecto) {
@@ -773,8 +742,8 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
     this.identificarCambiosEnFormulario();
   }
 
-  private validarInformacionGeneral(): InformacionGeneralProyecto {
-    const informacionGeneral = new InformacionGeneralProyecto();
+  private validarInformacionGeneral(): any {
+    const informacionGeneral: any = {};
     const proyectoLocalGuardado = this.proyectoLocalServicio.obtenerInformacionGeneralProyecto();
     if (!!proyectoLocalGuardado && !!proyectoLocalGuardado.codigo) {
       informacionGeneral.codigo = proyectoLocalGuardado.codigo;
@@ -1218,10 +1187,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   }
 
   abrirModalUbicacion(): void {
-    const left = (window.innerWidth / 2) - (800 / 2);
-    const top = (window.innerHeight / 2) - (400 / 2);
-    window.open(environment.modalUbicacion, "_blank", `height=400, width=800,left=${left},top=${top},
-                                            scrollbars=yes, resizable=yes`);
+    console.warn('abrirModalUbicacion deshabilitado en modo solo lectura (paso-informacion-general).');
   }
 
   @HostListener('window:message', ['$event'])

@@ -67,50 +67,7 @@ export class AgregarDocumentoSoporteProyectoComponent implements OnInit {
   }
 
   agregarDocumentoSoporte() {
-    this.enviado = true;
-    if (this.f.documentoAdjunto.value.length > 0) {
-      const megas = this.f.documentoAdjunto.value[0].file.size / Math.pow(DocumentosSoporteConstantes.MEGAS,
-        DocumentosSoporteConstantes.CUADRADO);
-      if (megas > DocumentosSoporteConstantes.TAMANNO_MAXIMO_MB) {
-        this.mensajeErrorTamanno = true;
-        return;
-      } else {
-        this.mensajeErrorTamanno = false;
-      }
-      if (this.f.documentoAdjunto.value[0].file.name.length > DocumentosSoporteConstantes.TAMANNO_MAXIMO_NOMBRE_ADJUNTO_BD) {
-        this.tamannoNombreAdjunto = true;
-        return;
-      } else {
-        this.tamannoNombreAdjunto = false;
-      }
-    }
-    if (this.formularioAgregarDocumentoProyecto.invalid) {
-      return;
-    }
-    const fechaEmision = this.f.fechaEmision.value.toDate();
-    const documentoProyecto: DocumentoProyecto = new DocumentoProyecto();
-    documentoProyecto.identificador = 0;
-    documentoProyecto.proyecto = this.proyectoServicioLocal.obtenerInformacionGeneralProyecto().codigo;
-    const documentoSoporte: DocumentoSoporte = new DocumentoSoporte();
-    documentoSoporte.identificador = 0;
-    documentoSoporte.nombreDocumento = this.f.nombreDocumento.value;
-    documentoSoporte.fechaEmision = fechaEmision.getTime().toString();
-    documentoSoporte.numeroDocumento = this.f.numeroDocumento.value;
-    documentoSoporte.nombreAdjunto = this.f.documentoAdjunto.value[0].file.name;
-    documentoSoporte.emisor = this.f.emisor.value;
-    documentoSoporte.descripcion = this.f.descripcion.value;
-    documentoSoporte.tipo = this.f.tipoDocumento.value;
-    const documentoAdjunto = this.f.documentoAdjunto.value[0].file;
-    const reader = new FileReader();
-    reader.readAsDataURL(documentoAdjunto);
-    reader.onload = () => {
-      documentoSoporte.documentoAdjunto = reader.result.toString().split(',')[1];
-    };
-    documentoProyecto.documentoSoporte = documentoSoporte;
-    const listaDocumentosProyecto = this.documentoSoporteServiciolocal.obtenerListaDocumentosProyecto();
-    listaDocumentosProyecto.push(documentoProyecto);
-    this.documentoSoporteServiciolocal.agregarListaDocumentosProyecto(listaDocumentosProyecto);
-    this.cerrarModal();
+    console.warn('agregarDocumentoSoporte deshabilitado en modo solo lectura (agregar-documento-soporte).');
   }
 
   get f() {

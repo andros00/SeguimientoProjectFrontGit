@@ -77,7 +77,8 @@ export class ContenedorFinanciadorBusquedaProyectoComponent implements OnInit {
   }
 
   guardarFinanciadoresConvocatoria() {
-    this.convocatoriaLocalService.guardarFinanciadoresConvocatoria(this.listaPersonaJuridica);
+    // Guardado deshabilitado en modo solo lectura.
+    console.warn('guardarFinanciadoresConvocatoria deshabilitado (solo lectura)');
   }
 
   activarAgregarInfoAdicionalCofinanciador(){
@@ -142,13 +143,6 @@ export class ContenedorFinanciadorBusquedaProyectoComponent implements OnInit {
   }
 
   abrirModalRegistrarFinanciador() {
-    const dialogoRef = this.dialogo.open(AgregarFinanciadorComponent, {
-      data: { nitParaRegistrar: this.nitNoEncontrado, esNacional: this.esNacional }
-    });
-    this.mostrarRegistroFinanciador = false;
-    dialogoRef.afterClosed().subscribe(resultado => {
-      this.obtenerPersonaJuridica();
-      this.emitirLimpiarFormulario.emit();
-    });
+    console.warn('abrirModalRegistrarFinanciador deshabilitado en modo solo lectura (contenedor-financiador).');
   }
 }

@@ -49,19 +49,7 @@
         <td>
           {{ mostrarProgramaAcademico(!!participante.programa?.nombrePrograma ? participante.programa.nombrePrograma : '', !!participante.programa?.porcentajeCompletado ? participante.programa.porcentajeCompletado : '' ) }}
         </td>
-        <td *ngIf="editable">
-          <button class="button-more" [matMenuTriggerFor]="menu">
-            <mat-icon>more_horiz</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button (click)="editarParticipante(participante)" mat-menu-item>
-              <mat-icon class="icon-table">create</mat-icon>Editar
-            </button>
-            <button (click)="abrirEliminarParticipante(participante)" mat-menu-item>
-              <mat-icon class="icon-table">delete</mat-icon>Eliminar
-            </button>
-          </mat-menu>
-        </td>
+        <!-- Acciones de edición/eliminación eliminadas (solo lectura) -->
       </tr>
       <tr *ngIf="participante.habilitarRegistro">
         <td colspan="8">
