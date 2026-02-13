@@ -26,11 +26,11 @@
           {{pasos.informacionGeneral?.titulo}}</p>
       </ng-template>
       <br />
-      <!-- <app-paso-informacion-general-proyecto #paso1 (pasoSiguiente)="irAdelante()">
-      </app-paso-informacion-general-proyecto> -->
+      <app-paso-informacion-general-proyecto #paso1 (pasoSiguiente)="irAdelante()">
+      </app-paso-informacion-general-proyecto>
     </aw-wizard-step>
 
-    <!-- <aw-wizard-step *ngIf="mostrarPaso(pasos.actualizaciones)">
+    <aw-wizard-step *ngIf="mostrarPaso(pasos.actualizaciones)">
       <ng-template class="p" awWizardStepTitle>
         <span class="step-number">{{pasos.actualizaciones?.numero}}</span>
         <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.actualizaciones),
@@ -160,7 +160,7 @@
       </ng-template>
       <app-paso-publicar-proyecto #paso12 (pasoAnterior)="irAtras()" (pasoSiguiente)="irAdelante()">
       </app-paso-publicar-proyecto>
-    </aw-wizard-step> -->
+    </aw-wizard-step>
 
   </aw-wizard>
 </div>

@@ -43,10 +43,12 @@ export class PestanaCofinanciadorProyectoComponent implements OnInit {
   }
 
   abrirVentanaBuscarFinanciador() {
-    const infoCofinanciador = true;
-    this.dialogo.open(ContenedorFinanciadorBusquedaProyectoComponent, {
-      data: infoCofinanciador
-    });
+    // Buscar financiador deshabilitado en modo solo lectura.
+    console.warn('abrirVentanaBuscarFinanciador deshabilitado en modo solo lectura (pestana-cofinanciador)');
+    // const infoCofinanciador = true;
+    // this.dialogo.open(ContenedorFinanciadorBusquedaProyectoComponent, {
+    //   data: infoCofinanciador
+    // });
   }
 
   abrirVentanaBuscarGrupo() {

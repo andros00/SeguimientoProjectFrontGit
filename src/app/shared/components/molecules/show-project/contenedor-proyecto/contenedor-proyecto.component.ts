@@ -28,18 +28,18 @@ import { PasoPublicarProyectoComponent } from '../paso-publicar-proyecto/paso-pu
   styleUrls: ['./contenedor-proyecto.component.css'],
   standalone: true,
   imports:[CommonModule,
-        // PasoInformacionGeneralProyectoComponent
-    // PasoActualizacionesProyectoComponent,
-    // PasoInformacionComplementariaComponent,
-    // PasoDescripcionCronogramaProyectoComponent,
-    // PasoPresupuestalProyectoComponent,
-    // PasoComponenteProyectoComponent,
-    // PasoPlanTrabajoProyectoComponent,
-    // PasoParticipantesProyectoComponent,
-    // PasoEvaluadoresRecomendadosProyectoComponent,
-    // PasoCompromisosCondicionesProyectoComponent,
-    // PasoDocumentosSoporteProyectoComponent,
-    // PasoPublicarProyectoComponent
+    PasoInformacionGeneralProyectoComponent,
+    PasoActualizacionesProyectoComponent,
+    PasoInformacionComplementariaComponent,
+    PasoDescripcionCronogramaProyectoComponent,
+    PasoPresupuestalProyectoComponent,
+    PasoComponenteProyectoComponent,
+    PasoPlanTrabajoProyectoComponent,
+    PasoParticipantesProyectoComponent,
+    PasoEvaluadoresRecomendadosProyectoComponent,
+    PasoCompromisosCondicionesProyectoComponent,
+    PasoDocumentosSoporteProyectoComponent,
+    PasoPublicarProyectoComponent
    ]
 
 })

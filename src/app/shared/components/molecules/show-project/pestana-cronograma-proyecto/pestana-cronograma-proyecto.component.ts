@@ -63,13 +63,17 @@ export class PestanaCronogramaProyectoComponent implements OnInit {
   get f() { return this.formularioPeriodo.controls; }
 
   abrirAgregarActividad() {
-    this.dialogo.open(AgregarActividadComponent).afterClosed().subscribe(_ => {
-      this.validarPeriodoSeleccionado();
-    });
+    // Agregar actividad deshabilitado en modo solo lectura.
+    console.warn('abrirAgregarActividad deshabilitado en modo solo lectura (pestana-cronograma)');
+    // this.dialogo.open(AgregarActividadComponent).afterClosed().subscribe(_ => {
+    //   this.validarPeriodoSeleccionado();
+    // });
   }
 
   abrirDiagramaActividad() {
-    this.dialogoDiagrama.open(DiagramaActividadComponent);
+    // Ver diagrama de actividad deshabilitado en modo solo lectura.
+    console.warn('abrirDiagramaActividad deshabilitado en modo solo lectura (pestana-cronograma)');
+    // this.dialogoDiagrama.open(DiagramaActividadComponent);
   }
 
   guardarActividad() {

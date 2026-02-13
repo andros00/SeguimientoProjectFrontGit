@@ -48,7 +48,9 @@ export class PasoEvaluadoresRecomendadosProyectoComponent implements OnInit {
   }
 
   agregarEvaluador() {
-    this.dialogo.open(ContenedorEvaluadorBusquedaComponent);
+    // Agregar evaluador deshabilitado en modo solo lectura.
+    console.warn('agregarEvaluador deshabilitado en modo solo lectura (paso-evaluadores-recomendados)');
+    // this.dialogo.open(ContenedorEvaluadorBusquedaComponent);
   }
 
   guardarEvaluadoresRecomendados() {
