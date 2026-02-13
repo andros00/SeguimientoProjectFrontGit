@@ -1,7 +1,0 @@
-<div class="filtro-persona-natural">
-  <mat-form-field appearance="outline" class="campo-identificacion">
-    <mat-label>Identificación</mat-label>
-    <input matInput [(ngModel)]="identificacion" (keyup)="formularioCambiado()" (keyup.enter)="buscarPersona()">
-  </mat-form-field>
-  <app-button-primary *ngIf="!cargando" [label]="'Buscar'" [icon]="'search'" (clicked)="buscarPersona()" />
-</div>
