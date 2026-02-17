@@ -36,7 +36,7 @@ export class DocumentoSoporteProyectoService {
     return this.http.post(url, documento);
   }
 
-  descargarDocumento(idDocumentoSoporte): Observable<DocumentoSoporte> {
+  descargarDocumento(idDocumentoSoporte: number): Observable<DocumentoSoporte> {
     const url = `${environment.URL_BASE}${DireccionesUrl.DIRECCIONES_PROYECTO.DESCARGAR_DOCUMENTO_SOPORTE}${idDocumentoSoporte}`;
     return this.http.get<DocumentoSoporte>(url);
   }

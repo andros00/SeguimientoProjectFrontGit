@@ -10,7 +10,7 @@ import { CronogramaService } from './cronograma.service';
 })
 export class CronogramaProyectoLocalService implements ServicioProyectoLocal {
 
-  private listaActividadProyecto: BehaviorSubject<ActividadProyecto[]> = new BehaviorSubject(([]));
+  private listaActividadProyecto: BehaviorSubject<ActividadProyecto[]> = new BehaviorSubject<ActividadProyecto[]>([]);
   public listaActividadProyectoObservable = this.listaActividadProyecto.asObservable();
 
   constructor(private cronogramaServicio: CronogramaService) {

@@ -13,7 +13,7 @@ export class DescripcionProyectoService {
   constructor(private http: HttpClient) { }
 
 
-  guardarTextoDescriptivo(textoDescriptivo): Observable<TextoDescriptivo> {
+  guardarTextoDescriptivo(textoDescriptivo: TextoDescriptivo): Observable<TextoDescriptivo> {
     const url = `${environment.URL_BASE}${DireccionesUrl.DIRECCIONES_PROYECTO.GUARDAR_TEXTO_DESCRIPTIVO}`;
     return this.http.post<TextoDescriptivo>(url, textoDescriptivo);
   }

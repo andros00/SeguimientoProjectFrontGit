@@ -14,10 +14,10 @@ export class CompromisosProyectoLocalService implements ServicioProyectoLocal {
   readonly tipoCompromisoObligatorioBD = 'b';
 
 
-  private listaCompromisosObligatorios: BehaviorSubject<CompromisoProyecto[]> = new BehaviorSubject(([]));
+  private listaCompromisosObligatorios: BehaviorSubject<CompromisoProyecto[]> = new BehaviorSubject<CompromisoProyecto[]>([]);
   public listaCompromisosObligatoriosObservable = this.listaCompromisosObligatorios.asObservable();
 
-  private listaCompromisosOpcionales: BehaviorSubject<CompromisoProyecto[]> = new BehaviorSubject(([]));
+  private listaCompromisosOpcionales: BehaviorSubject<CompromisoProyecto[]> = new BehaviorSubject<CompromisoProyecto[]>([]);
   public listaCompromisosOpcionalesObservable = this.listaCompromisosOpcionales.asObservable();
 
   constructor(private compromisoServicio: CompromisosProyectoService) {
@@ -64,15 +64,15 @@ export class CompromisosProyectoLocalService implements ServicioProyectoLocal {
   }
 
   guardar() {
-    let compromisos = [];
+    let compromisos: CompromisoProyecto[] = [];
     compromisos = compromisos.concat(this.listaCompromisosObligatorios.getValue());
     compromisos = compromisos.concat(this.listaCompromisosOpcionales.getValue());
     return this.compromisoServicio.guardarCompromisos(compromisos, ProyectoConstantes.ENVIADO_A_CENTRO);
   }
 
   postguardado(compromisosGuardados: CompromisoProyecto[]) {
-    const listaCompromisosObligatorios = [];
-    const listaCompromisosOpcionales = [];
+    const listaCompromisosObligatorios: CompromisoProyecto[] = [];
+    const listaCompromisosOpcionales: CompromisoProyecto[] = [];
     compromisosGuardados.forEach(compromiso => {
       if (compromiso.compromiso && compromiso.compromiso.tipoCompromiso === this.tipoCompromisoObligatorio) {
         listaCompromisosObligatorios.push(compromiso);

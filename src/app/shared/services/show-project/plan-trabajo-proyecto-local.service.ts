@@ -10,7 +10,7 @@ import { ProyectoConstantes } from '../../components/molecules/show-project/proy
 })
 export class PlanTrabajoProyectoLocalService implements ServicioProyectoLocal {
 
-  private listaPlanDeTrabajo: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject(([]));
+  private listaPlanDeTrabajo: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject<TextoDescriptivo[]>([]);
   public listaPlanDeTrabajoObservable = this.listaPlanDeTrabajo.asObservable();
 
   constructor(private textoDescriptivoServicio: DescripcionProyectoService) {

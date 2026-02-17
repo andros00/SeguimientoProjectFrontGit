@@ -13,10 +13,10 @@ export class AccionesPresupuestalLocalService {
   private accionVerPorcentajeSubject = new BehaviorSubject<boolean>(false);
   accionVerPorcentaje$ = this.accionVerPorcentajeSubject.asObservable();
 
-  private accionGuardarSubject = new Subject();
+  private accionGuardarSubject = new Subject<void>();
   accionGuardar$ = this.accionGuardarSubject.asObservable();
 
-  private accionConfirmarPresupuestoSubject = new Subject();
+  private accionConfirmarPresupuestoSubject = new Subject<void>();
   accionConfirmarPresupuesto$ = this.accionConfirmarPresupuestoSubject.asObservable();
 
   private accionRubroAgregadoSubject = new Subject<RubroProyecto>();
@@ -28,10 +28,10 @@ export class AccionesPresupuestalLocalService {
   private accionEdicionFinalizadaSubject = new Subject<[RubroProyecto, RubroProyecto]>();
   accionEdicionFinalizada$ = this.accionEdicionFinalizadaSubject.asObservable();
 
-  private accionAmpliarTodoSubject = new Subject();
+  private accionAmpliarTodoSubject = new Subject<void>();
   accionAmpliarTodo$ = this.accionAmpliarTodoSubject.asObservable();
 
-  private accionReducirTodoSubject = new Subject();
+  private accionReducirTodoSubject = new Subject<void>();
   accionReducirTodo$ = this.accionReducirTodoSubject.asObservable();
 
   constructor() { }

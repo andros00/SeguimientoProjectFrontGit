@@ -10,7 +10,7 @@ import { CondicionFormalPorEvaluacion } from '../../components/molecules/show-pr
 })
 export class CondicionFormalProyectoLocalService implements ServicioProyectoLocal {
 
-  private listaCondicionFormalPorEvaluacion: BehaviorSubject<CondicionFormalPorEvaluacion[]> = new BehaviorSubject(([]));
+  private listaCondicionFormalPorEvaluacion: BehaviorSubject<CondicionFormalPorEvaluacion[]> = new BehaviorSubject<CondicionFormalPorEvaluacion[]>([]);
   public listaCondicionFormalPorEvaluacionObservable = this.listaCondicionFormalPorEvaluacion.asObservable();
 
   constructor(private condicionFormalServicio: CondicionesFormalesService) {

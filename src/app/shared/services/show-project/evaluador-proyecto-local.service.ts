@@ -11,10 +11,10 @@ import { EvaluadorEvaluacionCientifica } from '../../components/molecules/show-p
 })
 export class EvaluadorProyectoLocalService implements ServicioProyectoLocal {
 
-  private listaEvaluadoresRecomendados: BehaviorSubject<EvaluadorRecomendado[]> = new BehaviorSubject(([]));
+  private listaEvaluadoresRecomendados: BehaviorSubject<EvaluadorRecomendado[]> = new BehaviorSubject<EvaluadorRecomendado[]>([]);
   public listaEvaluadoresRecomendadosObservable = this.listaEvaluadoresRecomendados.asObservable();
 
-  private listaEvaluadoresEvaluacion: BehaviorSubject<EvaluadorEvaluacionCientifica[]> = new BehaviorSubject(([]));
+  private listaEvaluadoresEvaluacion: BehaviorSubject<EvaluadorEvaluacionCientifica[]> = new BehaviorSubject<EvaluadorEvaluacionCientifica[]>([]);
   public listaEvaluadoresEvaluacionObservable = this.listaEvaluadoresEvaluacion.asObservable();
 
   constructor(private evaluadorService: EvaluadorService) {

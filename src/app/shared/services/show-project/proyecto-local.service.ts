@@ -14,7 +14,7 @@ import { FinanciadorConvocatoria } from '../../components/molecules/show-project
 })
 export class ProyectoLocalService {
 
-  private listaFinanciador: BehaviorSubject<FinanciadorConvocatoria[]> = new BehaviorSubject(([]));
+  private listaFinanciador: BehaviorSubject<FinanciadorConvocatoria[]> = new BehaviorSubject<FinanciadorConvocatoria[]>([]);
   public listaFinanciadoresObservable = this.listaFinanciador.asObservable();
   private proyectoGuardado: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   informacionGeneralProyecto: BehaviorSubject<InformacionGeneralProyecto> =
@@ -26,7 +26,7 @@ export class ProyectoLocalService {
     new BehaviorSubject<InformacionGeneralConvocatoria>(BehaviorSubject.create());
   private componenteProyecto: BehaviorSubject<ComponenteProyecto> = new BehaviorSubject<ComponenteProyecto>(BehaviorSubject.create());
   private datosSubproyecto: BehaviorSubject<DatosSubproyecto> = new BehaviorSubject<DatosSubproyecto>(BehaviorSubject.create());
-  private modalidadSeleccionadaSubject = new BehaviorSubject<ModalidadConvocatoria>(null);
+  private modalidadSeleccionadaSubject = new BehaviorSubject<ModalidadConvocatoria | null>(null);
 
   obtenerInformacionGeneralProyecto(): InformacionGeneralProyecto {
     return this.informacionGeneralProyecto.getValue();
@@ -72,7 +72,7 @@ export class ProyectoLocalService {
     this.modalidadSeleccionadaSubject.next(modalidad);
   }
 
-  obtenerModalidadSeleccionada(): ModalidadConvocatoria {
+  obtenerModalidadSeleccionada(): ModalidadConvocatoria | null {
     return this.modalidadSeleccionadaSubject.getValue();
   }
 

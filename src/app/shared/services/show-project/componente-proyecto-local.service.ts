@@ -11,7 +11,7 @@ import { ComponenteProyecto } from '../../components/molecules/show-project/comp
 })
 export class ComponenteProyectoLocalService implements ServicioProyectoLocal {
 
-  private listaComponenteProyecto: BehaviorSubject<ComponenteMacroproyecto[]> = new BehaviorSubject(([]));
+  private listaComponenteProyecto: BehaviorSubject<ComponenteMacroproyecto[]> = new BehaviorSubject<ComponenteMacroproyecto[]>([]);
   public listaComponenteProyectoObservable = this.listaComponenteProyecto.asObservable();
 
   constructor(private componenteServicio: ComponenteProyectoService) {

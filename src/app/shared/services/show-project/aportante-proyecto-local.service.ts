@@ -13,10 +13,10 @@ import { UdeaConstantes } from '../../components/molecules/show-project/udea-con
 })
 export class AportanteProyectoLocalService implements ServicioProyectoLocal {
 
-  private listaAportante: BehaviorSubject<AportanteProyecto[]> = new BehaviorSubject(([]));
+  private listaAportante: BehaviorSubject<AportanteProyecto[]> = new BehaviorSubject<AportanteProyecto[]>([]);
   public listaAportanteObservable = this.listaAportante.asObservable();
 
-  private listaAportanteTemporal: BehaviorSubject<AportanteProyecto[]> = new BehaviorSubject(([]));
+  private listaAportanteTemporal: BehaviorSubject<AportanteProyecto[]> = new BehaviorSubject<AportanteProyecto[]>([]);
   public listaAportanteTemporalObservable = this.listaAportanteTemporal.asObservable();
 
   private aportanteAgregadoSubject = new Subject<AportanteProyecto>();
@@ -53,8 +53,9 @@ export class AportanteProyectoLocalService implements ServicioProyectoLocal {
 
   obtenerRubrosHabilitadosConvocatoria(codigoConvocatoria: number): Observable<RubroConvocatoria[]> {
     if (this.servicioLocalProyecto.obtenerInformacionGeneralProyecto().claseProyecto === codigoConvocatoria) {
+      const convocatoria = this.servicioLocalProyecto.obtenerInformacionGeneralProyecto().convocatoria;
       return this.aportanteProyectoService.consultarRubrosConvocatoria(
-        this.servicioLocalProyecto.obtenerInformacionGeneralProyecto().convocatoria.identificador);
+        convocatoria?.identificador || 0);
     } else {
       return this.aportanteProyectoService.consultarRubrosHabilitados();
     }

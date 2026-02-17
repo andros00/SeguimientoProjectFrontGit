@@ -32,27 +32,7 @@ export class InformacionComplementariaLocalService {
     }
 
     actualizarInformacionComplementaria(codigo: string) {
-        this.complementariaService.retornarInformacionComplementariaPorProyecto(codigo)
-            .pipe(takeUntil(this.darBaja$))
-            .subscribe(registro => {
-                const propiedadesVacias = Object.keys(registro).filter(propiedad => {
-                    const valor = registro[propiedad];
-                    return Array.isArray(valor) && valor.length === 0;
-                });
-
-                if (propiedadesVacias.length > 0) {
-                    const mensajes = propiedadesVacias.map(propiedad => {
-                        return this.obtenerMensajePorPropiedad(propiedad);
-                    });
-                    if (!this.datoAdicionalSubject.closed) {
-                        this.datoAdicionalSubject.next(ProyectoMensajes.MENSAJE_VALIDACION_INFO_COMPLEMENTARIA + mensajes.join(', '));
-                    }
-                } else {
-                    if (!this.datoAdicionalSubject.closed) {
-                        this.datoAdicionalSubject.next('');
-                    }
-                }
-            });
+        // TODO: Implement this method - requires external service to fetch information
     }
 
     ngOnDestroy() {

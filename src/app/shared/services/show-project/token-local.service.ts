@@ -22,7 +22,7 @@ export class TokenLocalService {
 
   construirEncabezadoToken(): { [key: string]: string } {
     const valorToken = this.getToken();
-    const headers = {};
+    const headers: { [key: string]: string } = {};
     if (!!valorToken) {
       headers[EvaluadorConstantes.NOMBRE_ENCABEZADO_TOKEN] = valorToken;
       headers['Cache-Control'] = 'no-cache';

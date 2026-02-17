@@ -49,7 +49,7 @@ export class PasosProyectoService {
   inicializarPasos() {
     let indice = 1;
     this.pasos.informacionGeneral = this.crearPaso(indice, ProyectoMensajes.PASO_INFORMACION_GENERAL, true);
-    this.pasos.actualizaciones = this.crearPaso(indice++, ProyectoMensajes.PASO_ACTUALIZACION, false, this.actualizacionProyecto);
+    this.pasos.actualizaciones = this.crearPaso(indice++, ProyectoMensajes.PASO_ACTUALIZACION, false);
     this.pasos.complementaria = this.crearPaso(indice++, ProyectoMensajes.PASO_COMPLEMENTARIA,false);
     this.pasos.cronograma = this.crearPaso(indice++, ProyectoMensajes.PASO_CRONOGRAMA, false);
     this.pasos.presupuestal = this.crearPaso(indice++, ProyectoMensajes.PASO_PRESUPUESTAL, false);
@@ -69,9 +69,13 @@ export class PasosProyectoService {
   esPestanaVisible(nombrePaso: string, nombrePestana: string): boolean {
     let pestana = null;
 
-    const paso: Paso = Object.keys(this.pasos)
-      .map(k => this.pasos[k])
-      .find(p => p.titulo === nombrePaso);
+    const keys = Object.keys(this.pasos);
+    const pasoKey = keys.find(k => {
+      const key = k as keyof PasosProyectoFormulario;
+      return this.pasos[key].titulo === nombrePaso;
+    }) as keyof PasosProyectoFormulario | undefined;
+    
+    const paso: Paso | undefined = pasoKey ? this.pasos[pasoKey] : undefined;
 
     if (!!paso && !!paso.tabs) {
       pestana = paso.tabs.find(p => p.titulo === nombrePestana);
@@ -81,11 +85,11 @@ export class PasosProyectoService {
   }
 
   esPasoVisible(nombrePaso: string): boolean {
-    const paso: Paso = Object.keys(this.pasos)
-      .map(k => this.pasos[k])
-      .find(p => p.titulo === nombrePaso);
-
-    return paso.visible;
+    const paso: Paso | undefined = Object.keys(this.pasos).find(k => {
+      const key = k as keyof PasosProyectoFormulario;
+      return this.pasos[key].titulo === nombrePaso;
+    }) as any;
+    return paso?.visible || false;
   }
 
   calcularPasos(proyecto: InformacionGeneralProyecto,
@@ -99,7 +103,7 @@ export class PasosProyectoService {
         this.proyectoLocalServicio.agregarInformacionGeneralProcesoSeleccion(procesoSeleccion.informacionGeneral);
         this.habilitarInformacionGeneral(this.pasos);
         this.habilitarInformacionComplementaria(this.pasos,  procesoSeleccion.informacionGeneral);
-        this.habilitarActualizaciones(this.pasos, actualizaciones);
+        this.habilitarActualizaciones(this.pasos, actualizaciones || []);
         this.habilitacionPorCheckDeProceso(this.pasos, procesoSeleccion.informacionGeneral);
         this.habilitarComponentes(this.pasos, proyecto);
         this.habilitarCondicionesFormales(this.pasos, proyecto, procesoSeleccion.listaCondicionesFormales);
@@ -224,6 +228,7 @@ export class PasosProyectoService {
       numero: index,
       titulo: nombre,
       visible: visible,
+      valido: true,
       servicio: servicio,
       tabs: []
     } as Paso;

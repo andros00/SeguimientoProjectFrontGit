@@ -1,4 +1,4 @@
-import { EstadosProyectoConstantes } from '../busqueda-proyecto/constantes/estados-proyecto-constantes';
+// import { EstadosProyectoConstantes } from '../busqueda-proyecto/constantes/estados-proyecto-constantes';
 
 export const ProyectoConstantes = {
     VALOR_MAXIMO_CUARENTA: 40,
@@ -60,14 +60,16 @@ export const ProyectoConstantes = {
         'Proceso Selección Proyectos Inscritos': 'Esta opción corresponde a los  Proyectos por medio de contratos que no pasaron por la VRI en su gestión. - Proyectos de Convocatorias en Convenios con la UdeA (Ej: las convocatorias del G8, FAPESP, DFG, entre otras)',
         'Proceso Solicitud Avales Institucionales': 'Esta opción corresponde a los proyectos - Financiados por Convocatorias Minciencias. - Proyectos de los cuales las propuestas o el contrato pasaron por el proceso de avales de la vicerrectoría de investigación.',
       },
+    // Estados de proyectos permitidos para devolver (comentado - archivo de constantes no disponible)
     ESTADO_PERMITIDO_PARA_DEVOLVER_PROYECTO: [
-        EstadosProyectoConstantes.AVALADO,
-        EstadosProyectoConstantes.MATRICULADO
+        // EstadosProyectoConstantes.AVALADO,
+        // EstadosProyectoConstantes.MATRICULADO
     ],
+    // Estados para cambio de centro (comentado - archivo de constantes no disponible)
     ESTADO_PERMITIDO_PARA_CAMBIO_CENTRO: [
-        EstadosProyectoConstantes.MATRICULADO,
-        EstadosProyectoConstantes.APROBADO,
-        EstadosProyectoConstantes.AVALADO
+        // EstadosProyectoConstantes.MATRICULADO,
+        // EstadosProyectoConstantes.APROBADO,
+        // EstadosProyectoConstantes.AVALADO
       ],
     SIN_CONVOCATORIA: 'SIN_CONVOCATORIA',
     PROCESO_SELECCION_INSCRITO: 351,

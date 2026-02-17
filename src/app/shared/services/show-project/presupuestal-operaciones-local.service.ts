@@ -63,8 +63,8 @@ export class PresupuestalOperacionesLocalService {
 
   // BÚSQUEDAS
 
-  private encontrarRubroPadre(rubro: RubroProyecto, listaRubrosProyecto: RubroProyecto[]): RubroProyecto {
-    let padre: RubroProyecto;
+  private encontrarRubroPadre(rubro: RubroProyecto, listaRubrosProyecto: RubroProyecto[]): RubroProyecto | undefined {
+    let padre: RubroProyecto | undefined;
 
     for (const r of listaRubrosProyecto) {
       if (r.rubrosHijos.some(h => h === rubro)) {
@@ -81,8 +81,8 @@ export class PresupuestalOperacionesLocalService {
     return padre;
   }
 
-  encontrarRubroPadreRecursivo(rubro: RubroProyecto, listaRubrosProyecto: RubroProyecto[]): RubroProyecto {
-    let padre: RubroProyecto;
+  encontrarRubroPadreRecursivo(rubro: RubroProyecto, listaRubrosProyecto: RubroProyecto[]): RubroProyecto | undefined {
+    let padre: RubroProyecto | undefined;
 
     for (const r of listaRubrosProyecto) {
       if (r.rubrosHijos.some(h => h === rubro)) {
@@ -99,8 +99,8 @@ export class PresupuestalOperacionesLocalService {
     return padre;
   }
 
-  buscarAportante(padre: RubroProyecto, aportante: AportanteProyecto): RubroAportante {
-    let aportantePadre: RubroAportante = null;
+  buscarAportante(padre: RubroProyecto, aportante: AportanteProyecto): RubroAportante | null | undefined {
+    let aportantePadre: RubroAportante | null | undefined = null;
 
     for (const a of padre.listaRubrosPorAportantes) {
       aportantePadre = a.frescos.find(f => f.aportante.identificador === aportante.identificador);
@@ -118,15 +118,15 @@ export class PresupuestalOperacionesLocalService {
   }
 
   buscarRubroEnConvocatoria(rubroBuscado: RubroProyecto,
-    listaRubrosConvocatoria: RubroConvocatoria[]): RubroConvocatoria {
+    listaRubrosConvocatoria: RubroConvocatoria[]): RubroConvocatoria | undefined {
 
-    let rubroConvocatoriaEncontrado: RubroConvocatoria;
+    let rubroConvocatoriaEncontrado: RubroConvocatoria | undefined;
 
     for (const r of listaRubrosConvocatoria) {
       if (r.identificador === rubroBuscado.rConvocatoria.identificador) {
         rubroConvocatoriaEncontrado = r;
       } else {
-        rubroConvocatoriaEncontrado = this.buscarRubroEnConvocatoria(rubroBuscado, r.listaRubrosHijos);
+        rubroConvocatoriaEncontrado = this.buscarRubroEnConvocatoria(rubroBuscado, r.listaRubrosHijos || []);
       }
 
       if (!!rubroConvocatoriaEncontrado) {
@@ -155,11 +155,18 @@ export class PresupuestalOperacionesLocalService {
       // sumatoria de los valores hijos del mismo aportante
       padre.rubrosHijos
         .map(h => this.buscarAportante(h, aportanteModificado))
-        .forEach(aportante => frescoRecalculado += aportante.frescoSolicitado);
+        .filter(a => !!a)
+        .forEach(aportante => {
+          if (aportante) {
+            frescoRecalculado += aportante.frescoSolicitado;
+          }
+        });
 
       // Actualización del valor fresco del padre
       const aportanteActualizar = this.buscarAportante(padre, aportanteModificado);
-      aportanteActualizar.frescoSolicitado = frescoRecalculado;
+      if (aportanteActualizar) {
+        aportanteActualizar.frescoSolicitado = frescoRecalculado;
+      }
 
       this.recalcularPorcentajeDeHijos(padre.rubrosHijos, frescoRecalculado, aportanteModificado);
 
@@ -186,11 +193,18 @@ export class PresupuestalOperacionesLocalService {
       // sumatoria de los valores hijos del mismo aportante
       padre.rubrosHijos
         .map(h => this.buscarAportante(h, aportanteModificado))
-        .forEach(aportante => especieRecalculado += aportante.especieSolicitado);
+        .filter(a => !!a)
+        .forEach(aportante => {
+          if (aportante) {
+            especieRecalculado += aportante.especieSolicitado;
+          }
+        });
 
       // Actualización del valor fresco del padre
       const aportanteActualizar = this.buscarAportante(padre, aportanteModificado);
-      aportanteActualizar.especieSolicitado = especieRecalculado;
+      if (aportanteActualizar) {
+        aportanteActualizar.especieSolicitado = especieRecalculado;
+      }
 
       this.recalcularEspecieEnColumna(listaRubros, subtotales, padre, aportanteModificado);
     } else {
@@ -242,22 +256,30 @@ export class PresupuestalOperacionesLocalService {
     let subtotalAportante = 0;
     listaRubros.forEach(rubro => {
       const aportanteProcesadoEnRubro = this.buscarAportante(rubro, aportante);
-      subtotalAportante += aportanteProcesadoEnRubro.frescoSolicitado;
+      if (aportanteProcesadoEnRubro) {
+        subtotalAportante += aportanteProcesadoEnRubro.frescoSolicitado;
+      }
     });
 
     const subtotal = this.buscarAportante(subtotales, aportante);
-    subtotal.frescoSolicitado = subtotalAportante;
+    if (subtotal) {
+      subtotal.frescoSolicitado = subtotalAportante;
+    }
   }
 
   calcularSubtotalDelAportanteEspecie(listaRubros: RubroProyecto[], subtotales: RubroProyecto, aportante: AportanteProyecto) {
     let subtotalAportante = 0;
     listaRubros.forEach(rubro => {
       const aportanteProcesadoEnRubro = this.buscarAportante(rubro, aportante);
-      subtotalAportante += aportanteProcesadoEnRubro.especieSolicitado;
+      if (aportanteProcesadoEnRubro) {
+        subtotalAportante += aportanteProcesadoEnRubro.especieSolicitado;
+      }
     });
 
     const subtotal = this.buscarAportante(subtotales, aportante);
-    subtotal.especieSolicitado = subtotalAportante;
+    if (subtotal) {
+      subtotal.especieSolicitado = subtotalAportante;
+    }
   }
 
 
@@ -267,6 +289,9 @@ export class PresupuestalOperacionesLocalService {
     aportanteModificado: AportanteProyecto) {
 
     const subtotal = this.buscarAportante(subtotales, aportanteModificado);
+    if (!subtotal) {
+      return;
+    }
     const base = subtotal.frescoSolicitado;
     let porcentajeAcumulado = 0;
 
@@ -274,11 +299,15 @@ export class PresupuestalOperacionesLocalService {
         .map(r => this.buscarAportante(r, aportanteModificado))
         .filter(f => !!f)
         .forEach(f => {
-          f.porcentaje = this.formulaSimplePorcentaje(f.frescoSolicitado, base);
-          porcentajeAcumulado += f.porcentaje;
+          if (f) {
+            f.porcentaje = this.formulaSimplePorcentaje(f.frescoSolicitado, base);
+            porcentajeAcumulado += f.porcentaje;
+          }
         });
 
-    subtotal.porcentaje = porcentajeAcumulado;
+    if (subtotal) {
+      subtotal.porcentaje = porcentajeAcumulado;
+    }
   }
 
   recalcularPorcentajeDeHijos(rubros: RubroProyecto[], valorFrescoPadre: number,
@@ -350,10 +379,11 @@ export class PresupuestalOperacionesLocalService {
     return resultadoEvaluacion;
   }
 
-  private buscarAportanteEspecie(rubro: RubroProyecto, aportante: RubroAportante): RubroAportante {
-    let especie;
+  private buscarAportanteEspecie(rubro: RubroProyecto, aportante: RubroAportante): RubroAportante | undefined {
+    let especie: RubroAportante | undefined;
     if (this.esUdeA(aportante.aportante)) {
-      especie = rubro.listaRubrosPorAportantes.find(r => r.esUdea).aportanteEnEspecie;
+      const udeaRow = rubro.listaRubrosPorAportantes.find(r => r.esUdea);
+      especie = udeaRow?.aportanteEnEspecie;
     } else {
       for (const fila of rubro.listaRubrosPorAportantes) {
         especie = fila.frescos.find(f => f.aportante.personaJuridica.nit === aportante.aportante.personaJuridica.nit);
@@ -378,8 +408,8 @@ export class PresupuestalOperacionesLocalService {
 
   // REGLAS PORCENTAJE MAXIMO
 
-  evaluarReglaPorcentaje(regla: PorcentajeMaximoRubros, rubros: RubroProyecto[], subtotales: RubroProyecto): string {
-    let inconsistencia: string = null;
+  evaluarReglaPorcentaje(regla: PorcentajeMaximoRubros, rubros: RubroProyecto[], subtotales: RubroProyecto): string | null {
+    let inconsistencia: string | null = null;
 
     // Objeto rubro en la tabla
     const rubroEnTabla = rubros.find(r => r.rConvocatoria.identificador === regla.rubro.identificador);
@@ -418,8 +448,8 @@ export class PresupuestalOperacionesLocalService {
     return nombre;
   }
 
-  private encontrarRubroAportanteDesdeFinanciador(rubro: RubroProyecto, financiador: FinanciadorConvocatoria): RubroAportante {
-    let aportanteEvaluado: RubroAportante;
+  private encontrarRubroAportanteDesdeFinanciador(rubro: RubroProyecto, financiador: FinanciadorConvocatoria): RubroAportante | undefined {
+    let aportanteEvaluado: RubroAportante | undefined;
 
     for (const agrupador of rubro.listaRubrosPorAportantes) {
       aportanteEvaluado = agrupador.frescos

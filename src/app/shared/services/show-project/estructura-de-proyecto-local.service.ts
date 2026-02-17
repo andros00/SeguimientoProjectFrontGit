@@ -10,11 +10,11 @@ import { EvaluacionTecnica } from '../../components/molecules/show-project/evalu
 })
 export class EstructuraDeProyectoLocalService {
 
-  private listaTextosDescriptivos: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject(([]));
+  private listaTextosDescriptivos: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject<TextoDescriptivo[]>([]);
   public listaTextosDescriptivosObservable = this.listaTextosDescriptivos.asObservable();
-  private listaCompromisosProyecto: BehaviorSubject<CompromisoProyecto[]> = new BehaviorSubject(([]));
+  private listaCompromisosProyecto: BehaviorSubject<CompromisoProyecto[]> = new BehaviorSubject<CompromisoProyecto[]>([]);
   public listaCompromisosProyectoObservable = this.listaCompromisosProyecto.asObservable();
-  private listaPlanesDeTrabajo: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject(([]));
+  private listaPlanesDeTrabajo: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject<TextoDescriptivo[]>([]);
   public listaPlanesDeTrabajoObservable = this.listaPlanesDeTrabajo.asObservable();
   private evaluacionTecnica: BehaviorSubject<EvaluacionTecnica> = new BehaviorSubject<EvaluacionTecnica>(BehaviorSubject.create());
   public evaluacionTecnicaObservable = this.evaluacionTecnica.asObservable();

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-//import { ActualizacionProyectoService } from './../servicios/actualizacion-proyecto.service';
 import { ProyectoConstantes } from '../../components/molecules/show-project/proyecto-constantes';
 import { ActualizacionProyecto } from '../../components/molecules/show-project/actualizacion-proyecto';
 import { ServicioProyectoLocal } from './servicio-proyecto-local';
@@ -10,16 +9,16 @@ import { ServicioProyectoLocal } from './servicio-proyecto-local';
 })
 export class ActualizacionProyectoLocalService implements ServicioProyectoLocal {
 
-  private listaActualizaciones: BehaviorSubject<ActualizacionProyecto[]> = new BehaviorSubject(([]));
+  private listaActualizaciones: BehaviorSubject<ActualizacionProyecto[]> = new BehaviorSubject<ActualizacionProyecto[]>([]);
   public listaActualizacionesObservable = this.listaActualizaciones.asObservable();
-  private actualizacionVigente: BehaviorSubject<ActualizacionProyecto> =
-    new BehaviorSubject<ActualizacionProyecto>(BehaviorSubject.create());
+  private actualizacionVigente: BehaviorSubject<ActualizacionProyecto | null> =
+    new BehaviorSubject<ActualizacionProyecto | null>(null);
   public actualizacionVigenteObservable = this.actualizacionVigente.asObservable();
 
-  constructor(private actualizacionProyectoServicio: ActualizacionProyectoService) { }
+  constructor() { }
 
-  asignarListaActualizaciones(actualizacionProyecto: ActualizacionProyecto[]) {
-    this.listaActualizaciones.next(actualizacionProyecto);
+  asignarListaActualizaciones(listaActualizaciones: ActualizacionProyecto[]) {
+    this.listaActualizaciones.next(listaActualizaciones);
   }
 
   asignarActualizacionVigente(actualizacionProyecto: ActualizacionProyecto) {
@@ -27,7 +26,10 @@ export class ActualizacionProyectoLocalService implements ServicioProyectoLocal 
   }
 
   validar(): string {
-    const actualizacion: ActualizacionProyecto = this.actualizacionVigente.getValue();
+    const actualizacion: ActualizacionProyecto | null = this.actualizacionVigente.getValue();
+    if (!actualizacion) {
+      return '';
+    }
     const limiteActualizacion: Date = new Date(+actualizacion.fechaLimite);
     const fechaActual: Date = new Date();
     if (!!actualizacion && !!actualizacion.cambiosRealizados) {
@@ -38,10 +40,13 @@ export class ActualizacionProyectoLocalService implements ServicioProyectoLocal 
     return 'Debe diligenciar el paso actualización con el comentario de los cambios realizados.';
   }
 
+  // Comentado: guardar y postguardado no están implementados correctamente
+  /*
   guardar() {
     return this.actualizacionProyectoServicio.guardarActualizacionProyectoInvestigador(
       this.actualizacionVigente.getValue(), ProyectoConstantes.ENVIADO_A_CENTRO);
   }
+  */
 
   postguardado() {
   }

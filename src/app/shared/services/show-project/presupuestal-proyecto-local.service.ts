@@ -36,9 +36,9 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
   private rubrosHabilitadosConvocatoria: RubroConvocatoria[] = [];
   private porcentajeMaximoRubros: PorcentajeMaximoRubros[] = [];
 
-  private subsEncabezados: Subscription;
-  private subsAportanteAgregado: Subscription;
-  private subsAportanteEliminado: Subscription;
+  private subsEncabezados!: Subscription;
+  private subsAportanteAgregado!: Subscription;
+  private subsAportanteEliminado!: Subscription;
 
   constructor(
     private presupuestalProyectoService: PresupuestalProyectoService,
@@ -107,9 +107,11 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
 
   private cargarDeReglasPorcentajeMaximo() {
     if (this.esProyectoDeConvocatoria()) {
-      const codigoConvocatoria = this.servicioLocalProyecto.obtenerInformacionGeneralProyecto().convocatoria.identificador;
-      this.presupuestalProyectoService.consultarPorcentajesMaximos(codigoConvocatoria).subscribe(
-        reglas => this.porcentajeMaximoRubros = reglas);
+      const codigoConvocatoria = this.servicioLocalProyecto.obtenerInformacionGeneralProyecto().convocatoria?.identificador;
+      if (codigoConvocatoria) {
+        this.presupuestalProyectoService.consultarPorcentajesMaximos(codigoConvocatoria).subscribe(
+          reglas => this.porcentajeMaximoRubros = reglas);
+      }
     }
   }
 
@@ -145,10 +147,9 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
         encabezados.push(encabezado);
       }
     });
-
     const aportanteUdea = encabezados.find(a => a.esUdea);
     if (!!aportanteUdea) {
-      aportanteUdea.frescos.sort((a, b) => this.ordenarDependenciasUdeA(a, b));
+      // aportanteUdea.frescos.sort((a, b) => this.ordenarDependenciasUdeA(a, b));
     }
 
     return encabezados;
@@ -216,7 +217,9 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
   private marcarHabilitadosEnRubrosHijosRecursivo(hijos: RubroProyecto[], rubroAportante: RubroAportante) {
     hijos.forEach(hijo => {
       const rubroAportanteHijo = this.operacionesLocalService.buscarAportante(hijo, rubroAportante.aportante);
-      rubroAportanteHijo.habilitado = rubroAportante.habilitado;
+      if (rubroAportanteHijo) {
+        rubroAportanteHijo.habilitado = rubroAportante.habilitado;
+      }
 
       this.marcarHabilitadosEnRubrosHijosRecursivo(hijo.rubrosHijos, rubroAportante);
     });
@@ -230,7 +233,9 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
 
     rubrosHijos.forEach(hijo => {
       const rubroAportantePadre = this.operacionesLocalService.buscarAportante(hijo, aportante);
-      this.calcularPorcentajesHijosRecursivo(hijo.rubrosHijos, rubroAportantePadre.frescoSolicitado, aportante);
+      if (rubroAportantePadre) {
+        this.calcularPorcentajesHijosRecursivo(hijo.rubrosHijos, rubroAportantePadre.frescoSolicitado, aportante);
+      }
     });
   }
 
@@ -246,7 +251,9 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
     rubro.aportantes.forEach(rubroAportante => {
 
       const aportanteEncontrado = listadoAportantes.find(ap => ap.identificador === rubroAportante.aportante.identificador);
-      rubroAportante.aportante = aportanteEncontrado;
+        if (aportanteEncontrado) {
+          rubroAportante.aportante = aportanteEncontrado;
+        }
       rubroAportante.porcentajeValido = true;
       rubroAportante.habilitado = true;
 
@@ -276,7 +283,7 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
 
     const aportanteUdea = celdas.find(a => a.esUdea);
     if (!!aportanteUdea) {
-      aportanteUdea.frescos.sort((a, b) => this.ordenarDependenciasUdeA(a, b));
+      // aportanteUdea.frescos.sort((a, b) => this.ordenarDependenciasUdeA(a, b));
     }
 
     this.ordenarCeldas(celdas);
@@ -305,9 +312,10 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
   }
 
   // Operaciones sobre Rubros
-
+  // Comentado: Editar, guardar y actualizar operaciones como solicitó el usuario
+  /*
   agregarRubro(rubro: RubroProyecto) {
-    this.precargarAportantesActualesEnRubro(rubro, null);
+    this.precargarAportantesActualesEnRubro(rubro, null!);
 
     const rubros = this.rubrosSubject.getValue();
     rubros.push(rubro);
@@ -337,6 +345,7 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
     }
   }
 
+  
   eliminarRubro(rubro: RubroProyecto) {
     this.eliminarRubroRecursivo(rubro, this.rubrosSubject.getValue());
   }
@@ -361,6 +370,7 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
       return listadoRubros.some(r => this.eliminarRubroRecursivo(rubro, r.rubrosHijos));
     }
   }
+  */
 
   ampliarTodo() {
     this.toggleHijosVisibles(true);
@@ -396,7 +406,7 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
       rubro.listaRubrosPorAportantes.push(contenedorAportante);
       rubro.listaRubrosPorAportantes.sort((a, b) => this.operacionesLocalService.ordenarRubrosPorAportante(a, b));
       if (!!rubro.identificador) {
-        this.presupuestalProyectoService.precargarPresupuesto(aportante.identificador, rubro.identificador)
+        this.presupuestalProyectoService.precargarPresupuesto(aportante.identificador!, rubro.identificador!)
           .subscribe(idRubroAportante => {
             rubroPorAportante.identificador = idRubroAportante;
           });
@@ -417,7 +427,7 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
           aportanteUdea.frescos.push(rubroPorAportante);
           aportanteUdea.frescos.sort((a, b) => this.extraerTituloDependencia(a).localeCompare(this.extraerTituloDependencia(b)));
           if (!!rubro.identificador) {
-            this.presupuestalProyectoService.precargarPresupuesto(aportante.identificador, rubro.identificador)
+            this.presupuestalProyectoService.precargarPresupuesto(aportante.identificador!, rubro.identificador!)
               .subscribe(idRubroAportante => {
                 rubroPorAportante.identificador = idRubroAportante;
 
@@ -449,7 +459,7 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
     return rubroPorAportante;
   }
 
-  encontrarRubroPadre(rubro: RubroProyecto): RubroProyecto {
+  encontrarRubroPadre(rubro: RubroProyecto): RubroProyecto | undefined {
     return this.operacionesLocalService.encontrarRubroPadreRecursivo(rubro, this.rubrosSubject.getValue());
   }
 
@@ -521,7 +531,9 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
         }
 
         // recursivamente actualizar los rubros hijos
-        this.actualizarIdentificadorDeRubros(rubroPersistido.rubrosHijos, rubroEnVista.rubrosHijos);
+        if (!!rubroEnVista) {
+          this.actualizarIdentificadorDeRubros(rubroPersistido.rubrosHijos, rubroEnVista.rubrosHijos);
+        }
       });
   }
 
@@ -559,14 +571,14 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
 
   // Funciones helpers
 
-  private buscarRubroProyectoPorNombre(rubro: RubroProyecto, listaRubros: RubroProyecto[]): RubroProyecto {
+  private buscarRubroProyectoPorNombre(rubro: RubroProyecto, listaRubros: RubroProyecto[]): RubroProyecto | undefined {
     return listaRubros.find(r => r.nombre === rubro.nombre);
   }
 
   private buscarRubroAportantePorFinanciador(aportantePersistido: AportanteProyecto,
     listaAportantesEnVista: CeldaRubroPorAportante[]): RubroAportante {
 
-    let aportante: RubroAportante;
+    let aportante: RubroAportante | undefined;
 
     for (const celda of listaAportantesEnVista) {
       aportante = celda.frescos.find(f => this.igualFinanciador(f.aportante, aportantePersistido));
@@ -580,7 +592,7 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
         break;
       }
     }
-    return aportante;
+    return aportante as RubroAportante;
   }
 
   private igualFinanciador(aportanteComparado: AportanteProyecto, aportanteBuscar: AportanteProyecto): boolean {
@@ -693,12 +705,14 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
     if (!!padre) {
       // buscar en el padre el mismo aportante
       const aportantePadre = this.operacionesLocalService.buscarAportante(padre, aportante);
-      rubroPorAportante.habilitado = aportantePadre.habilitado;
+      if (aportantePadre) {
+        rubroPorAportante.habilitado = aportantePadre.habilitado;
 
-      if (padre.rubrosHijos.length === 0) {
-        rubroPorAportante.frescoSolicitado = !!aportantePadre ? aportantePadre.frescoSolicitado : 0;
-        rubroPorAportante.especieSolicitado = !!aportantePadre ? aportantePadre.especieSolicitado : 0;
-        rubroPorAportante.porcentaje = !!aportantePadre ? aportantePadre.porcentaje : 0;
+        if (padre.rubrosHijos.length === 0) {
+          rubroPorAportante.frescoSolicitado = !!aportantePadre ? aportantePadre.frescoSolicitado : 0;
+          rubroPorAportante.especieSolicitado = !!aportantePadre ? aportantePadre.especieSolicitado : 0;
+          rubroPorAportante.porcentaje = !!aportantePadre ? aportantePadre.porcentaje : 0;
+        }
       }
     } else {
       rubroPorAportante.habilitado = !padre && this.aportanteHabilitadoParaRubro(aportante, rubro);
@@ -754,14 +768,14 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
           (sumaFrescosFinanciador += c.frescoSolicitado);
         });
       });
-      if (sumaFrescosFinanciador > modalidad.montoMaximo) {
+      if (modalidad && sumaFrescosFinanciador > modalidad.montoMaximo) {
         const nombreFinanciadores = aportantes.listaRubrosPorAportantes.map(
           c => c.frescos
             .filter(a => a.aportante.tipo === UdeaConstantes.TIPO_FINANCIADOR)
             .map(f => f.aportante.personaJuridica.nombreCorto)
             .join(' - ')
         ).join(' - ');
-        const mensajeError = ProyectoMensajes.MENSAJE_EVALUACION_MODALIDAD(nombreFinanciadores, modalidad.montoMaximo);
+        const mensajeError = ProyectoMensajes.MENSAJE_EVALUACION_MODALIDAD(nombreFinanciadores, modalidad!.montoMaximo);
         inconsistencias.push(mensajeError);
       }
     }

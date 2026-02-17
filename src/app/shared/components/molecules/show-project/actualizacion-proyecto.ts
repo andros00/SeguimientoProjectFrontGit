@@ -3,29 +3,29 @@ import { EvaluacionCientifica } from './evaluacion-cientifica';
 import { Empleado } from 'src/app/shared/modelo/empleado';
 
 export class ActualizacionProyecto {
-    identificador: number;
-    habilitadoDescripcion: number;
-    habilitadoParticipante: number;
-    habilitadoCompromiso: number;
-    habilitadoCronograma: number;
-    habilitadoPresupuesto: number;
-    habilitadoEvaluador: number;
-    habilitadoDocumento: number;
-    habilitadoDatoBasico: number;
-    fechaAutorizacion: string;
-    fechaActualizacion: string;
-    fechaLimite: string;
-    evaluacionTecnica: EvaluacionTecnica;
-    evaluacionCientifica: EvaluacionCientifica;
-    empleadoAutorizador: Empleado;
-    cambiosSolicitados: string;
-    cambiosRealizados: string;
-    proyecto: string;
+    identificador!: number;
+    habilitadoDescripcion!: number;
+    habilitadoParticipante!: number;
+    habilitadoCompromiso!: number;
+    habilitadoCronograma!: number;
+    habilitadoPresupuesto!: number;
+    habilitadoEvaluador!: number;
+    habilitadoDocumento!: number;
+    habilitadoDatoBasico!: number;
+    fechaAutorizacion!: string;
+    fechaActualizacion!: string;
+    fechaLimite!: string;
+    evaluacionTecnica!: EvaluacionTecnica;
+    evaluacionCientifica!: EvaluacionCientifica;
+    empleadoAutorizador!: Empleado;
+    cambiosSolicitados!: string;
+    cambiosRealizados!: string;
+    proyecto!: string;
     mensajeActualizacionCientifica?: string;
     mensajeActualizacionTecnica?: string;
-    orden: number;
+    orden!: number;
 
-    seccionesHabilitadas: string[];
+    seccionesHabilitadas!: string[];
 
-    mostrarDetalle: boolean;
+    mostrarDetalle!: boolean;
 }

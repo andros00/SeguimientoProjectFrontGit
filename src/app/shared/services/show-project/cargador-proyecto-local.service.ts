@@ -83,7 +83,9 @@ export class CargadorProyectoLocalService {
       proyectoAEditar.informacionGeneralProyecto.nivelProyecto = NivelProyectoId.Subproyecto;
     }
     this.proyectoLocalServicio.agregarInformacionGeneralProyecto(proyectoAEditar.informacionGeneralProyecto);
-    this.proyectoLocalServicio.guardarModalidadSeleccionada(proyectoAEditar.informacionGeneralProyecto.modalidadConvocatoria);
+    if (proyectoAEditar.informacionGeneralProyecto.modalidadConvocatoria) {
+      this.proyectoLocalServicio.guardarModalidadSeleccionada(proyectoAEditar.informacionGeneralProyecto.modalidadConvocatoria);
+    }
     this.proyectoLocalServicio.guardarComponenteProyecto(proyectoAEditar.componenteProyecto);
     this.proyectoLocalServicio.guardarDatosSubproyecto(proyectoAEditar.datosSubproyecto);
     this.descripcionLocalServicio.agregarTextosDescriptivosOpcionalesYObligatorios(proyectoAEditar.textosDescriptivos);
@@ -108,20 +110,23 @@ export class CargadorProyectoLocalService {
 
   private inicializarPasos(
     proyecto: InformacionGeneralProyecto,
-    actualizaciones: ActualizacionProyecto[],
+    actualizaciones: ActualizacionProyecto[] | null,
     conPasoPublicar: boolean,
     subject: Subject<void>) {
 
     this.pasosService.inicializarPasos();
-    this.pasosService.calcularPasos(proyecto, proyecto.procesoSeleccion.identificador, actualizaciones, conPasoPublicar);
+    if (proyecto && proyecto.procesoSeleccion) {
+      this.pasosService.calcularPasos(proyecto, proyecto.procesoSeleccion.identificador, actualizaciones || [], conPasoPublicar);
+    }
     subject.next();
   }
 
   limpiarDatosServiciosLocales() {
-    this.proyectoLocalServicio.agregarInformacionGeneralProyecto(null);
+    // Comentado: Anteriormente se pasaban null values, ahora se usan valores por defecto
+    // this.proyectoLocalServicio.agregarInformacionGeneralProyecto(null);
     this.actualizacionProyectoLocalService.asignarListaActualizaciones([]);
-    this.proyectoLocalServicio.guardarComponenteProyecto(null);
-    this.proyectoLocalServicio.guardarDatosSubproyecto(null);
+    // this.proyectoLocalServicio.guardarComponenteProyecto(null);
+    // this.proyectoLocalServicio.guardarDatosSubproyecto(null);
     this.descripcionLocalServicio.agregarTextoDescriptivoObligatorio([]);
     this.descripcionLocalServicio.agregarTextoDescriptivoOpcional([]);
     this.cronogramaLocalServicio.agregarActividadProyecto([]);
@@ -130,9 +135,7 @@ export class CargadorProyectoLocalService {
     this.cofinanciadoresLocalServicio.agregarListaAportanteTemporal([]);
     this.planTrabajoServicioLocal.agregarPlanDeTrabajo([]);
     this.participanteServicioLocal.agregarParticipanteProyecto([]);
-    const listaGrupo = []
-      .filter(participante => participante.grupoInvestigacion.identificador !== null)
-      .map(participante => participante.grupoInvestigacion);
+    const listaGrupo: any[] = [];
     this.participanteServicioLocal.agregarListaGrupo(listaGrupo);
     this.compromisosProyectoServicioLocal.agregarListaCompromisosObligatorios([]);
     this.compromisosProyectoServicioLocal.agregarListaCompromisosOpcionales([]);

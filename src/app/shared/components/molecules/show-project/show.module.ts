@@ -6,9 +6,7 @@ import { PasoInformacionGeneralProyectoComponent } from "./paso-informacion-gene
 import { MatCardContent, MatCard } from "@angular/material/card";
 import { MatStepper, MatStep } from "@angular/material/stepper";
 import { MatDivider } from "@angular/material/divider";
-import { ButtonPrimaryComponent } from '../../atoms/button-primary/button-primary.component';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from '../footer/footer.component';
 import { MatIcon } from "@angular/material/icon";
 import { MatMenu } from "@angular/material/menu";
 import { MatFormField, MatLabel, MatError, MatHint } from "@angular/material/form-field";
@@ -46,11 +44,11 @@ import { ListaDocumentosSoporteProyectoComponent } from './lista-documentos-sopo
   declarations: [ListaDocumentosSoporteProyectoComponent, PasoDocumentosSoporteProyectoComponent, ListaCompromisosProyectoComponent, PestanaCompromisosProyectoComponent, TablaCondicionesFormalesComponent, PestanaCondicionesFormalesProyectoComponent, PasoCompromisosCondicionesProyectoComponent, TablaParticipantesProyectoComponent, PasoParticipantesProyectoComponent, VisorComponentesProyectoComponent, TablaPresupuestoProyectoComponent, PestanaPresupuestoProyectoComponent,
     TablaCofinanciadoresProyectoComponent, PestanaCofinanciadorProyectoComponent, PasoPresupuestalProyectoComponent,
     PestanaDescripcionProyectoComponent, ListaCronogramaProyectoComponent, MensajeExitoErrorComponent,
-    PestanaCronogramaProyectoComponent, PasoDescripcionCronogramaProyectoComponent, SteeperShowComponent, ButtonPrimaryComponent,
-    FooterComponent, PasoInformacionGeneralProyectoComponent, PasoActualizacionesProyectoComponent],
+    PestanaCronogramaProyectoComponent, PasoDescripcionCronogramaProyectoComponent, SteeperShowComponent,
+    PasoInformacionGeneralProyectoComponent, PasoActualizacionesProyectoComponent],
 
   exports: [],
-  imports: [MatCardContent, MatCard, MatStepper, MatStep, MatDivider, CommonModule, MatIcon, MatMenu,
+  imports: [SharedModule, MatCardContent, MatCard, MatStepper, MatStep, MatDivider, CommonModule, MatIcon, MatMenu,
     MatFormField, MatLabel, MatSelect, MatOption, MatError, MatRadioGroup, MatRadioButton, MatAutocomplete,
     MatSlideToggle, MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatTabGroup, MatTab,
     MatHint, MatCheckbox]
