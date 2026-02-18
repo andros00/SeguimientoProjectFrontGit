@@ -1,4 +1,4 @@
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { TextoDescriptivo } from '../../components/molecules/show-project/texto-descriptivo';
 import { DescripcionProyectoService } from './descripcion-proyecto.service';
@@ -10,7 +10,7 @@ import { ProyectoConstantes } from '../../components/molecules/show-project/proy
 })
 export class PlanTrabajoProyectoLocalService implements ServicioProyectoLocal {
 
-  private listaPlanDeTrabajo: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject(([]));
+  private listaPlanDeTrabajo: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject<TextoDescriptivo[]>([]);
   public listaPlanDeTrabajoObservable = this.listaPlanDeTrabajo.asObservable();
 
   constructor(private textoDescriptivoServicio: DescripcionProyectoService) {

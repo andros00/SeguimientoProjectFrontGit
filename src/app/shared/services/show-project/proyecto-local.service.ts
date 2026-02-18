@@ -14,19 +14,19 @@ import { FinanciadorConvocatoria } from '../../components/molecules/show-project
 })
 export class ProyectoLocalService {
 
-  private listaFinanciador: BehaviorSubject<FinanciadorConvocatoria[]> = new BehaviorSubject(([]));
+  private listaFinanciador: BehaviorSubject<FinanciadorConvocatoria[]> = new BehaviorSubject<FinanciadorConvocatoria[]>([]);
   public listaFinanciadoresObservable = this.listaFinanciador.asObservable();
   private proyectoGuardado: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   informacionGeneralProyecto: BehaviorSubject<InformacionGeneralProyecto> =
-    new BehaviorSubject<InformacionGeneralProyecto>(BehaviorSubject.create());
+    new BehaviorSubject<InformacionGeneralProyecto>({} as InformacionGeneralProyecto);
   public proyectoGuardadoObservable = this.informacionGeneralProyecto.asObservable();
   private informacionGeneralProcesoSeleccion: BehaviorSubject<InformacionGeneral> =
-    new BehaviorSubject<InformacionGeneral>(BehaviorSubject.create());
+    new BehaviorSubject<InformacionGeneral>({} as InformacionGeneral);
   private informacionGeneralConvocatoria: BehaviorSubject<InformacionGeneralConvocatoria> =
-    new BehaviorSubject<InformacionGeneralConvocatoria>(BehaviorSubject.create());
-  private componenteProyecto: BehaviorSubject<ComponenteProyecto> = new BehaviorSubject<ComponenteProyecto>(BehaviorSubject.create());
-  private datosSubproyecto: BehaviorSubject<DatosSubproyecto> = new BehaviorSubject<DatosSubproyecto>(BehaviorSubject.create());
-  private modalidadSeleccionadaSubject = new BehaviorSubject<ModalidadConvocatoria>(null);
+    new BehaviorSubject<InformacionGeneralConvocatoria>({} as InformacionGeneralConvocatoria);
+  private componenteProyecto: BehaviorSubject<ComponenteProyecto> = new BehaviorSubject<ComponenteProyecto>({} as ComponenteProyecto);
+  private datosSubproyecto: BehaviorSubject<DatosSubproyecto> = new BehaviorSubject<DatosSubproyecto>({} as DatosSubproyecto);
+  private modalidadSeleccionadaSubject = new BehaviorSubject<ModalidadConvocatoria>(null as any);
 
   obtenerInformacionGeneralProyecto(): InformacionGeneralProyecto {
     return this.informacionGeneralProyecto.getValue();

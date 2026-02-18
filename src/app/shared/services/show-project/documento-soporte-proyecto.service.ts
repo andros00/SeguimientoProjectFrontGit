@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { DireccionesUrl } from '../../components/molecules/show-project/direcciones-url';
 import { DocumentoSoporte } from '../../components/molecules/show-project/documento-soporte';
@@ -36,7 +36,7 @@ export class DocumentoSoporteProyectoService {
     return this.http.post(url, documento);
   }
 
-  descargarDocumento(idDocumentoSoporte): Observable<DocumentoSoporte> {
+  descargarDocumento(idDocumentoSoporte: number): Observable<DocumentoSoporte> {
     const url = `${environment.URL_BASE}${DireccionesUrl.DIRECCIONES_PROYECTO.DESCARGAR_DOCUMENTO_SOPORTE}${idDocumentoSoporte}`;
     return this.http.get<DocumentoSoporte>(url);
   }

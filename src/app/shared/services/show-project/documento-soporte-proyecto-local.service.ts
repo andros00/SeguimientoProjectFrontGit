@@ -11,7 +11,7 @@ import { DocumentoSoporteProyectoService } from '../../components/molecules/show
 export class DocumentoSoporteProyectoLocalService implements ServicioProyectoLocal {
 
 
-  private listaDocumentosProyecto: BehaviorSubject<DocumentoProyecto[]> = new BehaviorSubject(([]));
+  private listaDocumentosProyecto: BehaviorSubject<DocumentoProyecto[]> = new BehaviorSubject<DocumentoProyecto[]>([]);
   public listaDocumentosProyectoObservable = this.listaDocumentosProyecto.asObservable();
 
   constructor(private documentoServicio: DocumentoSoporteProyectoService) { }

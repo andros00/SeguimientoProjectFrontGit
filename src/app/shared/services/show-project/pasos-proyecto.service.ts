@@ -27,7 +27,8 @@ import { PresupuestalProyectoLocalService } from './presupuestal-proyecto-local.
 })
 export class PasosProyectoService {
 
-  private pasos: PasosProyectoFormulario = new PasosProyectoFormulario();
+  // PasosProyectoFormulario is an interface/type, not a class. initialize with a cast.
+  private pasos: PasosProyectoFormulario = {} as PasosProyectoFormulario;
 
   constructor(
     private procesoSeleccionService: ProcesoSeleccionService,
@@ -70,7 +71,7 @@ export class PasosProyectoService {
     let pestana = null;
 
     const paso: Paso = Object.keys(this.pasos)
-      .map(k => this.pasos[k])
+      .map(k => (this.pasos as any)[k])
       .find(p => p.titulo === nombrePaso);
 
     if (!!paso && !!paso.tabs) {
@@ -82,7 +83,7 @@ export class PasosProyectoService {
 
   esPasoVisible(nombrePaso: string): boolean {
     const paso: Paso = Object.keys(this.pasos)
-      .map(k => this.pasos[k])
+      .map(k => (this.pasos as any)[k])
       .find(p => p.titulo === nombrePaso);
 
     return paso.visible;

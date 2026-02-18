@@ -13,9 +13,9 @@ export class DescripcionProyectoLocalService implements ServicioProyectoLocal {
 
   private readonly codigoConvocatoria = 1;
   private readonly codigoProcesoSeleccion = 2;
-  private listaTextoDescriptivoObligatoria: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject(([]));
+  private listaTextoDescriptivoObligatoria: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject<TextoDescriptivo[]>([]);
   public listaTextoDescriptivoObligatorioObservable = this.listaTextoDescriptivoObligatoria.asObservable();
-  private listaTextoDescriptivoOpcional: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject(([]));
+  private listaTextoDescriptivoOpcional: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject<TextoDescriptivo[]>([]);
   public listaTextoDescriptivoOpcionalObservable = this.listaTextoDescriptivoOpcional.asObservable();
 
   constructor(private proyectoServicioLocal: ProyectoLocalService, private descripcionServicio: DescripcionProyectoService) {
@@ -104,12 +104,12 @@ export class DescripcionProyectoLocalService implements ServicioProyectoLocal {
   }
 
   guardar() {
-    let listaTextosDescriptivos = [];
-    listaTextosDescriptivos = listaTextosDescriptivos.concat(this.listaTextoDescriptivoObligatoria.getValue());
-    listaTextosDescriptivos = listaTextosDescriptivos.concat(this.listaTextoDescriptivoOpcional.getValue());
+    const listaTextosDescriptivos: TextoDescriptivo[] = [];
+    listaTextosDescriptivos.push(...this.listaTextoDescriptivoObligatoria.getValue());
+    listaTextosDescriptivos.push(...this.listaTextoDescriptivoOpcional.getValue());
     return this.descripcionServicio.guardarListaTextoDescriptivo(listaTextosDescriptivos, ProyectoConstantes.ENVIADO_A_CENTRO);
   }
 
-  postguardado(listaTextosDescriptivos) {
+  postguardado(listaTextosDescriptivos: TextoDescriptivo[]) {
   }
 }

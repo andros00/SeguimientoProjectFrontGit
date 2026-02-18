@@ -13,11 +13,11 @@ import { ProyectoConstantes } from '../../components/molecules/show-project/proy
 })
 export class ParticipanteProyectoLocalService implements ServicioProyectoLocal {
 
-  private listaGrupoInvestigacion: BehaviorSubject<GrupoInvestigacion[]> = new BehaviorSubject(([]));
+  private listaGrupoInvestigacion: BehaviorSubject<GrupoInvestigacion[]> = new BehaviorSubject<GrupoInvestigacion[]>([]);
   public listaGrupoObservable = this.listaGrupoInvestigacion.asObservable();
-  private listaParticipanteProyecto: BehaviorSubject<ParticipanteProyecto[]> = new BehaviorSubject(([]));
+  private listaParticipanteProyecto: BehaviorSubject<ParticipanteProyecto[]> = new BehaviorSubject<ParticipanteProyecto[]>([]);
   public listaParticipanteProyectoObservable = this.listaParticipanteProyecto.asObservable();
-  private listaInstitucion: BehaviorSubject<AportanteProyecto[]> = new BehaviorSubject(([]));
+  private listaInstitucion: BehaviorSubject<AportanteProyecto[]> = new BehaviorSubject<AportanteProyecto[]>([]);
   public listaInstitucionObservable = this.listaInstitucion.asObservable();
 
   constructor(private proyectoServicioLocal: ProyectoLocalService, private participanteServicio: ParticipanteProyectoService) {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-//import { ActualizacionProyectoService } from './../servicios/actualizacion-proyecto.service';
+import { ActualizacionProyectoService } from './actualizacion-proyecto.service';
 import { ProyectoConstantes } from '../../components/molecules/show-project/proyecto-constantes';
 import { ActualizacionProyecto } from '../../components/molecules/show-project/actualizacion-proyecto';
 import { ServicioProyectoLocal } from './servicio-proyecto-local';
@@ -10,10 +10,10 @@ import { ServicioProyectoLocal } from './servicio-proyecto-local';
 })
 export class ActualizacionProyectoLocalService implements ServicioProyectoLocal {
 
-  private listaActualizaciones: BehaviorSubject<ActualizacionProyecto[]> = new BehaviorSubject(([]));
+  private listaActualizaciones: BehaviorSubject<ActualizacionProyecto[]> = new BehaviorSubject<ActualizacionProyecto[]>([]);
   public listaActualizacionesObservable = this.listaActualizaciones.asObservable();
   private actualizacionVigente: BehaviorSubject<ActualizacionProyecto> =
-    new BehaviorSubject<ActualizacionProyecto>(BehaviorSubject.create());
+    new BehaviorSubject<ActualizacionProyecto>({} as ActualizacionProyecto);
   public actualizacionVigenteObservable = this.actualizacionVigente.asObservable();
 
   constructor(private actualizacionProyectoServicio: ActualizacionProyectoService) { }

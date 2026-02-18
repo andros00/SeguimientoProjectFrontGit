@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 //import { EvaluadorConstantes } from '../../evaluador/evaluador-constantes';
 import { DireccionesUrl } from '../../components/molecules/show-project/direcciones-url';
 import { PersonaNatural } from '../../components/molecules/show-project/persona-natural';

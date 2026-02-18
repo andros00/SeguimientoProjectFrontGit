@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/internal/Observable';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActividadProyecto } from '../../components/molecules/show-project/actividad-proyecto';

@@ -32,7 +32,7 @@ export class AportanteProyectoService {
     return this.http.delete<void>(url);
   }
 
-  editarAportante(datos: ActualizarAportante): Observable<void> {
+  editarAportante(datos: any): Observable<void> {
     const url = `${environment.URL_BASE}${DireccionesUrl.DIRECCIONES_PROYECTO.ACTUALIZAR_APORTANTE_PROYECTO}`;
     return this.http.put<void>(url, datos);
   }
