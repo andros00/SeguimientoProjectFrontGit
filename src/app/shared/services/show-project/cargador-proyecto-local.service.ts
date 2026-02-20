@@ -62,7 +62,7 @@ export class CargadorProyectoLocalService {
             this.inicializarPasos(proyecto, actualizaciones, conPublicar, subject);
           });
       } else {
-        this.inicializarPasos(proyecto, null, conPublicar, subject);
+        this.inicializarPasos(proyecto, undefined, conPublicar, subject);
       }
     });
 
@@ -108,7 +108,7 @@ export class CargadorProyectoLocalService {
 
   private inicializarPasos(
     proyecto: InformacionGeneralProyecto,
-    actualizaciones: ActualizacionProyecto[] | null,
+    actualizaciones: ActualizacionProyecto[] | undefined,
     conPasoPublicar: boolean,
     subject: Subject<void>) {
 
@@ -130,10 +130,7 @@ export class CargadorProyectoLocalService {
     this.cofinanciadoresLocalServicio.agregarListaAportanteTemporal([]);
     this.planTrabajoServicioLocal.agregarPlanDeTrabajo([]);
     this.participanteServicioLocal.agregarParticipanteProyecto([]);
-    const listaGrupo: any[] = []
-      .filter(participante => participante.grupoInvestigacion.identificador !== null)
-      .map(participante => participante.grupoInvestigacion);
-    this.participanteServicioLocal.agregarListaGrupo(listaGrupo);
+    this.participanteServicioLocal.agregarListaGrupo([]);
     this.compromisosProyectoServicioLocal.agregarListaCompromisosObligatorios([]);
     this.compromisosProyectoServicioLocal.agregarListaCompromisosOpcionales([]);
     this.condicionFormalServicioLocal.agregarCondicionesPorEvaluacionInicial([]);

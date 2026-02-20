@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 import { ContenedorFinanciadorBusquedaProyectoComponent } from './../contenedor-financiador-busqueda-proyecto/contenedor-financiador-busqueda-proyecto.component';
 import { PersonaJuridica } from '../persona-juridica';
 import { EvaluadorService } from 'src/app/shared/services/show-project/evaluador.service';
@@ -11,8 +12,8 @@ import { Evaluador } from '../evaluador-proyecto';
   selector: 'app-filtro-evaluador',
   templateUrl: './filtro-evaluador.component.html',
   styleUrls: ['./filtro-evaluador.component.css'],
-  standalone: true
-
+  standalone: true,
+  imports: [CommonModule]
 })
 export class FiltroEvaluadorComponent implements OnInit {
 

@@ -123,7 +123,7 @@ export class PasosProyectoService {
     pasos.informacionGeneral.visible = true;
   }
 
-  private habilitarActualizaciones(pasos: PasosProyectoFormulario, actualizaciones: ActualizacionProyecto[]) {
+  private habilitarActualizaciones(pasos: PasosProyectoFormulario, actualizaciones?: ActualizacionProyecto[]) {
     pasos.actualizaciones.visible = !!actualizaciones && actualizaciones.length > 0;
   }
 
@@ -225,6 +225,7 @@ export class PasosProyectoService {
       numero: index,
       titulo: nombre,
       visible: visible,
+      valido: false,
       servicio: servicio,
       tabs: []
     } as Paso;

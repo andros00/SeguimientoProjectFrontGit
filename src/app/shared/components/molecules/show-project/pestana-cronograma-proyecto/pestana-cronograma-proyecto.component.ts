@@ -52,7 +52,7 @@ export class PestanaCronogramaProyectoComponent implements OnInit {
     this.formularioPeriodo = this.formBuilder.group({
       periodo: [PeriodoEnum.MESES.nombreDB]
     });
-    if (this.modoEdicion) {
+    if (this.modoEdicion && this.informacionGeneral?.periodoCronograma) {
       this.f['periodo'].setValue(this.informacionGeneral.periodoCronograma.trim());
       this.validarPeriodoSeleccionado();
       this.f['periodo'].disable();

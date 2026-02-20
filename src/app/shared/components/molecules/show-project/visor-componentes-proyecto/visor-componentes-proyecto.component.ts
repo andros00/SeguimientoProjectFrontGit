@@ -10,9 +10,9 @@ import { ComponenteProyectoLocalService } from 'src/app/shared/services/show-pro
 })
 export class VisorComponentesProyectoComponent implements OnInit {
 
-  @Input() url: string;
+  @Input() url!: string;
 
-  componentes$: Observable<ComponenteMacroproyecto[]>;
+  componentes$!: Observable<ComponenteMacroproyecto[]>;
 
   constructor(private componentesLocalService: ComponenteProyectoLocalService) { }
 

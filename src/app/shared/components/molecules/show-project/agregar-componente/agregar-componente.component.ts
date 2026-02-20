@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ComponenteMacroproyecto } from '../componente-macroproyecto';
 import { PersonaNatural } from '../persona-natural';
 import { PersonaNaturalLocalService } from 'src/app/shared/services/show-project/persona-natural-local.service';
@@ -8,18 +8,27 @@ import { ContenedorPersonaNaturalComponent } from '../../../modal/contenedor-per
 import { ComponenteProyectoConstantes } from '../componente-proyecto-constantes';
 import { ProyectoLocalService } from 'src/app/shared/services/show-project/proyecto-local.service';
 import { ComponenteProyectoLocalService } from 'src/app/shared/services/show-project/componente-proyecto-local.service';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-agregar-componente',
   templateUrl: './agregar-componente.component.html',
-  styleUrls: ['./agregar-componente.component.css']
+  styleUrls: ['./agregar-componente.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatMenuModule, MatIconModule, MatCheckboxModule, MatButtonModule, MatInputModule]
 })
 export class AgregarComponenteComponent implements OnInit {
 
-  formularioComponente: FormGroup;
+  formularioComponente!: FormGroup;
   responsableSeleccionado = 0;
   informacionGuardada = false;
-  responsable: PersonaNatural = null;
+  responsable: PersonaNatural | null = null;
   responsableIndeterminado = true;
 
   constructor(public modalAgregarComponente: MatDialogRef<AgregarComponenteComponent>,
@@ -47,7 +56,7 @@ export class AgregarComponenteComponent implements OnInit {
     });
   }
 
-  get f() { return this.formularioComponente.controls; }
+  get f() { return this.formularioComponente.controls as any; }
 
   abrirModalSeleccionarResponsable() {
     const modalContenedorPersonaNatural = this.dialogo.open(ContenedorPersonaNaturalComponent);
@@ -87,7 +96,7 @@ export class AgregarComponenteComponent implements OnInit {
     componenteMacroproyecto.descripcion = this.f.descripcion.value;
     componenteMacroproyecto.macroproyecto = this.proyectoServicioLocal.obtenerInformacionGeneralProyecto().codigo;
     if (!this.responsableIndeterminado) {
-      componenteMacroproyecto.personaNatural = this.responsable;
+      componenteMacroproyecto.personaNatural = this.responsable || undefined;
     }
     componenteMacroproyecto.titulo = this.f.titulo.value;
 

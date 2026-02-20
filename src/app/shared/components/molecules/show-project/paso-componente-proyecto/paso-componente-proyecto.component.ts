@@ -13,6 +13,9 @@ import { ComponenteProyectoLocalService } from 'src/app/shared/services/show-pro
 import { ComponenteProyectoService } from 'src/app/shared/services/show-project/componente-proyecto.service';
 import { AlertaLocalService } from 'src/app/shared/services/show-project/alerta-local.service';
 import { PasosHabilitadosLocalService } from 'src/app/shared/services/show-project/pasos-habilitados-local.service';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 const MENSAJE_EXITO = 'Componentes del proyecto guardados con éxito.';
 const MENSAJE_ERROR = 'Ocurrió un error guardando los componentes del proyecto.';
@@ -21,7 +24,8 @@ const MENSAJE_ERROR = 'Ocurrió un error guardando los componentes del proyecto.
   selector: 'app-paso-componente-proyecto',
   templateUrl: './paso-componente-proyecto.component.html',
   styleUrls: ['./paso-componente-proyecto.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule]
 })
 export class PasoComponenteProyectoComponent implements OnInit {
 

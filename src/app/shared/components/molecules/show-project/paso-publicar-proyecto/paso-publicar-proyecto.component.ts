@@ -2,6 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
 import { DatosModal } from '../modal-dinamico/datos-modal';
 import { Paso } from '../paso';
 import { EnviarACentro } from '../enviar-a-centro';
@@ -22,6 +27,7 @@ import { InformacionComplementariaLocalService } from 'src/app/shared/services/s
   templateUrl: './paso-publicar-proyecto.component.html',
   styleUrls: ['./paso-publicar-proyecto.component.css'],
   standalone: true,
+  imports: [CommonModule, MatProgressSpinnerModule, MatIconModule, MatCardModule, MatButtonModule],
   providers: [DatePipe]
 })
 export class PasoPublicarProyectoComponent {
@@ -184,7 +190,7 @@ export class PasoPublicarProyectoComponent {
     );
   }
 
-  private ejecutarRecursivo(pasosVisibles: Paso[], resolve: () => void) {
+  private ejecutarRecursivo(pasosVisibles: Paso[], resolve: (value?: any) => void) {
     if (pasosVisibles.length > 0) {
       const paso = pasosVisibles[0];
       if (paso.servicio) {

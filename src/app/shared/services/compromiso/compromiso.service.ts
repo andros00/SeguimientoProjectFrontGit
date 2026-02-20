@@ -5,7 +5,7 @@ import { CompromisoProyectoDTO } from 'src/app/core/interfaces/CompromisoProyect
 import { CompromisoCentroDTO } from 'src/app/core/interfaces/CompromisoCentroDTO';
 import { environment } from 'src/environments/environment';
 import { ENDPOINTS } from 'src/app/utils/url/endpoints-url';
-import { CompromisoFechaRequest } from 'src/app/core/request/compromisoFechaRequest';
+import { CompromisoFechaRequest } from 'src/app/core/request/CompromisoFechaRequest';
 
 @Injectable({
   providedIn: 'root'

@@ -419,9 +419,9 @@ export class PresupuestalProyectoLocalService implements ServicioProyectoLocal {
 
         rubro.listaRubrosPorAportantes = rubro.listaRubrosPorAportantes || [];
         const aportanteUdea = rubro.listaRubrosPorAportantes.find(rxa => rxa.esUdea);
-        if (!!aportanteUdea) {
+        if (!!aportanteUdea && aportanteUdea.frescos) {
           aportanteUdea.frescos.push(rubroPorAportante);
-          aportanteUdea.frescos.sort((a, b) => this.extraerTituloDependencia(a).localeCompare(this.extraerTituloDependencia(b)));
+          aportanteUdea.frescos.sort((a, b) => (this.extraerTituloDependencia(a) || '').localeCompare(this.extraerTituloDependencia(b) || ''));
           if (!!rubro.identificador && !!aportante.identificador) {
             this.presupuestalProyectoService.precargarPresupuesto(aportante.identificador, rubro.identificador)
               .subscribe(idRubroAportante => {

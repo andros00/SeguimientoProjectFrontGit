@@ -9,7 +9,7 @@ import { MatDivider } from "@angular/material/divider";
 import { ButtonPrimaryComponent } from '../../atoms/button-primary/button-primary.component';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../footer/footer.component';
-import { MatIcon } from "@angular/material/icon";
+import { MatIconModule } from "@angular/material/icon";
 import { MatMenu } from "@angular/material/menu";
 import { MatFormField, MatLabel, MatError, MatHint } from "@angular/material/form-field";
 import { MatSelect, MatOption } from "@angular/material/select";
@@ -50,7 +50,7 @@ import { ListaDocumentosSoporteProyectoComponent } from './lista-documentos-sopo
     FooterComponent, PasoInformacionGeneralProyectoComponent, PasoActualizacionesProyectoComponent],
 
   exports: [],
-  imports: [MatCardContent, MatCard, MatStepper, MatStep, MatDivider, CommonModule, MatIcon, MatMenu,
+  imports: [MatCardContent, MatCard, MatStepper, MatStep, MatDivider, CommonModule, MatIconModule, MatMenu,
     MatFormField, MatLabel, MatSelect, MatOption, MatError, MatRadioGroup, MatRadioButton, MatAutocomplete,
     MatSlideToggle, MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatTabGroup, MatTab,
     MatHint, MatCheckbox]

@@ -29,7 +29,7 @@ export class PasoParticipantesProyectoComponent implements OnInit {
   editable = false;
   mostrarComponentes = false;
 
-  participanteEditar: ParticipanteProyecto = new ParticipanteProyecto();
+  participanteEditar: ParticipanteProyecto = {} as ParticipanteProyecto;
 
   formularioAgregarParticipante = false;
   formularioEditarParticipante = false;

@@ -148,7 +148,7 @@ export class TablaPresupuestoProyectoComponent implements OnInit, OnDestroy {
 
   abrirModalEdicion(rubro: RubroProyecto) {
     const esSubrubro = this.presupuestalProyectoLocalService.esSubrubro(rubro);
-    let padre: RubroProyecto;
+    let padre: RubroProyecto | undefined = undefined;
 
     if (!esSubrubro) {
       padre = this.presupuestalProyectoLocalService.encontrarRubroPadre(rubro);

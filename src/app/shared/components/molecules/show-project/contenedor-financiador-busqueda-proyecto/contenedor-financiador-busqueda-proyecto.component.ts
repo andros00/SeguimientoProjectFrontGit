@@ -32,7 +32,7 @@ export class ContenedorFinanciadorBusquedaProyectoComponent implements OnInit {
   listaPersonaJuridica: PersonaJuridica[];
   mostrarRegistroFinanciador = false;
   mostrarMensajeFinanciadorNoEncontrado = false;
-  filtroPersonaJuridica: FiltroPersonaJuridica = new FiltroPersonaJuridica();
+  filtroPersonaJuridica: FiltroPersonaJuridica = {} as FiltroPersonaJuridica;
   cofinanciadorMatriculaProyecto: DatoAdicionalAportante;
   listaFinanciadoresConvocatoria$: BehaviorSubject<FinanciadorConvocatoria[]>;
   nitNoEncontrado: string;

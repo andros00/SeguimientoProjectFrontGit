@@ -5,7 +5,7 @@ import { CompromisoService } from '../../../../../services/compromiso/compromiso
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
-import { CompromisoFechaRequest } from 'src/app/core/request/compromisoFechaRequest';
+import { CompromisoFechaRequest } from 'src/app/core/request/CompromisoFechaRequest';
 import { MatCard } from "@angular/material/card";
 import { MatIcon } from "@angular/material/icon";
 

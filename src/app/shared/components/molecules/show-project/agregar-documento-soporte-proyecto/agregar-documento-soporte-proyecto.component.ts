@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { DocumentoProyecto } from '../documento-proyecto';
 import { TipoDocumento } from '../tipo-documento';
 import { ProyectoLocalService } from 'src/app/shared/services/show-project/proyecto-local.service';
@@ -16,6 +24,8 @@ import { DocumentosSoporteConstantes } from '../documentos-soporte-constantes';
   selector: 'app-agregar-documento-soporte-proyecto',
   templateUrl: './agregar-documento-soporte-proyecto.component.html',
   styleUrls: ['./agregar-documento-soporte-proyecto.component.css'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatMenuModule, MatIconModule, MatButtonModule],
   providers: [
     { provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE] },
     { provide: MAT_DATE_FORMATS, useValue: FORMATO_FECHA },

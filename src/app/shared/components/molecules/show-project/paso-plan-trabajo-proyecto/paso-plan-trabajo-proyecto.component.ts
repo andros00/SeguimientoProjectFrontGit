@@ -1,4 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { SeccionProyecto } from '../seccion-proyecto';
 import { PasosHabilitadosLocalService } from 'src/app/shared/services/show-project/pasos-habilitados-local.service';
 
@@ -6,7 +9,8 @@ import { PasosHabilitadosLocalService } from 'src/app/shared/services/show-proje
   selector: 'app-paso-plan-trabajo-proyecto',
   templateUrl: './paso-plan-trabajo-proyecto.component.html',
   styleUrls: ['./paso-plan-trabajo-proyecto.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule]
 })
 export class PasoPlanTrabajoProyectoComponent implements OnInit {
 

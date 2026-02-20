@@ -18,7 +18,7 @@ export class PasoActualizacionesProyectoComponent implements OnInit {
   @Output() pasoAnterior = new EventEmitter<any>();
 
   editable = false;
-  actualizacionActual: ActualizacionProyecto= new ActualizacionProyecto();
+  actualizacionActual: ActualizacionProyecto = {} as ActualizacionProyecto;
 
   constructor(private modal: MatDialog,
     private pasosHabilitadosLocalService: PasosHabilitadosLocalService,

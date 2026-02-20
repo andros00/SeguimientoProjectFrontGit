@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { SeccionProyecto } from '../seccion-proyecto';
 import { ContenedorEvaluadorBusquedaComponent } from '../contenedor-evaluador-busqueda/contenedor-evaluador-busqueda.component';
 import { AlertaMensaje } from '../mensaje-exito-error/alerta-mensaje';
@@ -17,7 +20,8 @@ const MENSAJE_ERROR = 'Ocurrió un error guardando los evaluadores recomendados 
   selector: 'app-paso-evaluadores-recomendados-proyecto',
   templateUrl: './paso-evaluadores-recomendados-proyecto.component.html',
   styleUrls: ['./paso-evaluadores-recomendados-proyecto.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [CommonModule, MatButtonModule, MatIconModule]
 })
 export class PasoEvaluadoresRecomendadosProyectoComponent implements OnInit {
 

@@ -363,7 +363,7 @@ export class PresupuestalOperacionesLocalService {
         const aportanteEspecie = this.buscarAportanteEspecie(rubro, aportante);
         denominadorResta = regla.calcularSobre.identificador ===  ProyectoConstantes.CALCULAR_SOBRE_SUBTOTAL ?
           aportante.frescoSolicitado :
-          aportante.frescoSolicitado + aportanteEspecie.especieSolicitado;
+          aportante.frescoSolicitado + (aportanteEspecie ? aportanteEspecie.especieSolicitado : 0);
       }
 
       const denominador = denominadorBase - denominadorResta;
@@ -423,8 +423,8 @@ export class PresupuestalOperacionesLocalService {
     return inconsistencia;
   }
 
-  private crearInconsistenciaRegla(evaluacionExitosa: boolean, inconsistencia: string,
-    regla: PorcentajeMaximoRubros, aportanteEvaluado: RubroAportante) {
+  private crearInconsistenciaRegla(evaluacionExitosa: boolean, inconsistencia: string | null,
+    regla: PorcentajeMaximoRubros, aportanteEvaluado: RubroAportante): string | null {
 
     if (!evaluacionExitosa) {
       inconsistencia = ProyectoMensajes.MENSAJE_EVALUACION_REGLA(
@@ -436,14 +436,14 @@ export class PresupuestalOperacionesLocalService {
   }
 
   private nombreAportante(aportanteEvaluado: RubroAportante): string {
-    let nombre = aportanteEvaluado.aportante.personaJuridica ? aportanteEvaluado.aportante.personaJuridica.nombreCorto : '';
+    let nombre: string = aportanteEvaluado.aportante.personaJuridica ? (aportanteEvaluado.aportante.personaJuridica.nombreCorto || '') : '';
     if (!!aportanteEvaluado.aportante.dependencia) {
       nombre = ` - ${aportanteEvaluado.aportante.dependencia.nombre}`;
     }
     if (!!aportanteEvaluado.aportante.grupo) {
-      nombre = ` - ${aportanteEvaluado.aportante.grupo.nombreCorto}`;
+      nombre = ` - ${(aportanteEvaluado.aportante.grupo.nombreCorto || '')}`;
     }
-    return nombre;
+    return nombre || '';
   }
 
   private encontrarRubroAportanteDesdeFinanciador(rubro: RubroProyecto, financiador: FinanciadorConvocatoria): RubroAportante | undefined {
