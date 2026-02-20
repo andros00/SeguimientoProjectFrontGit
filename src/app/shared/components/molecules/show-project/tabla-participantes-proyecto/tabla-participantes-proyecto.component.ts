@@ -17,10 +17,10 @@ export class TablaParticipantesProyectoComponent implements OnInit {
 
   readonly tiempoVisibleMensaje = 5000;
 
-  @Input() editable: boolean;
+  @Input() editable!: boolean;
   @Output() emitirParticipanteEditar: EventEmitter<ParticipanteProyecto> = new EventEmitter();
 
-  listaParticipantes: ParticipanteProyecto[];
+  listaParticipantes: ParticipanteProyecto[] = [];
   mostrarMensajeExitoEliminar = false;
   mostrarMensajeErrorEliminar = false;
 
@@ -37,7 +37,7 @@ export class TablaParticipantesProyectoComponent implements OnInit {
   ngOnInit() {
   }
 
-  habilitarRegistro(participante) {
+  habilitarRegistro(participante: ParticipanteProyecto) {
     participante.habilitarRegistro = !participante.habilitarRegistro;
   }
 
@@ -89,7 +89,7 @@ export class TablaParticipantesProyectoComponent implements OnInit {
     }
   }
 
-  construirNombreCompleto(nombre: string, pApellido: string, sApellido) {
+  construirNombreCompleto(nombre: string, pApellido: string, sApellido?: string) {
     return nombre.concat(' ').concat(!!pApellido ? pApellido : '').concat(' ').concat(!!sApellido ? sApellido : '');
   }
 

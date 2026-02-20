@@ -47,11 +47,11 @@ export class PasoPublicarProyectoComponent {
   }
 
   matricularProyecto() {
-    const enviarACentro = new EnviarACentro();
-    enviarACentro.codigoProyecto = this.proyectoServicioLocal.obtenerInformacionGeneralProyecto().codigo;
-    enviarACentro.centroDeGestion = this.proyectoServicioLocal.obtenerInformacionGeneralProyecto().centroGestion;
-    enviarACentro.identificadorProcesoSeleccion =
-      this.proyectoServicioLocal.obtenerInformacionGeneralProyecto().procesoSeleccion.identificador;
+    const enviarACentro = {} as EnviarACentro;
+    const info = this.proyectoServicioLocal.obtenerInformacionGeneralProyecto();
+    enviarACentro.codigoProyecto = info?.codigo ?? '';
+    enviarACentro.centroDeGestion = info?.centroGestion ?? 0;
+    enviarACentro.identificadorProcesoSeleccion = info?.procesoSeleccion?.identificador ?? 0;
     enviarACentro.pestanasGuardadas = this.cargarListaPasos().filter(paso => paso.visible).map(paso => paso.titulo);
 
     const actualizacionEditable = this.pasosHabilitadosLocalService.esEditable(SeccionProyecto.Actualizacion);
@@ -168,11 +168,11 @@ export class PasoPublicarProyectoComponent {
   }
 
   validarVigenciaProcesoSeleccionConvocatoria() {
-    const identificadorConvocatoria =
-      this.proyectoServicioLocal.informacionGeneralProyecto.getValue().convocatoria !== null ?
-        this.proyectoServicioLocal.informacionGeneralProyecto.getValue().convocatoria.identificador : 0;
+    const info = this.proyectoServicioLocal.informacionGeneralProyecto.getValue();
+    const identificadorConvocatoria = info?.convocatoria?.identificador ?? 0;
+    const identificadorProceso = info?.procesoSeleccion?.identificador ?? 0;
     return this.informacionGeneralProyectoServicio.vigenciaProcesoSeleccionConvocatoria(
-      this.proyectoServicioLocal.informacionGeneralProyecto.getValue().procesoSeleccion.identificador,
+      identificadorProceso,
       identificadorConvocatoria);
   }
 
@@ -184,13 +184,15 @@ export class PasoPublicarProyectoComponent {
     );
   }
 
-  private ejecutarRecursivo(pasosVisibles: Paso[], resolve) {
+  private ejecutarRecursivo(pasosVisibles: Paso[], resolve: () => void) {
     if (pasosVisibles.length > 0) {
       const paso = pasosVisibles[0];
       if (paso.servicio) {
         paso.servicio.guardar().subscribe(
           exito => {
-            paso.servicio.postguardado(exito);
+            if ((paso.servicio as any).postguardado) {
+              (paso.servicio as any).postguardado(exito);
+            }
             const nuevosPasosVisibles = pasosVisibles.slice(1);
             this.ejecutarRecursivo(nuevosPasosVisibles, resolve);
           },

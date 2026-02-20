@@ -24,9 +24,9 @@ export class PestanaPresupuestoProyectoComponent implements OnInit, OnDestroy {
   datosSoloLectura = true;
   porcentajeVisible = false;
   ampliado = false;
-  mostrarComponentes: boolean;
-  proyecto: InformacionGeneralProyecto;
-  rubros: RubroProyecto[];
+  mostrarComponentes = false;
+  proyecto!: InformacionGeneralProyecto;
+  rubros: RubroProyecto[] = [];
   pesos = 'COP';
   inconsistencias: string[] = [];
   mensajesTipoMoneda = ProyectoConstantes;
@@ -80,7 +80,7 @@ export class PestanaPresupuestoProyectoComponent implements OnInit, OnDestroy {
     this.accionesFormularioService.verPorcentaje();
   }
 
-  onAmpliarSubrubros(evento) {
+  onAmpliarSubrubros(evento: any) {
     if (!!evento && !!evento.checked) {
       this.ampliado = true;
       this.ampliarTodo();

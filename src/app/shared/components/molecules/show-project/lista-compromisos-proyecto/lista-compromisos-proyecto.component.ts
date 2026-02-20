@@ -18,7 +18,7 @@ export class ListaCompromisosProyectoComponent implements OnInit {
 
   private readonly codigoProcesoSeleccion = 2;
 
-  @Input() editable: boolean;
+  @Input() editable!: boolean;
 
   listaCompromisosObligatorios: CompromisoProyecto[];
   listaCompromisosOpcionales: CompromisoProyecto[];

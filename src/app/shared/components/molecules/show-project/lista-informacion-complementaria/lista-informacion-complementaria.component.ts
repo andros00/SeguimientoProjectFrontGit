@@ -23,7 +23,7 @@ const MENSAJE_EXITO = 'Información complementaria guardada con éxito.';
 })
 export class ListaInformacionComplementariaComponent implements OnInit {
 
-  @Input() editable: boolean;
+  @Input() editable!: boolean;
 
   listado: ObjetoInformacionComplementaria[];
   datosService: DatosAdicionales;

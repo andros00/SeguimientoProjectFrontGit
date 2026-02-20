@@ -1,11 +1,17 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { Evaluador } from '../evaluador-proyecto';
 
 @Component({
   selector: 'app-resultado-evaluador',
   templateUrl: './resultado-evaluador.component.html',
   styleUrls: ['./resultado-evaluador.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatPaginatorModule]
 })
 export class ResultadoEvaluadorComponent implements OnInit, OnChanges {
 
@@ -49,8 +55,16 @@ export class ResultadoEvaluadorComponent implements OnInit, OnChanges {
     this.cantidadPaginas = this.totalRegistros / this.registrosPorPagina;
   }
 
-  cargarPagina(pagina: number) {
-    const numeroResgitrosMaximo = this.registrosPorPagina * (pagina + 1);
+  cargarPagina(pagina: any) {
+    let paginaIndex: number;
+    if (typeof pagina === 'number') {
+      paginaIndex = pagina;
+    } else if (pagina && typeof pagina.pageIndex === 'number') {
+      paginaIndex = pagina.pageIndex;
+    } else {
+      paginaIndex = 0;
+    }
+    const numeroResgitrosMaximo = this.registrosPorPagina * (paginaIndex + 1);
     const numeroRegistrosMinimo = numeroResgitrosMaximo - this.registrosPorPagina;
     this.listaEvaluadoresPaginada = this.listadoEvaluadores.slice(numeroRegistrosMinimo, numeroResgitrosMaximo);
   }

@@ -8,7 +8,7 @@ import { EvaluadorRecomendado } from '../../components/molecules/show-project/ev
 })
 export class EvaluacionLocalService {
 
-  private evaluadorSeleccionadoSubject = new BehaviorSubject<EvaluadorRecomendado>(BehaviorSubject.create());
+  private evaluadorSeleccionadoSubject = new BehaviorSubject<EvaluadorRecomendado>({} as EvaluadorRecomendado);
   constructor() { }
 
   actualizarEvaluadorSeleccionado(evaluadorSeleccionado: EvaluadorRecomendado) {

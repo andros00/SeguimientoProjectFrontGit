@@ -10,7 +10,7 @@ export class PasoInformacionComplementariaComponent implements OnInit {
   @Output() pasoSiguiente = new EventEmitter<any>();
   @Output() pasoAnterior = new EventEmitter<any>();
 
-  @Input() editable: boolean;
+  @Input() editable!: boolean;
 
   constructor() { }
 

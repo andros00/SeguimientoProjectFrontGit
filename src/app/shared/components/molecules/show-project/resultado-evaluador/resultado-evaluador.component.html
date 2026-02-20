@@ -76,6 +76,6 @@
 
 <div *ngIf="totalRegistros && (totalRegistros > registrosPorPagina)">
   <mat-paginator class="paginador" [hidePageSize]="true" [length]="totalRegistros" [pageSize]="registrosPorPagina"
-    (page)="cargarPagina($event.pageIndex)">
+    (page)="cargarPagina($event)">
   </mat-paginator>
 </div>

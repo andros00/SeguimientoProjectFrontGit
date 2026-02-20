@@ -7,7 +7,7 @@ import { AlertaMensaje } from '../../components/molecules/show-project/mensaje-e
 })
 export class AlertaLocalService {
 
-  private alertaMensaje: BehaviorSubject<AlertaMensaje> = new BehaviorSubject<AlertaMensaje>(BehaviorSubject.create());
+  private alertaMensaje: BehaviorSubject<AlertaMensaje> = new BehaviorSubject<AlertaMensaje>({} as AlertaMensaje);
   public alertaMensajeObservable = this.alertaMensaje.asObservable();
 
 

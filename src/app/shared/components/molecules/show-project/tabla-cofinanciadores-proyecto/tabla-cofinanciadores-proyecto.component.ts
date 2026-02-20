@@ -30,12 +30,12 @@ export class TablaCofinanciadoresProyectoComponent implements OnInit {
   listaAportanteProyecto: AportanteProyecto[] = [];
   columnas = ProyectoConstantes.COLUMNAS_TABLA_COFINANCIADORES;
 
-  informacionGeneralProyecto: InformacionGeneralProyecto;
+  informacionGeneralProyecto!: InformacionGeneralProyecto;
   esProyectoProcesoSeleccion = false;
   esProyectoConvocatoria = false;
   tipo = new FormControl('');
 
-  codigoProyecto: string;
+  codigoProyecto!: string;
   grupoDependenciaPorDefectoUdeA: string = UdeaConstantes.APORTE_RECURSOS_ESPECIA;
   nitFinanciadorUdeA: string = UdeaConstantes.NIT_UDEA;
 
@@ -48,7 +48,7 @@ export class TablaCofinanciadoresProyectoComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const modoEdicion = this.activeRoute.snapshot.queryParams.estado === 'Editar';
+    const modoEdicion = this.activeRoute.snapshot.queryParams['estado'] === 'Editar';
     this.aportanteProyectoServicioLocal.listaAportanteTemporalObservable.subscribe(listaAportante$ => {
       this.listaAportante$ = of(listaAportante$);
     });
@@ -99,7 +99,7 @@ export class TablaCofinanciadoresProyectoComponent implements OnInit {
   }
 
   habilitarEliminarRegistro(aportanteProyecto: AportanteProyecto) {
-    if ((this.esFinanciadorUdeA(aportanteProyecto.personaJuridica.nit) && this.esAporteRecursoEnEspecie(aportanteProyecto))) {
+    if ((this.esFinanciadorUdeA(aportanteProyecto.personaJuridica?.nit ?? '') && this.esAporteRecursoEnEspecie(aportanteProyecto))) {
       return false;
     }
     if (this.esProyectoConvocatoria) {

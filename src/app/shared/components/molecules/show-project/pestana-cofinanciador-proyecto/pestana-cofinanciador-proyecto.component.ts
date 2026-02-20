@@ -99,17 +99,17 @@ export class PestanaCofinanciadorProyectoComponent implements OnInit {
     // }
   }
 
-  private buscarEnListaAportante(aportante: AportanteProyecto, nuevosAportantes: AportanteProyecto[]): AportanteProyecto {
+  private buscarEnListaAportante(aportante: AportanteProyecto, nuevosAportantes: AportanteProyecto[]): AportanteProyecto | undefined {
     return nuevosAportantes.find(a => this.compararAportante(aportante, a));
   }
 
   compararAportante(aportante: AportanteProyecto, aportanteComparar: AportanteProyecto): boolean {
-    const mismoFinanciador = aportante.personaJuridica.nit === aportanteComparar.personaJuridica.nit;
-    if (aportanteComparar.personaJuridica.nit === UdeaConstantes.NIT_UDEA) {
-      return mismoFinanciador
+    const mismoFinanciador = aportante.personaJuridica?.nit === aportanteComparar.personaJuridica?.nit;
+    if (aportanteComparar.personaJuridica?.nit === UdeaConstantes.NIT_UDEA) {
+      return !!mismoFinanciador
         && (this.compararDependencia(aportante, aportanteComparar) || this.compararGrupo(aportante, aportanteComparar));
     } else {
-      return mismoFinanciador;
+      return !!mismoFinanciador;
     }
   }
 

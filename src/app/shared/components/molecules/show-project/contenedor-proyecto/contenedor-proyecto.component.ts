@@ -65,8 +65,8 @@ export class ContenedorProyectoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.soloLectura = this.activeRoute.snapshot.queryParams.soloLectura === 'true';
-    this.paraActualizacion = this.activeRoute.snapshot.queryParams.paraActualizacion === 'true';
+    this.soloLectura = this.activeRoute.snapshot.queryParams['soloLectura'] === 'true';
+    this.paraActualizacion = this.activeRoute.snapshot.queryParams['paraActualizacion'] === 'true';
   }
 
   inhabilitarSiguiente() {

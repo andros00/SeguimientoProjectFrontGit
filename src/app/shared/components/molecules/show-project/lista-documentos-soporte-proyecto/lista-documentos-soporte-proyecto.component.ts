@@ -22,7 +22,7 @@ const MENSAJE_ERROR_ELIMINANDO = 'Ocurrió un error eliminando el documento.';
 })
 export class ListaDocumentosSoporteProyectoComponent implements OnInit {
 
-  @Input() editable: boolean;
+  @Input() editable!: boolean;
 
   listaDocumentosProyecto$: Observable<DocumentoProyecto[]>;
 

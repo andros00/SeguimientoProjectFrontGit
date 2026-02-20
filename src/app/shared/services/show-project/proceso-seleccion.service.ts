@@ -26,7 +26,7 @@ export class ProcesoSeleccionService {
     return this.http.get<NivelProyecto[]>(url);
   }
 
-  guardarProcesoSeleccion(procesoSeleccion): Observable<any> {
+  guardarProcesoSeleccion(procesoSeleccion: any): Observable<any> {
     const url = `${environment.URL_BASE}${DireccionesUrl.DIRECIONES_ADMINISTRADOR.REGISTRAR_PROCESO}`;
     return this.http.post(url, procesoSeleccion);
   }

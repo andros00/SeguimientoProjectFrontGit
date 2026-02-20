@@ -22,9 +22,9 @@ export class PestanaCompromisosProyectoComponent implements OnInit {
   readonly tipoCompromisoObligatorioDB = 'b';
 
 
-  @Input() editable: boolean;
+  @Input() editable!: boolean;
 
-  mostrarComponentes: boolean;
+  mostrarComponentes = false;
 
   constructor(private compromisosServicioLocal: CompromisosProyectoLocalService,
     private compromisosServicio: CompromisosProyectoService,
@@ -42,8 +42,8 @@ export class PestanaCompromisosProyectoComponent implements OnInit {
     let listaCompromisos: CompromisoProyecto[];
     listaCompromisos = this.compromisosServicioLocal.obtenerListaCompromisosObligatorios();
     listaCompromisos = listaCompromisos.concat(this.compromisosServicioLocal.obtenerListaCompromisosOpcionales());
-    const listaCompromisosObligatorios = [];
-    const listaCompromisosOpcionales = [];
+    const listaCompromisosObligatorios: CompromisoProyecto[] = [];
+    const listaCompromisosOpcionales: CompromisoProyecto[] = [];
     this.compromisosServicio.guardarCompromisos(listaCompromisos).subscribe(
       compromisosGuardados => {
         compromisosGuardados.forEach(compromiso => {

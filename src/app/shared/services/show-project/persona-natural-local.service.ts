@@ -7,7 +7,7 @@ import { PersonaNatural } from '../../components/molecules/show-project/persona-
 })
 export class PersonaNaturalLocalService {
 
-  private personaNaturalSubject: BehaviorSubject<PersonaNatural> = new BehaviorSubject<PersonaNatural>(BehaviorSubject.create());
+  private personaNaturalSubject: BehaviorSubject<PersonaNatural> = new BehaviorSubject<PersonaNatural>({} as PersonaNatural);
 
   constructor() { }
 
@@ -20,7 +20,7 @@ export class PersonaNaturalLocalService {
   }
 
   eliminarPersonaNatural(): void {
-    this.personaNaturalSubject = new BehaviorSubject<PersonaNatural>(BehaviorSubject.create());
+    this.personaNaturalSubject = new BehaviorSubject<PersonaNatural>({} as PersonaNatural);
   }
 
 }

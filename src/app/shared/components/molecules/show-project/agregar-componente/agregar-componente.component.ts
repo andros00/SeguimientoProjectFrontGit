@@ -81,7 +81,7 @@ export class AgregarComponenteComponent implements OnInit {
 
   private guardarComponenteLocal() {
 
-    const componenteMacroproyecto = new ComponenteMacroproyecto();
+    const componenteMacroproyecto = {} as ComponenteMacroproyecto;
     componenteMacroproyecto.identificador = 0;
     componenteMacroproyecto.cantidadproyectos = this.f.numeroProyectos.value;
     componenteMacroproyecto.descripcion = this.f.descripcion.value;

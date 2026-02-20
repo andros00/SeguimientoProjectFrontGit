@@ -16,7 +16,7 @@ export class EstructuraDeProyectoLocalService {
   public listaCompromisosProyectoObservable = this.listaCompromisosProyecto.asObservable();
   private listaPlanesDeTrabajo: BehaviorSubject<TextoDescriptivo[]> = new BehaviorSubject<TextoDescriptivo[]>([]);
   public listaPlanesDeTrabajoObservable = this.listaPlanesDeTrabajo.asObservable();
-  private evaluacionTecnica: BehaviorSubject<EvaluacionTecnica> = new BehaviorSubject<EvaluacionTecnica>(BehaviorSubject.create());
+  private evaluacionTecnica: BehaviorSubject<EvaluacionTecnica> = new BehaviorSubject<EvaluacionTecnica>({} as EvaluacionTecnica);
   public evaluacionTecnicaObservable = this.evaluacionTecnica.asObservable();
 
   obtenerListaTextosDescriptivosInicial(): TextoDescriptivo[] {

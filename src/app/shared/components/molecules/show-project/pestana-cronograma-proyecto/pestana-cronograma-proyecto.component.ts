@@ -23,12 +23,11 @@ const MENSAJE_ERROR = 'Ocurrió un error guardando las actividades del proyecto.
   styleUrls: ['./pestana-cronograma-proyecto.component.css']
 })
 export class PestanaCronogramaProyectoComponent implements OnInit {
+  @Input() editable!: boolean;
 
-  @Input() editable: boolean;
-
-  formularioPeriodo: FormGroup;
+  formularioPeriodo!: FormGroup;
   listaCronogramaProyecto$: ActividadProyecto[] = [];
-  informacionGeneral: InformacionGeneralProyecto;
+  informacionGeneral!: InformacionGeneralProyecto;
   listaPeriodo = [PeriodoEnum.MESES, PeriodoEnum.DIAS, PeriodoEnum.SEMANAS];
   modoEdicion = false;
 
@@ -41,7 +40,7 @@ export class PestanaCronogramaProyectoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.modoEdicion = this.activeRoute.snapshot.queryParams.estado === 'Editar';
+    this.modoEdicion = this.activeRoute.snapshot.queryParams['estado'] === 'Editar';
     this.cronogramaServicioLocal.listaActividadProyectoObservable.subscribe(lista$ => {
       this.listaCronogramaProyecto$ = lista$;
     });
@@ -54,16 +53,16 @@ export class PestanaCronogramaProyectoComponent implements OnInit {
       periodo: [PeriodoEnum.MESES.nombreDB]
     });
     if (this.modoEdicion) {
-      this.f.periodo.setValue(this.informacionGeneral.periodoCronograma.trim());
+      this.f['periodo'].setValue(this.informacionGeneral.periodoCronograma.trim());
       this.validarPeriodoSeleccionado();
-      this.f.periodo.disable();
+      this.f['periodo'].disable();
     }
   }
 
   get f() { return this.formularioPeriodo.controls; }
 
   abrirAgregarActividad() {
-    this.dialogo.open(AgregarActividadComponent).afterClosed().subscribe(_ => {
+    this.dialogo.open(DiagramaActividadComponent).afterClosed().subscribe(_ => {
       this.validarPeriodoSeleccionado();
     });
   }
@@ -93,14 +92,14 @@ export class PestanaCronogramaProyectoComponent implements OnInit {
   agregarPeriodo(listaActividades: ActividadProyecto[]) {
     if (this.formularioPeriodo.valid) {
       listaActividades.forEach(actividad => {
-        actividad.periodo = this.f.periodo.value;
+        actividad.periodo = this.f['periodo'].value;
       });
     }
   }
 
   validarPeriodoSeleccionado() {
     this.listaCronogramaProyecto$.forEach(actividad => {
-      actividad.periodo = this.f.periodo.value;
+      actividad.periodo = this.f['periodo'].value;
     });
   }
 }

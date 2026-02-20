@@ -15,10 +15,9 @@ import { ProyectoConstantes } from '../proyecto-constantes';
   styleUrls: ['./pestana-descripcion-proyecto.component.css']
 })
 export class PestanaDescripcionProyectoComponent implements OnInit {
+  @Input() editable!: boolean;
 
-  @Input() editable: boolean;
-
-  subscription: Subscription;
+  subscription!: Subscription;
 
   permiteAgregarDescripcion = false;
   habilitarAgregarDescripcion = false;

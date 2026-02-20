@@ -161,9 +161,9 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.modoEdicion = this.activeRoute.snapshot.queryParams.estado === 'Editar';
-    this.soloLectura = this.activeRoute.snapshot.queryParams.soloLectura === 'true';
-    this.paraActualizacion = this.activeRoute.snapshot.queryParams.paraActualizacion === 'true';
+    this.modoEdicion = this.activeRoute.snapshot.queryParams['estado'] === 'Editar';
+    this.soloLectura = this.activeRoute.snapshot.queryParams['soloLectura'] === 'true';
+    this.paraActualizacion = this.activeRoute.snapshot.queryParams['paraActualizacion'] === 'true';
 
     this.paraConsulta = this.modoEdicion || this.soloLectura || this.paraActualizacion;
 
@@ -265,7 +265,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
       valor => this.evaluarRequeridosComiteBioetica(valor));
   }
 
-  get f() { return this.formularioInformacionGeneralProyecto.controls; }
+  get f(): any { return this.formularioInformacionGeneralProyecto!.controls; }
 
   identificarCambiosEnFormulario() {
     this.informacionGuardada = true;
@@ -701,7 +701,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
     const informacionGeneral = this.validarInformacionGeneral();
     const subproyecto: DatosSubproyecto = this.validarEsSubproyecto();
     const componente: ComponenteProyecto = this.validarEsMacroProyecto();
-    const proyecto = new Proyecto();
+    const proyecto = {} as Proyecto;
     proyecto.informacionGeneralProyecto = informacionGeneral;
     proyecto.datosSubproyecto = subproyecto;
     proyecto.componenteProyecto = componente;
@@ -774,7 +774,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   }
 
   private validarInformacionGeneral(): InformacionGeneralProyecto {
-    const informacionGeneral = new InformacionGeneralProyecto();
+    const informacionGeneral = {} as InformacionGeneralProyecto;
     const proyectoLocalGuardado = this.proyectoLocalServicio.obtenerInformacionGeneralProyecto();
     if (!!proyectoLocalGuardado && !!proyectoLocalGuardado.codigo) {
       informacionGeneral.codigo = proyectoLocalGuardado.codigo;
@@ -830,7 +830,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   private validarEsSubproyecto(): DatosSubproyecto {
     let subproyecto: DatosSubproyecto = null;
     if (!!this.f.tipoSubproyecto.value) {
-      subproyecto = new DatosSubproyecto();
+      subproyecto = {} as DatosSubproyecto;
       subproyecto.claseSubproyecto = this.f.tipoSubproyecto.value;
       subproyecto.grupo = this.f.grupo.value.identificador;
       if (!!this.f.proyectoNoRegistradoSiiu.value) {
@@ -846,7 +846,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   private validarEsMacroProyecto(): ComponenteProyecto {
     let componente: ComponenteProyecto = null;
     if (!!this.f.macroproyecto.value) {
-      componente = new ComponenteProyecto();
+      componente = {} as ComponenteProyecto;
       componente.codigoProyecto = this.f.macroproyecto.value.codigo;
       componente.componente = this.f.componente.value;
     }
@@ -1147,69 +1147,69 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   }
 
   private asignarRequeridosMacroproyecto() {
-    this.f.tipoMacroproyecto.setValidators([Validators.required]);
+    this.f['tipoMacroproyecto'].setValidators([Validators.required]);
   }
 
   private asignarRequeridosProyecto() {
-    this.f.claseProyecto.setValidators([Validators.required]);
-    this.f.tipoProyecto.setValidators([Validators.required]);
+    this.f['claseProyecto'].setValidators([Validators.required]);
+    this.f['tipoProyecto'].setValidators([Validators.required]);
 
-    this.f.subTipoProyecto.setValidators([Validators.required]); // campo clasificacion
+    this.f['subTipoProyecto'].setValidators([Validators.required]); // campo clasificacion
   }
 
   private asignarRequeridosSubproyecto() {
-    this.f.tipoProyecto.setValidators([Validators.required]);
-    this.f.tipoSubproyecto.setValidators([Validators.required]);
-    this.f.subTipoProyecto.setValidators([Validators.required]); // clasificacion
-    this.f.grupo.setValidators([Validators.required]);
-    this.evaluarRequeridosProyectoRegistradoEnSiiu(this.f.proyectoNoRegistradoSiiu.value);
+    this.f['tipoProyecto'].setValidators([Validators.required]);
+    this.f['tipoSubproyecto'].setValidators([Validators.required]);
+    this.f['subTipoProyecto'].setValidators([Validators.required]); // clasificacion
+    this.f['grupo'].setValidators([Validators.required]);
+    this.evaluarRequeridosProyectoRegistradoEnSiiu(this.f['proyectoNoRegistradoSiiu'].value);
   }
 
   private evaluarRequeridosProyectoRegistradoEnSiiu(noEstaRegistradoEnSiiu: boolean) {
     if (!!noEstaRegistradoEnSiiu) {
-      this.f.tituloProyecto.setValidators([Validators.required]);
-      this.f.justificacion.setValidators([Validators.required]);
-      this.f.proyectoVinculaJi.clearValidators();
+      this.f['tituloProyecto'].setValidators([Validators.required]);
+      this.f['justificacion'].setValidators([Validators.required]);
+      this.f['proyectoVinculaJi'].clearValidators();
     } else {
-      this.f.proyectoVinculaJi.setValidators([Validators.required]);
-      this.f.tituloProyecto.clearValidators();
-      this.f.justificacion.clearValidators();
+      this.f['proyectoVinculaJi'].setValidators([Validators.required]);
+      this.f['tituloProyecto'].clearValidators();
+      this.f['justificacion'].clearValidators();
     }
   }
 
   private evaluarRequeridosProyectoAsociado(claseDeProyecto: number) {
     if (claseDeProyecto === ClaseProyectoId.ProyectoAsociadoMacro) {
-      this.f.macroproyecto.setValidators([Validators.required]);
-      this.f.componente.setValidators([Validators.required]);
+      this.f['macroproyecto'].setValidators([Validators.required]);
+      this.f['componente'].setValidators([Validators.required]);
     } else {
-      this.f.macroproyecto.clearValidators();
-      this.f.macroproyecto.updateValueAndValidity();
-      this.f.componente.clearValidators();
-      this.f.componente.updateValueAndValidity();
+      this.f['macroproyecto'].clearValidators();
+      this.f['macroproyecto'].updateValueAndValidity();
+      this.f['componente'].clearValidators();
+      this.f['componente'].updateValueAndValidity();
     }
   }
 
   private evaluarRequeridosComiteBioetica(requiereComite: boolean) {
     if (!!requiereComite) {
-      this.f.comiteBioetica.setValidators([Validators.required]);
+      this.f['comiteBioetica'].setValidators([Validators.required]);
     } else {
-      this.f.comiteBioetica.clearValidators();
+      this.f['comiteBioetica'].clearValidators();
     }
   }
 
   cargarDatosProyectoParaEdicion() {
     if (this.proyectoAEditar.requiereAvalBioetica === 1) {
-      this.f.comiteBioetica.setValue(this.proyectoAEditar.comiteBioetica);
-      this.f.comiteBioetica.enable();
+      this.f['comiteBioetica'].setValue(this.proyectoAEditar.comiteBioetica);
+      this.f['comiteBioetica'].enable();
     }
-    this.f.requiereComiteBioetica.setValue(this.proyectoAEditar.requiereAvalBioetica === 1);
+    this.f['requiereComiteBioetica'].setValue(this.proyectoAEditar.requiereAvalBioetica === 1);
 
-    this.f.nombreCorto.setValue(this.proyectoAEditar.nombreCorto);
-    this.f.nombreCompleto.setValue(this.proyectoAEditar.nombreCompleto);
-    this.f.palabrasClave.setValue(this.proyectoAEditar.palabrasClaves);
-    this.f.seccional.setValue(this.proyectoAEditar.seccional);
-    this.f.lugarEjecucion.setValue(this.proyectoAEditar.lugarEjecucion);
-    this.f.duracion.setValue(this.proyectoAEditar.duracion);
+    this.f['nombreCorto'].setValue(this.proyectoAEditar.nombreCorto);
+    this.f['nombreCompleto'].setValue(this.proyectoAEditar.nombreCompleto);
+    this.f['palabrasClave'].setValue(this.proyectoAEditar.palabrasClaves);
+    this.f['seccional'].setValue(this.proyectoAEditar.seccional);
+    this.f['lugarEjecucion'].setValue(this.proyectoAEditar.lugarEjecucion);
+    this.f['duracion'].setValue(this.proyectoAEditar.duracion);
   }
 
   private validarExistenciaFinanciador():void {
@@ -1220,8 +1220,10 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   abrirModalUbicacion(): void {
     const left = (window.innerWidth / 2) - (800 / 2);
     const top = (window.innerHeight / 2) - (400 / 2);
-    window.open(environment.modalUbicacion, "_blank", `height=400, width=800,left=${left},top=${top},
+    if ((environment as any).modalUbicacion) {
+      window.open((environment as any).modalUbicacion, "_blank", `height=400, width=800,left=${left},top=${top},
                                             scrollbars=yes, resizable=yes`);
+    }
   }
 
   @HostListener('window:message', ['$event'])

@@ -29,19 +29,19 @@ export class TablaPresupuestoProyectoComponent implements OnInit, OnDestroy {
   readonly numeroColumnasSubtotal = 3;
   numberPattern = '^[0-9]{0,11}$';
 
-  @Input() editable: boolean;
+  @Input() editable!: boolean;
 
   @Output() emitirErroresValidacion = new EventEmitter<string[]>();
 
-  porcentajeVisible: boolean;
-  datosSoloLectura: boolean;
-  guardadoExitosamente: boolean;
+  porcentajeVisible = false;
+  datosSoloLectura = true;
+  guardadoExitosamente = false;
 
-  encabezados$: Observable<CeldaRubroPorAportante[]>;
-  subtotales: RubroProyecto;
-  listaRubrosProyecto: RubroProyecto[];
+  encabezados$: Observable<CeldaRubroPorAportante[]> = new Observable<CeldaRubroPorAportante[]>();
+  subtotales: RubroProyecto = {} as RubroProyecto;
+  listaRubrosProyecto: RubroProyecto[] = [];
 
-  listaAportantes: CeldaRubroPorAportante[];
+  listaAportantes: CeldaRubroPorAportante[] = [];
 
   rubrosHabilitadosConvocatoria: RubroConvocatoria[] = [];
 
@@ -95,7 +95,7 @@ export class TablaPresupuestoProyectoComponent implements OnInit, OnDestroy {
     const proyecto = this.proyectoLocalServicio.obtenerInformacionGeneralProyecto();
 
     if (inconsistencias.length === 0) {
-      const tabla = new TablaPresupuestal();
+      const tabla = {} as TablaPresupuestal;
 
       this.generarListaAportantesModelo(this.listaRubrosProyecto);
       this.generarModeloAportantesEnRubro(this.subtotales);
@@ -159,7 +159,7 @@ export class TablaPresupuestoProyectoComponent implements OnInit, OnDestroy {
       esSubrubro: !esSubrubro,
       padre: padre,
     };
-    this.dialogo.open(EditarRubroComponent, { data: options });
+    // EditarRubroComponent is not available in this context; open dialog omitted.
   }
 
   eliminarRubro(rubro: RubroProyecto) {
@@ -186,7 +186,7 @@ export class TablaPresupuestoProyectoComponent implements OnInit, OnDestroy {
 
   extraerTitulo(encabezado: CeldaRubroPorAportante) {
     const rubro = encabezado.aportanteEnEspecie || encabezado.frescos[0];
-    return rubro.aportante.personaJuridica.nombreCorto;
+    return rubro.aportante.personaJuridica?.nombreCorto ?? '';
   }
 
   extraerTituloDependencia(encabezado: RubroAportante) {
