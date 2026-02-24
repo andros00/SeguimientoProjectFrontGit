@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SteeperShowComponent } from './shared/components/molecules/show-project/steeper-show/steeper-show.component';
 
 const routes: Routes = [
   {

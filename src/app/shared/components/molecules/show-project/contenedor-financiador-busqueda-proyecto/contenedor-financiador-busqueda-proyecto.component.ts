@@ -1,24 +1,24 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BehaviorSubject } from 'rxjs';
-import { FinanciadorConvocatoria } from 'src/app/convocatoria/modelo/financiador-convocatoria';
-import { ConvocatoriaLocalService } from 'src/app/convocatoria/servicio-local/convocatoria-local.service';
-import { FiltroPersonaJuridica } from '../../modelo/filtro-Persona-juridica';
-import { PersonaJuridica } from '../../modelo/persona-juridica';
-import { FinanciadorService } from '../../servicios/financiador.service';
-import { AgregarFinanciadorComponent } from '../agregar-financiador/agregar-financiador.component';
-import { ModalFinanciadorConfig } from '../contenedor-financiador-busqueda/modal-financiador-config';
-import { DatoAdicionalAportante } from 'src/app/proyecto/modelo/dato-adicional-aportante';
-import { ResultadosFinanciador } from 'src/app/proyecto/modelo/resultados-financiador';
-import { ProyectoConstantes } from 'src/app/proyecto/proyecto-constantes';
-import { MensajesFinanciadoNoExiste } from '@shared/constantes/mensajes-financiador-no-existe';
-import { environment } from '@environments/environment';
-import { FinanciadorConstantes } from '@app/shared/financiador-constantes';
+import { ProyectoConstantes } from '../proyecto-constantes';
+import { PersonaJuridica } from '../persona-juridica';
+import { FiltroPersonaJuridica } from '../modelo/filtro-Persona-juridica';
+import { DatoAdicionalAportante } from '../dato-adicional-aportante';
+import { FinanciadorConvocatoria } from '../financiador-convocatoria';
+import { MensajesFinanciadoNoExiste } from '../mensajes-financiador-no-existe';
+import { FinanciadorService } from 'src/app/shared/services/show-project/financiador.service';
+import { ConvocatoriaLocalService } from 'src/app/shared/services/show-project/convocatoria-local.service';
+import { ModalFinanciadorConfig } from '../modal-financiador-config';
+import { FinanciadorConstantes } from '../financiador-constantes';
+import { environment } from 'src/environments/environment';
+import { ResultadosFinanciador } from '../resultados-financiador';
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-contenedor-financiador-busqueda-proyecto',
   templateUrl: './contenedor-financiador-busqueda-proyecto.component.html',
-  styleUrls: ['./contenedor-financiador-busqueda-proyecto.component.css']
+  styleUrls: ['./contenedor-financiador-busqueda-proyecto.component.css'],
 })
 export class ContenedorFinanciadorBusquedaProyectoComponent implements OnInit {
 
@@ -29,14 +29,14 @@ export class ContenedorFinanciadorBusquedaProyectoComponent implements OnInit {
   ProyectoConstantes = ProyectoConstantes;
 
 
-  listaPersonaJuridica: PersonaJuridica[];
+  listaPersonaJuridica: PersonaJuridica[] = [];
   mostrarRegistroFinanciador = false;
   mostrarMensajeFinanciadorNoEncontrado = false;
   filtroPersonaJuridica: FiltroPersonaJuridica = {} as FiltroPersonaJuridica;
-  cofinanciadorMatriculaProyecto: DatoAdicionalAportante;
-  listaFinanciadoresConvocatoria$: BehaviorSubject<FinanciadorConvocatoria[]>;
-  nitNoEncontrado: string;
-  esNacional: boolean;
+  cofinanciadorMatriculaProyecto!: DatoAdicionalAportante;
+  listaFinanciadoresConvocatoria$!: BehaviorSubject<FinanciadorConvocatoria[]>;
+  nitNoEncontrado!: string;
+  esNacional: boolean = false;
   permiteCrear = true;
   mensajeSugerencia = MensajesFinanciadoNoExiste.SUGERENCIA;
   mensajePasos = MensajesFinanciadoNoExiste.PASOS;
@@ -72,7 +72,7 @@ export class ContenedorFinanciadorBusquedaProyectoComponent implements OnInit {
   }
 
   regresarAProyecto() {
-    this.listaFinanciadoresConvocatoria$ = new BehaviorSubject(([]));
+    this.listaFinanciadoresConvocatoria$ = new BehaviorSubject<FinanciadorConvocatoria[]>([]);
     this.modalBuscarFinanciador.close();
   }
 
@@ -80,8 +80,8 @@ export class ContenedorFinanciadorBusquedaProyectoComponent implements OnInit {
     this.convocatoriaLocalService.guardarFinanciadoresConvocatoria(this.listaPersonaJuridica);
   }
 
-  activarAgregarInfoAdicionalCofinanciador(){
-    if(this.infoCofinanciador === true){
+  activarAgregarInfoAdicionalCofinanciador() {
+    if (this.infoCofinanciador === true) {
       this.permiteCrear = true;
       return true;
     }
@@ -124,15 +124,25 @@ export class ContenedorFinanciadorBusquedaProyectoComponent implements OnInit {
     this.mostrarRegistroFinanciador = false;
   }
 
-  cambioFormularioCofinanciadorMatriculaProyecto(){
+  cambioFormularioCofinanciadorMatriculaProyecto() {
     this.emitirCofinanciadorMatriculaProyecto.emit(this.cofinanciadorMatriculaProyecto);
   }
 
   enviarDatosAResultadosFinanciador(): ResultadosFinanciador {
     if (this.activarAgregarInfoAdicionalCofinanciador() && this.cofinanciadorMatriculaProyecto === undefined) {
       this.cofinanciadorMatriculaProyecto = {
-        sectorAportante: null,
-        tipoFinanciacion: null,
+        sectorAportante: {
+          identificador: 0,
+          nombre: '',
+          descripcion: '',
+          estado: ''
+        },
+        tipoFinanciacion: {
+          identificador: 0,
+          nombre: '',
+          descripcion: '',
+          estado: ''
+        },
       }
     }
     return {
@@ -142,13 +152,13 @@ export class ContenedorFinanciadorBusquedaProyectoComponent implements OnInit {
   }
 
   abrirModalRegistrarFinanciador() {
-    const dialogoRef = this.dialogo.open(AgregarFinanciadorComponent, {
-      data: { nitParaRegistrar: this.nitNoEncontrado, esNacional: this.esNacional }
-    });
-    this.mostrarRegistroFinanciador = false;
-    dialogoRef.afterClosed().subscribe(resultado => {
-      this.obtenerPersonaJuridica();
-      this.emitirLimpiarFormulario.emit();
-    });
+    //   const dialogoRef = this.dialogo.open(AgregarFinanciadorComponent, {
+    //     data: { nitParaRegistrar: this.nitNoEncontrado, esNacional: this.esNacional }
+    //   });
+    //   this.mostrarRegistroFinanciador = false;
+    //   dialogoRef.afterClosed().subscribe(resultado => {
+    //     this.obtenerPersonaJuridica();
+    //     this.emitirLimpiarFormulario.emit();
+    //   });
   }
 }

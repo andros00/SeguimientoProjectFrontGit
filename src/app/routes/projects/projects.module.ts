@@ -16,9 +16,8 @@ import { ShowModule } from 'src/app/shared/components/molecules/show-project/sho
   imports: [
     CommonModule,
     ProjectsRoutingModule,
-    SharedModule,
-
     ShowModule
   ]
+
 })
 export class ProjectsModule { }

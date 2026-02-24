@@ -10,7 +10,7 @@ import { AlertaLocalService } from 'src/app/shared/services/show-project/alerta-
 })
 export class MensajeExitoErrorComponent implements OnInit {
 
-  alertaMensaje: AlertaMensaje = new AlertaMensaje();
+  alertaMensaje: AlertaMensaje = {} as AlertaMensaje;
   mostrarMensajeExito = false;
   mostrarMensajeError = false;
   mensajeMostrar: string='';
@@ -37,7 +37,7 @@ export class MensajeExitoErrorComponent implements OnInit {
     this.mostrarMensajeError = true;
     setTimeout(() => {
       this.mostrarMensajeError = false;
-      this.alertaServicioLocal.agregarMensaje(null);
+      this.alertaServicioLocal.agregarMensaje(mensaje);
     }, ConstantesExitoError.TIEMPO_MENSAJES_EXITO_ERROR);
     return true;
   }
@@ -47,7 +47,7 @@ export class MensajeExitoErrorComponent implements OnInit {
     this.mostrarMensajeExito = true;
     setTimeout(() => {
       this.mostrarMensajeExito = false;
-      this.alertaServicioLocal.agregarMensaje(null);
+      this.alertaServicioLocal.agregarMensaje(mensaje);
     }, ConstantesExitoError.TIEMPO_MENSAJES_EXITO_ERROR);
     return true;
   }

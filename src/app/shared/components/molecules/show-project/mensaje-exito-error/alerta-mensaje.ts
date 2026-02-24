@@ -1,4 +1,4 @@
-export class AlertaMensaje {
+export interface AlertaMensaje {
     tipoMensaje: string;
     mensaje: string;
 }

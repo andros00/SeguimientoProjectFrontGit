@@ -1,25 +1,9 @@
 import { NgModule } from '@angular/core';
-import { ArchwizardModule } from 'angular-archwizard';
 import { SteeperShowComponent } from './steeper-show/steeper-show.component';
 import { SharedModule } from "src/app/shared/shared.module";
 import { PasoInformacionGeneralProyectoComponent } from "./paso-informacion-general-proyecto/paso-informacion-general-proyecto.component";
-import { MatCardContent, MatCard } from "@angular/material/card";
-import { MatStepper, MatStep } from "@angular/material/stepper";
-import { MatDivider } from "@angular/material/divider";
-import { ButtonPrimaryComponent } from '../../atoms/button-primary/button-primary.component';
 import { CommonModule } from '@angular/common';
-import { FooterComponent } from '../footer/footer.component';
-import { MatIconModule } from "@angular/material/icon";
-import { MatMenu } from "@angular/material/menu";
-import { MatFormField, MatLabel, MatError, MatHint } from "@angular/material/form-field";
-import { MatSelect, MatOption } from "@angular/material/select";
-import { MatRadioGroup, MatRadioButton } from "@angular/material/radio";
-import { MatAutocomplete } from "@angular/material/autocomplete";
-import { MatSlideToggle } from "@angular/material/slide-toggle";
-import { PasoActualizacionesProyectoComponent } from './paso-actualizaciones-proyecto/paso-actualizaciones-proyecto.component';
-import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from "@angular/material/expansion";
 import { PasoDescripcionCronogramaProyectoComponent } from './paso-descripcion-cronograma-proyecto/paso-descripcion-cronograma-proyecto.component';
-import { MatTabGroup, MatTab } from "@angular/material/tabs";
 import { PestanaCronogramaProyectoComponent } from './pestana-cronograma-proyecto/pestana-cronograma-proyecto.component';
 import { MensajeExitoErrorComponent } from './mensaje-exito-error/mensaje-exito-error.component';
 import { ListaCronogramaProyectoComponent } from './lista-cronograma-proyecto/lista-cronograma-proyecto.component';
@@ -37,22 +21,82 @@ import { PestanaCondicionesFormalesProyectoComponent } from './pestana-condicion
 import { TablaCondicionesFormalesComponent } from './tabla-condiciones-formales/tabla-condiciones-formales.component';
 import { PestanaCompromisosProyectoComponent } from './pestana-compromisos-proyecto/pestana-compromisos-proyecto.component';
 import { ListaCompromisosProyectoComponent } from './lista-compromisos-proyecto/lista-compromisos-proyecto.component';
-import { MatCheckbox } from "@angular/material/checkbox";
 import { PasoDocumentosSoporteProyectoComponent } from './paso-documentos-soporte-proyecto/paso-documentos-soporte-proyecto.component';
 import { ListaDocumentosSoporteProyectoComponent } from './lista-documentos-soporte-proyecto/lista-documentos-soporte-proyecto.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModalDinamicoComponent } from './modal-dinamico/modal-dinamico.component';
+import { ModalDinamicoInformativoComponent } from './modal-dinamico-informativo/modal-dinamico-informativo.component';
+import { ListaInformacionComplementariaComponent } from './lista-informacion-complementaria/lista-informacion-complementaria.component';
+import { PasoInformacionComplementariaComponent } from './paso-informacion-complementaria/paso-informacion-complementaria.component';
+import { DiagramaActividadComponent } from './diagrama-actividad/diagrama-actividad.component';
+import { ContenedorFinanciadorBusquedaProyectoComponent } from './contenedor-financiador-busqueda-proyecto/contenedor-financiador-busqueda-proyecto.component';
+import { ResultadoFinanciadorProyectoComponent } from './resultado-financiador-proyecto/resultado-financiador-proyecto.component';
+import { RouterModule } from '@angular/router';
 
+import { MatCardModule } from '@angular/material/card';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatInputModule } from '@angular/material/input';
+import { NgxCurrencyDirective } from 'ngx-currency';
+import { ListaDescripcionProyectoComponent } from './lista-descripcion-proyecto/lista-descripcion-proyecto.component';
+import { TableComponent } from '../../organisms/table/table.component';
+import { SidebarComponent } from '../../organisms/sidebar/sidebar.component';
+import { ProjectInfoFormalStartComponent } from '../project-info-formal-start/project-info-formal-start.component';
+import { StepperComponent } from '../../organisms/stepper/stepper.component';
+import { FiltrosFinanciadorBusquedaComponent } from './filtros-financiador-busqueda/filtros-financiador-busqueda.component';
 @NgModule({
 
-  declarations: [ListaDocumentosSoporteProyectoComponent, PasoDocumentosSoporteProyectoComponent, ListaCompromisosProyectoComponent, PestanaCompromisosProyectoComponent, TablaCondicionesFormalesComponent, PestanaCondicionesFormalesProyectoComponent, PasoCompromisosCondicionesProyectoComponent, TablaParticipantesProyectoComponent, PasoParticipantesProyectoComponent, VisorComponentesProyectoComponent, TablaPresupuestoProyectoComponent, PestanaPresupuestoProyectoComponent,
+  declarations: [PasoInformacionGeneralProyectoComponent, ListaCompromisosProyectoComponent, ListaDocumentosSoporteProyectoComponent,
+    PasoDocumentosSoporteProyectoComponent, PestanaCompromisosProyectoComponent, TablaCondicionesFormalesComponent,
+    PestanaCondicionesFormalesProyectoComponent, PasoCompromisosCondicionesProyectoComponent, TablaParticipantesProyectoComponent, PasoParticipantesProyectoComponent,
+    VisorComponentesProyectoComponent, TablaPresupuestoProyectoComponent, PestanaPresupuestoProyectoComponent,
     TablaCofinanciadoresProyectoComponent, PestanaCofinanciadorProyectoComponent, PasoPresupuestalProyectoComponent,
     PestanaDescripcionProyectoComponent, ListaCronogramaProyectoComponent, MensajeExitoErrorComponent,
-    PestanaCronogramaProyectoComponent, PasoDescripcionCronogramaProyectoComponent, SteeperShowComponent, ButtonPrimaryComponent,
-    FooterComponent, PasoInformacionGeneralProyectoComponent, PasoActualizacionesProyectoComponent],
+    PestanaCronogramaProyectoComponent, PasoDescripcionCronogramaProyectoComponent, SteeperShowComponent,
+    ModalDinamicoComponent, ModalDinamicoInformativoComponent, ListaInformacionComplementariaComponent,
+    PasoInformacionComplementariaComponent, DiagramaActividadComponent, ContenedorFinanciadorBusquedaProyectoComponent,
+    ResultadoFinanciadorProyectoComponent, SteeperShowComponent, ListaDescripcionProyectoComponent, FiltrosFinanciadorBusquedaComponent],
 
-  exports: [],
-  imports: [MatCardContent, MatCard, MatStepper, MatStep, MatDivider, CommonModule, MatIconModule, MatMenu,
-    MatFormField, MatLabel, MatSelect, MatOption, MatError, MatRadioGroup, MatRadioButton, MatAutocomplete,
-    MatSlideToggle, MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatTabGroup, MatTab,
-    MatHint, MatCheckbox]
+
+  exports: [TableComponent, SidebarComponent, ProjectInfoFormalStartComponent, StepperComponent],
+  imports: [SharedModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule,
+
+    MatCardModule,
+    MatStepperModule,
+    MatDividerModule,
+    MatIconModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatAutocompleteModule,
+    MatSlideToggleModule,
+    MatExpansionModule,
+    MatTabsModule,
+    MatCheckboxModule,
+    MatTreeModule,
+    MatPaginatorModule,
+    MatTooltipModule,
+    MatInputModule,
+    NgxCurrencyDirective
+
+  ]
 })
 export class ShowModule { }

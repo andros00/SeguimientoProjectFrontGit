@@ -1,0 +1,26 @@
+<div class="accordion-udea margin-top">
+  <mat-accordion *ngFor="let textoDescriptivo of listadoTextoDescriptivos; let i = index">
+    <mat-expansion-panel class="expansion-space">
+      <mat-expansion-panel-header class="header-accordions">
+        <mat-panel-title>
+          <button mat-icon-button *ngIf="editable">
+            <span class="title-accordion">
+              <mat-icon class="more" [matMenuTriggerFor]="menu">more_vert</mat-icon>
+            </span>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editarDescripcion(textoDescriptivo)">
+              <mat-icon>edit</mat-icon>Editar
+            </button>
+            <button mat-menu-item *ngIf="textoDescriptivo?.habilitadoEliminacion || esProyectoSeleccionInscritoOAvales" (click)="eliminarDescripcion(textoDescriptivo)">
+              <mat-icon>delete</mat-icon>Eliminar
+            </button>
+          </mat-menu>
+          <h3 *ngIf="textoDescriptivo.textoSolicitado" class="title-accordion">{{textoDescriptivo.textoSolicitado.titulo}}</h3>
+          <h3 *ngIf="!textoDescriptivo.textoSolicitado && textoDescriptivo.titulo" class="title-accordion">{{textoDescriptivo.titulo}}</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div [innerHtml]="textoDescriptivo.textoIngresado"></div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

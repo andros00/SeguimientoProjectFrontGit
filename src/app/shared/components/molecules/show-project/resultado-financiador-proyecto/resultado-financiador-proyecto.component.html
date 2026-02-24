@@ -1,0 +1,102 @@
+<div class="container">
+  <h2 class="medium-gray font-20" *ngIf="resultadoCantidadFinanciadores > 0">
+    Resultados({{resultadoCantidadFinanciadores}})</h2>
+  <div class="row card-financer">
+    <mat-card class="col-2 card-financiador flip-card" *ngFor="let personaJuridica of listaPersonaJuridicaPaginada"
+      [ngClass]="{'active': personaJuridica.transicion}">
+      <div class="flip-card-inner">
+        <mat-card-header class="header-card">
+          <mat-card-title>
+            <p class="title-card dark-gray font-16 font-w">{{personaJuridica.razonSocial}}</p>
+            <p class="normal-gray">NIT: {{personaJuridica.nit}}</p>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="d-flex">
+            <mat-icon class="light-gray">place</mat-icon>
+            <div class="card-body">
+              <p class="normal-gray">Dirección</p>
+              <p class="medium-gray font-16">{{personaJuridica.direccion}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <mat-icon class="light-gray">email</mat-icon>
+            <div class="card-body">
+              <p class="normal-gray">Correo</p>
+              <p class="medium-gray font-16">{{personaJuridica.correoElectronico}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <mat-icon class="light-gray">phone</mat-icon>
+            <div class="card-body">
+              <p class="normal-gray">Telefono</p>
+              <p class="medium-gray font-16">{{personaJuridica.telefono}}</p>
+            </div>
+          </div>
+
+          <div class="d-flex">
+            <mat-icon class="light-gray">stay_current_portrait</mat-icon>
+            <div class="card-body">
+              <p class="normal-gray">Celular</p>
+              <p class="medium-gray font-16">{{personaJuridica.fax}}</p>
+            </div>
+          </div>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <div class="position-bottom">
+            <button mat-button class="button-select" (click)="agregarFinanciador(personaJuridica)">SELECCIONAR</button>
+          </div>
+        </mat-card-actions>
+      </div>
+      <div class="flip-card-back">
+        <form [formGroup]="formularioAgregarFinanciadorConvocatoria" autocomplete="off">
+          <mat-card-header class="header-card">
+            <mat-icon class="close" (click)="personaJuridica.transicion=false;">clear</mat-icon>
+            <mat-card-title>
+              <p class="title-card secondary-color">Definiendo financiador</p>
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div>
+              <div class="financer-select">
+                <p class="title-card medium-gray">{{personaJuridica.razonSocial}}</p>
+                <p class="normal-gray">NIT: {{personaJuridica.nit}}</p>
+              </div>
+              <div *ngIf="personaJuridica.nit === nitUdeA">
+                <mat-form-field class="d-block" appearance="fill" hidden="!esUdeA">
+                  <mat-label>Seleccione la dependencia<span class="required">*</span></mat-label>
+                  <mat-select id="dependencia" formControlName="dependencia">
+                    <mat-option *ngFor="let dependenciaFinanciadora of listadoDependenciaFinanciadora"
+                      [value]="dependenciaFinanciadora">{{dependenciaFinanciadora.nombre
+                      | titlecase}}</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="f.dependencia.errors?.required">
+                    Este campo es obligatorio
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="display-center">
+              <button mat-button class="add-fill" (click)="agregarFinanciadorUdea(personaJuridica)">AGREGAR
+              </button>
+            </div>
+          </mat-card-actions>
+        </form>
+      </div>
+    </mat-card>
+  </div>
+</div>
+<div class="contextual-error margin-bottom" *ngIf="habilitarMensajeError">
+  <img src="assets/img/ic-contextual-error.png" alt="ic-contextual-error">
+  <p> {{ProyectoConstantes.MENSAJE_ERROR_SELECCIONAR_FINANCIADORES}}</p>
+</div>
+<div *ngIf="resultadoCantidadFinanciadores && (resultadoCantidadFinanciadores > registrosPorPagina)">
+  <mat-paginator [hidePageSize]="true" [length]="resultadoCantidadFinanciadores" [pageSize]="registrosPorPagina"
+    (page)="cargarPagina($event.pageIndex)">
+  </mat-paginator>
+</div>

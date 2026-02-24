@@ -27,7 +27,7 @@
     <mat-form-field class="element" appearance="fill">
       <mat-label><span class="required">* </span>Seleccione los textos descriptivos opcionales para el proyecto</mat-label>
       <mat-select (selectionChange)="agregarTextoDescriptivoOpcional()" [formControl]="textoDescriptivoControl">
-        <mat-option *ngFor="let textoDescriptivo of listaTextoDescriptivoOpcional" [value]="textoDescriptivo">{{textoDescriptivo.textoSolicitado?.titulo}}</mat-option>
+        <mat-option *ngFor="let textoDescriptivo of listaTextoDescriptivoOpcional" [value]="textoDescriptivo">{{textoDescriptivo.textoSolicitado.titulo}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>

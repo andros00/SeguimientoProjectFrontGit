@@ -9,11 +9,14 @@ import { AnnouncementService } from 'src/app/shared/services/announcement/announ
 import { FilterService } from 'src/app/shared/services/project/filter/filter.service';
 import { ProjectDataService } from 'src/app/shared/services/project/project-data/project-data.service';
 import { IProject } from 'src/app/core/interfaces/IProject';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-sidebar-content',
   templateUrl: './sidebar-content.component.html',
-  styleUrls: ['./sidebar-content.component.scss']
+  styleUrls: ['./sidebar-content.component.scss'],
+  //standalone: true,
+  //imports: [MatProgressSpinner]
 })
 export class SidebarContentComponent implements OnInit {
   form!: FormGroup;

@@ -20,8 +20,8 @@
     <app-filtros-financiador-busqueda #filtrosFinanciador (emitirFiltro)="recibirFiltro($event)"
       (emitirCambioEnFormulario)="cambioFormulario()"></app-filtros-financiador-busqueda>
 
-    <app-cofinanciador-matricula-proyecto *ngIf="activarAgregarInfoAdicionalCofinanciador()" (emitirActualizarSeleccion)="recibirFiltroCofinanciadorMatriculaProyecto($event)" 
-    (emitirCambioFormulario)="cambioFormularioCofinanciadorMatriculaProyecto()"></app-cofinanciador-matricula-proyecto>
+    <!-- <app-cofinanciador-matricula-proyecto *ngIf="activarAgregarInfoAdicionalCofinanciador()" (emitirActualizarSeleccion)="recibirFiltroCofinanciadorMatriculaProyecto($event)"
+    (emitirCambioFormulario)="cambioFormularioCofinanciadorMatriculaProyecto()"></app-cofinanciador-matricula-proyecto> -->
 
     <div class="row" *ngIf="mostrarRegistroFinanciador">
         <div class="contextual-info">
@@ -41,7 +41,7 @@
     </div>
 
     <app-resultado-financiador-proyecto (emitirLimpiarFormulario)="filtrosFinanciador.limpiarFormulario()"
-      (emitirCierreModal)="regresarAProyecto()" 
+      (emitirCierreModal)="regresarAProyecto()"
       [resultadosFinanciador] = "enviarDatosAResultadosFinanciador()"
       [institucionPara]="institucionPara"></app-resultado-financiador-proyecto>
   </div>

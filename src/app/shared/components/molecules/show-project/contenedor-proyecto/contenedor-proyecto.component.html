@@ -11,11 +11,11 @@
         <p class="content">Código de proyecto</p>
       </div>
       <div class="bg-status">
-        <span>{{informacionGeneralProyecto?.codigo}}{{getEstadoProyecto()}}</span>
+        <span>{{informacionGeneralProyecto.codigo}}{{getEstadoProyecto()}}</span>
       </div>
     </div>
   </div>
-
+  <!--
   <aw-wizard [disableNavigationBar]='inhabilitarNavegacion' class="wizard-udea" #wizardProyecto>
 
     <aw-wizard-step class="error">
@@ -28,9 +28,9 @@
       <br />
       <!-- <app-paso-informacion-general-proyecto #paso1 (pasoSiguiente)="irAdelante()">
       </app-paso-informacion-general-proyecto> -->
-    </aw-wizard-step>
+  <!-- </aw-wizard-step>  -->
 
-    <!-- <aw-wizard-step *ngIf="mostrarPaso(pasos.actualizaciones)">
+  <!-- <aw-wizard-step *ngIf="mostrarPaso(pasos.actualizaciones)">
       <ng-template class="p" awWizardStepTitle>
         <span class="step-number">{{pasos.actualizaciones?.numero}}</span>
         <p class="minuscula" [ngClass]="{'current-text': esPasoActual(pasos.actualizaciones),
@@ -162,5 +162,5 @@
       </app-paso-publicar-proyecto>
     </aw-wizard-step> -->
 
-  </aw-wizard>
+  <!-- </aw-wizard> -->
 </div>

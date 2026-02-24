@@ -29,7 +29,9 @@ export class ContenedorEvaluadorBusquedaComponent implements OnInit {
   informacionGeneralProyecto: InformacionGeneralProyecto = {
     codigo: '',
     claseProyecto: 0,
-    nivelProyecto: 0
+    nivelProyecto: 0,
+    procesoSeleccion: {} as any,
+    responsable: ''
   };
 
   constructor(public modalBusquedaEvaluadores: MatDialogRef<ContenedorEvaluadorBusquedaComponent>,

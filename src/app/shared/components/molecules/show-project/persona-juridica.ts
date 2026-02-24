@@ -1,5 +1,5 @@
 export interface PersonaJuridica {
-    nit?: string;
+    nit: string;
     nombreCorto?: string;
     razonSocial?: string;
     tipo?: string;

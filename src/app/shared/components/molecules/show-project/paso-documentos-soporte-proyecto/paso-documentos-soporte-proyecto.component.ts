@@ -29,7 +29,7 @@ export class PasoDocumentosSoporteProyectoComponent implements OnInit {
 
   listaDocumento: DocumentoProyecto[] = [];
   editable = false;
-  publicarVisible = false;
+  publicarVisible: boolean = false;
 
   constructor(
     public dialogo: MatDialog, public formularioServicio: FormularioService,
@@ -52,20 +52,20 @@ export class PasoDocumentosSoporteProyectoComponent implements OnInit {
   }
 
   guardarDocumentos() {
-    const mensaje = new AlertaMensaje();
-    let listaDocumentos: DocumentoProyecto[];
-    listaDocumentos = this.documentoSoporteServicioLocal.obtenerListaDocumentosProyecto();
-    this.documentoProyectoServicio.guardarDocumentoSoporte(listaDocumentos).subscribe(respuestaGuardado => {
-      this.documentoSoporteServicioLocal.agregarListaDocumentosProyecto(respuestaGuardado);
-      mensaje.tipoMensaje = ConstantesExitoError.EXITO;
-      mensaje.mensaje = MENSAJE_EXITO;
-      this.alertaServicioLocal.agregarMensaje(mensaje);
-    },
-      _ => {
-        mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-        mensaje.mensaje = MENSAJE_ERROR;
-        this.alertaServicioLocal.agregarMensaje(mensaje);
-      });
+    // const mensaje = new AlertaMensaje();
+    // let listaDocumentos: DocumentoProyecto[];
+    // listaDocumentos = this.documentoSoporteServicioLocal.obtenerListaDocumentosProyecto();
+    // this.documentoProyectoServicio.guardarDocumentoSoporte(listaDocumentos).subscribe(respuestaGuardado => {
+    //   this.documentoSoporteServicioLocal.agregarListaDocumentosProyecto(respuestaGuardado);
+    //   mensaje.tipoMensaje = ConstantesExitoError.EXITO;
+    //   mensaje.mensaje = MENSAJE_EXITO;
+    //   this.alertaServicioLocal.agregarMensaje(mensaje);
+    // },
+    //   _ => {
+    //     mensaje.tipoMensaje = ConstantesExitoError.ERROR;
+    //     mensaje.mensaje = MENSAJE_ERROR;
+    //     this.alertaServicioLocal.agregarMensaje(mensaje);
+    //   });
 
   }
 

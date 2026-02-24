@@ -14,21 +14,21 @@
       <ng-container *ngFor="let aportanteProyecto of listaAportante$ | async">
         <tr class="table-hover">
           <td>
-            <span>{{aportanteProyecto.personaJuridica.nit}} - {{aportanteProyecto.personaJuridica.nombreCorto}}</span>
+            <span>{{aportanteProyecto.personaJuridica?.nit}} - {{aportanteProyecto.personaJuridica?.nombreCorto}}</span>
           </td>
           <td>
             <span *ngIf="aportanteProyecto.dependencia != null">
-              {{aportanteProyecto.dependencia?.nombre}}
+              {{aportanteProyecto.dependencia.nombre}}
             </span>
             <span *ngIf="aportanteProyecto.grupo != null">
-              {{aportanteProyecto.grupo?.nombreCorto}}
+              {{aportanteProyecto.grupo.nombreCorto}}
             </span>
-            <span *ngIf="esFinanciadorUdeA(aportanteProyecto.personaJuridica.nit) &&esAporteRecursoEnEspecie(aportanteProyecto)">
+            <span *ngIf="esFinanciadorUdeA(aportanteProyecto?.personaJuridica!.nit) &&esAporteRecursoEnEspecie(aportanteProyecto)">
               {{grupoDependenciaPorDefectoUdeA}}
             </span>
           </td>
           <td>
-            <span *ngIf="!editable || esProyectoConvocatoria">{{validarEsCofinanciadorOFinanciador(aportanteProyecto.tipo)}}</span>
+            <span *ngIf="!editable || esProyectoConvocatoria">{{validarEsCofinanciadorOFinanciador(aportanteProyecto.tipo!)}}</span>
             <mat-form-field *ngIf="editable && esProyectoProcesoSeleccion" appearance="fill" class="margin-right">
               <mat-label>Tipo</mat-label>
               <mat-select id="tipoAportanteProyecto" [(value)]="aportanteProyecto.tipo" (selectionChange)="cambioEnAportante(aportanteProyecto);">
@@ -50,7 +50,7 @@
                 <mat-icon class="light-gray" (click)="validarEditarAportante(aportanteProyecto)">edit</mat-icon>
               </div>
             </div>
-            
+
           </td>
         </tr>
       </ng-container>

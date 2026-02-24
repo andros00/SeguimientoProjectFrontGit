@@ -7,6 +7,7 @@ import { ModalDinamicoComponent } from '../modal-dinamico/modal-dinamico.compone
 import { ClaseAlerta } from '../clase-alerta';
 import { ProyectoConstantes } from '../proyecto-constantes';
 import { ParticipanteProyectoService } from 'src/app/shared/services/show-project/participante-proyecto.service';
+import { AportanteProyecto } from '../aportante-proyecto';
 
 @Component({
   selector: 'app-tabla-participantes-proyecto',
@@ -30,7 +31,12 @@ export class TablaParticipantesProyectoComponent implements OnInit {
     private participanteLocalServicio: ParticipanteProyectoLocalService) {
 
     this.participanteLocalServicio.listaParticipanteProyectoObservable.subscribe(listado => {
-      this.listaParticipantes = listado;
+      this.listaParticipantes = listado.map(p => ({
+        ...p,
+        rol: p.rol ?? { nombre: '' },
+        vinculo: p.vinculo ?? { nombreTipoVinculacion: '', nombreClaseEmpleado: '' },
+        programa: p.programa ?? { nombrePrograma: '', porcentajeCompletado: 0 } // <--- aquí
+      }));
     });
   }
 
@@ -52,6 +58,7 @@ export class TablaParticipantesProyectoComponent implements OnInit {
       textoPrimerBoton: ClaseAlerta.CANCELAR,
       textoSegundoBoton: ClaseAlerta.ELIMINAR,
       clase: ClaseAlerta.ALERTA_INFORMATIVA,
+      editarAportante: new AportanteProyecto
     };
     const modalEliminaParticipanteRef = this.modal.open(ModalDinamicoComponent, {
       data: datosModal

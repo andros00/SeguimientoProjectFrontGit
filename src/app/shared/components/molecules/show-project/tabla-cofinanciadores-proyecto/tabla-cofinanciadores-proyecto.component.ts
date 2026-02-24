@@ -119,8 +119,8 @@ export class TablaCofinanciadoresProyectoComponent implements OnInit {
       mensaje: ProyectoMensajes.MENSAJE_ELIMINAR_APORTANTE,
       textoPrimerBoton: ClaseAlerta.CANCELAR,
       textoSegundoBoton: ClaseAlerta.ACEPTAR,
-      clase: ClaseAlerta.ALERTA_INFORMATIVA
-
+      clase: ClaseAlerta.ALERTA_INFORMATIVA,
+      editarAportante: new AportanteProyecto
     };
     const modalContinuarSinGuardar = this.modal.open(ModalDinamicoComponent, {
       data: datosModal

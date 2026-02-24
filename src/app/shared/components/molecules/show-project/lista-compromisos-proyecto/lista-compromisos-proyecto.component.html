@@ -36,10 +36,10 @@
               <mat-form-field appearance="fill">
                 <mat-label>Comentario</mat-label>
                 <textarea matInput placeholder="Comentario" [disabled]="!editable" [(ngModel)]="compromiso.comentario"></textarea>
-                <mat-error *ngIf="compromiso.comentario?.length > longitudMaximaComentario">
+                <!-- <mat-error *ngIf="compromiso.comentario?.length > longitudMaximaComentario">
                   Máximo 400 caracteres.
                 </mat-error>
-                <mat-hint align="end">{{compromiso.comentario?.length}} / 1200</mat-hint>
+                <mat-hint align="end">{{compromiso.comentario?.length}} / 1200</mat-hint> -->
               </mat-form-field>
             </td>
           </tr>
@@ -93,10 +93,10 @@
                 <mat-form-field appearance="fill">
                   <mat-label>Comentario</mat-label>
                   <textarea matInput placeholder="Comentario" [disabled]="!editable" [(ngModel)]="compromiso.comentario"></textarea>
-                  <mat-error *ngIf="compromiso.comentario?.length > longitudMaximaComentario">
+                  <!-- <mat-error *ngIf="compromiso.comentario?.length > longitudMaximaComentario">
                     Máximo 1200 caracteres.
-                  </mat-error>
-                  <mat-hint align="end">{{compromiso.comentario?.length}} / 1200</mat-hint>
+                  </mat-error> -->
+                  <!-- <mat-hint align="end">{{compromiso.comentario?.length}} / 1200</mat-hint> -->
                 </mat-form-field>
               </td>
               <td *ngIf="editable">
@@ -155,10 +155,10 @@
               <mat-form-field appearance="fill">
                 <mat-label>Comentario</mat-label>
                 <textarea matInput placeholder="Comentario" [disabled]="!editable" [(ngModel)]="compromiso.comentario"></textarea>
-                <mat-error *ngIf="compromiso.comentario?.length > longitudMaximaComentario">
+                <!-- <mat-error *ngIf="compromiso.comentario?.length > longitudMaximaComentario">
                   Máximo 1200 caracteres.
                 </mat-error>
-                <mat-hint align="end">{{compromiso.comentario?.length}} / 1200</mat-hint>
+                <mat-hint align="end">{{compromiso.comentario?.length}} / 1200</mat-hint> -->
               </mat-form-field>
             </td>
             <td *ngIf="editable">

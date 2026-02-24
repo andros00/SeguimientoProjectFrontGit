@@ -27,9 +27,9 @@ export interface InformacionGeneralProyecto {
   pendienteAjustePpto?: number;
   pendienteRevisionCentro?: string;
   periodoCronograma?: string;
-  procesoSeleccion?: InformacionGeneral;
+  procesoSeleccion: InformacionGeneral;
   requiereAvalBioetica?: number;
-  responsable?: string;
+  responsable: string;
   seccional?: string;
   selectorResponsable?: string;
   selectorSeccional?: string;

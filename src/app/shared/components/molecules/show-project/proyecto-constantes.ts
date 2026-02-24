@@ -74,4 +74,4 @@ export const ProyectoConstantes = {
     PROCESO_SELECCION_AVALES: 1670,
     TIPO_DATO_UBICACION: 'listado',
     TITULO_LUGAR_EJECUCION: 'Lugar de ejecución'
-};
+}as const;

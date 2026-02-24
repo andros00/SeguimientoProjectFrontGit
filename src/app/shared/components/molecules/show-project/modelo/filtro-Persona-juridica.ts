@@ -1,4 +1,5 @@
 export interface FiltroPersonaJuridica {
-    nit?: string;
-    limiteGeograficoNacional?: boolean;
+    limiteGeograficoNacional: boolean;
+    palabraClave: string;
+    nit: string;
 }

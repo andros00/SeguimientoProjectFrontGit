@@ -13,11 +13,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatAutocompleteModule } from '@angular/material';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { PasoInformacionGeneralProyectoComponent } from './paso-informacion-general-proyecto.component';
-import { ProyectoConstantes } from '../../proyecto-constantes';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 describe('PasoInformacionGeneralProyectoComponent', () => {
     let component: PasoInformacionGeneralProyectoComponent;
@@ -81,9 +80,9 @@ describe('PasoInformacionGeneralProyectoComponent', () => {
 
     it('debería nulificar convocatoria y modalidad, y llamar a métodos relevantes', () => {
         spyOn(component, 'validarSiLimitaDescripciones');
-     
+
         component.procesoSeleccionSeleccionado();
-     
+
         expect(component.formularioInformacionGeneralProyecto.controls['convocatoria'].value).toBeNull();
         expect(component.formularioInformacionGeneralProyecto.controls['modalidad'].value).toBeNull();
         expect(component.validarSiLimitaDescripciones).toHaveBeenCalled();

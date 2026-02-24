@@ -8,6 +8,7 @@ import { CompromisosProyectoService } from 'src/app/shared/services/show-project
 import { ClaseAlerta } from '../clase-alerta';
 import { ModalDinamicoComponent } from '../modal-dinamico/modal-dinamico.component';
 import { CompromisoProyectoConstantes } from '../compromiso-proyecto-constantes';
+import { AportanteProyecto } from '../aportante-proyecto';
 
 @Component({
   selector: 'app-lista-compromisos-proyecto',
@@ -20,8 +21,8 @@ export class ListaCompromisosProyectoComponent implements OnInit {
 
   @Input() editable!: boolean;
 
-  listaCompromisosObligatorios: CompromisoProyecto[];
-  listaCompromisosOpcionales: CompromisoProyecto[];
+  listaCompromisosObligatorios: CompromisoProyecto[] = [];
+  listaCompromisosOpcionales: CompromisoProyecto[] = [];
   mostrarTablaProcesoSeleccion = false;
 
   constructor(private compromisoServicioLocal: CompromisosProyectoLocalService, proyectoServicioLocal: ProyectoLocalService,
@@ -56,6 +57,7 @@ export class ListaCompromisosProyectoComponent implements OnInit {
       textoPrimerBoton: ClaseAlerta.CANCELAR,
       textoSegundoBoton: ClaseAlerta.ELIMINAR,
       clase: ClaseAlerta.ALERTA_INFORMATIVA,
+      editarAportante: new AportanteProyecto
     };
     const modalEliminarCondicionRef = this.modalEliminar.open(ModalDinamicoComponent, {
       data: datosModal

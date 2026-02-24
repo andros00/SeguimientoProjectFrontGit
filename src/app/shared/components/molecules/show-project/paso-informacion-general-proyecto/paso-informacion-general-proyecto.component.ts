@@ -66,9 +66,9 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
 
   @Output() pasoSiguiente = new EventEmitter<any>();
 
-  formularioInformacionGeneralProyecto: FormGroup | undefined;
+  formularioInformacionGeneralProyecto: FormGroup = new FormGroup({});
   informacionGuardada = false;
-  formularioInformacionGeneral: FormGroup | undefined;
+  formularioInformacionGeneral: FormGroup = new FormGroup({});
   listadoTipoProyectos: TipoProyecto[] = [];
   listadoNivelProyecto: NivelProyecto[] = [];
   listadoclaseSubproyectos: ClaseSubproyecto[] = [];
@@ -83,7 +83,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   listaModalidadesConvocatoria: ModalidadConvocatoria[] = [];
   listaGrupoInvestigacion: GrupoInvestigacion[] = [];
   listaProyectoAsociado: InformacionGeneralProyecto[] = [];
-  personaNatural: PersonaNatural={
+  personaNatural: PersonaNatural = {
     identificacion: '',
     nombrePila: '',
     apellido1: '',
@@ -100,12 +100,12 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
     departamento: 0,
     municipio: 0
   };
-  responsable: string ='';
-  procesoDeLaConvocatoria: number=0;
+  responsable: string = '';
+  procesoDeLaConvocatoria: number = 0;
 
-  opcionesFiltradasConvocatoria: Observable<InformacionGeneralConvocatoria[]>;
-  opcionesFiltradasProcesosSeleccion: Observable<InformacionGeneral[]>;
-  opcionesFiltradasProyecto: Observable<InformacionGeneralProyecto[]>;
+  opcionesFiltradasConvocatoria!: Observable<InformacionGeneralConvocatoria[]>;
+  opcionesFiltradasProcesosSeleccion!: Observable<InformacionGeneral[]>;
+  opcionesFiltradasProyecto!: Observable<InformacionGeneralProyecto[]>;
 
   esMacroproyecto = false;
   esClaseproyecto = false;
@@ -122,14 +122,14 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   tipoProyecto = 0;
   tipoSubproyecto = 0;
   claseSubproyecto = 0;
-  convocatoriaSeleccionada: InformacionGeneralConvocatoria;
+  convocatoriaSeleccionada!: InformacionGeneralConvocatoria;
   grupo = 0;
-  soloLectura: boolean;
-  paraActualizacion: boolean;
-  modoEdicion: boolean;
-  paraConsulta: boolean;
-  proyectoAEditar: InformacionGeneralProyecto;
-  actualizacionVigente: ActualizacionProyecto;
+  soloLectura!: boolean;
+  paraActualizacion!: boolean;
+  modoEdicion!: boolean;
+  paraConsulta!: boolean;
+  proyectoAEditar!: InformacionGeneralProyecto;
+  actualizacionVigente!: ActualizacionProyecto;
   seccionesHabilitadas: string[] = [];
   fechaLimiteActualizacion = '';
   fechaAutorizacion = '';
@@ -212,8 +212,8 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
         actualizacion => {
           this.actualizacionVigente = actualizacion;
           this.seccionesHabilitadas = this.actualizacionVigente.seccionesHabilitadas;
-          this.fechaLimiteActualizacion = this.datePipe.transform(this.actualizacionVigente.fechaLimite, 'dd-MM-yyyy');
-          this.fechaAutorizacion = this.datePipe.transform(this.actualizacionVigente.fechaAutorizacion, 'dd-MM-yyyy');
+          this.fechaLimiteActualizacion = this.datePipe.transform(this.actualizacionVigente.fechaLimite, 'dd-MM-yyyy') ?? '';
+          this.fechaAutorizacion = this.datePipe.transform(this.actualizacionVigente.fechaAutorizacion, 'dd-MM-yyyy') ?? '';
         }
       );
       this.pasosHabilitadosLocalService.habilitarSeccionesActulizacion(this.actualizacionVigente.seccionesHabilitadas);
@@ -252,20 +252,49 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
       duracion: ['', [Validators.required, Validators.min(ProyectoConstantes.MINIMO_DURACION)]]
     });
 
-    this.formularioInformacionGeneralProyecto.get('nivelProyecto').valueChanges.subscribe(
+    this.formularioInformacionGeneralProyecto.get('nivelProyecto')!.valueChanges.subscribe(
       valor => this.evaluarRequeridosNivelProyecto(valor));
 
-    this.formularioInformacionGeneralProyecto.get('proyectoNoRegistradoSiiu').valueChanges.subscribe(
+    this.formularioInformacionGeneralProyecto.get('proyectoNoRegistradoSiiu')!.valueChanges.subscribe(
       valor => this.evaluarRequeridosProyectoRegistradoEnSiiu(valor));
 
-    this.formularioInformacionGeneralProyecto.get('claseProyecto').valueChanges.subscribe(
+    this.formularioInformacionGeneralProyecto.get('claseProyecto')!.valueChanges.subscribe(
       valor => this.evaluarRequeridosProyectoAsociado(valor));
 
-    this.formularioInformacionGeneralProyecto.get('requiereComiteBioetica').valueChanges.subscribe(
+    this.formularioInformacionGeneralProyecto.get('requiereComiteBioetica')!.valueChanges.subscribe(
       valor => this.evaluarRequeridosComiteBioetica(valor));
   }
 
-  get f(): any { return this.formularioInformacionGeneralProyecto!.controls; }
+  get f() {
+    return this.formularioInformacionGeneralProyecto.controls as {
+      duracion: any;
+      nivelProyecto: AbstractControl,
+      tipoMacroproyecto: AbstractControl,
+      tipoProyecto: AbstractControl,
+      claseProyecto: AbstractControl,
+      tipoSubproyecto: AbstractControl,
+      subTipoProyecto: AbstractControl,
+      macroproyecto: AbstractControl,
+      tipoMatriculaProyecto: AbstractControl,
+      convocatoria: AbstractControl,
+      procesoSeleccion: AbstractControl,
+      modalidad: AbstractControl,
+      centroAdministrativo: AbstractControl,
+      requiereComiteBioetica: AbstractControl,
+      comiteBioetica: AbstractControl,
+      grupo: AbstractControl,
+      proyectoNoRegistradoSiiu: AbstractControl,
+      proyectoVinculaJi: AbstractControl,
+      tituloProyecto: AbstractControl,
+      justificacion: AbstractControl,
+      componente: AbstractControl,
+      nombreCorto: AbstractControl,
+      nombreCompleto: AbstractControl,
+      palabrasClave: AbstractControl,
+      seccional: AbstractControl,
+      lugarEjecucion: AbstractControl,
+    };
+  }
 
   identificarCambiosEnFormulario() {
     this.informacionGuardada = true;
@@ -292,7 +321,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
     this.informacionGeneralProyectoServicio.obtenerTiposProyectoConPermiso(this.paraConsulta).subscribe(listaTipoProyecto => {
       this.listadoTipoProyectos = listaTipoProyecto;
       if (this.modoEdicion) {
-        this.f.tipoProyecto.setValue(this.proyectoAEditar.procesoSeleccion.tipoProyecto.identificador);
+        this.f.tipoProyecto.setValue(this.proyectoAEditar.procesoSeleccion.tipoProyecto?.identificador);
         this.f.tipoMacroproyecto.setValue(this.proyectoAEditar.tipoProyectoMacro);
         this.cambioTipoProyecto();
         this.cambioTipoMacroproyecto();
@@ -396,7 +425,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
       this.personaNaturalServicio.consultarPersonaNaturalPorId(this.proyectoLocalServicio.obtenerInformacionGeneralProyecto().responsable)
         .subscribe(personaNatural => {
           this.personaNatural = personaNatural;
-          this.responsable = `${this.personaNatural.nombrePila} ${this.personaNatural.apellido1} ${this.personaNatural.apellido2}`;
+          this.responsable = `${this.personaNatural?.nombrePila} ${this.personaNatural?.apellido1} ${this.personaNatural?.apellido2}`;
         });
     }
   }
@@ -433,13 +462,24 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
     this.validarSiLimitaDescripciones();
     this.consultarCentrosAdministrativos();
 
-    const procesoSeleccion = this.f.procesoSeleccion.value.nombre;
+    const procesoSeleccion = this.f.procesoSeleccion.value;
 
-    if (procesoSeleccion in ProyectoConstantes.PROYECTO_PROCES0_DE_SELECCION) {
-      this.mensajeProceSeleccion = ProyectoConstantes.PROYECTO_PROCES0_DE_SELECCION[procesoSeleccion];
+    if (!procesoSeleccion?.nombre) return;
+
+    type ProcesoSeleccionKey = keyof typeof ProyectoConstantes.PROYECTO_PROCES0_DE_SELECCION;
+    const nombre = this.f.procesoSeleccion.value?.nombre as ProcesoSeleccionKey;
+
+    if (ProyectoConstantes.PROYECTO_PROCES0_DE_SELECCION[nombre]) {
+  this.mensajeProceSeleccion = ProyectoConstantes.PROYECTO_PROCES0_DE_SELECCION[nombre];
+  this.trigger.openMenu();
+
+// }
+
+//     if (procesoSeleccion.nombre in ProyectoConstantes.PROYECTO_PROCES0_DE_SELECCION) {
+//       this.mensajeProceSeleccion = ProyectoConstantes.PROYECTO_PROCES0_DE_SELECCION[procesoSeleccion.nombre];
       //this.trigger.openMenu();
     } else {
-      console.error(`Valor no válido para procesoSeleccion: ${procesoSeleccion}`);
+      console.error(`Valor no válido para procesoSeleccion:`);
     }
   }
 
@@ -544,8 +584,13 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   }
 
   private cargarConvocatorias() {
-    const tipoAEnviar = this.tipoProyecto || this.f.tipoMacroproyecto.value ||
-      this.proyectoAEditar.procesoSeleccion.tipoProyecto.identificador;
+
+    const tipoAEnviar = this.tipoProyecto
+      ? this.tipoProyecto
+      : this.f.tipoMacroproyecto.value ??
+      (this.proyectoAEditar?.procesoSeleccion?.tipoProyecto?.identificador ?? 0);
+
+
     if ((this.nivelProyecto !== 0 && !!tipoAEnviar && this.tipoSubproyecto !== 0)
       || (this.nivelProyecto !== 0 && !!tipoAEnviar && this.claseSubproyecto !== 0)
       || (this.nivelProyecto !== 0 && this.esMacroproyecto && !!this.f.tipoMacroproyecto.value)
@@ -553,34 +598,60 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
       this.listaConvocatorias = [];
       this.f.convocatoria.setValue('');
       if (this.modoEdicion) {
-        this.tipoSubproyecto = this.proyectoLocalServicio.obtenerDatosSubproyecto().claseSubproyecto || 0;
+        this.tipoSubproyecto = this.proyectoLocalServicio.obtenerDatosSubproyecto()?.claseSubproyecto ?? 0;
       }
-      this.informacionGeneralProyectoServicio.consultarConvocatoria(
-        this.nivelProyecto, tipoAEnviar, this.tipoSubproyecto, this.paraConsulta).subscribe(convocatorias => {
-          convocatorias.forEach(convocatoria => {
-            this.listaConvocatorias.push(convocatoria);
-          });
+
+
+      this.informacionGeneralProyectoServicio
+        .consultarConvocatoria(this.nivelProyecto, tipoAEnviar, this.tipoSubproyecto, this.paraConsulta)
+        .subscribe(convocatorias => {
+          this.listaConvocatorias.push(...convocatorias);
+
           if (this.modoEdicion) {
-            this.f.convocatoria.setValue(this.listaConvocatorias.find(
-              convocatoria => convocatoria.identificador === this.proyectoAEditar.convocatoria.identificador));
+            const conv = this.listaConvocatorias.find(c =>
+              c.identificador === this.proyectoAEditar?.convocatoria?.identificador
+            );
+            this.f.convocatoria.setValue(conv ?? '');
             this.procesoConvocatoriaSeleccionado();
-            this.obtenerModalidades(this.proyectoAEditar.convocatoria);
+            if (this.proyectoAEditar?.convocatoria) {
+              this.obtenerModalidades(this.proyectoAEditar.convocatoria);
+            }
             this.edicionConvocatoria = false;
           }
         });
 
-      this.opcionesFiltradasConvocatoria = this.f.convocatoria.valueChanges
-        .pipe(
-          startWith<string | InformacionGeneralConvocatoria>(''),
-          map(value => typeof value === 'string' ? value : value.nombre),
-          map(nombre => nombre ? this._filtroConvocatoria(nombre) : this.listaConvocatorias.slice())
-        );
+      this.opcionesFiltradasConvocatoria = this.f.convocatoria.valueChanges.pipe(
+        startWith<string | InformacionGeneralConvocatoria>(''),
+        map(value => typeof value === 'string' ? value : value?.nombre ?? ''),
+        map(nombre => nombre ? this._filtroConvocatoria(nombre) : this.listaConvocatorias.slice())
+      );
+
+      // this.informacionGeneralProyectoServicio.consultarConvocatoria(
+      //   this.nivelProyecto, tipoAEnviar, this.tipoSubproyecto, this.paraConsulta).subscribe(convocatorias => {
+      //     convocatorias.forEach(convocatoria => {
+      //       this.listaConvocatorias.push(convocatoria);
+      //     });
+      //     if (this.modoEdicion) {
+      //       this.f.convocatoria.setValue(this.listaConvocatorias.find(
+      //         convocatoria => convocatoria.identificador === this.proyectoAEditar.convocatoria?.identificador));
+      //       this.procesoConvocatoriaSeleccionado();
+      //       this.obtenerModalidades(this.proyectoAEditar.convocatoria!);
+      //       this.edicionConvocatoria = false;
+      //     }
+      //   });
+
+      // this.opcionesFiltradasConvocatoria = this.f.convocatoria.valueChanges
+      //   .pipe(
+      //     startWith<string | InformacionGeneralConvocatoria>(''),
+      //     map(value => typeof value === 'string' ? value : value.nombre),
+      //     map(nombre => nombre ? this._filtroConvocatoria(nombre) : this.listaConvocatorias.slice())
+      //   );
     }
   }
 
   private _filtroConvocatoria(nombre: string): any[] {
     const valorFiltro = nombre.toLowerCase();
-    return this.listaConvocatorias.filter(opcion => opcion.nombre.toLowerCase().indexOf(valorFiltro) ===
+    return this.listaConvocatorias.filter(opcion => opcion.nombre!.toLowerCase().indexOf(valorFiltro) ===
       ConvocatoriaConstantes.INCIALIZACION_CERO);
   }
 
@@ -588,8 +659,10 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
     return convocatoria ? convocatoria.nombre : undefined;
   }
 
-  nombreProyecto(proyecto?: InformacionGeneralProyecto): string | undefined {
-    return proyecto ? `${proyecto.codigo}  ${'-'} ${proyecto.nombreCorto}` : undefined;
+  nombreProyecto(proyecto?: InformacionGeneralProyecto): string {
+    return proyecto
+      ? `${proyecto.codigo} - ${proyecto.nombreCorto}`
+      : '';
   }
 
   validarValorEnOpciones(control: AbstractControl) {
@@ -602,29 +675,54 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   }
 
   private cargarProcesosSeleccion() {
-    const tipoAEnviar = this.tipoProyecto || this.f.tipoMacroproyecto.value;
+    const tipoAEnviar = this.tipoProyecto
+      ? this.tipoProyecto
+      : this.f.tipoMacroproyecto.value ?? 0;
+
+
     if ((this.nivelProyecto !== 0 && !!tipoAEnviar && this.tipoSubproyecto !== 0)
       || (this.nivelProyecto !== 0 && !!tipoAEnviar && this.claseSubproyecto !== 0)
       || (this.nivelProyecto !== 0 && this.esMacroproyecto && !!this.f.tipoMacroproyecto.value)) {
       this.listaProcesosSeleccion = [];
       this.f.procesoSeleccion.setValue('');
+
       if (this.modoEdicion) {
-        this.tipoSubproyecto = this.proyectoLocalServicio.obtenerDatosSubproyecto().claseSubproyecto || 0;
+        this.tipoSubproyecto = this.proyectoLocalServicio.obtenerDatosSubproyecto()?.claseSubproyecto ?? 0;
       }
-      this.informacionGeneralProyectoServicio.consultarProcesosSeleccion(
-        this.nivelProyecto, tipoAEnviar, this.tipoSubproyecto, this.paraConsulta).subscribe(procesos => {
-          procesos.forEach(proceso => {
-            this.listaProcesosSeleccion.push(proceso);
-          });
+
+      this.informacionGeneralProyectoServicio
+        .consultarProcesosSeleccion(this.nivelProyecto, tipoAEnviar, this.tipoSubproyecto, this.paraConsulta)
+        .subscribe(procesos => {
+          this.listaProcesosSeleccion.push(...procesos);
+
           if (this.modoEdicion) {
-            this.f.procesoSeleccion.setValue(this.listaProcesosSeleccion.find(
-              procesoSeleccion => procesoSeleccion.identificador === this.proyectoAEditar.procesoSeleccion.identificador));
-            if (!this.proyectoAEditar.convocatoria) {
+            const proceso = this.listaProcesosSeleccion.find(p =>
+              p.identificador === this.proyectoAEditar?.procesoSeleccion?.identificador
+            );
+            this.f.procesoSeleccion.setValue(proceso ?? '');
+
+            if (!this.proyectoAEditar?.convocatoria) {
               this.procesoSeleccionSeleccionado();
             }
+
             this.identificarCambiosEnFormulario();
           }
         });
+
+      // this.informacionGeneralProyectoServicio.consultarProcesosSeleccion(
+      //   this.nivelProyecto, tipoAEnviar, this.tipoSubproyecto, this.paraConsulta).subscribe(procesos => {
+      //     procesos.forEach(proceso => {
+      //       this.listaProcesosSeleccion.push(proceso);
+      //     });
+      //     if (this.modoEdicion) {
+      //       this.f.procesoSeleccion.setValue(this.listaProcesosSeleccion.find(
+      //         procesoSeleccion => procesoSeleccion.identificador === this.proyectoAEditar.procesoSeleccion.identificador));
+      //       if (!this.proyectoAEditar.convocatoria) {
+      //         this.procesoSeleccionSeleccionado();
+      //       }
+      //       this.identificarCambiosEnFormulario();
+      //     }
+      //   });
     }
   }
 
@@ -661,7 +759,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
 
   private _filtroProyectoAsociado(nombre: string): InformacionGeneralProyecto[] {
     const valorFiltro = nombre.toLowerCase();
-    return this.listaProyectoAsociado.filter(opcion => (opcion.nombreCorto.toLowerCase().indexOf(valorFiltro) ===
+    return this.listaProyectoAsociado.filter(opcion => (opcion.nombreCorto!.toLowerCase().indexOf(valorFiltro) ===
       ConvocatoriaConstantes.INCIALIZACION_CERO) || (opcion.codigo.toLowerCase().indexOf(valorFiltro) ===
         ConvocatoriaConstantes.INCIALIZACION_CERO));
   }
@@ -673,7 +771,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   obtenerModalidades(convocatoria: InformacionGeneralConvocatoria) {
     this.convocatoriaSeleccionada = convocatoria;
     this.activarModalidades = true;
-    this.cargarModalidadesConvocatoria(convocatoria.identificador);
+    this.cargarModalidadesConvocatoria(convocatoria.identificador!);
   }
 
   private cargarModalidadesConvocatoria(idConvocatoria: number) {
@@ -684,7 +782,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
           modalidades.forEach(modalidad => this.listaModalidadesConvocatoria.push(modalidad));
           if (this.modoEdicion) {
             const modalidadEncontradaParaProyecto = this.listaModalidadesConvocatoria.find(
-              modalidad => modalidad.identificador === this.proyectoAEditar.modalidadConvocatoria.identificador);
+              modalidad => modalidad.identificador === this.proyectoAEditar.modalidadConvocatoria!.identificador);
             this.f.modalidad.setValue(modalidadEncontradaParaProyecto);
             this.cambioModalidad();
             this.identificarCambiosEnFormulario();
@@ -781,14 +879,14 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
     }
     informacionGeneral.nivelProyecto = this.getNivelProyecto();
     if (!!this.f.tipoMacroproyecto.value) {
-      informacionGeneral.subnivelProyecto = null;
-      informacionGeneral.subtipoProyecto = null;
+      informacionGeneral.subnivelProyecto = 0;
+      informacionGeneral.subtipoProyecto = 0;
       informacionGeneral.tipoProyectoMacro = this.f.tipoMacroproyecto.value;
       informacionGeneral.tipoProyecto = this.f.tipoMacroproyecto.value;
     } else {
       informacionGeneral.subtipoProyecto = this.f.subTipoProyecto.value.identificador;
       informacionGeneral.subnivelProyecto = this.f.claseProyecto.value;
-      informacionGeneral.tipoProyectoMacro = null;
+      informacionGeneral.tipoProyectoMacro = 0;
       informacionGeneral.tipoProyecto = this.f.tipoProyecto.value;
     }
     informacionGeneral.centroGestion = this.f.centroAdministrativo.value;
@@ -817,7 +915,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
 
   getNivelProyecto(): number {
     const nivel = this.f.nivelProyecto.value;
-    switch(nivel) {
+    switch (nivel) {
       case -1:
         return 2;
       case -2:
@@ -828,7 +926,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   }
 
   private validarEsSubproyecto(): DatosSubproyecto {
-    let subproyecto: DatosSubproyecto = null;
+    let subproyecto: DatosSubproyecto = {} as DatosSubproyecto;
     if (!!this.f.tipoSubproyecto.value) {
       subproyecto = {} as DatosSubproyecto;
       subproyecto.claseSubproyecto = this.f.tipoSubproyecto.value;
@@ -844,7 +942,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   }
 
   private validarEsMacroProyecto(): ComponenteProyecto {
-    let componente: ComponenteProyecto = null;
+    let componente: ComponenteProyecto = {} as ComponenteProyecto;
     if (!!this.f.macroproyecto.value) {
       componente = {} as ComponenteProyecto;
       componente.codigoProyecto = this.f.macroproyecto.value.codigo;
@@ -878,7 +976,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   private calcularPasosVisibles(proyecto: InformacionGeneralProyecto) {
     let idProcesoSeleccionAsociado: number;
     if (this.tipoMatriculaProyectoConvocatoria()) {
-      idProcesoSeleccionAsociado = this.convocatoriaSeleccionada.procesoSeleccion.informacionGeneral.identificador;
+      idProcesoSeleccionAsociado = this.convocatoriaSeleccionada.procesoSeleccion!.informacionGeneral.identificador;
     } else {
       idProcesoSeleccionAsociado = this.f.procesoSeleccion.value.identificador;
     }
@@ -1031,7 +1129,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
     }
   }
 
-  validarEsMacroproyecto(idNivelProyecto) {
+  validarEsMacroproyecto(idNivelProyecto: any) {
     if (idNivelProyecto === ProyectoConstantes.IDENTIFICADOR_TIPO_MACROPROYECTO) {
       this.esMacroproyecto = true;
       this.claseSubproyecto = 0;
@@ -1040,7 +1138,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
     }
   }
 
-  validarEsClaseProyecto(idNivelProyecto) {
+  validarEsClaseProyecto(idNivelProyecto: any) {
     if (idNivelProyecto === ProyectoConstantes.IDENTIFICADOR_TIPO_PROYECTO) {
       this.esClaseproyecto = true;
     } else {
@@ -1212,7 +1310,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
     this.f['duracion'].setValue(this.proyectoAEditar.duracion);
   }
 
-  private validarExistenciaFinanciador():void {
+  private validarExistenciaFinanciador(): void {
     this.existeFinanciador =
       this.aportanteProyectoLocalService.validarSiExisteFinanciador();
   }
@@ -1228,7 +1326,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
 
   @HostListener('window:message', ['$event'])
   onMessage(event: any) {
-    if(event.data.tipo === ProyectoConstantes.TIPO_DATO_UBICACION){
+    if (event.data.tipo === ProyectoConstantes.TIPO_DATO_UBICACION) {
       const pais = event.data.pais.nombre;
       const departamento = event.data.departamento.nombre;
       const municipio = event.data.municipio.nombre;

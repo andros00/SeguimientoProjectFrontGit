@@ -4,13 +4,18 @@ import { SeccionProyecto } from '../seccion-proyecto';
 import { ActualizacionProyecto } from '../actualizacion-proyecto';
 import { ActualizacionProyectoLocalService } from 'src/app/shared/services/show-project/actualizacion-proyecto-local.service';
 import { PasosHabilitadosLocalService } from 'src/app/shared/services/show-project/pasos-habilitados-local.service';
-import { MatAccordion } from "@angular/material/expansion";
+import { MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle } from "@angular/material/expansion";
+import { MatIcon } from "@angular/material/icon";
+import { MatMenu } from "@angular/material/menu";
+import { CommonModule } from '@angular/common';
 //import { EditarActualizacionesProyectoComponent } from '../editar-actualizaciones-proyecto/editar-actualizaciones-proyecto.component';
 
 @Component({
   selector: 'app-paso-actualizaciones-proyecto',
   templateUrl: './paso-actualizaciones-proyecto.component.html',
   styleUrls: ['./paso-actualizaciones-proyecto.component.css'],
+  standalone: true,
+  imports: [CommonModule,MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatIcon, MatMenu],
 })
 export class PasoActualizacionesProyectoComponent implements OnInit {
 

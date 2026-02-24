@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class TableComponent implements AfterViewInit {
 
   FORMAT_START_URL: string = 'tramitesadministrativos/seguimientoaproyectos/inicioformal';
-  SHOW_PROJECT_URL: string = 'tramitesadministrativos/seguimientoaproyecto/verproyecto';
+  SHOW_PROJECT_URL: string = 'tramitesadministrativos/seguimientoaproyectos/verproyecto';
 
   displayedColumns: string[] = ['code', 'project', 'state', 'projectLevel', 'calls', 'responsable', 'ip', 'projectType', 'actions'];
   projects = new MatTableDataSource<IProject[]>([]);

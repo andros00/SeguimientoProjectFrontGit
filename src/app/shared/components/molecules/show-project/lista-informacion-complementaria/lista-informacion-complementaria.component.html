@@ -1,9 +1,9 @@
 <div class="accordion-udea margin-top">
   <div class="col-5 align-center boton">
-    <div>
+    <!-- <div>
       <button mat-raised-button id="btn-guardar-condicion" name="btnguardar" class="save-fill"
         (click)="guardarSeleccionados()">GUARDAR<mat-icon class="margin-left">save</mat-icon></button>
-    </div>
+    </div> -->
   </div>
   <app-mensaje-exito-error></app-mensaje-exito-error>
   <mat-accordion *ngFor="let valor of listado; let i = index">
@@ -12,13 +12,13 @@
         <mat-panel-title>
           <button mat-icon-button *ngIf="editable">
             <span class="title-accordion">
-              <mat-icon class="more" [matMenuTriggerFor]="menu">more_vert</mat-icon>
+              <!-- <mat-icon class="more" [matMenuTriggerFor]="menu">more_vert</mat-icon> -->
             </span>
           </button>
           <h3 *ngIf="valor.titulo" class="title-accordion">{{valor.titulo}}<span class="required">* </span>
           </h3>
           <p *ngIf="validarElementosSeleccionados(valor)" class="primary-color"> Tiene
-            {{valor.elementosSeleccionados.length}} objetivos
+            {{valor.elementosSeleccionados!.length}} objetivos
             seleccionados</p>
           <p *ngIf="!validarElementosSeleccionados(valor)" class="required"> No tiene elementos seleccionados</p>
         </mat-panel-title>
@@ -39,8 +39,8 @@
                 {{ elemento.objetivo }}. {{ elemento.descripcion }}
               </div>
               <div>
-                <mat-checkbox [(ngModel)]="elemento.seleccionado" [disabled]="elemento.disabled"
-                  (change)="manejarCambioElemento(elemento, null, valor)"></mat-checkbox>
+                <!-- <mat-checkbox [(ngModel)]="elemento.seleccionado" [disabled]="elemento.disabled!"
+                  (change)="manejarCambioElemento(elemento, null, valor)"></mat-checkbox> -->
               </div>
             </li>
             <li *ngIf="elemento.subagendas && validarSubagendasSeleccionadas" class="list-item agenda">
@@ -53,8 +53,8 @@
                 {{ elemento.objetivo }}.{{ subagenda.objetivo }}. {{ subagenda.descripcion }}
               </div>
               <div>
-                <mat-checkbox [(ngModel)]="subagenda.seleccionado" [disabled]="elemento.disabled"
-                  (change)="manejarCambioElemento(elemento, subagenda, valor)"></mat-checkbox>
+                <!-- <mat-checkbox [(ngModel)]="subagenda.seleccionado" [disabled]="elemento.disabled"
+                  (change)="manejarCambioElemento(elemento, subagenda, valor)"></mat-checkbox> -->
               </div>
             </li>
           </ng-container>

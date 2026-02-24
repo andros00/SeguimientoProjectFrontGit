@@ -11,6 +11,8 @@ import { PasoParticipantesProyectoComponent } from '../paso-participantes-proyec
 import { PasoEvaluadoresRecomendadosProyectoComponent } from '../paso-evaluadores-recomendados-proyecto/paso-evaluadores-recomendados-proyecto.component';
 import { PasoCompromisosCondicionesProyectoComponent } from '../paso-compromisos-condiciones-proyecto/paso-compromisos-condiciones-proyecto.component';
 import { PasoDocumentosSoporteProyectoComponent } from '../paso-documentos-soporte-proyecto/paso-documentos-soporte-proyecto.component';
+import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,6 +21,9 @@ import { PasoDocumentosSoporteProyectoComponent } from '../paso-documentos-sopor
   styleUrl: './steeper-show.component.scss'
 })
 export class SteeperShowComponent {
+
+    soloLectura = false;
+  paraActualizacion = false;
 
   isLinear = false;
   steps: any[] = [];
@@ -31,9 +36,19 @@ export class SteeperShowComponent {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private injector: Injector) { }
+    private injector: Injector,
+  private activeRoute: ActivatedRoute,
+  private router: Router ) { }
 
   ngOnInit() {
+
+  const query = this.activeRoute.snapshot.queryParams;
+  this.soloLectura = query['soloLectura'] === 'true';
+  this.paraActualizacion = query['paraActualizacion'] === 'true';
+  this.projectCode = query['projectCode'];
+
+    console.log('sololectura del proyecto recibido en SteeperShowComponent:', this.soloLectura );
+
     this.initializeSteps();
   }
 
@@ -86,19 +101,19 @@ export class SteeperShowComponent {
         label: 'Evaluadores recomendados',
         formGroup: this._formBuilder.group({ closeCtrl: ['', Validators.required] }),
         component: PasoEvaluadoresRecomendadosProyectoComponent,
-        controlName: 'closeCtrl'
+        controlName: 'evaluadoresCtrl'
       },
       {
         label: 'Compromisos y condiciones',
         formGroup: this._formBuilder.group({ closeCtrl: ['', Validators.required] }),
         component: PasoCompromisosCondicionesProyectoComponent,
-        controlName: 'closeCtrl'
+        controlName: 'compromisosCtrl'
       },
       {
         label: 'Documento soporte',
         formGroup: this._formBuilder.group({ closeCtrl: ['', Validators.required] }),
         component: PasoDocumentosSoporteProyectoComponent,
-        controlName: 'closeCtrl'
+        controlName: 'documentosCtrl'
       }
     ];
   }
@@ -114,6 +129,13 @@ export class SteeperShowComponent {
     if (this.stepper) {
       this.stepper.previous();
     }
+  }
+
+    finalizarStepper(stepper: MatStepper) {
+    // 1. Opcional: Reiniciar el stepper
+    stepper.reset();
+
+  this.router.navigate(['/']);
   }
 
 

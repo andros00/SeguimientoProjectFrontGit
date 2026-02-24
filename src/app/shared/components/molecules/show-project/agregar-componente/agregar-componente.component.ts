@@ -16,6 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 
+
 @Component({
   selector: 'app-agregar-componente',
   templateUrl: './agregar-componente.component.html',

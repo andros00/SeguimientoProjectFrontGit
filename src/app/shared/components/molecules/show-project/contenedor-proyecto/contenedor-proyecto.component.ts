@@ -7,7 +7,7 @@ import { InformacionGeneralProyecto } from '../informacion-general-proyecto';
 import { ProyectoLocalService } from 'src/app/shared/services/show-project/proyecto-local.service';
 import { MatIcon } from "@angular/material/icon";
 import { CommonModule } from '@angular/common';
-import { WizardModule , WizardComponent } from 'angular-archwizard';
+import {  WizardComponent } from 'angular-archwizard';
 import { PasoInformacionGeneralProyectoComponent } from '../paso-informacion-general-proyecto/paso-informacion-general-proyecto.component';
 import { PasoActualizacionesProyectoComponent } from '../paso-actualizaciones-proyecto/paso-actualizaciones-proyecto.component';
 import { PasoInformacionComplementariaComponent } from '../paso-informacion-complementaria/paso-informacion-complementaria.component';
@@ -27,20 +27,7 @@ import { PasoPublicarProyectoComponent } from '../paso-publicar-proyecto/paso-pu
   templateUrl: './contenedor-proyecto.component.html',
   styleUrls: ['./contenedor-proyecto.component.css'],
   standalone: true,
-  imports:[CommonModule,
-        // PasoInformacionGeneralProyectoComponent
-    // PasoActualizacionesProyectoComponent,
-    // PasoInformacionComplementariaComponent,
-    // PasoDescripcionCronogramaProyectoComponent,
-    // PasoPresupuestalProyectoComponent,
-    // PasoComponenteProyectoComponent,
-    // PasoPlanTrabajoProyectoComponent,
-    // PasoParticipantesProyectoComponent,
-    // PasoEvaluadoresRecomendadosProyectoComponent,
-    // PasoCompromisosCondicionesProyectoComponent,
-    // PasoDocumentosSoporteProyectoComponent,
-    // PasoPublicarProyectoComponent
-   ]
+  imports: [CommonModule, MatIcon]
 
 })
 export class ContenedorProyectoComponent implements OnInit {
@@ -77,17 +64,17 @@ export class ContenedorProyectoComponent implements OnInit {
     this.inhabilitarNavegacion = false;
   }
 
-  irAtras() {
-    this.wizard.model.navigationMode.goToPreviousStep();
-  }
+  // irAtras() {
+  //   this.wizard.model.navigationMode.goToPreviousStep();
+  // }
 
-  irAdelante() {
-    this.wizard.model.navigationMode.goToNextStep();
-  }
+  // irAdelante() {
+  //   this.wizard.model.navigationMode.goToNextStep();
+  // }
 
-  esPasoActual(paso: Paso): boolean {
-    return !!paso && this.wizard.model.currentStepIndex === paso.numero - 1;
-  }
+  // esPasoActual(paso: Paso): boolean {
+  //   return !!paso && this.wizard.model.currentStepIndex === paso.numero - 1;
+  // }
 
   mostrarPaso(paso: Paso): boolean {
     return !!paso && paso.visible;

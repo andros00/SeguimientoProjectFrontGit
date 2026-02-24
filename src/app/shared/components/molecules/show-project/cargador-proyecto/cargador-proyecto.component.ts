@@ -9,7 +9,7 @@ import { MatProgressSpinner } from "@angular/material/progress-spinner";
   selector: 'app-cargador-proyecto',
   templateUrl: './cargador-proyecto.component.html',
   styleUrls: ['./cargador-proyecto.component.css'],
-  standalone : true,
+  standalone: true,
   imports: [MatProgressSpinner]
 })
 export class CargadorProyectoComponent implements OnInit {
@@ -30,8 +30,9 @@ export class CargadorProyectoComponent implements OnInit {
 
   private cargarDatosProyecto(proyecto: InformacionGeneralProyecto): void {
     this.cargadorProyectoService.cargarProyecto(proyecto, true, false).subscribe(
-      _ => this.router.navigate(['/proyecto/'], { queryParams: { estado: 'Editar', soloLectura: true } })
-    );
+      _ =>
+        this.router.navigate(['tramitesadministrativos/seguimientoaproyectos/proyecto'],
+          { queryParams: { estado: 'Editar', soloLectura: true } }));
   }
 
 }

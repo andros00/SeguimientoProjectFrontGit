@@ -5,5 +5,5 @@ export interface Programa {
     nombreTipoPrograma: string;
     inicioProximaCohorte: string;
     codigoFacultad: number;
-    porcentajeCompletado: number;
+    porcentajeCompletado?: number;
 }

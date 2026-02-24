@@ -21,6 +21,7 @@ import { ModalDinamicoInformativoComponent } from '../modal-dinamico-informativo
 import { ModalDinamicoComponent } from '../modal-dinamico/modal-dinamico.component';
 import { InformacionGeneralProyectoService } from 'src/app/shared/services/show-project/informacion-general-proyecto.service';
 import { InformacionComplementariaLocalService } from 'src/app/shared/services/show-project/informacion-complementaria-local.service';
+import { AportanteProyecto } from '../aportante-proyecto';
 
 @Component({
   selector: 'app-paso-publicar-proyecto',
@@ -97,6 +98,7 @@ export class PasoPublicarProyectoComponent {
       textoPrimerBoton: ClaseAlerta.CANCELAR,
       textoSegundoBoton: ClaseAlerta.ACEPTAR,
       clase: ClaseAlerta.ALERTA_ADVERTENCIA,
+      editarAportante: new AportanteProyecto
     };
     const modalEliminarDocumentoRef = this.modal.open(ModalDinamicoComponent, {
       data: datosModal

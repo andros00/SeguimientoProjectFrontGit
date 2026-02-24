@@ -13,6 +13,8 @@ import { CronogramaProyectoConstantes } from '../cronograma-proyecto-constantes'
 import { ActividadProyecto } from '../actividad-proyecto';
 import { CronogramaProyectoLocalService } from 'src/app/shared/services/show-project/cronograma-proyecto-local.service';
 import { CronogramaService } from 'src/app/shared/services/show-project/cronograma.service';
+import { InformacionGeneral } from '../informacion-general';
+import { AportanteProyecto } from '../aportante-proyecto';
 
 const MENSAJE_EXITO_ELIMINANDO = 'La actividad fue eliminada con éxito.';
 const MENSAJE_ERROR_ELIMINANDO = 'Ocurrió un error eliminando la actividad.';
@@ -30,7 +32,9 @@ export class ListaCronogramaProyectoComponent implements OnInit {
   informacionGeneral: InformacionGeneralProyecto = {
     codigo: '',
     claseProyecto: 0,
-    nivelProyecto: 0
+    nivelProyecto: 0,
+    procesoSeleccion: {} as InformacionGeneral,
+    responsable: ''
   };
 
   constructor(public dialogo: MatDialog, private cronogramaServicioLocal: CronogramaProyectoLocalService,
@@ -58,6 +62,7 @@ export class ListaCronogramaProyectoComponent implements OnInit {
       textoPrimerBoton: ClaseAlerta.CANCELAR,
       textoSegundoBoton: ClaseAlerta.ELIMINAR,
       clase: ClaseAlerta.ALERTA_INFORMATIVA,
+      editarAportante: new AportanteProyecto
     };
     const modalEliminarCondicionRef = this.modal.open(ModalDinamicoComponent, {
       data: datosModal
@@ -71,19 +76,19 @@ export class ListaCronogramaProyectoComponent implements OnInit {
   }
 
   eliminarActividad(actividad: ActividadProyecto) {
-    const mensaje = new AlertaMensaje();
-    if (!!actividad.identificador && actividad.identificador !== 0) {
-      this.cronogramaServicio.eliminarActividadProyecto(actividad.identificador).subscribe(_ => {
-        this.eliminarActividadLocal(actividad, mensaje);
-      },
-        _ => {
-          mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-          mensaje.mensaje = MENSAJE_ERROR_ELIMINANDO;
-          this.alertaServicioLocal.agregarMensaje(mensaje);
-        });
-    } else {
-      this.eliminarActividadLocal(actividad, mensaje);
-    }
+    // const mensaje = new AlertaMensaje();
+    // if (!!actividad.identificador && actividad.identificador !== 0) {
+    //   this.cronogramaServicio.eliminarActividadProyecto(actividad.identificador).subscribe(_ => {
+    //     this.eliminarActividadLocal(actividad, mensaje);
+    //   },
+    //     _ => {
+    //       mensaje.tipoMensaje = ConstantesExitoError.ERROR;
+    //       mensaje.mensaje = MENSAJE_ERROR_ELIMINANDO;
+    //       this.alertaServicioLocal.agregarMensaje(mensaje);
+    //     });
+    // } else {
+    //   this.eliminarActividadLocal(actividad, mensaje);
+    // }
   }
 
 

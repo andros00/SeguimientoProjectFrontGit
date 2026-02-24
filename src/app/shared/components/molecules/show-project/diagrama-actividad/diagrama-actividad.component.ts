@@ -1,18 +1,18 @@
-import { InformacionGeneralProyecto } from 'src/app/proyecto/modelo/informacion-general-proyecto';
 import { Observable } from 'rxjs';
-import { ActividadProyectoNodo } from './../../modelo/actividad-proyecto-nodo';
-import { ActividadProyecto } from './../../modelo/actividad-proyecto';
 import { Component, OnInit } from '@angular/core';
-import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material/tree';
+import { MatTreeFlattener, MatTreeFlatDataSource, MatTree, MatTreeNode } from '@angular/material/tree';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { ProyectoLocalService } from '../../servicio-local/proyecto-local.service';
-import { CronogramaProyectoLocalService } from '../../servicio-local/cronograma-proyecto-local.service';
+import { ActividadProyecto } from '../actividad-proyecto';
+import { ActividadProyectoNodo } from '../actividad-proyecto-nodo';
+import { ProyectoLocalService } from 'src/app/shared/services/show-project/proyecto-local.service';
+import { CronogramaProyectoLocalService } from 'src/app/shared/services/show-project/cronograma-proyecto-local.service';
+import { InformacionGeneralProyecto } from '../informacion-general-proyecto';
 
 @Component({
   selector: 'app-diagrama-actividad',
   templateUrl: './diagrama-actividad.component.html',
-  styleUrls: ['./diagrama-actividad.component.scss']
+  styleUrls: ['./diagrama-actividad.component.scss'],
 })
 
 export class DiagramaActividadComponent implements OnInit {
@@ -50,7 +50,7 @@ export class DiagramaActividadComponent implements OnInit {
   }
 
   private cargarDuracion(proyectoGuardado$: InformacionGeneralProyecto) {
-    this.meses = this.calcularRango(0, proyectoGuardado$.duracion);
+    this.meses = this.calcularRango(0, proyectoGuardado$.duracion!);
   }
 
   obtenerRango(actividad: ActividadProyecto) {
@@ -68,7 +68,7 @@ export class DiagramaActividadComponent implements OnInit {
 
 
   transformer = (node: ActividadProyecto) => {
-    const flatNode = new ActividadProyectoNodo(node.nombre, node.rangoMeses,
+    const flatNode = new ActividadProyectoNodo(node.nombre, node.rangoMeses!,
       node.inicio, node.fin);
     this.flatNodeMap.set(flatNode, node);
     this.nestedNodeMap.set(node, flatNode);

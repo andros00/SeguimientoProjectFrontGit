@@ -9,7 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { ModalDinamicoComponent } from './modal-dinamico.component';
-import { DatoAdicionalAportante } from 'src/app/proyecto/modelo/dato-adicional-aportante';
+import { DatoAdicionalAportante } from '../dato-adicional-aportante';
 
 describe('ModalDinamicoComponent', () => {
     let component: ModalDinamicoComponent;

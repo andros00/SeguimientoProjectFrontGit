@@ -6,7 +6,7 @@ export interface ComponenteMacroproyecto {
     cantidadproyectos: number;
     descripcion: string;
     macroproyecto: string;
-    personaNatural: PersonaNatural;
+    personaNatural?: PersonaNatural;
     titulo: string;
 
     proyectos: ComponenteProyecto[];

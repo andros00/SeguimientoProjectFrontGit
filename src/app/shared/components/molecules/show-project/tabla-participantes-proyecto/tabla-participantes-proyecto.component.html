@@ -37,17 +37,22 @@
           </a>
         </td>
         <td>
-          {{participante.participante? construirNombreCompleto(participante.participante.nombrePila, participante.participante.apellido1, participante.participante.apellido2) : 'Indeterminado'}}
+          {{participante.participante? construirNombreCompleto(participante.participante.nombrePila,
+          participante.participante.apellido1, participante.participante.apellido2) : 'Indeterminado'}}
         </td>
         <td>{{participante.grupoInvestigacion? participante.grupoInvestigacion.nombreCorto: ''}}</td>
         <td>
-          {{ concatenarCadena(participante.rol?.nombre, participante.vinculo?.nombreTipoVinculacion) }}
-          {{participante.vinculo?.nombreClaseEmpleado}}
+          {{ concatenarCadena(participante.rol.nombre , participante.vinculo.nombreTipoVinculacion ) }}
+          {{participante.vinculo.nombreClaseEmpleado}}
         </td>
         <td>{{participante.dedicacionHoras}}h - {{participante.dedicacionMeses}}m
-          <span *ngIf="participante.dedicacionHorasPlan">/ P.T.:{{participante.dedicacionHorasPlan}}h - {{participante.dedicacionMesesPlan}}m</span></td>
+          <span *ngIf="participante.dedicacionHorasPlan">/ P.T.:{{participante.dedicacionHorasPlan}}h -
+            {{participante.dedicacionMesesPlan}}m</span>
+        </td>
         <td>
-          {{ mostrarProgramaAcademico(!!participante.programa?.nombrePrograma ? participante.programa.nombrePrograma : '', !!participante.programa?.porcentajeCompletado ? participante.programa.porcentajeCompletado : '' ) }}
+          {{ mostrarProgramaAcademico(participante.programa.nombrePrograma,
+          (participante.programa.porcentajeCompletado ?? 0).toString()) }}
+
         </td>
         <td *ngIf="editable">
           <button class="button-more" [matMenuTriggerFor]="menu">

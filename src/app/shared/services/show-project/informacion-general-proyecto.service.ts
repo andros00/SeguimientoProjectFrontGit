@@ -77,6 +77,8 @@ export class InformacionGeneralProyectoService {
   }
 
   obtenerInformacionGeneral(codigo: string): Observable<InformacionGeneralProyecto> {
+
+    console.log('Obteniendo información general del proyecto con código:', codigo);
     const url = `${environment.URL_BASE}${DireccionesUrl.DIRECCIONES_PROYECTO.CONSULTAR_INFORMACION_GENERAL}${codigo}`;
     return this.http.get<InformacionGeneralProyecto>(url);
   }

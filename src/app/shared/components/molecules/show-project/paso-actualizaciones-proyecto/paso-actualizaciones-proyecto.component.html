@@ -19,7 +19,7 @@
           <mat-panel-title>
             <button mat-icon-button *ngIf="editable">
               <span class="title-accordion">
-                <mat-icon class="more" [matMenuTriggerFor]="menu">more_vert</mat-icon>
+                <!-- <mat-icon class="more" [matMenuTriggerFor]="menu">more_vert</mat-icon> -->
               </span>
             </button>
             <mat-menu #menu="matMenu">
@@ -30,14 +30,14 @@
             <h3 class="title-accordion">Comentarios</h3>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <div [innerHtml]="actualizacionActual.cambiosRealizados | formatoEstilos"></div>
+        <div [innerHtml]="actualizacionActual.cambiosRealizados"></div>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
   <div>
     <!-- <app-tabla-actualizacion-proyecto></app-tabla-actualizacion-proyecto> -->
   </div>
-  <div class="align-between border-top margin-top">
+  <!-- <div class="align-between border-top margin-top">
     <button mat-button class="button-back" (click)="emitirPasoAnterior()">
       <mat-icon>arrow_back</mat-icon>
       ANTERIOR
@@ -46,5 +46,5 @@
       SIGUIENTE
       <mat-icon>arrow_forward</mat-icon>
     </button>
-  </div>
+  </div> -->
 </div>

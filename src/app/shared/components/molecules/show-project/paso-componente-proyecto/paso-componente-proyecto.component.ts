@@ -52,22 +52,22 @@ export class PasoComponenteProyectoComponent implements OnInit {
   }
 
   guardarComponentes() {
-    const mensaje = new AlertaMensaje();
-    let listaComponentes: ComponenteMacroproyecto[];
-    listaComponentes = this.componenteServicioLocal.obtenerListaComponenteProyecto();
-    if (listaComponentes.length > 0) {
-      this.componenteServicio.guardarComponentes(listaComponentes).subscribe(respuestaGuardado => {
-        this.componenteServicioLocal.agregarComponenteProyecto(respuestaGuardado);
-        mensaje.tipoMensaje = ConstantesExitoError.EXITO;
-        mensaje.mensaje = MENSAJE_EXITO;
-        this.alertaServicioLocal.agregarMensaje(mensaje);
-      },
-        _ => {
-          mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-          mensaje.mensaje = MENSAJE_ERROR;
-          this.alertaServicioLocal.agregarMensaje(mensaje);
-        });
-    }
+    // const mensaje = new AlertaMensaje();
+    // let listaComponentes: ComponenteMacroproyecto[];
+    // listaComponentes = this.componenteServicioLocal.obtenerListaComponenteProyecto();
+    // if (listaComponentes.length > 0) {
+    //   this.componenteServicio.guardarComponentes(listaComponentes).subscribe(respuestaGuardado => {
+    //     this.componenteServicioLocal.agregarComponenteProyecto(respuestaGuardado);
+    //     mensaje.tipoMensaje = ConstantesExitoError.EXITO;
+    //     mensaje.mensaje = MENSAJE_EXITO;
+    //     this.alertaServicioLocal.agregarMensaje(mensaje);
+    //   },
+    //     _ => {
+    //       mensaje.tipoMensaje = ConstantesExitoError.ERROR;
+    //       mensaje.mensaje = MENSAJE_ERROR;
+    //       this.alertaServicioLocal.agregarMensaje(mensaje);
+    //     });
+    // }
   }
 
   validarComponente() {

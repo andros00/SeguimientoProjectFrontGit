@@ -26,19 +26,19 @@ export class PestanaCondicionesFormalesProyectoComponent implements OnInit {
   }
 
   guardarCondiciones() {
-    const mensaje = new AlertaMensaje();
-    let listaCondiciones: CondicionFormalPorEvaluacion[];
-    listaCondiciones = this.condicionFormalProyectoServicioLocal.obtenerListaCondicionesPorEvaluacionInicial();
-    this.condicionesFormalesServicio.guardarCondicionesFormales(listaCondiciones).subscribe(respuestaGuardado => {
-      this.condicionFormalProyectoServicioLocal.agregarCondicionesPorEvaluacionInicial(respuestaGuardado);
-      mensaje.tipoMensaje = ConstantesExitoError.EXITO;
-      mensaje.mensaje = MENSAJE_EXITO;
-      this.alertaServicioLocal.agregarMensaje(mensaje);
-    },
-      _ => {
-        mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-        mensaje.mensaje = MENSAJE_ERROR;
-        this.alertaServicioLocal.agregarMensaje(mensaje);
-      });
+  //   const mensaje = new AlertaMensaje();
+  //   let listaCondiciones: CondicionFormalPorEvaluacion[];
+  //   listaCondiciones = this.condicionFormalProyectoServicioLocal.obtenerListaCondicionesPorEvaluacionInicial();
+  //   this.condicionesFormalesServicio.guardarCondicionesFormales(listaCondiciones).subscribe(respuestaGuardado => {
+  //     this.condicionFormalProyectoServicioLocal.agregarCondicionesPorEvaluacionInicial(respuestaGuardado);
+  //     mensaje.tipoMensaje = ConstantesExitoError.EXITO;
+  //     mensaje.mensaje = MENSAJE_EXITO;
+  //     this.alertaServicioLocal.agregarMensaje(mensaje);
+  //   },
+  //     _ => {
+  //       mensaje.tipoMensaje = ConstantesExitoError.ERROR;
+  //       mensaje.mensaje = MENSAJE_ERROR;
+  //       this.alertaServicioLocal.agregarMensaje(mensaje);
+  //     });
   }
 }

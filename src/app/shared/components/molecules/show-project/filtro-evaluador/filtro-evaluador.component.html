@@ -45,12 +45,14 @@
             </div>
           </div>
           <div class="row" *ngIf="!!institucion">
-            <mat-chip-list *ngIf="!!institucion">
-              <mat-chip *ngIf="!!institucion" class="chip-filter" [removable] (removed)="eliminarFinanciador()">
+            <mat-chip-set>
+              <mat-chip-row class="chip-filter" [removable]="true" (removed)="eliminarFinanciador()">
                 {{institucion.nit}} - {{institucion.razonSocial}}
-                <mat-icon *ngIf="!!institucion" matChipRemove>cancel</mat-icon>
-              </mat-chip>
-            </mat-chip-list>
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            </mat-chip-set>
           </div>
         </div>
 

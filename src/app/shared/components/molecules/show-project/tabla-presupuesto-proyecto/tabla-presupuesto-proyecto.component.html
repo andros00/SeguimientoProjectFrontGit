@@ -84,8 +84,8 @@
                 <ng-container *ngFor="let aportanteUdea of rubroPorAportante.frescos">
                   <td class="border-left">
                     <mat-form-field appearance="fill" *ngIf="!datosSoloLectura && !porcentajeVisible">
-                      <input matInput type="text" currencyMask [pattern]="number"
-                        [options]="{ thousands: '.', decimal: ',',  precision: '2'}"
+                      <input matInput type="text" currencyMask [pattern]="numberPattern"
+                        [options]="{ thousands: '.', decimal: ',',  precision: 2}"
                         [disabled]="deshabilitarRubroAportante(rubroProyecto, aportanteUdea)"
                         [(ngModel)]="aportanteUdea.frescoSolicitado"
                         [ngClass]="{'aportanteRubroInvalido': !aportanteUdea.porcentajeValido}"
@@ -100,8 +100,8 @@
                 <td>
                   <!-- Especie UdeA-->
                   <mat-form-field appearance="fill" *ngIf="!datosSoloLectura && !porcentajeVisible">
-                    <input matInput type="text" currencyMask [pattern]="number"
-                      [options]="{ thousands: '.', decimal: ',',  precision: '2'}"
+                    <input matInput type="text" currencyMask [pattern]="numberPattern"
+                      [options]="{ thousands: '.', decimal: ',',  precision: 2}"
                       [disabled]="deshabilitarRubroAportante(rubroProyecto, rubroPorAportante.aportanteEnEspecie)"
                       [(ngModel)]="rubroPorAportante.aportanteEnEspecie.especieSolicitado"
                       (blur)="recalcularEspecie(rubroProyecto, rubroPorAportante.aportanteEnEspecie)">
@@ -116,8 +116,8 @@
                 <td class="border-left">
                   <!-- Fresco -->
                   <mat-form-field appearance="fill" *ngIf="!datosSoloLectura && !porcentajeVisible">
-                    <input matInput type="text" currencyMask [pattern]="number"
-                      [options]="{ thousands: '.', decimal: ',',  precision: '2'}"
+                    <input matInput type="text" currencyMask [pattern]="numberPattern"
+                      [options]="{ thousands: '.', decimal: ',',  precision: 2}"
                       [disabled]="deshabilitarRubroAportante(rubroProyecto, rubroPorAportante.frescos[0])"
                       [(ngModel)]="rubroPorAportante.frescos[0].frescoSolicitado"
                       [ngClass]="{'aportanteRubroInvalido': !rubroPorAportante.frescos[0].porcentajeValido}"
@@ -131,8 +131,8 @@
                 <td>
                   <!-- Especie -->
                   <mat-form-field appearance="fill" *ngIf="!datosSoloLectura && !porcentajeVisible">
-                    <input matInput type="text" currencyMask [pattern]="number"
-                      [options]="{ thousands: '.', decimal: ',',  precision: '2'}"
+                    <input matInput type="text" currencyMask [pattern]="numberPattern"
+                      [options]="{ thousands: '.', decimal: ',',  precision: 2}"
                       [disabled]="deshabilitarRubroAportante(rubroProyecto, rubroPorAportante.frescos[0])"
                       [(ngModel)]="rubroPorAportante.frescos[0].especieSolicitado"
                       (blur)="recalcularEspecie(rubroProyecto, rubroPorAportante.frescos[0])">
@@ -188,11 +188,11 @@
           </ng-container>
         </ng-container>
 
-        <td class="border-left">{{subtotales?.totalFrescoSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</td>
+        <td class="border-left">{{subtotales.totalFrescoSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</td>
         <td *ngIf="porcentajeVisible">{{subtotales.porcentajeSubtotalFresco | number:'1.2-2'}}%</td>
-        <td>{{subtotales?.totalEspecieSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</td>
+        <td>{{subtotales.totalEspecieSolicitado | currency:'COP':'symbol-narrow':'1.2-2' }}</td>
         <td>
-          {{(subtotales?.totalFrescoSolicitado + subtotales?.totalEspecieSolicitado) | currency:'COP':'symbol-narrow':'1.2-2' }}
+          {{(subtotales.totalFrescoSolicitado + subtotales.totalEspecieSolicitado) | currency:'COP':'symbol-narrow':'1.2-2' }}
         </td>
       </tr>
 

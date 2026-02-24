@@ -58,7 +58,7 @@
                       [value]="nivelProyecto.identificador">{{nivelProyecto.nombre
                       | titlecase}}</mat-option>
                     <mat-option [value]="-1">Propuesta de trabajo de grado - Posgrados</mat-option>
-                    <mat-option [value]="-2">Trabajo de grado - Posgrados</mat-option>  
+                    <mat-option [value]="-2">Trabajo de grado - Posgrados</mat-option>
                   </mat-select>
                   <mat-error>
                     Este campo es obligatorio.
@@ -86,7 +86,8 @@
                   <mat-select id="tipoProyecto" (selectionChange)="cambioTipoMacroproyecto()"
                     formControlName="tipoMacroproyecto" placeholder="Seleccione el tipo de macroproyecto">
                     <mat-option value="" selected="true">Seleccione un tipo de macroproyecto</mat-option>
-                    <mat-option *ngFor="let tipoProyecto of listadoTipoProyectos" [value]="tipoProyecto.identificador">{{tipoProyecto.nombre
+                    <mat-option *ngFor="let tipoProyecto of listadoTipoProyectos"
+                      [value]="tipoProyecto.identificador">{{tipoProyecto.nombre
                       | titlecase}}</mat-option>
                   </mat-select>
                   <mat-error>
@@ -95,7 +96,7 @@
                 </mat-form-field>
               </div>
             </div>
-            
+
             <div class="row no-wrap">
               <div *ngIf="esClaseproyecto && !esProyectoPosgrados" class="col col-5">
                 <mat-form-field appearance="fill" class="element">
@@ -137,7 +138,8 @@
                   <mat-select (selectionChange)="cambioTipoProyecto()" id="tipoProyecto" formControlName="tipoProyecto"
                     placeholder="Seleccione el tipo de tipo de proyecto">
                     <mat-option>Seleccione el tipo de proyecto</mat-option>
-                    <mat-option *ngFor="let tipoProyecto of listadoTipoProyectos" [value]="tipoProyecto.identificador">{{tipoProyecto.nombre
+                    <mat-option *ngFor="let tipoProyecto of listadoTipoProyectos"
+                      [value]="tipoProyecto.identificador">{{tipoProyecto.nombre
                       | titlecase}}</mat-option>
                   </mat-select>
                   <mat-error>
@@ -163,7 +165,8 @@
                     <mat-select id="subTipoProyecto" formControlName="subTipoProyecto"
                       placeholder="Seleccione la clasificación">
                       <mat-option>Seleccione la clasificación</mat-option>
-                      <mat-option *ngFor="let subTipoProyecto of listadoSubtipoProyecto" [value]="subTipoProyecto">{{subTipoProyecto.nombre
+                      <mat-option *ngFor="let subTipoProyecto of listadoSubtipoProyecto"
+                        [value]="subTipoProyecto">{{subTipoProyecto.nombre
                         | titlecase}}</mat-option>
                     </mat-select>
                     <mat-error>
@@ -199,7 +202,8 @@
                     (selectionChange)="cambioMacroproyecto()"
                     placeholder="Seleccione el macroproyecto al que pertenece">
                     <mat-option>Seleccione el macroproyecto</mat-option>
-                    <mat-option *ngFor="let macroproyecto of listaMacroproyectos" [value]="macroproyecto">{{macroproyecto.nombreCorto
+                    <mat-option *ngFor="let macroproyecto of listaMacroproyectos"
+                      [value]="macroproyecto">{{macroproyecto.nombreCorto
                       | titlecase}}</mat-option>
                   </mat-select>
                   <mat-error>
@@ -213,7 +217,8 @@
                   <mat-label><span class="required">* </span>Componente</mat-label>
                   <mat-select id="componente" formControlName="componente" placeholder="Seleccione el componente">
                     <mat-option>Seleccione el componente</mat-option>
-                    <mat-option *ngFor="let componente of listaComponentes" [value]="componente.identificador">{{componente.titulo
+                    <mat-option *ngFor="let componente of listaComponentes"
+                      [value]="componente.identificador">{{componente.titulo
                       | titlecase}}</mat-option>
                   </mat-select>
                   <mat-error>
@@ -263,7 +268,7 @@
                         <mat-radio-button value="procesoSeleccion">Proceso de selección</mat-radio-button>
                       </div>
                     </div>
-                    <mat-error *ngIf="f.tipoMatriculaProyecto?.dirty && f.tipoMatriculaProyecto.errors?.required">
+                    <mat-error *ngIf="f.tipoMatriculaProyecto?.dirty && f.tipoMatriculaProyecto?.hasError('required')">
                       Este campo es obligatorio.
                     </mat-error>
                   </mat-radio-group>
@@ -282,7 +287,7 @@
                           {{proceso.nombre | titlecase}}
                         </mat-option>
                       </mat-select>
-                      <mat-error *ngIf="f.procesoSeleccion.errors?.required">
+                      <mat-error *ngIf="f.procesoSeleccion?.hasError('required')">
                         Este campo es obligatorio.
                       </mat-error>
                     </mat-form-field>
@@ -326,7 +331,7 @@
                         <mat-option *ngFor="let convocatoria of listaConvocatorias" [value]="convocatoria">
                           {{convocatoria.nombre | titlecase}} </mat-option>
                       </mat-select>
-                      <mat-error *ngIf="f.convocatoria.errors?.required">
+                      <mat-error *ngIf="f.convocatoria.hasError('required')">
                         Este campo es obligatorio.
                       </mat-error>
                     </mat-form-field>
@@ -392,17 +397,18 @@
                     {{ tipoProyecto === 3 ? 'Codigo propuesta de posgrado' : 'Proyecto al que se vincula el J.I' }}
                   </mat-label>
                   <input formControlName="proyectoVinculaJi" matInput type="text"
-                    [placeholder]="tipoProyecto === 3 ? 'Seleccione la propuesta de posgrado' : 'Seleccione el proyecto al que se vincula el J.I'" [matAutocomplete]="auto">
+                    [placeholder]="tipoProyecto === 3 ? 'Seleccione la propuesta de posgrado' : 'Seleccione el proyecto al que se vincula el J.I'"
+                    [matAutocomplete]="auto">
                   <mat-autocomplete #auto="matAutocomplete" [displayWith]="nombreProyecto">
                     <mat-option *ngFor="let opcion of opcionesFiltradasProyecto | async" [value]="opcion">
                       {{opcion.codigo}} - {{opcion.nombreCorto | titlecase}}
                     </mat-option>
                   </mat-autocomplete>
-                  <mat-error *ngIf="f.proyectoVinculaJi.errors?.required">
+                  <mat-error *ngIf="f.proyectoVinculaJi.hasError('required')">
                     Este campo es obligatorio.
                   </mat-error>
-                  <mat-error *ngIf="f.proyectoVinculaJi.errors?.valorValido">
-                    Debe seleccionar un proyecto válido del listado autocompletar.
+                  <mat-error *ngIf="f.proyectoVinculaJi.hasError('valorValido')">
+                    Debe seleccionar un proyecto válido hasdel listado autocompletar.
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -431,7 +437,7 @@
                 <mat-form-field appearance="fill" class="element">
                   <mat-label><span class="required">* </span>Título del proyecto</mat-label>
                   <input matInput placeholder="Título del proyecto" formControlName="tituloProyecto">
-                  <mat-error *ngIf="f.tituloProyecto.errors?.required">
+                  <mat-error *ngIf="f.tituloProyecto.hasError('required')">
                     Este campo es obligatorio.
                   </mat-error>
                 </mat-form-field>
@@ -443,7 +449,7 @@
                 <mat-form-field appearance="fill" class="element">
                   <mat-label><span class="required">* </span>Justificación</mat-label>
                   <input matInput placeholder="Justificación" formControlName="justificacion">
-                  <mat-error *ngIf="f.justificacion.errors?.required">
+                  <mat-error *ngIf="f.justificacion.hasError('required')">
                     Este campo es obligatorio.
                   </mat-error>
                 </mat-form-field>
@@ -529,11 +535,11 @@
                   <mat-label><span class="required">* </span>Nombre corto</mat-label>
                   <input id="idNombre" matInput placeholder="Ejemplo: Proyecto de investigación Ciencias"
                     formControlName="nombreCorto">
-                  <mat-error *ngIf="f.nombreCorto.errors?.required">
+                  <mat-error *ngIf="f.nombreCorto.hasError('required')">
                     Este campo es obligatorio.
                   </mat-error>
-                  <mat-error *ngIf="f.nombreCorto.errors?.maxlength">
-                    Solo se permiten {{f.nombreCorto.errors.maxlength.requiredLength}} caracteres.
+                  <mat-error *ngIf="f.nombreCorto.hasError('maxlength')">
+                    Solo se permiten {{f.nombreCorto.getError('maxlength').requiredLength}} caracteres.
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -544,11 +550,11 @@
                   <input id="idNombreCompleto" matInput
                     placeholder="Ejemplo: Proyecto de investigación Ciencias naturales"
                     formControlName="nombreCompleto">
-                  <mat-error *ngIf="f.nombreCompleto.errors?.required">
+                  <mat-error *ngIf="f.nombreCompleto.hasError('required')">
                     Este campo es obligatorio.
                   </mat-error>
-                  <mat-error *ngIf="f.nombreCompleto.errors?.maxlength">
-                    Solo se permiten {{f.nombreCompleto.errors.maxlength.requiredLength}} caracteres.
+                  <mat-error *ngIf="f.nombreCompleto.hasError('maxlength')">
+                    Solo se permiten {{f.nombreCompleto.getError('maxlength').requiredLength}} caracteres.
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -560,11 +566,11 @@
                   <mat-label><span class="required">* </span>Palabras clave</mat-label>
                   <input id="idPalabraClave" matInput placeholder="Ejemplo: Investigación, prácticas, postgrado, etc."
                     formControlName="palabrasClave">
-                  <mat-error *ngIf="f.palabrasClave.errors?.required">
+                  <mat-error *ngIf="f.palabrasClave.hasError('required')">
                     Este campo es obligatorio.
                   </mat-error>
-                  <mat-error *ngIf="f.palabrasClave.errors?.maxlength">
-                    Solo se permiten {{f.palabrasClave.errors.maxlength.requiredLength}} caracteres.
+                  <mat-error *ngIf="f.palabrasClave.hasError('maxlength')">
+                    Solo se permiten {{f.palabrasClave.getError('maxlength').requiredLength}} caracteres.
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -574,10 +580,11 @@
                   <mat-label><span class="required">* </span>Seccional</mat-label>
                   <mat-select id="idSeccional" placeholder="Seccional" formControlName="seccional">
                     <mat-option [value]="''">Seleccione una seccional</mat-option>
-                    <mat-option *ngFor="let seccional of listaSeccionales" [value]="seccional.identificador">{{seccional.nombre
+                    <mat-option *ngFor="let seccional of listaSeccionales"
+                      [value]="seccional.identificador">{{seccional.nombre
                       | titlecase}}</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="f.seccional.errors?.required">
+                  <mat-error *ngIf="f.seccional.hasError('required')">
                     Este campo es obligatorio.
                   </mat-error>
                 </mat-form-field>
@@ -597,10 +604,10 @@
               <div class="col col-4">
                 <mat-form-field appearance="fill" class="element border-gray">
                   <mat-label><span>* </span>{{tituloLugarEjecucion}}</mat-label>
-                  <input id="idLugarEjecucion" matInput placeholder="Ejemplo: Auditorio Universidad de Antioquia" 
+                  <input id="idLugarEjecucion" matInput placeholder="Ejemplo: Auditorio Universidad de Antioquia"
                     (click)="abrirModalUbicacion()" formControlName="lugarEjecucion">
-                  <mat-error *ngIf="f.lugarEjecucion.errors?.maxlength">
-                    Solo se permiten {{f.lugarEjecucion.errors.maxlength.requiredLength}} caracteres.
+                  <mat-error *ngIf="f.lugarEjecucion.hasError('maxlength')">
+                    Solo se permiten {{f.lugarEjecucion.getError('maxlength').requiredLength}} caracteres.
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -698,7 +705,7 @@
           </div>
           <div class="row">
             <div class="col col-2" align="end">
-              <div class="buttons padding-top">
+              <!-- <div class="buttons padding-top">
                 <button id="btn-guardar" class="save-fill" *ngIf="!soloLectura" [disabled]="informacionGuardada"
                   mat-raised-button (click)="guardar()">
                   GUARDAR
@@ -709,7 +716,7 @@
                   SIGUIENTE
                   <mat-icon>arrow_forward</mat-icon>
                 </button>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

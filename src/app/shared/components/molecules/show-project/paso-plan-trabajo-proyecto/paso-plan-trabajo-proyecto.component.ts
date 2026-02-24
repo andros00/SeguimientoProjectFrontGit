@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SeccionProyecto } from '../seccion-proyecto';
 import { PasosHabilitadosLocalService } from 'src/app/shared/services/show-project/pasos-habilitados-local.service';
-
 @Component({
   selector: 'app-paso-plan-trabajo-proyecto',
   templateUrl: './paso-plan-trabajo-proyecto.component.html',

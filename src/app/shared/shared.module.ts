@@ -123,6 +123,7 @@ import { ContenedorProyectoComponent } from './components/molecules/show-project
     ContenedorInstitucionComponent,
     FiltroInstitucionComponent,
     ResultadoInstitucionComponent,
+    ButtonPrimaryComponent
 
   ], imports: [CommonModule,
     MatIconModule,

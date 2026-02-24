@@ -24,7 +24,7 @@ export class ListaDocumentosSoporteProyectoComponent implements OnInit {
 
   @Input() editable!: boolean;
 
-  listaDocumentosProyecto$: Observable<DocumentoProyecto[]>;
+  listaDocumentosProyecto$!: Observable<DocumentoProyecto[]>;
 
   urlBase = environment.URL_BASE;
   direccion = DireccionesUrl.DIRECCIONES_PROYECTO.DESCARGAR_DOCUMENTO;
@@ -66,20 +66,20 @@ export class ListaDocumentosSoporteProyectoComponent implements OnInit {
   }
 
   eliminarDocumento(documento: DocumentoProyecto) {
-    const mensaje = new AlertaMensaje();
-    if (!!documento.identificador && documento.identificador !== 0) {
-      this.documentoProyectoServicio.eliminarDocumentoSoporte(documento).subscribe(
-        _ => {
-          this.eliminarDocumentoLocal(documento, mensaje);
-        },
-        _ => {
-          mensaje.tipoMensaje = ConstantesExitoError.ERROR;
-          mensaje.mensaje = MENSAJE_ERROR_ELIMINANDO;
-          this.alertaServicioLocal.agregarMensaje(mensaje);
-        });
-    } else {
-      this.eliminarDocumentoLocal(documento, mensaje);
-    }
+    // const mensaje = new AlertaMensaje();
+    // if (!!documento.identificador && documento.identificador !== 0) {
+    //   this.documentoProyectoServicio.eliminarDocumentoSoporte(documento).subscribe(
+    //     _ => {
+    //       this.eliminarDocumentoLocal(documento, mensaje);
+    //     },
+    //     _ => {
+    //       mensaje.tipoMensaje = ConstantesExitoError.ERROR;
+    //       mensaje.mensaje = MENSAJE_ERROR_ELIMINANDO;
+    //       this.alertaServicioLocal.agregarMensaje(mensaje);
+    //     });
+    // } else {
+    //   this.eliminarDocumentoLocal(documento, mensaje);
+    // }
   }
 
   private eliminarDocumentoLocal(documento: DocumentoProyecto, mensaje: AlertaMensaje) {

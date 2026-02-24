@@ -7,7 +7,7 @@ import { FormalStartMandatoryComponent } from '../../molecules/formal-start-mand
 import { FormalStartStageComponent } from '../../molecules/formal-start-stage/formal-start-stage.component';
 import { JovenInvestigadorComponent } from '../../modal/joven-investigador/joven-investigador.component';
 import { FormalStartMinutesComponent } from '../../molecules/formal-start-minutes/formal-start-minutes.component';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-stepper',
   templateUrl: './stepper.component.html',
@@ -23,7 +23,8 @@ export class StepperComponent {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private injector: Injector) { }
+    private injector: Injector,
+    private router: Router) { }
 
   ngOnInit() {
     this.initializeSteps();
@@ -93,4 +94,11 @@ export class StepperComponent {
       this.stepper.previous();
     }
   }
+
+  finalizarStepper(stepper: MatStepper) {
+      // 1. Opcional: Reiniciar el stepper
+      stepper.reset();
+
+    this.router.navigate(['/']);
+    }
 }
