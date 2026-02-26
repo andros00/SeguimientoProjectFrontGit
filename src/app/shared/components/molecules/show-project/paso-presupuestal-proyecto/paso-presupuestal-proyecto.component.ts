@@ -17,9 +17,9 @@ export class PasoPresupuestalProyectoComponent implements OnInit {
   @Output() pasoAnterior = new EventEmitter<any>();
 
   editable = false;
-  pestanaPresupuestoVisible = false;
-  pestanaCofinanciadorVisible = false;
-  deshabilitarRubros = false;
+  pestanaPresupuestoVisible = true;
+  pestanaCofinanciadorVisible = true;
+  deshabilitarRubros = true;
 
   constructor(pasosProyectoService: PasosProyectoService,
     private aportanteProyectoLocalService: AportanteProyectoLocalService,

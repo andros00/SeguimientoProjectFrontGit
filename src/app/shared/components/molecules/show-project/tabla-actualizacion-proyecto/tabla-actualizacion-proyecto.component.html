@@ -1,0 +1,50 @@
+<div class="container-search">
+
+  <table id="result-table" class="table table-striped table-bordered">
+    <thead>
+      <tr class="header-table">
+        <th>Detalles</th>
+        <th>Autorizador</th>
+        <th>Fecha autorización</th>
+        <th>Fecha actualización</th>
+        <th>Fecha límite</th>
+        <th>Secciones habilitadas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let actualizacion of actualizaciones">
+        <tr class="table-hover">
+          <td>
+            <a (click)="mostrarDetalle(actualizacion)">
+              <mat-icon class="icon-table" *ngIf="!actualizacion.mostrarDetalle">add</mat-icon>
+              <mat-icon class="icon-table" *ngIf="actualizacion.mostrarDetalle">remove</mat-icon>
+            </a>
+          </td>
+          <td>{{autorizador(actualizacion)}}</td>
+          <td>{{formatearFechaCorta(actualizacion.fechaAutorizacion)}}</td>
+          <td>{{formatearFechaCorta(actualizacion.fechaActualizacion)}}</td>
+          <td>{{formatearFechaCorta(actualizacion.fechaLimite)}}</td>
+          <td>
+            <ul *ngIf="actualizacion.seccionesHabilitadas">
+              <li *ngFor="let seccion of actualizacion.seccionesHabilitadas">{{seccion}}</li>
+            </ul>
+          </td>
+        </tr>
+
+        <tr class="table-hover" *ngIf="actualizacion.mostrarDetalle">
+          <td colspan="6">
+            <div>
+              <span class="resaltado">Cambios solicitados:</span>
+              {{actualizacion.cambiosSolicitados}}
+            </div>
+            <div>
+              <span class="resaltado">Cambios realizados:</span>
+              <span [innerHtml]="actualizacion.cambiosRealizados"></span>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+</div>

@@ -5,11 +5,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  // background-color: #f5f5f5;
  background-color: white;
-// .container {
-//   background-color: white;
-// }
 
 }
 
@@ -91,11 +87,7 @@ img{
 
 
 
-
-
-
-
-
+/*.*/
 .header {
   border-bottom: 4px solid #7cb342;
   margin-bottom: 30px;
@@ -350,75 +342,6 @@ textarea.form-control {
   padding: 10px 12px;
 }
 
-/* Responsive */
-// @media (max-width: 1024px) {
-//   .project-info {
-//     flex-direction: column;
-//     gap: 15px;
-//   }
-
-//   .dedication-section {
-//     grid-template-columns: 1fr;
-//   }
-
-//   .pb-section {
-//     grid-template-columns: 1fr;
-//   }
-
-//   .form-row {
-//     flex-direction: column;
-//   }
-
-//   .form-group {
-//     min-width: 100%;
-//   }
-// }
-
-// @media (max-width: 768px) {
-//   .container {
-//     padding: 15px;
-//   }
-
-//   .title {
-//     font-size: 20px;
-//   }
-
-//   .button-group {
-//     flex-direction: column;
-//   }
-
-//   .btn {
-//     width: 100%;
-//     justify-content: center;
-//   }
-
-//   .form-group-container {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-// }
-
-// .input {
-//   width: 100%;
-//   margin-right: 5em;
-// }
-
-// .container {
-//   background-color: white;
-// }
-
-// .divider {
-//   margin-top: 2em;
-//   margin-bottom: 2em;
-// }
-
-// mat-icon {
-//   color: #b0b0b0;
-//   cursor: pointer;
-// }
-
-// }
-
 .form-group-container {
   display: flex;
   justify-content: space-between;
@@ -429,18 +352,3 @@ textarea.form-control {
   width: 100%;
   margin-right: 5em;
 }
-
-// .container {
-//   background-color: white;
-// }
-
-// .divider {
-//   margin-top: 2em;
-//   margin-bottom: 2em;
-// }
-
-// mat-icon {
-//   color: #b0b0b0;
-//   cursor: pointer;
-// }
-

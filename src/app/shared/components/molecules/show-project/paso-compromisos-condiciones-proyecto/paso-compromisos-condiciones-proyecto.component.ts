@@ -15,8 +15,8 @@ export class PasoCompromisosCondicionesProyectoComponent implements OnInit {
   @Output() pasoAnterior = new EventEmitter<any>();
 
   editable = false; // indica si el componente permite la edición de los datos cargados
-  pestanaCompromisosVisible = false;
-  pestanaCondicionesVisible = false;
+  pestanaCompromisosVisible = true;
+  pestanaCondicionesVisible = true;
 
   constructor(pasosProyectoService: PasosProyectoService,
     private pasosHabilitadosLocalService: PasosHabilitadosLocalService) {

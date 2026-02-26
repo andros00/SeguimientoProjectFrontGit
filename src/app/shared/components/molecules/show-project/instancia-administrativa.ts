@@ -1,6 +1,6 @@
 export interface InstanciaAdministrativa {
     identificador: number;
-    nombre?: string;
+    nombre: string;
     nombreCorto?: string;
     nivelAdministrativo?: number;
 }

@@ -13,6 +13,8 @@ import { PasoCompromisosCondicionesProyectoComponent } from '../paso-compromisos
 import { PasoDocumentosSoporteProyectoComponent } from '../paso-documentos-soporte-proyecto/paso-documentos-soporte-proyecto.component';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { InformacionGeneralProyecto } from '../informacion-general-proyecto';
+import { ProyectoLocalService } from 'src/app/shared/services/show-project/proyecto-local.service';
 
 
 @Component({
@@ -22,32 +24,38 @@ import { Router } from '@angular/router';
 })
 export class SteeperShowComponent {
 
-    soloLectura = false;
+  soloLectura = false;
   paraActualizacion = false;
 
   isLinear = false;
   steps: any[] = [];
 
-   //steps: FormGroup;
 
   @Input() projectCode!: string;
 
   @ViewChild('stepper') stepper!: MatStepper;
 
+    informacionGeneralProyecto!: InformacionGeneralProyecto;
+
   constructor(
     private _formBuilder: FormBuilder,
     private injector: Injector,
-  private activeRoute: ActivatedRoute,
-  private router: Router ) { }
+    private activeRoute: ActivatedRoute,
+    private router: Router, private proyectoLocalServicio: ProyectoLocalService,) {
+
+
+    this.proyectoLocalServicio.observableProyectoGuardado().subscribe(
+      _ => this.informacionGeneralProyecto = this.proyectoLocalServicio.obtenerInformacionGeneralProyecto());
+  }
 
   ngOnInit() {
 
-  const query = this.activeRoute.snapshot.queryParams;
-  this.soloLectura = query['soloLectura'] === 'true';
-  this.paraActualizacion = query['paraActualizacion'] === 'true';
-  this.projectCode = query['projectCode'];
+    const query = this.activeRoute.snapshot.queryParams;
+    this.soloLectura = query['soloLectura'] === 'true';
+    this.paraActualizacion = query['paraActualizacion'] === 'true';
+    this.projectCode = query['projectCode'];
 
-    console.log('sololectura del proyecto recibido en SteeperShowComponent:', this.soloLectura );
+    console.log('sololectura del proyecto recibido en SteeperShowComponent:', this.soloLectura);
 
     this.initializeSteps();
   }
@@ -131,12 +139,27 @@ export class SteeperShowComponent {
     }
   }
 
-    finalizarStepper(stepper: MatStepper) {
+  finalizarStepper(stepper: MatStepper) {
     // 1. Opcional: Reiniciar el stepper
     stepper.reset();
 
-  this.router.navigate(['/']);
+    this.router.navigate(['/']);
   }
 
+  cerrar() {
+    window.close();
+  }
+
+  esProyectoGuardado(): boolean {
+     return !!this.informacionGeneralProyecto && !!this.informacionGeneralProyecto.codigo;
+  }
+
+    getEstadoProyecto() {
+    if (!!this.informacionGeneralProyecto && !!this.informacionGeneralProyecto.estado) {
+      return ` - ${this.informacionGeneralProyecto.estado}`;
+    }
+
+    return '';
+  }
 
 }

@@ -1,9 +1,9 @@
 <mat-tab-group>
-  <mat-tab label="Descripción" *ngIf="pestanaDescripcionVisible">
-    <app-pestana-descripcion-proyecto [editable]="descripcionesEditables"></app-pestana-descripcion-proyecto>
+  <mat-tab label="Descripción" >
+    <app-pestana-descripcion-proyecto></app-pestana-descripcion-proyecto>
   </mat-tab>
-  <mat-tab label="Cronograma" *ngIf="pestanaCronogramaVisible">
-    <app-pestana-cronograma-proyecto [editable]="cronogramaEditable"></app-pestana-cronograma-proyecto>
+  <mat-tab label="Cronograma" >
+    <app-pestana-cronograma-proyecto></app-pestana-cronograma-proyecto>
   </mat-tab>
 </mat-tab-group>
 <!-- <div class="align-between border-top margin-top">

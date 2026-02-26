@@ -35,14 +35,23 @@
   </div>
 </div>
 
-<div class="row no-wrap">
+<div class="col-6">
+    <div class="contextual-help">
+      <div class="card-contextual">
+        <img src="assets/img/ic-contextual-help.png" alt="">
+        <p class="contextual-yellow">Aquí la información del presupuesto del proyecto.
+        </p>
+      </div>
+    </div>
+</div>
+<!-- <div class="row no-wrap">
   <div class="col col-10">
     <div class="contextual-info margin-bottom">
       <img src="assets/img/ic-contextual-info.png" alt="ic-contextual-info">
-      <p>{{mensajesTipoMoneda.MENSAJES_TIPO_MONEDA.MENSAJE_ADVERTENCIA}}</p>
+      <p class="contextual-yellow">Aquí la información del presupuesto del proyecto.</p>
     </div>
   </div>
-</div>
+</div> -->
 
 
 <div class="row">
@@ -53,7 +62,7 @@
         <p>Moneda</p>
         <p>{{ mensajesTipoMoneda.MENSAJES_TIPO_MONEDA.NOMBRE_MONEDA }}</p>
       </div>
-      <div class="money-info-popup">
+      <!-- <div class="money-info-popup">
         <span class="btn-info" [matMenuTriggerFor]="infogeneralproyecto">
           <mat-icon class="light-gray more">info</mat-icon>
         </span>
@@ -63,7 +72,7 @@
           </h3>
           <span>{{mensajesTipoMoneda.MENSAJES_TIPO_MONEDA.MENSAJE_INFORMACION}}</span>
         </mat-menu>
-      </div>
+      </div> -->
     </div>
 
     <div class="align-center" *ngIf="editable">

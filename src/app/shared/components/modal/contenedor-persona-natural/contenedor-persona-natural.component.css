@@ -88,12 +88,7 @@ img{
 }
 
 
-
-
-
-
-
-
+/*.*/
 .header {
   border-bottom: 4px solid #7cb342;
   margin-bottom: 30px;
@@ -358,5 +353,3 @@ textarea.form-control {
   width: 100%;
   margin-right: 5em;
 }
-
-

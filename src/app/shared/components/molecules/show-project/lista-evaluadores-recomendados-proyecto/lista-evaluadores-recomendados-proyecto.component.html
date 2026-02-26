@@ -1,0 +1,50 @@
+<div class="row" *ngIf="editable && listaEvaluadoresRecomendados$.length === 0">
+  <div class="col-10">
+    <div class="onboarding">
+      <p>Crea los ítems que componen este paso</p>
+    </div>
+    <div class="onboarding">
+      <p>Recuerda completar cada uno de los campos</p>
+    </div>
+    <div class="onboarding">
+      <p>Revisa la información antes de continuar</p>
+    </div>
+  </div>
+</div>
+
+<div class="margin-top" *ngIf="listaEvaluadoresRecomendados$">
+  <mat-accordion *ngFor="let evaluadorRecomendado of listaEvaluadoresRecomendados$; let i = index">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header class="header-accordions">
+        <mat-panel-title>
+          <button mat-icon-button *ngIf="editable">
+            <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="abrirEliminarEvaluadorRecomendado(evaluadorRecomendado)">
+              <mat-icon>delete</mat-icon>Eliminar
+            </button>
+          </mat-menu>
+          <h3>Evaluador recomendado {{i + 1}}</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row no-wrap">
+        <div class="col col-3">
+          <h2 class="titles-accordion">Evaluador</h2>
+          <p class="parrafo-accordion">{{evaluadorRecomendado.evaluador?.identificacion}} -
+            {{evaluadorRecomendado.evaluador?.nombres}}
+            {{evaluadorRecomendado.evaluador?.primerApellido}}
+            {{evaluadorRecomendado.evaluador?.segundoApellido}}</p>
+        </div>
+        <div class="col col-3">
+          <h2 class="titles-accordion">Áreas de especialidad</h2>
+          <p class="parrafo-accordion">{{evaluadorRecomendado.evaluador?.areaEspecialidad}}</p>
+        </div>
+        <div class="col col-3">
+          <h2 class="titles-accordion">Asignación</h2>
+          <p class="parrafo-accordion">Recomendado</p>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

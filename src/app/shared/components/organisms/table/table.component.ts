@@ -51,6 +51,7 @@ export class TableComponent implements AfterViewInit {
             icon: 'edit',
             label: 'Realizar inicio formal',
             action: () => this.navegateToFormalStart(project),
+            disabled: !this.isProjectApproved(project),
           },
           {
             icon: 'visibility',
@@ -68,9 +69,17 @@ export class TableComponent implements AfterViewInit {
   }
 
   navegateToFormalStart(project: IProject) {
+    if (!this.isProjectApproved(project)) {
+      return;
+    }
+
     this.projectSelectionService.selectProject(project);
     localStorage.setItem('selectedProject', JSON.stringify(project));
     this.router.navigate([this.FORMAT_START_URL, project.codigo]);
+  }
+
+  private isProjectApproved(project: IProject): boolean {
+    return project.estado?.trim().toLowerCase() === 'aprobado';
   }
 
   verDetalle(project: IProject): void {

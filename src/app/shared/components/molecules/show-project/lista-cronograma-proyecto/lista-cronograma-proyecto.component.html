@@ -1,5 +1,5 @@
 <div class="row" *ngIf="listaCronogramaProyecto$.length === 0">
-  <div class="col-10">
+  <!-- <div class="col-10">
     <div class="onboarding">
       <p>Crea los ítems que componen este paso</p>
     </div>
@@ -9,7 +9,7 @@
     <div class="onboarding">
       <p>Revisa la información antes de continuar</p>
     </div>
-  </div>
+  </div> -->
 </div>
 <div class="accordion-udea margin-top" *ngIf="listaCronogramaProyecto$">
   <mat-accordion *ngFor="let actividad of listaCronogramaProyecto$; let i = index">
@@ -60,7 +60,7 @@
         </div>
 
         <div class="col col-5 margin-top-mini">
-          
+
           <div class="col col-10 padding-int">
             <h3 class="subtitle-accordion">
               Período

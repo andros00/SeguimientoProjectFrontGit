@@ -20,8 +20,6 @@ const MENSAJE_ERROR = 'Ocurrió un error guardando los evaluadores recomendados 
   selector: 'app-paso-evaluadores-recomendados-proyecto',
   templateUrl: './paso-evaluadores-recomendados-proyecto.component.html',
   styleUrls: ['./paso-evaluadores-recomendados-proyecto.component.css'],
-  standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule]
 })
 export class PasoEvaluadoresRecomendadosProyectoComponent implements OnInit {
 

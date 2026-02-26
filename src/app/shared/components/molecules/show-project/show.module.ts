@@ -57,9 +57,13 @@ import { SidebarComponent } from '../../organisms/sidebar/sidebar.component';
 import { ProjectInfoFormalStartComponent } from '../project-info-formal-start/project-info-formal-start.component';
 import { StepperComponent } from '../../organisms/stepper/stepper.component';
 import { FiltrosFinanciadorBusquedaComponent } from './filtros-financiador-busqueda/filtros-financiador-busqueda.component';
+import { TablaActualizacionProyectoComponent } from './tabla-actualizacion-proyecto/tabla-actualizacion-proyecto.component';
+import { PasoActualizacionesProyectoComponent } from './paso-actualizaciones-proyecto/paso-actualizaciones-proyecto.component';
+import { ListaEvaluadoresRecomendadosProyectoComponent } from './lista-evaluadores-recomendados-proyecto/lista-evaluadores-recomendados-proyecto.component';
+import { PasoEvaluadoresRecomendadosProyectoComponent } from './paso-evaluadores-recomendados-proyecto/paso-evaluadores-recomendados-proyecto.component';
 @NgModule({
 
-  declarations: [PasoInformacionGeneralProyectoComponent, ListaCompromisosProyectoComponent, ListaDocumentosSoporteProyectoComponent,
+  declarations: [PasoEvaluadoresRecomendadosProyectoComponent,ListaEvaluadoresRecomendadosProyectoComponent, PasoActualizacionesProyectoComponent,TablaActualizacionProyectoComponent,PasoInformacionGeneralProyectoComponent, ListaCompromisosProyectoComponent, ListaDocumentosSoporteProyectoComponent,
     PasoDocumentosSoporteProyectoComponent, PestanaCompromisosProyectoComponent, TablaCondicionesFormalesComponent,
     PestanaCondicionesFormalesProyectoComponent, PasoCompromisosCondicionesProyectoComponent, TablaParticipantesProyectoComponent, PasoParticipantesProyectoComponent,
     VisorComponentesProyectoComponent, TablaPresupuestoProyectoComponent, PestanaPresupuestoProyectoComponent,

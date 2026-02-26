@@ -14,8 +14,6 @@ import { CommonModule } from '@angular/common';
   selector: 'app-paso-actualizaciones-proyecto',
   templateUrl: './paso-actualizaciones-proyecto.component.html',
   styleUrls: ['./paso-actualizaciones-proyecto.component.css'],
-  standalone: true,
-  imports: [CommonModule,MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatIcon, MatMenu],
 })
 export class PasoActualizacionesProyectoComponent implements OnInit {
 

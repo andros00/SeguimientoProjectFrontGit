@@ -1,7 +1,21 @@
+<div class="container">
+  <br />
+  <h1 align="center" class="margin-b secondary-color font-normal title-w">Resumen proyecto</h1>
+  <div class="status">
+    <div *ngIf="esProyectoGuardado()">
+      <div>
+        <p class="content">Código de proyecto</p>
+      </div>
+      <div class="bg-status">
+        <span>{{informacionGeneralProyecto.codigo}}{{getEstadoProyecto()}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <mat-stepper [linear]="isLinear" #stepper>
   <mat-step *ngFor="let step of steps; let i = index" [stepControl]="step.formGroup">
-    <app-button-primary *ngIf="i < steps.length" [label]="'Regresar'" [icon]="'assignment_turned_in'"
-        (clicked)="finalizarStepper(stepper)" />
     <form [formGroup]="step.formGroup">
       <ng-template matStepLabel>{{ step.label }}</ng-template>
       <mat-card>
@@ -12,6 +26,9 @@
 
             <app-button-primary *ngIf="i > 0" [label]="'Anterior'" [icon]="'assignment_turned_in'"
               (clicked)="goToPreviousStep()" />
+
+            <app-button-primary *ngIf="i < steps.length" [label]="'Cancelar'" [icon]="'assignment_turned_in'"
+              (clicked)="finalizarStepper(stepper)" />
 
             <app-button-primary *ngIf="i < steps.length - 1" [label]="'Siguiente'" [icon]="'assignment_turned_in'"
               (clicked)="goToNextStep()" />
