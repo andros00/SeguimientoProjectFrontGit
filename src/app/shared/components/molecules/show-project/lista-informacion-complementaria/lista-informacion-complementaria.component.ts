@@ -22,8 +22,6 @@ const MENSAJE_EXITO = 'Información complementaria guardada con éxito.';
   selector: 'app-lista-informacion-complementaria',
   templateUrl: './lista-informacion-complementaria.component.html',
   styleUrls: ['./lista-informacion-complementaria.component.css']
-  //   , standalone: true,
-  // imports: [MatAccordion, MatExpansionPanel, MatExpansionPanelHeader, MatExpansionPanelTitle, MatExpansionPanelDescription, MatCheckbox],
 })
 export class ListaInformacionComplementariaComponent implements OnInit {
 
@@ -221,8 +219,26 @@ export class ListaInformacionComplementariaComponent implements OnInit {
     return valor.elementosSeleccionados.length > 0;
   }
 
-  validarSubagendasSeleccionadas(elemento: any): boolean {
-    return elemento.subagendas && elemento.subagendas.length > 0;
+  obtenerDetalleSeleccionados(valor: ObjetoInformacionComplementaria): string[] {
+    const detalleSeleccionados: string[] = [];
+
+    valor.elementos.forEach((elemento) => {
+      if (this.tieneSubagendas(elemento)) {
+        elemento.subagendas!.forEach((subagenda) => {
+          if (subagenda.seleccionado) {
+            detalleSeleccionados.push(`${elemento.objetivo}.${subagenda.objetivo}. ${subagenda.descripcion}`);
+          }
+        });
+      } else if (elemento.seleccionado) {
+        detalleSeleccionados.push(`${elemento.objetivo}. ${elemento.descripcion}`);
+      }
+    });
+
+    return detalleSeleccionados;
+  }
+
+  tieneSubagendas(elemento: InformacionComplementaria): boolean {
+    return !!elemento.subagendas && elemento.subagendas.length > 0;
   }
 
 }

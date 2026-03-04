@@ -1,43 +1,24 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DropdownRequiredComponent } from '../dropdown-required/dropdown-required.component';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  OnInit,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  FormControl
+} from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
-/**
- * DropdownComponent
- * 
- * A reusable dropdown component that allows users to select an option from a list.
- * This component is highly customizable and emits an event whenever the selected option changes.
- * 
- * Inputs:
- * - `label` (string): The label for the dropdown (default: 'Select an option').
- * - `id` (string): The unique identifier for the dropdown element (default: 'dropdown').
- * - `options` (array): An array of objects representing the options in the dropdown. Each option has a `value` and a `tag` (default: empty array).
- * - `dropdownClass` (string): Additional class(es) to apply to the dropdown element (optional).
- * - `optionClass` (string): Additional class(es) to apply to the option elements (optional).
- * 
- * Outputs:
- * - `selectionChange` (EventEmitter<string | number>): Emits the value of the selected option when it changes.
- * 
- * Usage Example:
- * <app-dropdown 
- *   label="Choose a fruit" 
- *   [options]="[{ value: 'apple', tag: 'Apple' }, { value: 'banana', tag: 'Banana' }]" 
- *   (selectionChange)="onSelectionChange($event)">
- * </app-dropdown>
- */
 @Component({
   selector: 'app-dropdown',
-  template: `
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>{{ label }}</mat-label>
-      <mat-select [value]="value" (selectionChange)="onSelectionChange($event)">
-        <mat-option [value]="null">--</mat-option>
-        <mat-option *ngFor="let option of options" [value]="option.value">
-          {{ option.tag }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  `,
+  templateUrl: './dropdown.component.html',
   styleUrls: ['./dropdown.component.scss'],
   providers: [
     {
@@ -47,65 +28,66 @@ import { DropdownRequiredComponent } from '../dropdown-required/dropdown-require
     },
   ],
 })
-export class DropdownComponent implements ControlValueAccessor {
-  /**
-   * The label for the dropdown.
-   */
+export class DropdownComponent
+  implements ControlValueAccessor, OnInit, OnChanges {
+
   @Input() label: string = 'Select an option';
-
-  /**
-   * The unique identifier for the dropdown element.
-   */
   @Input() id: string = 'dropdown';
-
-  /**
-   * An array of options to display in the dropdown.
-   */
   @Input() options: { value: string | number; tag: string }[] = [];
 
-  /**
-   * Event emitted when the selected option changes.
-   */
   @Output() selectionChange = new EventEmitter<string | number>();
 
-  value: string | number | null = null;
+  inputControl = new FormControl('');
+  filteredOptions$!: Observable<{ value: string | number; tag: string }[]>;
 
-  // Callbacks for ControlValueAccessor
-  onChange = (value: any) => { };
-  onTouched = () => { };
+  private selectedValue: string | number | null = null;
 
-  /**
-   * Writes a new value to the input field.
-   * @param value The new value to set.
-   */
-  writeValue(value: any): void {
-    this.value = value || null;
+  onChange = (value: any) => {};
+  onTouched = () => {};
+
+  ngOnInit(): void {
+    this.initializeFilter();
   }
 
-  /**
-   * Registers a function to call when the input value changes.
-   * @param fn The callback function.
-   */
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['options']) {
+      this.initializeFilter();
+    }
+  }
+
+  writeValue(value: any): void {
+    this.selectedValue = value;
+    const selected = this.options.find(o => o.value === value);
+    this.inputControl.setValue(selected ? selected.tag : '', { emitEvent: false });
+  }
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  /**
-   * Registers a function to call when the input is touched (blur event).
-   * @param fn The callback function.
-   */
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 
-  /**
-   * Handles the selection change event from the dropdown and emits the selected value.
-   * @param event The change event triggered by the dropdown.
-   */
-  onSelectionChange(event: any): void {
-    const value = event.value;
-    this.value = value;
-    this.onChange(value);
-    this.selectionChange.emit(value);
+  onOptionSelected(option: { value: string | number; tag: string }): void {
+    this.selectedValue = option.value;
+    this.inputControl.setValue(option.tag, { emitEvent: false });
+
+    this.onChange(option.value);
+    this.selectionChange.emit(option.value);
+  }
+
+  private initializeFilter(): void {
+    this.filteredOptions$ = this.inputControl.valueChanges.pipe(
+      startWith(this.inputControl.value || ''),
+      map(value => this.filterOptions(value || ''))
+    );
+  }
+
+  private filterOptions(value: string) {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option =>
+      option.tag.toLowerCase().includes(filterValue)
+    );
   }
 }

@@ -2,7 +2,7 @@ td{
     padding: 8px 10px;
     overflow: hidden;
   }
-  
+
   form td:not(:last-child){
   text-overflow: ellipsis;
     display: -webkit-box;
@@ -12,18 +12,18 @@ td{
     max-height: 35px;
     max-width: 300px;
   }
-  
+
   .header-table{
     background: #f3f3f3;
     color: #777777;
     white-space: nowrap;
   }
-  
+
   .icon-table:hover{
     background: #e7e7e7;
     border-radius: 50%;
     padding: 8px 6px 2px 6px;
-  
+
   }
 
   .table-hover td button:focus{
@@ -35,22 +35,73 @@ td{
     vertical-align: middle;
     color: #9E9E9E;
   }
-  
-  
+
+
   @media (max-width: 992px){
     #result-table{
       width: 90%;
     }
   }
-  
+
   @media (max-width: 768px){
     #result-table{
       width: 90%;
     }
   }
-  
+
   @media (max-width: 576px){
     #result-table{
       width: 90%;
     }
   }
+
+  .margin-top{
+    margin-top: 40px;
+}
+
+.margin-bottom{
+    margin-bottom: 20px;
+}
+
+.col-10 {
+    flex: 1 1 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse:collapse;
+    border-radius: 2px;
+    background: white;
+    margin-bottom: 40px;
+
+    -webkit-box-shadow: -1px 6px 24px -3px rgba(0,0,0,0.35);
+    -moz-box-shadow: -1px 6px 24px -3px rgba(0,0,0,0.35);
+    box-shadow: -1px 6px 24px -3px rgba(0,0,0,0.35);
+  }
+
+    .icon-table{
+    font-size: 18px;
+    color: #979797;
+    margin-right: 5px;
+    cursor: pointer;
+    background: transparent;
+    border-radius: 50%;
+    padding: 8px 6px 2px 6px;
+    text-align: center;
+  }
+
+    .content-table{
+    padding: 10px;
+  }
+
+  .card-accordion{
+    box-shadow: none;
+    background: #f7f7f7;
+    border: 1px solid #dddddd;
+    padding: 15px;
+    margin: 0 0 15px 0;
+}
+
+.margin-right{
+    margin-right: 10px;
+}

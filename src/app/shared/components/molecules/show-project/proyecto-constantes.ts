@@ -30,9 +30,9 @@ export const ProyectoConstantes = {
     INFORMACION_COMPLEMENTARIA_SECCION_ODS: 'objetivosDesarrolloMilenio',
     INFORMACION_COMPLEMENTARIA_SECCION_G8: 'agendaG8',
     INFORMACION_COMPLEMENTARIA_SECCION_ECONOMI: 'objetivosSocioeconomicos',
-    INFORMACION_COMPLEMENTARIA_TITULO_FOCOS: 'Agregar focos de misión de sabios',
-    INFORMACION_COMPLEMENTARIA_TITULO_ODS: 'Agregar objetivos desarrollo sostenible - ODS',
-    INFORMACION_COMPLEMENTARIA_TITULO_G8: 'Agregar agenda G8',
+    INFORMACION_COMPLEMENTARIA_TITULO_FOCOS: 'Focos de misión de sabios',
+    INFORMACION_COMPLEMENTARIA_TITULO_ODS: 'Objetivos desarrollo sostenible - ODS',
+    INFORMACION_COMPLEMENTARIA_TITULO_G8: 'Agenda G8',
     TEXTO_SELECCIONAR_FINANCIADORES: 'Seleccionar financiadores',
     MENSAJE_AYUDA_SELECCIONAR_FINANCIADORES: 'Agregue las entidades aportantes al proyecto, defina el tipo de financiación y el sector al que pertenece',
     MENSAJE_ERROR_SELECCIONAR_FINANCIADORES: 'Debe completar toda la información de financiadores, solo así lo podrá agregar.',
@@ -54,7 +54,7 @@ export const ProyectoConstantes = {
       NOMBRE_MONEDA: 'COP - PESO COLOMBIANO',
       MENSAJE_INFORMACION: 'Recuerde que el presupuesto debe estar en Pesos colombianos, debe realizar la conversión de acuerdo a la TRM del día que realiza el registro del proyecto.'
     },
-    INFORMACION_COMPLEMENTARIA_TITULO_ECONOMI: 'Agregar objetivo socioeconómico',
+    INFORMACION_COMPLEMENTARIA_TITULO_ECONOMI: 'Objetivo socioeconómico',
     ENVIADO_A_CENTRO: 'true',
     PROYECTO_PROCES0_DE_SELECCION: {
         'Proceso Selección Proyectos Inscritos': 'Esta opción corresponde a los  Proyectos por medio de contratos que no pasaron por la VRI en su gestión. - Proyectos de Convocatorias en Convenios con la UdeA (Ej: las convocatorias del G8, FAPESP, DFG, entre otras)',

@@ -147,3 +147,35 @@ $highlightBorderColor: #FF9800;
 ::ng-deep container-modal{
   width: auto;
 }
+
+.text-center{
+    text-align: center;
+}
+
+h2.title-modal{
+    font-weight: 400;
+    font-size: 20px;
+    padding: 0 15px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.no-wrap{
+    flex-wrap: nowrap;
+}
+
+.col-8{
+    flex: 1 1 80%;
+}
+
+.col-5 {
+    flex: 1 1 50%;
+}
+.align-end{
+    display: flex;
+    justify-content: flex-end;
+}

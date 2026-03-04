@@ -1,6 +1,6 @@
-<form class="example-form" [formGroup]="formularioInformacionGeneralProyecto" autocomplete="off">
+<ng-container class="example-form" [formGroup]="formularioInformacionGeneralProyecto" autocomplete="off">
   <div class="container">
-    <div class="alert-info margin-bottom" *ngIf="paraActualizacion">
+    <!-- <div class="alert-info margin-bottom" *ngIf="paraActualizacion">
       <mat-icon>info</mat-icon>
       <div class="col col-10">
         <p>Como parte del proceso de selección del proyecto se ha solicitado que realice cambios en
@@ -19,7 +19,7 @@
           cambios pertinentes, especifique en la sección actualización los cambios realizados y reenvíe el
           proyecto.</p>
       </div>
-    </div>
+    </div> -->
     <mat-card class="card">
       <div class="content">
         <div class="forms">
@@ -703,24 +703,8 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col col-2" align="end">
-              <!-- <div class="buttons padding-top">
-                <button id="btn-guardar" class="save-fill" *ngIf="!soloLectura" [disabled]="informacionGuardada"
-                  mat-raised-button (click)="guardar()">
-                  GUARDAR
-                  <mat-icon>save</mat-icon>
-                </button>
-                <button id="btn-siguiente" class="button-secondary" [disabled]="!informacionGuardada" mat-raised-button
-                  (click)="emitirSiguientePaso()">
-                  SIGUIENTE
-                  <mat-icon>arrow_forward</mat-icon>
-                </button>
-              </div> -->
-            </div>
-          </div>
         </div>
       </div>
     </mat-card>
   </div>
-</form>
+</ng-container>

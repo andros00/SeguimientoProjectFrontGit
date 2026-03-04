@@ -1,19 +1,20 @@
-import { Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  Component,
+  forwardRef,
+  Input,
+  OnInit
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  FormControl
+} from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dropdown-required',
-  template: `
-    <mat-form-field appearance="outline" class="full-width">
-      <mat-label>{{ label }}</mat-label>
-      <mat-select [value]="value" (selectionChange)="onSelectionChange($event)" required>
-        <mat-option [value]="null">--</mat-option>
-        <mat-option *ngFor="let option of options" [value]="option.value">
-          {{ option.tag }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  `,
+  templateUrl: './dropdown-required.component.html',
   styleUrls: ['./dropdown-required.component.scss'],
   providers: [
     {
@@ -23,65 +24,55 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class DropdownRequiredComponent implements ControlValueAccessor {
-  /**
-   * The label for the dropdown.
-   */
+export class DropdownRequiredComponent
+  implements ControlValueAccessor, OnInit {
+
   @Input() label: string = 'Select an option';
-
-  /**
-   * The unique identifier for the dropdown element.
-   */
-  @Input() id: string = 'dropdown';
-
-  /**
-   * An array of options to display in the dropdown.
-   */
   @Input() options: { value: string | number; tag: string }[] = [];
 
-  /**
-   * Event emitted when the selected option changes.
-   */
-  @Output() selectionChange = new EventEmitter<string | number>();
+  inputControl = new FormControl('');
+  filteredOptions$!: Observable<{ value: string | number; tag: string }[]>;
 
-  value: string | number | null = null;
+  private selectedValue: string | number | null = null;
 
-  // Callbacks for ControlValueAccessor
   onChange = (value: any) => {};
   onTouched = () => {};
 
-  /**
-   * Writes a new value to the input field.
-   * @param value The new value to set.
-   */
-  writeValue(value: any): void {
-    this.value = value || null;
+  ngOnInit(): void {
+    this.filteredOptions$ = this.inputControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value || ''))
+    );
   }
 
-  /**
-   * Registers a function to call when the input value changes.
-   * @param fn The callback function.
-   */
+  writeValue(value: any): void {
+    this.selectedValue = value;
+    const selected = this.options.find(o => o.value === value);
+    this.inputControl.setValue(selected ? selected.tag : '');
+  }
+
   registerOnChange(fn: any): void {
     this.onChange = fn;
   }
 
-  /**
-   * Registers a function to call when the input is touched (blur event).
-   * @param fn The callback function.
-   */
   registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
 
-  /**
-   * Handles the selection change event from the dropdown and emits the selected value.
-   * @param event The change event triggered by the dropdown.
-   */
-  onSelectionChange(event: any): void {
-    const value = event.value;
-    this.value = value;
-    this.onChange(value);
-    this.selectionChange.emit(value);
+  onOptionSelected(event: any): void {
+    const selectedTag = event.option.value;
+    const selected = this.options.find(o => o.tag === selectedTag);
+
+    if (selected) {
+      this.selectedValue = selected.value;
+      this.onChange(selected.value);
+    }
+  }
+
+  private _filter(value: string) {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option =>
+      option.tag.toLowerCase().includes(filterValue)
+    );
   }
 }

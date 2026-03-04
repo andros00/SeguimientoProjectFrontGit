@@ -112,7 +112,7 @@ export class FormalStartMandatoryComponent {
 
   abrirModalFecha(c: any): void {
     const dialogRef = this.dialog.open(CompromisoFechaComponent, {
-      width: '400px',
+      width: '500px',
       data: {
         id: c.identificador,
         usuario: '8061496' // reemplaza con el usuario actual autenticado

@@ -1,108 +1,157 @@
-
-<div class="container" >
+<div class="container">
   <div class="header">
     <h2 class="title">Detalle del Proyecto</h2>
   </div>
 
-<mat-card class="card">
-  <mat-dialog-content *ngIf="!cargando && detalle">
+  <mat-card class="card">
+    <mat-dialog-content *ngIf="!cargando && detalle">
+
+      <h2 align="center" class="margin-b secondary-color font-normal title-w">{{ detalle.proyecto.nombreCompleto }}</h2>
+
+      <div class="row card-responsable">
+
+        <h3></h3>
+        <p><strong>Código:</strong> {{ detalle.proyecto.codigo }}</p>
+        <p><strong>Estado:</strong> {{ detalle.proyecto.estado }}</p>
+        <p><strong>Responsable:</strong> {{ detalle.proyecto.nombreResponsable }}</p>
+        <p><strong>Centro de Gestión:</strong> {{ detalle.proyecto.nombreCentroGestion }}</p>
+        <p><strong>Duración</strong> {{ detalle.proyecto.duracion }}</p>
+      </div>
+      <hr>
+
+      <div class="row card-responsable">
+        <h4>Convocatoria</h4>
+        <p>{{ detalle.convocatoria.name }}</p>
+
+      </div>
+
+      <div class="row card-responsable">
+        <h4>Lugar Ejecución</h4>
+        <p>{{ detalle.proyecto.lugarEjecucion }}</p>
+
+      </div>
+
+      <div class="row card-responsable">
+
+        <h4>Financiadores</h4>
+
+        <table mat-table [dataSource]="fiadores">
+
+          <ng-container matColumnDef="nit">
+            <th mat-header-cell *matHeaderCellDef> NIT </th>
+            <td mat-cell *matCellDef="let fiador">
+              {{ fiador.nit }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="razonSocial">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let fiador">
+              {{ fiador.razonSocial }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="fiadoresColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: fiadoresColumns;"></tr>
+
+        </table>
 
 
-    <div class="row card-responsable">
 
-      <h3>{{ detalle.proyecto.nombreCompleto }}</h3>
-      <p><strong>Código:</strong> {{ detalle.proyecto.codigo }}</p>
-      <p><strong>Estado:</strong> {{ detalle.proyecto.estado }}</p>
-      <p><strong>Responsable:</strong> {{ detalle.proyecto.nombreResponsable }}</p>
-      <p><strong>Centro de Gestión:</strong> {{ detalle.proyecto.nombreCentroGestion }}</p>
-      <p><strong>Duración</strong> {{ detalle.proyecto.duracion }}</p>
-    </div>
-    <hr>
 
-    <div class="row card-responsable">
-      <h4>Convocatoria</h4>
-      <p>{{ detalle.convocatoria.name }}</p>
+      </div>
 
-    </div>
+      <div class="row card-responsable">
+        <h4>Grupos</h4>
 
-    <div class="row card-responsable">
-      <h4>Lugar Ejecución</h4>
-      <p>{{ detalle.proyecto.lugarEjecucion }}</p>
 
-    </div>
+        <table mat-table [dataSource]="grupos">
 
-    <div class="row card-responsable">
-      <h4>Financiadores</h4>
-      <ul>
-        <li *ngFor="let f of detalle.listaFinanciadores">
-          {{ f.nit }} – {{ f.razonSocial }}
-        </li>
-      </ul>
+          <ng-container matColumnDef="nombreCorto">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let grupo">
+              {{ grupo.nombreCorto }}
+            </td>
+          </ng-container>
 
-    </div>
 
-    <div class="row card-responsable">
-      <h4>Grupos</h4>
-      <ul>
-        <li *ngFor="let g of detalle.listaGrupo">
-          {{ g.nombreCorto }}
-        </li>
-      </ul>
+          <tr mat-header-row *matHeaderRowDef="gruposColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: gruposColumns;"></tr>
 
-    </div>
+        </table>
 
-    <div class="row card-responsable">
-      <h4>Solicitudes</h4>
-      <ul>
-        <li *ngFor="let p of detalle.prorrogasAplicadas">
-          {{ p.id }} {{ p.descripcion }} {{ p.tipoProrroga }} {{ p.tiempoSolicitado }} {{ p.admFechaModifica }}
-        </li>
-      </ul>
-    </div>
+        <table class="table margin-top">
+          <thead>
+            <tr class="header-table">
+              <th>Nombre</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-hover" *ngFor="let grupo of detalle.listaGrupo">
+              <td>{{ grupo.nombreCorto }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div class="row card-responsable">
-  <h4>Solicitudes</h4>
+      <div class="row card-responsable">
+        <h4>Solicitudes</h4>
 
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Descripción</th>
-        <th>Tipo de prórroga</th>
-        <th>Tiempo solicitado</th>
-        <th>Fecha modificación</th>
-      </tr>
-    </thead>
 
-    <tbody>
-      <tr *ngFor="let p of detalle.prorrogasAplicadas">
-        <td>{{ p.id }}</td>
-        <td>{{ p.descripcion }}</td>
-        <td>{{ p.tipoProrroga }}</td>
-        <td>{{ p.tiempoSolicitado }}</td>
-        <td>{{ p.admFechaModifica }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
-    <div class="row card-responsable">
-      <h4>Fecha Límite Inicio</h4>
-      <p>{{ detalle.fechalimiteInicio }}</p>
-    </div>
+        <table mat-table [dataSource]="solicitudes">
 
-    <button class="btn btn-primary" (click)="redirigir(detalle.proyecto.codigo)"> Ir a detalle </button>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let solicitud">
+              {{ solicitud.id }}
+            </td>
+          </ng-container>
 
+
+          <tr mat-header-row *matHeaderRowDef="solicitudesColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: solicitudesColumns;"></tr>
+
+        </table>
+
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Descripción</th>
+              <th>Tipo de prórroga</th>
+              <th>Tiempo solicitado</th>
+              <th>Fecha modificación</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let p of detalle.prorrogasAplicadas">
+              <td>{{ p.id }}</td>
+              <td>{{ p.descripcion }}</td>
+              <td>{{ p.tipoProrroga }}</td>
+              <td>{{ p.tiempoSolicitado }}</td>
+              <td>{{ p.admFechaModifica }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row card-responsable">
+        <h4>Fecha Límite Inicio</h4>
+        <p>{{ detalle.fechalimiteInicio }}</p>
+      </div>
+
+    </mat-dialog-content>
+
+  </mat-card>
+
+  <mat-dialog-content *ngIf="cargando">
+    <mat-spinner></mat-spinner>
   </mat-dialog-content>
 
-</mat-card>
-
-<mat-dialog-content *ngIf="cargando">
-  <mat-spinner></mat-spinner>
-</mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-button (click)="cerrar()">Cerrar</button>
-</mat-dialog-actions>
+  <mat-dialog-actions align="end">
+    <button mat-button (click)="cerrar()">Cerrar</button>
+  </mat-dialog-actions>
 
 </div>

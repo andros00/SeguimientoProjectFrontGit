@@ -6,15 +6,28 @@ import { MatProgressSpinner } from "@angular/material/progress-spinner";
 import { CommonModule } from '@angular/common';
 import { IProject } from 'src/app/core/interfaces/IProject';
 import { MatCard } from "@angular/material/card";
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { FinanciadorDTO } from 'src/app/core/interfaces/FinanciadorDTO';
+import { GrupoDTO } from 'src/app/core/interfaces/GrupoDTO';
+import { SolicitudAdminDTO } from 'src/app/core/interfaces/SolicitudAdminDTO';
 
 @Component({
   selector: 'app-proyecto-detalle-modal',
   standalone: true,
-  imports: [MatDialogContent, MatProgressSpinner, MatDialogActions, CommonModule, MatCard],
+  imports: [MatDialogContent, MatProgressSpinner, MatDialogActions, CommonModule, MatCard, MatTableModule],
   templateUrl: './proyecto-detalle-modal.component.html',
   styleUrl: './proyecto-detalle-modal.component.scss'
 })
 export class ProyectoDetalleModalComponent implements OnInit {
+
+  fiadoresColumns: string[] = ['nit', 'razonSocial'];
+  fiadores = new MatTableDataSource<FinanciadorDTO>([]);
+
+  gruposColumns: string[] = ['nombreCorto'];
+  grupos = new MatTableDataSource<GrupoDTO>([]);
+
+  solicitudesColumns: string[] = ['id'];
+  solicitudes = new MatTableDataSource<SolicitudAdminDTO>([]);
 
   detalle?: ProyectoDetalleDTO;
   cargando = true;
@@ -35,6 +48,10 @@ export class ProyectoDetalleModalComponent implements OnInit {
         next: resp => {
           this.detalle = resp;
           this.cargando = false;
+          this.fiadores.data = this.detalle?.listaFinanciadores ?? [];
+
+          this.grupos.data = this.detalle?.listaGrupo ?? [];
+          this.solicitudes.data = this.detalle?.prorrogasAplicadas ?? [];
 
           console.log("Detalle: ", this.detalle);
         },
@@ -47,21 +64,4 @@ export class ProyectoDetalleModalComponent implements OnInit {
   cerrar(): void {
     this.dialogRef.close();
   }
-
-  // redirigir(id: string): void {
-  //   const url = `https://asone.udea.edu.co/siiuFront/#/ver-proyecto/${id}`; window.open(url, '_blank'); // abre en nueva pestaña
-  // }
-
-  redirigir(id: string): void {
-  const url = `https://asone.udea.edu.co/siiuFront/#/ver-proyecto/${id}`;
-
-  window.open(
-    url,
-    'verProyecto',
-    'width=1200,height=800,resizable=yes,scrollbars=yes'
-  );
-}
-
-
-
 }

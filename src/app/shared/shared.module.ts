@@ -65,6 +65,7 @@ import { EtapaModalComponent } from './components/modal/etapa-modal/etapa-modal.
 import { ActividadComponent } from './components/modal/actividad/actividad/actividad.component';
 import { FormalStartMinutesComponent } from './components/molecules/formal-start-minutes/formal-start-minutes.component';
 import { ContenedorProyectoComponent } from './components/molecules/show-project/contenedor-proyecto/contenedor-proyecto.component';
+import { MatAutocomplete, MatAutocompleteModule } from "@angular/material/autocomplete";
 
 
 @NgModule({
@@ -127,6 +128,7 @@ import { ContenedorProyectoComponent } from './components/molecules/show-project
 
   ], imports: [CommonModule,
     MatIconModule,
+    MatAutocompleteModule,
     MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
@@ -146,7 +148,7 @@ import { ContenedorProyectoComponent } from './components/molecules/show-project
     MatDividerModule,
     MatSlideToggleModule,
     MatCheckboxModule, MenuComponent, MatProgressSpinnerModule,
-    MatDialogModule, MatTab, MatTabGroup], providers: [
+    MatDialogModule, MatTab, MatTabGroup, MatAutocomplete], providers: [
       [provideHttpClient(withInterceptorsFromDi())],
       { provide: MatPaginatorIntl, useValue: CustomPaginator() }
     ]

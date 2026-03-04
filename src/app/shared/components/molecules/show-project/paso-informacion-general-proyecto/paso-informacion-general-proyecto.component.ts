@@ -64,7 +64,7 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
   private readonly codigoConvocatoria = 1;
   private readonly codigoProcesoSeleccion = 2;
 
-  @Output() pasoSiguiente = new EventEmitter<any>();
+  // @Output() pasoSiguiente = new EventEmitter<any>();
 
   formularioInformacionGeneralProyecto: FormGroup = new FormGroup({});
   informacionGuardada = false;
@@ -538,9 +538,9 @@ export class PasoInformacionGeneralProyectoComponent implements OnInit {
     return this.f.requiereComiteBioetica.value;
   }
 
-  emitirSiguientePaso() {
-    this.pasoSiguiente.emit();
-  }
+  // emitirSiguientePaso() {
+  //   this.pasoSiguiente.emit();
+  // }
 
   tipoMatriculaProyectoConvocatoria() {
     return this.f.tipoMatriculaProyecto.value === TipoMatricula.Convocatoria;

@@ -9,3 +9,13 @@ mat-form-field {
   width: 100%;
   box-sizing: border-box;
 }
+
+.full-width {
+  width: 100%;
+}
+
+mat-option input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}

@@ -52,7 +52,7 @@ export const ENDPOINTS = {
       NUEVO_JI: "investigador/nuevo-joven-investigador"
     },
     ACTA_URL: {
-      GENERAR: "/acta-generar/generar"
+      GENERAR: "/acta-general/generar"
     }
 
   }

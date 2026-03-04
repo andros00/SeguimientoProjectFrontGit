@@ -17,3 +17,31 @@ button.button-diagrama:hover{
 button mat-icon{
     vertical-align: middle;
 }
+
+.space-wizard{
+    margin: 50px 0 20px 0;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.col-6{
+    flex: 1 1 60%;
+}
+
+.align-center{
+    display: flex;
+    align-items: center;
+}
+
+.col-10 {
+    flex: 1 1 100%;
+}
+
+.align-end{
+    display: flex;
+    justify-content: flex-end;
+}
