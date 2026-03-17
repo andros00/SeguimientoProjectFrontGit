@@ -20,4 +20,12 @@ export class ActaServiceService {
       responseType: 'blob'
     });
   }
+
+  uploadActa(file: File, projectId: string) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('projectId', projectId);
+
+    return this.http.post(`${this.url}${ENDPOINTS.V1.ACTA_URL.SUBIR}`, formData);
+  }
 }

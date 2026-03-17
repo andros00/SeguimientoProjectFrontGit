@@ -16,10 +16,10 @@ export class FormalStartMinutesComponent {
 
   descargarActa(): void {
 
-this.actaService.generarActa(this.projectCode).subscribe((pdfBlob: Blob) => {
-  const fileURL = URL.createObjectURL(pdfBlob);
-  window.open(fileURL, '_blank');
-});
+    this.actaService.generarActa(this.projectCode).subscribe((pdfBlob: Blob) => {
+      const fileURL = URL.createObjectURL(pdfBlob);
+      window.open(fileURL, '_blank');
+    });
 
 
 

@@ -7,6 +7,7 @@ import { FormalStartMandatoryComponent } from '../../molecules/formal-start-mand
 import { FormalStartStageComponent } from '../../molecules/formal-start-stage/formal-start-stage.component';
 import { JovenInvestigadorComponent } from '../../modal/joven-investigador/joven-investigador.component';
 import { FormalStartMinutesComponent } from '../../molecules/formal-start-minutes/formal-start-minutes.component';
+import { FormalStartSupportDocComponent } from '../../molecules/formal-start-support-doc/formal-start-support-doc.component';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-stepper',
@@ -49,30 +50,36 @@ export class StepperComponent {
         label: 'Participantes / Joven Invest.',
         formGroup: this._formBuilder.group({ participantsCtrl: ['', Validators.required] }),
         component: FormalStartParticipantsInfoComponent,
-        controlName: 'participantsCtrl', injector: this.createInjector()
+        controlName: 'participantsCtrl',
+        injector: this.createInjector()
       },
       {
         label: 'Compromisos',
         formGroup: this._formBuilder.group({ commitmentsCtrl: ['', Validators.required] }),
         component: FormalStartMandatoryComponent,
-        controlName: 'commitmentsCtrl', injector: this.createInjector()
+        controlName: 'commitmentsCtrl',
+        injector: this.createInjector()
       },
       {
         label: 'Etapas / Actividades',
         formGroup: this._formBuilder.group({ stagesCtrl: ['', Validators.required] }),
         component: FormalStartStageComponent,
-        controlName: 'stagesCtrl', injector: this.createInjector()
+        controlName: 'stagesCtrl',
+        injector: this.createInjector()
       },
       {
         label: 'Generar acta de Inicio',
         formGroup: this._formBuilder.group({ startDocCtrl: ['', Validators.required] }),
         component: FormalStartMinutesComponent,
-        controlName: 'startDocCtrl', injector: this.createInjector()
+        controlName: 'startDocCtrl',
+        injector: this.createInjector()
       },
-      {
+            {
         label: 'Documento soporte',
-        formGroup: this._formBuilder.group({ supportDocCtrl: ['', Validators.required] }),
-        controlName: 'supportDocCtrl'
+        formGroup: this._formBuilder.group({ startDocCtrlUp: ['', Validators.required] }),
+        component: FormalStartSupportDocComponent,
+        controlName: 'startDocCtrlUp',
+        injector: this.createInjector()
       },
       {
         label: 'Cerrar Inicio Formal',
@@ -96,9 +103,9 @@ export class StepperComponent {
   }
 
   finalizarStepper(stepper: MatStepper) {
-      // 1. Opcional: Reiniciar el stepper
-      stepper.reset();
+    // 1. Opcional: Reiniciar el stepper
+    stepper.reset();
 
     this.router.navigate(['/']);
-    }
+  }
 }

@@ -66,6 +66,7 @@ import { ActividadComponent } from './components/modal/actividad/actividad/activ
 import { FormalStartMinutesComponent } from './components/molecules/formal-start-minutes/formal-start-minutes.component';
 import { ContenedorProyectoComponent } from './components/molecules/show-project/contenedor-proyecto/contenedor-proyecto.component';
 import { MatAutocomplete, MatAutocompleteModule } from "@angular/material/autocomplete";
+import { FormalStartSupportDocComponent } from './components/molecules/formal-start-support-doc/formal-start-support-doc.component';
 
 
 @NgModule({
@@ -109,6 +110,7 @@ import { MatAutocomplete, MatAutocompleteModule } from "@angular/material/autoco
     EtapaModalComponent,
     ActividadComponent,
     FormalStartMinutesComponent,
+    FormalStartSupportDocComponent,
 
 
   ],

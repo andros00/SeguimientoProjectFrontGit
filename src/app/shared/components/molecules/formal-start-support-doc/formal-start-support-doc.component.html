@@ -1,0 +1,10 @@
+<ng-container class="container">
+  <input type="file" (change)="onFileSelected($event)" />
+
+
+
+  <div class="buttons">
+    <app-button-primary [label]="'Subir Acta'" [icon]="'attach_file'" (click)="subirArchivo()" />
+  </div>
+  <mat-divider class="divider" />
+</ng-container>

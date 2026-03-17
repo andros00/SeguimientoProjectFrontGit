@@ -27,7 +27,7 @@
             <app-button-primary *ngIf="i > 0" [label]="'Anterior'" [icon]="'assignment_turned_in'"
               (clicked)="goToPreviousStep()" />
 
-            <app-button-primary *ngIf="i < steps.length" [label]="'Regresar'" [icon]="'assignment_turned_in'"
+            <app-button-primary *ngIf="i < steps.length" [label]="'Regresar'" [icon]="'backspace'"
               (clicked)="finalizarStepper(stepper)" />
 
             <app-button-primary *ngIf="i < steps.length - 1" [label]="'Siguiente'" [icon]="'assignment_turned_in'"
